@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Split.Views.Menu.MasterPage"
+             Title="Split">
+    <ContentPage.Content>
+        <StackLayout x:Name="MasterStack" VerticalOptions="FillAndExpand">
+
+            <StackLayout x:Name="TopStack">
+                <Label Text="Menu" HorizontalOptions="Center" FontSize="Large"/>
+            </StackLayout>
+
+            <StackLayout x:Name="MidStack" VerticalOptions="FillAndExpand">
+                <ListView x:Name="ListView" SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Image Source="{Binding IconSource}" />
+                                    <StackLayout Orientation="Vertical" VerticalOptions="Center" >
+                                        <Label Text="{Binding Title}" TextColor="Black" FontSize="Medium" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <StackLayout x:Name="BottomStack" VerticalOptions="EndAndExpand">
+                <Button Text="Se déconnecter" Clicked="LogOutProcedure"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
