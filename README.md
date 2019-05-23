@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/valentinrubio/Split/_apis/build/status/split2021.Split?branchName=master)](https://dev.azure.com/valentinrubio/Split/_build/latest?definitionId=1&branchName=master)
+
 # Split
 
 **Description succincte du projet**
