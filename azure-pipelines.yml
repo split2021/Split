@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'macos-latest'
+  vmImage: 'vs2017-win2016'
 
 variables:
   buildConfiguration: 'Release'
@@ -22,6 +22,13 @@ steps:
 
 - task: XamarinAndroid@1
   inputs:
-    projectFile: '**/*droid*.csproj'
+    projectFile: './Split/Split.Android/*droid*.csproj'
     outputDirectory: '$(outputDirectory)'
     configuration: '$(buildConfiguration)'
+
+- task: XamariniOS@2
+  inputs:
+    solutionFile: './Split/*iOS.csproj'
+    configuration: '$(buildConfiguration)'
+    packageApp: false
+    buildForSimulator: true
