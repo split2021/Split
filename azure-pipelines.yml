@@ -25,10 +25,3 @@ steps:
     projectFile: './Split/Split.Android/*droid*.csproj'
     outputDirectory: '$(outputDirectory)'
     configuration: '$(buildConfiguration)'
-
-- task: XamariniOS@2
-  inputs:
-    solutionFile: './Split/*iOS.csproj'
-    configuration: '$(buildConfiguration)'
-    packageApp: false
-    buildForSimulator: true
