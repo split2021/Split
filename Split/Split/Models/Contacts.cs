@@ -56,7 +56,7 @@ namespace Split.Models
                         }
                         catch (Exception ex)
                         {
-                            //something wrong with one contact, may be display name is completely empty, decide what to do
+                            Console.WriteLine(ex);
                         }
                     }
                     phones.Close();
