@@ -1,0 +1,50 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Hugo\\Desktop\\Split\\Split\\Split.Android\\Split.Android.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Hugo\\Desktop\\Split\\Split\\Split.Android\\Split.Android.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Hugo\\Desktop\\Split\\Split\\Split.Android\\Split.Android.csproj",
+        "projectName": "Split.Android",
+        "projectPath": "C:\\Users\\Hugo\\Desktop\\Split\\Split\\Split.Android\\Split.Android.csproj",
+        "packagesPath": "C:\\Users\\Hugo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Hugo\\Desktop\\Split\\Split\\Split.Android\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\ProgramData\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Hugo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "monoandroid81"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "monoandroid81": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "monoandroid81": {
+          "dependencies": {
+            "Xamarin.Forms": {
+              "target": "Package",
+              "version": "[3.6.0.344457, )"
+            }
+          }
+        }
+      }
+    }
+  }
+}

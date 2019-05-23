@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Split.Views.DetailViews.PaymentPage"
+             Title="Paiement">
+
+    <StackLayout x:Name="MasterStack" VerticalOptions="FillAndExpand">
+
+        <StackLayout x:Name="MidStack" VerticalOptions="FillAndExpand">
+            <ListView x:Name="PaymentListView" Margin="20" HorizontalOptions="StartAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout VerticalOptions="CenterAndExpand">
+                                    <Label Text="{Binding .}"/>
+                                    <Slider x:Name="SliderBar" Minimum="0" Maximum="100" MinimumTrackColor="Red" MaximumTrackColor="Green" ThumbColor="Blue"/>
+                                </StackLayout>
+                                <Image Source="icon_check.png" Grid.Column="1" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+        <StackLayout x:Name="BottomStack" VerticalOptions="EndAndExpand">
+            <Button Text="Payer" Clicked="PaymentProcedure"/>
+        </StackLayout>
+
+    </StackLayout>
+</ContentPage>
