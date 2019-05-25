@@ -1,0 +1,5 @@
+# VSCode config
+.vscode
+
+# Python compiled
+*.pyc

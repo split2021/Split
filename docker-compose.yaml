@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  api:
+    build: ./api
+    command: gunicorn split.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    volumes:
+      - ./api:/api
+    ports:
+      - "8000:8000"
