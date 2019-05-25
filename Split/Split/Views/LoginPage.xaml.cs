@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Split.Models;
 using Split.Views.Menu;
+using Split.Views.DetailViews;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,9 +37,12 @@ namespace Split.Views
         async void SingInProcedure(object sender, EventArgs e)
         {
             ActivitySpinner.IsVisible = true;
-            User user = new User(Entry_Username.Text, Entry_Password.Text);
-            if (user.CheckLogs())
+            bool IsLogged = await Requests.PostLog(Entry_Username.Text, Entry_Password.Text);
+            if (IsLogged)
             {
+                ActivitySpinner.IsVisible = false;
+                Constants.User.Username = Entry_Username.Text;
+                Constants.User.Password = Entry_Password.Text;
                 if (Device.RuntimePlatform.Equals("Android"))
                 {
                     Application.Current.MainPage = new NavigationPage(new MasterDetail());
@@ -50,8 +54,14 @@ namespace Split.Views
             }
             else
             {
-                await DisplayAlert("Login", "Login Failed, username or password is empty", "Ok");
+                ActivitySpinner.IsVisible = false;
+                await DisplayAlert("Error", Constants.ErrorMessage, "Ok");
             }
+        }
+
+        void CreateAccount(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new CreateAccountPage();
         }
     }
 }

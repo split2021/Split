@@ -16,7 +16,9 @@ namespace Split.Models
 
         public static int LoginIconHeight = 120;
 
-        public static List<PhoneContact> ContactList;
+        public static User User = new User();
+
+        public static string ErrorMessage = System.String.Empty;
 
         public static List<Group> GroupList = new List<Group>();
     }

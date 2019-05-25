@@ -4,7 +4,7 @@
              x:Class="Split.App">
     <Application.Resources>
         <Style TargetType="NavigationPage">
-            <Setter Property="BarBackgroundColor" Value="#4f6eaa" />
+            <Setter Property="BarBackgroundColor" Value="#22314E" />
         </Style>
     </Application.Resources>
 </Application>

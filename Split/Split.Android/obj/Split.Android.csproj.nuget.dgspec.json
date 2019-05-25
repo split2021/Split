@@ -1,21 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Hugo\\Desktop\\Split\\Split\\Split.Android\\Split.Android.csproj": {}
+    "C:\\Users\\Hugo\\Documents\\GitHub\\Split\\Split\\Split.Android\\Split.Android.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Hugo\\Desktop\\Split\\Split\\Split.Android\\Split.Android.csproj": {
+    "C:\\Users\\Hugo\\Documents\\GitHub\\Split\\Split\\Split.Android\\Split.Android.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Hugo\\Desktop\\Split\\Split\\Split.Android\\Split.Android.csproj",
+        "projectUniqueName": "C:\\Users\\Hugo\\Documents\\GitHub\\Split\\Split\\Split.Android\\Split.Android.csproj",
         "projectName": "Split.Android",
-        "projectPath": "C:\\Users\\Hugo\\Desktop\\Split\\Split\\Split.Android\\Split.Android.csproj",
+        "projectPath": "C:\\Users\\Hugo\\Documents\\GitHub\\Split\\Split\\Split.Android\\Split.Android.csproj",
         "packagesPath": "C:\\Users\\Hugo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Hugo\\Desktop\\Split\\Split\\Split.Android\\obj\\",
+        "outputPath": "C:\\Users\\Hugo\\Documents\\GitHub\\Split\\Split\\Split.Android\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
-          "C:\\ProgramData\\Xamarin\\NuGet\\"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\Hugo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,9 +38,13 @@
       "frameworks": {
         "monoandroid81": {
           "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.2, )"
+            },
             "Xamarin.Forms": {
               "target": "Package",
-              "version": "[3.6.0.344457, )"
+              "version": "[4.0.0.425677, )"
             }
           }
         }
