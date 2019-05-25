@@ -1,15 +1,10 @@
 version: '3'
 
 services:
-  db:
-    image: postgres
-  
   api:
     build: ./api
-    command: ./start.sh
+    command: gunicorn split.wsgi:application --bind 0.0.0.0:8000 --workers 3
     volumes:
       - ./api:/api
     ports:
       - "8000:8000"
-    depends_on:
-      - db
