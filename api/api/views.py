@@ -23,6 +23,7 @@ class Index(View):
 
 
 class CORSResponse(JsonResponse):
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self['Access-Control-Allow-Origin'] = '*'
@@ -95,7 +96,7 @@ class APIMultipleView(View):
     def get(self, request, *args, **kwargs):
         try:
             objects = self.model.objects.all()
-            return APIResponse(200, f"{self.model.Meta.verbose_name_plural} retrieved successfully", [object_.json() for object_ in objects])
+            return APIResponse(200, f"{self.model.Meta.verbose_name_plural} retrieved successfully", [object_.json() for object_ in objects], safe=True)
         except Exception as e:
             return JsonResponse(500, str(e))
 
