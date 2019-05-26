@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Contacts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Group.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MasterMenuItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\PhoneContact.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Requests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Token.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />

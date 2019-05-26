@@ -10,7 +10,7 @@
 
             <Button ImageSource="cross.png" Clicked="ReturnMainPage" VerticalOptions="Start" HorizontalOptions="Start" BackgroundColor="Transparent" WidthRequest="50"/>
 
-            <StackLayout VerticalOptions="StartAndExpand" HorizontalOptions="Fill" Margin="25,5">
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" Margin="25,5">
                 
                 <Entry x:Name="Entry_firstname" Placeholder="Prénom" PlaceholderColor="Black"/>
                 <Entry x:Name="Entry_lastname" Placeholder="Nom" PlaceholderColor="Black"/>
@@ -20,7 +20,7 @@
                 
             </StackLayout>
 
-            <Button x:Name="Btn_CreateAccount" Text="Créer" TextColor="White" VerticalOptions="End" HorizontalOptions="FillAndExpand" Clicked="CreateAccount" BackgroundColor="#22314E"/>
+            <Button x:Name="Btn_CreateAccount" Text="Créer" TextColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Clicked="CreateAccount" BackgroundColor="#19234B"/>
 
         </StackLayout>
 

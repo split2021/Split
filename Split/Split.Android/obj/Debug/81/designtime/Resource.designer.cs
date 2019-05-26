@@ -4301,6 +4301,9 @@ namespace Split.Droid
 			// aapt resource value: 0x7F090055
 			public const int avd_show_password = 2131296341;
 			
+			// aapt resource value: 0x7F010002
+			public const int cross = 2130771970;
+			
 			// aapt resource value: 0x7F090056
 			public const int design_bottom_navigation_item_background = 2131296342;
 			
@@ -4319,23 +4322,23 @@ namespace Split.Droid
 			// aapt resource value: 0x7F09005B
 			public const int design_snackbar_background = 2131296347;
 			
-			// aapt resource value: 0x7F010002
-			public const int icon_check = 2130771970;
-			
 			// aapt resource value: 0x7F010003
-			public const int icon_contact = 2130771971;
+			public const int icon_check = 2130771971;
 			
 			// aapt resource value: 0x7F010004
-			public const int icon_create_group = 2130771972;
+			public const int icon_contact = 2130771972;
 			
 			// aapt resource value: 0x7F010005
-			public const int icon_group = 2130771973;
-			
-			// aapt resource value: 0x7F010008
-			public const int icon_logo = 2130771976;
+			public const int icon_create_group = 2130771973;
 			
 			// aapt resource value: 0x7F010006
-			public const int icon_settings = 2130771974;
+			public const int icon_group = 2130771974;
+			
+			// aapt resource value: 0x7F010009
+			public const int icon_logo = 2130771977;
+			
+			// aapt resource value: 0x7F010007
+			public const int icon_settings = 2130771975;
 			
 			// aapt resource value: 0x7F090054
 			public const int ic_audiotrack_dark = 2131296340;
@@ -4868,8 +4871,11 @@ namespace Split.Droid
 			// aapt resource value: 0x7F090104
 			public const int ic_vol_type_tv_light = 2131296516;
 			
-			// aapt resource value: 0x7F010009
-			public const int logo = 2130771977;
+			// aapt resource value: 0x7F010010
+			public const int logo = 2130771984;
+			
+			// aapt resource value: 0x7F010008
+			public const int Logo_Split_v1 = 2130771976;
 			
 			// aapt resource value: 0x7F090105
 			public const int mr_button_connected_dark = 2131296517;
@@ -4970,8 +4976,11 @@ namespace Split.Droid
 			// aapt resource value: 0x7F09000C
 			public const int notify_panel_notification_icon_bg = 2131296268;
 			
-			// aapt resource value: 0x7F010007
-			public const int outline_close_black_18dp = 2130771975;
+			// aapt resource value: 0x7F010011
+			public const int Split_banner_v1 = 2130771985;
+			
+			// aapt resource value: 0x7F010012
+			public const int Split_banner_v1_svg = 2130771986;
 			
 			// aapt resource value: 0x7F090069
 			public const int tooltip_frame_dark = 2131296361;
