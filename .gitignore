@@ -3,3 +3,4 @@
 
 # Python compiled
 *.pyc
+db.sqlite3
