@@ -39,7 +39,7 @@ class APIResponse(CORSResponse):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class APIView(View):
+class APISingleView(View):
     model = None
 
     def get(self, request, *args, **kwargs):
@@ -76,7 +76,6 @@ class APIView(View):
             object_.save()
             return APIResponse(200, f"{self.model.Meta.verbose_name} created successfully", object_.json())
 
-
     def patch(self, request, *args, **kwargs):
         pass
 
@@ -89,5 +88,44 @@ class APIView(View):
             return APIResponse(404, f"{self.model.Meta.verbose_name} not found")
 
 
-class UserView(APIView):
+@method_decorator(csrf_exempt, name='dispatch')
+class APIMultipleView(View):
+    model = None
+
+    def get(self, request, *args, **kwargs):
+        try:
+            objects = self.model.objects.all()
+            return APIResponse(200, f"{self.model.Meta.verbose_name_plural} retrieved successfully", [object_.json() for object_ in objects])
+        except Exception as e:
+            return JsonResponse(500, str(e))
+
+    def post(self, request, *args, **kwargs):
+        data = request.body.decode('utf-8')
+        json_data = json.loads(data)
+        try:
+            object_ = self.model.objects.create(**json_data)
+            return APIResponse(201, f"{self.model.Meta.verbose_name} created successfully", object_.json())
+        except Exception as e:
+            return APIResponse(500, str(e))
+
+    def put(self, request, *args, **kwargs):
+        pass
+
+    def patch(self, request, *args, **kwargs):
+        pass
+
+    def delete(self, request, *args, **kwargs):
+        try:
+            objects = self.model.objects.all()
+            objects.delete()
+            return APIResponse(200, f"{self.model.Meta.verbose_name} deleted successfully", [object_.json() for object_ in objects])
+        except Exception as e:
+            return APIResponse(500, str(e))
+
+
+class UserView(APISingleView):
+    model = User
+
+
+class UsersView(APIMultipleView):
     model = User
