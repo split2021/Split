@@ -65,7 +65,7 @@ class User(AbstractUser, JsonizableMixin):
     email = models.EmailField('email address', unique=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['email', 'password']
+    REQUIRED_FIELDS = ['password']
 
     json_fields = ['email', 'first_name']
 
