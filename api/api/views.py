@@ -36,7 +36,7 @@ class APIResponse(CORSResponse):
             'statuscode': code,
             'reason': reason,
             'data': data
-        }, *args, **kwargs)
+        }, safe=False, *args, **kwargs)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -96,7 +96,7 @@ class APIMultipleView(View):
     def get(self, request, *args, **kwargs):
         try:
             objects = self.model.objects.all()
-            return APIResponse(200, f"{self.model.Meta.verbose_name_plural} retrieved successfully", [object_.json() for object_ in objects], safe=True)
+            return APIResponse(200, f"{self.model.Meta.verbose_name_plural} retrieved successfully", [object_.json() for object_ in objects])
         except Exception as e:
             return JsonResponse(500, str(e))
 
