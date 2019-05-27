@@ -11,7 +11,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
+  outputDirectory: './mobile/build/$(buildConfiguration)'
 
 steps:
 - task: NuGetToolInstaller@0
@@ -22,6 +22,6 @@ steps:
 
 - task: XamarinAndroid@1
   inputs:
-    projectFile: './Split/Split.Android/*droid*.csproj'
+    projectFile: './mobile/Split/Split.Android/*droid*.csproj'
     outputDirectory: '$(outputDirectory)'
     configuration: '$(buildConfiguration)'
