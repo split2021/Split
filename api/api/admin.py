@@ -5,6 +5,9 @@ from api.models import User
 
 # Register your models here.
 
+admin.site.site_header = "Split administration"
+admin.site.site_title = "Split site admin"
+
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
     """
