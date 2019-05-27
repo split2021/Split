@@ -1,7 +1,7 @@
 
 FROM python:3
 ENV PYTHONUNBUFFERED 1
-ENV DEBUG True
+ENV DEBUG False
 RUN mkdir /api
 WORKDIR /api
 ADD requirements.txt /api
