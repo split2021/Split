@@ -3,41 +3,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-from django.http import JsonResponse, Http404
 
 import json
 
 from api.models import User
+from api.responses import APIResponse, NotImplemented
 
 # Create your views here.
-
-class Index(View):
-    model = settings.AUTH_USER_MODEL
-
-    def get(self, request, *args, **kwargs):
-        return JsonResponse({
-            'statuscode': 200,
-            'reason': "Reason",
-            'data': {}
-        })
-
-
-class CORSResponse(JsonResponse):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self['Access-Control-Allow-Origin'] = '*'
-
-
-class APIResponse(CORSResponse):
-
-    def __init__(self, code, reason, data={}, *args, **kwargs):
-        super().__init__({
-            'statuscode': code,
-            'reason': reason,
-            'data': data
-        }, safe=False, *args, **kwargs)
-
 
 @method_decorator(csrf_exempt, name='dispatch')
 class APISingleView(View):
@@ -50,7 +22,7 @@ class APISingleView(View):
         except ObjectDoesNotExist:
             return APIResponse(404, f"{self.model.Meta.verbose_name} not found")
         except Exception as e:
-            return JsonResponse(500, str(e))
+            return APIResponse(500, str(e))
 
     def post(self, request, *args, **kwargs):
         data = request.body.decode('utf-8')
@@ -78,7 +50,7 @@ class APISingleView(View):
             return APIResponse(200, f"{self.model.Meta.verbose_name} created successfully", object_.json())
 
     def patch(self, request, *args, **kwargs):
-        pass
+        return NotImplemented()
 
     def delete(self, request, *args, **kwargs):
         try:
@@ -98,7 +70,7 @@ class APIMultipleView(View):
             objects = self.model.objects.all()
             return APIResponse(200, f"{self.model.Meta.verbose_name_plural} retrieved successfully", [object_.json() for object_ in objects])
         except Exception as e:
-            return JsonResponse(500, str(e))
+            return APIResponse(500, str(e))
 
     def post(self, request, *args, **kwargs):
         data = request.body.decode('utf-8')
@@ -110,10 +82,10 @@ class APIMultipleView(View):
             return APIResponse(500, str(e))
 
     def put(self, request, *args, **kwargs):
-        pass
+        return NotImplemented()
 
     def patch(self, request, *args, **kwargs):
-        pass
+        return NotImplemented()
 
     def delete(self, request, *args, **kwargs):
         try:
