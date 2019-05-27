@@ -12,8 +12,82 @@ from api.responses import APIResponse, NotImplemented
 # Create your views here.
 
 @method_decorator(csrf_exempt, name='dispatch')
-class APISingleView(View):
+class APIView(View):
+    """
+     Describes how all API views are implemented by default
+    """
+
     model = None
+    safe_methods = ['head', 'options', 'get']
+    implemented_methods = []
+
+    def head(self, request, *args, **kwargs):
+        """
+         Return header for this endpoint
+        """
+        response = self.get(request, *args, **kwargs)
+        response.content = ""
+        return response
+
+    def options(self, request, *args, **kwargs):
+        """
+         Return possible verbs for this endpoint
+        """
+        response = APIResponse(200, f"Possible options")
+        response['Allow'] = ", ".join(implemented_methods)
+        return response
+
+    def get(self, request, *args, **kwargs):
+        """
+         Return object(s) information with status code:
+         - 200 if id or collection
+         - 404 if id and not found
+        """
+        return NotImplemented()
+
+    def patch(self, request, *args, **kwargs):
+        """
+         Return updated object with status code:
+         - 405 if collection
+         - 200 if id and updated
+         - 204 if id and no content
+         - 404 if id and not found
+        """
+        return NotImplemented()
+
+    def post(self, request, *args, **kwargs):
+        """
+         Return created object with status code:
+         - 201 if created
+         - 404 if id and not found
+         - 409 if id and already exist
+        """
+        return NotImplemented()
+
+    def put(self, request, *args, **kwargs):
+        """
+         Return created / updated object with status code:
+         - 405 if collection
+         - 200 if id and created
+         - 205 if id and no content
+         - 404 if id and not found
+        """
+        return NotImplemented()
+
+    def delete(self, request, *args, **kwargs):
+        """
+         Return deleted object with status code:
+         - 405 if collection
+         - 200 if id and deleted
+         - 404 if id and not found
+        """
+        return NotImplemented()
+
+
+class SingleObjectAPIView(APIView):
+    """
+     API view helper class to access single object
+    """
 
     def get(self, request, *args, **kwargs):
         try:
@@ -49,9 +123,6 @@ class APISingleView(View):
             object_.save()
             return APIResponse(200, f"{self.model.Meta.verbose_name} created successfully", object_.json())
 
-    def patch(self, request, *args, **kwargs):
-        return NotImplemented()
-
     def delete(self, request, *args, **kwargs):
         try:
             object_ = self.model.objects.get(id=kwargs['id'])
@@ -61,9 +132,10 @@ class APISingleView(View):
             return APIResponse(404, f"{self.model.Meta.verbose_name} not found")
 
 
-@method_decorator(csrf_exempt, name='dispatch')
-class APIMultipleView(View):
-    model = None
+class MultipleObjectsAPIView(APIView):
+    """
+     API view helper class to access single object
+    """
 
     def get(self, request, *args, **kwargs):
         try:
@@ -81,12 +153,6 @@ class APIMultipleView(View):
         except Exception as e:
             return APIResponse(500, str(e))
 
-    def put(self, request, *args, **kwargs):
-        return NotImplemented()
-
-    def patch(self, request, *args, **kwargs):
-        return NotImplemented()
-
     def delete(self, request, *args, **kwargs):
         try:
             objects = self.model.objects.all()
@@ -96,9 +162,9 @@ class APIMultipleView(View):
             return APIResponse(500, str(e))
 
 
-class UserView(APISingleView):
+class UserView(SingleObjectAPIView):
     model = User
 
 
-class UsersView(APIMultipleView):
+class UsersView(MultipleObjectsAPIView):
     model = User
