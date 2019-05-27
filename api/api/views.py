@@ -18,8 +18,8 @@ class APIView(View):
     """
 
     model = None
-    safe_methods = ['head', 'options', 'get']
-    implemented_methods = []
+    safe_methods = ('head', 'options', 'get')
+    implemented_methods = ()
 
     def head(self, request, *args, **kwargs):
         """
@@ -88,6 +88,7 @@ class SingleObjectAPIView(APIView):
     """
      API view helper class to access single object
     """
+    implemented_methods = ('get', 'post', 'put', 'delete')
 
     def get(self, request, *args, **kwargs):
         try:
@@ -136,6 +137,7 @@ class MultipleObjectsAPIView(APIView):
     """
      API view helper class to access single object
     """
+    implemented_methods = ('get', 'post', 'delete')
 
     def get(self, request, *args, **kwargs):
         try:
