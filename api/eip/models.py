@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 # Create your models here.
 
 def get_pld_path(instance, filename):
-        return f"eip/pld/%Y/%m/%d/{filename}"
+    return f"eip/pld/%Y/%m/%d/2021_PLD_Split_%Y%m{instance.type}.pdf"
 
 class ProjectLogDocument(models.Model):
     """
@@ -18,12 +18,21 @@ class ProjectLogDocument(models.Model):
     ]
 
     type = models.CharField(max_length=2, choices=PLD_TYPE_CHOICES)
-    file = models.FielField(upload_to=get_pld_path)
+    file = models.FileField(upload_to=get_pld_path)
     meeting = models.ForeignKey('Meeting', on_delete=models.SET_NULL, null=True)
 
     def clean(self):
         if not file.filename.endswith(".pdf"):
             raise ValidationError("The file must be of pdf type")
+
+    def save(self, *args, **kwargs):
+        try:
+            this = ProjectLogDocument.objects.get(id=self.id)
+            if this.file != self.file:
+                this.file.delete()
+        except:
+            pass
+        super(MyModelName, self).save(*args, **kwargs)
 
 
 class Meeting(models.Model):
