@@ -7,7 +7,7 @@ from django.conf import settings
 import json
 
 from api.models import User
-from api.responses import APIResponse, NotImplemented
+from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed
 
 # Create your views here.
 
@@ -97,7 +97,21 @@ class SingleObjectAPIView(APIView):
         except ObjectDoesNotExist:
             return APIResponse(404, f"{self.model.Meta.verbose_name} not found")
         except Exception as e:
-            return APIResponse(500, str(e))
+            return ExceptionCaught(e)
+
+    def patch(self, request, *args, **kwargs):
+        data = request.body.decode('utf-8')
+        if not data:
+            return APIResponse(204, f"A content is required to update {self.model.Meta.verbose_name}")
+        json_data = json.loads(data)
+        try:
+            object_ = self.model.objects.filter(id=kwargs['id'])
+            object_.update(**json_data)
+            return APIResponse(200, f"{self.model.Meta.verbose_name} updated successfully", object_.json())
+        except ObjectDoesNotExist:
+            return APIResponse(404, f"{self.model.Meta.verbose_name} not found")
+        except Exception as e:
+            return ExceptionCaught(e)
 
     def post(self, request, *args, **kwargs):
         data = request.body.decode('utf-8')
@@ -106,7 +120,7 @@ class SingleObjectAPIView(APIView):
             object_ = self.model.objects.create(**json_data)
             return APIResponse(201, f"{self.model.Meta.verbose_name} created successfully", object_.json())
         except Exception as e:
-            return APIResponse(500, str(e))
+            return ExceptionCaught(e)
 
     def put(self, request, *args, **kwargs):
         data = request.body.decode('utf-8')
@@ -123,6 +137,8 @@ class SingleObjectAPIView(APIView):
             object_.id = kwargs['id']
             object_.save()
             return APIResponse(200, f"{self.model.Meta.verbose_name} created successfully", object_.json())
+        except Exception as e:
+            return ExceptionCaught(e)
 
     def delete(self, request, *args, **kwargs):
         try:
@@ -131,6 +147,8 @@ class SingleObjectAPIView(APIView):
             return APIResponse(200, f"{self.model.Meta.verbose_name} deleted successfully", object_.json())
         except ObjectDoesNotExist:
             return APIResponse(404, f"{self.model.Meta.verbose_name} not found")
+        except Exception as e:
+            return ExceptionCaught(e)
 
 
 class MultipleObjectsAPIView(APIView):
@@ -144,7 +162,10 @@ class MultipleObjectsAPIView(APIView):
             objects = self.model.objects.all()
             return APIResponse(200, f"{self.model.Meta.verbose_name_plural} retrieved successfully", [object_.json() for object_ in objects])
         except Exception as e:
-            return APIResponse(500, str(e))
+            return ExceptionCaught(e)
+
+    def patch(self, request, *args, **kwargs):
+        return NotAllowed()
 
     def post(self, request, *args, **kwargs):
         data = request.body.decode('utf-8')
@@ -153,7 +174,7 @@ class MultipleObjectsAPIView(APIView):
             object_ = self.model.objects.create(**json_data)
             return APIResponse(201, f"{self.model.Meta.verbose_name} created successfully", object_.json())
         except Exception as e:
-            return APIResponse(500, str(e))
+            return ExceptionCaught(e)
 
     def delete(self, request, *args, **kwargs):
         try:
@@ -161,7 +182,7 @@ class MultipleObjectsAPIView(APIView):
             objects.delete()
             return APIResponse(200, f"{self.model.Meta.verbose_name} deleted successfully", [object_.json() for object_ in objects])
         except Exception as e:
-            return APIResponse(500, str(e))
+            return ExceptionCaught(e)
 
 
 class UserView(SingleObjectAPIView):
