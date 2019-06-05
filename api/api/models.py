@@ -62,12 +62,12 @@ class User(AbstractUser, JsonizableMixin):
     User model
     """
 
-    username = None
     email = models.EmailField('email address', unique=True)
+    phone = models.CharField(max_length=20, unique=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
 
-    json_fields = ['email', 'first_name']
+    json_fields = ['email', 'last_name', 'first_name', 'phone', 'username']
 
     objects = UserManager()
