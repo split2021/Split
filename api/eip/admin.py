@@ -5,11 +5,11 @@ from eip.models import ProjectLogDocument, Meeting
 # Register your models here.
 
 @admin.register(ProjectLogDocument)
-class ProjectLogDocumentAdmin(admin.Admin):
+class ProjectLogDocumentAdmin(admin.ModelAdmin):
     """
     """
 
 @admin.register(Meeting)
-class MeetingAdmin(admin.Admin):
+class MeetingAdmin(admin.ModelAdmin):
     """
     """
