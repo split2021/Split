@@ -6,7 +6,7 @@ from django.conf import settings
 
 import json
 
-from api.models import User
+from api.models import User, Group
 from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed
 
 # Create your views here.
@@ -188,6 +188,12 @@ class MultipleObjectsAPIView(APIView):
 class UserView(SingleObjectAPIView):
     model = User
 
-
 class UsersView(MultipleObjectsAPIView):
     model = User
+
+
+class GroupView(SingleObjectAPIView):
+    model = Group
+
+class GroupsView(MultipleObjectsAPIView):
+    model = Group
