@@ -23,13 +23,13 @@ class NotImplemented(APIResponse):
         super().__init__(501, "Verbs not implemented", *args, **kwargs)
 
 
-class ExceptionCaught(exception):
+class ExceptionCaught(APIResponse):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, exception, *args, **kwargs):
         super().__init__(500, f"Exception caught: {str(exception)}", *args, **kwargs)
 
 
-class NotAllowed(exception):
+class NotAllowed(APIResponse):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, exception, *args, **kwargs):
         super().__init__(405, f"Verb not allowed", *args, **kwargs)
