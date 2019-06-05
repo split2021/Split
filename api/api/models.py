@@ -11,6 +11,7 @@ class JsonizableMixin(object):
         for field in self.json_fields:
             value = getattr(self, field)
             dump[field] = value
+        dump['url'] = f"http://api/{self.Meta.verbose_name_plural.lower()}/{self.id}"
         return dump
 
 

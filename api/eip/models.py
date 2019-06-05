@@ -22,7 +22,7 @@ class ProjectLogDocument(models.Model):
     meeting = models.ForeignKey('Meeting', on_delete=models.SET_NULL, null=True)
 
     def clean(self):
-        if not file.filename.endswith(".pdf"):
+        if not self.file.name.endswith(".pdf"):
             raise ValidationError("The file must be of pdf type")
 
     def save(self, *args, **kwargs):
@@ -32,7 +32,7 @@ class ProjectLogDocument(models.Model):
                 this.file.delete()
         except:
             pass
-        super(MyModelName, self).save(*args, **kwargs)
+        super(ProjectLogDocument, self).save(*args, **kwargs)
 
 
 class Meeting(models.Model):
@@ -41,4 +41,4 @@ class Meeting(models.Model):
 
     name = models.CharField(max_length=50)
     date = models.DateTimeField()
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)

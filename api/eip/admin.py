@@ -13,3 +13,4 @@ class ProjectLogDocumentAdmin(admin.ModelAdmin):
 class MeetingAdmin(admin.ModelAdmin):
     """
     """
+    filter_horizontal = ('members',)
