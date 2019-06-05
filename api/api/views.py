@@ -1,6 +1,5 @@
 from api.classviews import SingleObjectAPIView, MultipleObjectsAPIView
-from api.models import User, Group
-from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed
+from api.models import User#, Group
 
 # Create your views here.
 
@@ -11,8 +10,8 @@ class UsersView(MultipleObjectsAPIView):
     model = User
 
 
-class GroupView(SingleObjectAPIView):
-    model = Group
+#class GroupView(SingleObjectAPIView):
+#    model = Group
 
-class GroupsView(MultipleObjectsAPIView):
-    model = Group
+#class GroupsView(MultipleObjectsAPIView):
+#    model = Group

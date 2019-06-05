@@ -5,6 +5,9 @@ from django.views.decorators.csrf import csrf_exempt
 
 import json
 
+from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed
+
+
 @method_decorator(csrf_exempt, name='dispatch')
 class APIView(View):
     """
@@ -27,8 +30,8 @@ class APIView(View):
         """
          Return possible verbs for this endpoint
         """
-        response = APIResponse(200, f"Possible options")
-        response['Allow'] = ", ".join(implemented_methods)
+        response = APIResponse(204, f"Possible options")
+        response['Allow'] = ", ".join(self.implemented_methods)
         return response
 
     def get(self, request, *args, **kwargs):
@@ -169,6 +172,9 @@ class MultipleObjectsAPIView(APIView):
             return APIResponse(201, f"{self.model.Meta.verbose_name} created successfully", object_.json())
         except Exception as e:
             return ExceptionCaught(e)
+
+    def put(self, request, *args, **kwargs):
+        return NotAllowed()
 
     def delete(self, request, *args, **kwargs):
         try:

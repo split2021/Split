@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 
+
 class CORSResponse(JsonResponse):
 
     def __init__(self, *args, **kwargs):
@@ -14,7 +15,7 @@ class APIResponse(CORSResponse):
             'statuscode': code,
             'reason': reason,
             'data': data
-        }, safe=False, *args, **kwargs)
+        }, safe=False, status=code, *args, **kwargs)
 
 
 class NotImplemented(APIResponse):
