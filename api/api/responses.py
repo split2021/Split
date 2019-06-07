@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 
-
 class CORSResponse(JsonResponse):
 
     def __init__(self, *args, **kwargs):
