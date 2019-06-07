@@ -1,10 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
-from api.models import User
-from api.models import Group
-from api.models import Friend
-from api.models import Payment_user
+from api.models import User, Group, Friend, Payment_user
 
 # Register your models here.
 
@@ -36,15 +33,15 @@ class UserAdmin(DjangoUserAdmin):
 
 class PaymentUserAdmin(admin.ModelAdmin):
 	model = Payment_user
-	list_display = ['payment_name']
+	list_display = ['name']
 
 class GroupsAdmin(admin.ModelAdmin):
 	model = Group
-	list_display = ['group_name']
+	list_display = ['name']
 
 class FriendsAdmin(admin.ModelAdmin):
 	model = Friend
-	list_display = ['friend_name']
+	list_display = ['name']
 
 admin.site.register(Group, GroupsAdmin)
 admin.site.register(Friend, FriendsAdmin)
