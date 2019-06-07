@@ -4,31 +4,34 @@
              x:Class="Split.Views.Menu.MasterPage"
              Title="Split">
     <ContentPage.Content>
-        <StackLayout x:Name="MasterStack" VerticalOptions="FillAndExpand">
+        <StackLayout x:Name="MasterStack" VerticalOptions="FillAndExpand" BackgroundColor="WhiteSmoke">
 
-            <StackLayout x:Name="TopStack">
-                <Label Text="Menu" HorizontalOptions="Center" FontSize="Large"/>
+            <StackLayout x:Name="TopStack" HorizontalOptions="Center">
+                <Image Source="Logo_Split_v1.png" Margin="0, 40, 0, 20"/>
             </StackLayout>
 
             <StackLayout x:Name="MidStack" VerticalOptions="FillAndExpand">
-                <ListView x:Name="ListView" SeparatorVisibility="None">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                    <Image Source="{Binding IconSource}" />
-                                    <StackLayout Orientation="Vertical" VerticalOptions="Center" >
-                                        <Label Text="{Binding Title}" TextColor="Black" FontSize="Medium" />
-                                    </StackLayout>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+
+                <StackLayout x:Name="GroupsStack" HorizontalOptions="FillAndExpand">
+                    <Label Text="Groupes" TextColor="Black" Margin="0,1,0,0" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
+                    <Button Text="Mes groupes" TextColor="White" BackgroundColor="#19234B" Clicked="GroupsPage" Margin="0,1,0,0" HorizontalOptions="FillAndExpand"/>
+                    <Button Text="Contact" TextColor="White" BackgroundColor="#19234B" Clicked="ContactPage" Margin="0,1,0,0" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout x:Name="OptionStack" HorizontalOptions="FillAndExpand">
+                    <Label Text="Options" TextColor="Black" Margin="0,1,0,0" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
+                    <Button Text="Réglages" TextColor="White" BackgroundColor="#19234B" Margin="0,1,0,0" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <StackLayout x:Name="OtherStack" HorizontalOptions="FillAndExpand">
+                    <Label Text="Autre" TextColor="Black" Margin="0,1,0,0" FontSize="Medium" HorizontalOptions="CenterAndExpand"/>
+                    <Button Text="À propos" TextColor="White" BackgroundColor="#19234B" Margin="0,1,0,0" HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
             </StackLayout>
 
             <StackLayout x:Name="BottomStack" VerticalOptions="EndAndExpand">
-                <Button Text="Se déconnecter" Clicked="LogOutProcedure"/>
+                <Button Text="Se déconnecter" Clicked="LogOutProcedure" TextColor="White" HorizontalOptions="FillAndExpand" BackgroundColor="#19234B"/>
             </StackLayout>
 
         </StackLayout>

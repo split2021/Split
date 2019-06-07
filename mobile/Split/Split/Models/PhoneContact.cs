@@ -13,5 +13,14 @@ namespace Split.Models
         public string Name { get => $"{FirstName} {LastName}"; }
 
         public bool Selected { get; set; }
+
+        public PhoneContact() { }
+
+        public PhoneContact(string FirstName, string LastName, string PhoneNumber)
+        {
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+            this.PhoneNumber = PhoneNumber;
+        }
     }
 }
