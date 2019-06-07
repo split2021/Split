@@ -1,8 +1,11 @@
 from django.urls import include, path
 
-from api.views import UserView, UsersView
+from api.views import UserView, UsersView#, GroupView, GroupsView
+
 
 urlpatterns = [
-    path('user/<int:id>', UserView.as_view()),
-    path('user/', UsersView.as_view()),
+    path('users/<int:id>', UserView.as_view()),
+    path('users/', UsersView.as_view()),
+#    path('groups/<int:id>', GroupView.as_view()),
+#    path('groups/', GroupsView.as_view()),
 ]
