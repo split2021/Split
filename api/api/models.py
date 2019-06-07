@@ -71,3 +71,15 @@ class User(AbstractUser, JsonizableMixin):
     json_fields = ['email', 'last_name', 'first_name', 'phone', 'username']
 
     objects = UserManager()
+
+class Payment_user(models.Model):
+
+	payment_name = models.CharField(max_length=40)
+
+class Friend(models.Model):
+
+	friend_name = models.CharField(max_length=40)
+
+class Group(models.Model):
+
+	group_name = models.CharField(max_length=40)
