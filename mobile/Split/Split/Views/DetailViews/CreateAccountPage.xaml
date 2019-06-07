@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Split.Views.DetailViews.CreateAccountPage">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Button ImageSource="cross.png" Clicked="ReturnMainPage" VerticalOptions="Start" HorizontalOptions="Start" BackgroundColor="Transparent" WidthRequest="50"/>
+
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" Margin="25,5">
+                
+                <Entry x:Name="Entry_firstname" Placeholder="Prénom" PlaceholderColor="Black"/>
+                <Entry x:Name="Entry_lastname" Placeholder="Nom" PlaceholderColor="Black"/>
+                <Entry x:Name="Entry_email" Placeholder="Email" PlaceholderColor="Black"/>
+                <Entry x:Name="Entry_firstpassword" Placeholder="Mot de passe" PlaceholderColor="Black"/>
+                <Entry x:Name="Entry_secondpassword" Placeholder="Confirmer" PlaceholderColor="Black"/>
+                
+            </StackLayout>
+
+            <Button x:Name="Btn_CreateAccount" Text="Créer" TextColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Clicked="CreateAccount" BackgroundColor="#19234B"/>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

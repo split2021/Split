@@ -11,6 +11,7 @@ class JsonizableMixin(object):
         for field in self.json_fields:
             value = getattr(self, field)
             dump[field] = value
+        dump['url'] = f"http://api/{self.Meta.verbose_name_plural.lower()}/{self.id}"
         return dump
 
 
@@ -61,12 +62,24 @@ class User(AbstractUser, JsonizableMixin):
     User model
     """
 
-    username = None
     email = models.EmailField('email address', unique=True)
+    phone = models.CharField(max_length=20, unique=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
 
-    json_fields = ['email', 'first_name']
+    json_fields = ['email', 'last_name', 'first_name', 'phone', 'username']
 
     objects = UserManager()
+
+class Payment_user(models.Model):
+
+	payment_name = models.CharField(max_length=40)
+
+class Friend(models.Model):
+
+	friend_name = models.CharField(max_length=40)
+
+class Group(models.Model):
+
+	group_name = models.CharField(max_length=40)
