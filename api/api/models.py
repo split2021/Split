@@ -66,7 +66,7 @@ class User(AbstractUser, JsonizableMixin):
     phone = models.CharField(max_length=20, unique=True)
     payment = models.ForeignKey('Payment_user', on_delete=models.CASCADE, null=True)
     friend = models.ForeignKey('Friend', on_delete=models.CASCADE, null=True)
-    group = models.ForeignKey('Group', on_delete=models.CASCADE, null=True)
+    #group = models.ForeignKey('Group', on_delete=models.CASCADE, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
@@ -87,4 +87,5 @@ class Friend(models.Model):
 class Group(models.Model):
 
 	name = models.CharField(max_length=40)
+	user_group = models.ForeignKey('User', on_delete=models.CASCADE, null=True)
 	friend_group = models.ForeignKey('Friend', on_delete=models.CASCADE, null=True)
