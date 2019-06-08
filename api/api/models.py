@@ -64,8 +64,8 @@ class User(AbstractUser, JsonizableMixin):
 
     email = models.EmailField('email address', unique=True)
     phone = models.CharField(max_length=20, unique=True)
-    payment = models.ForeignKey('Payment_user', on_delete=models.CASCADE, null=True)
-    friend = models.ForeignKey('Friend', on_delete=models.CASCADE, null=True)
+    #payment = models.ForeignKey('Payment_user', on_delete=models.CASCADE, null=True)
+    #friend = models.ForeignKey('Friend', on_delete=models.CASCADE, null=True)
     #group = models.ForeignKey('Group', on_delete=models.CASCADE, null=True)
 
     USERNAME_FIELD = 'email'
@@ -75,17 +75,17 @@ class User(AbstractUser, JsonizableMixin):
 
     objects = UserManager()
 
-class Payment_user(models.Model):
+#class Payment_user(models.Model):
 
-	name = models.CharField(max_length=40)
+#	name = models.CharField(max_length=40)
 
-class Friend(models.Model):
+#class Friend(models.Model):
 
-	name = models.CharField(max_length=40)
-	payment_friend = models.ForeignKey('Friend', on_delete=models.CASCADE, null=True)
+#	name = models.CharField(max_length=40)
+#	payment_friend = models.ForeignKey('Friend', on_delete=models.CASCADE, null=True)
 
 class Group(models.Model):
 
 	name = models.CharField(max_length=40)
-	user_group = models.ForeignKey('User', on_delete=models.CASCADE, null=True)
-	friend_group = models.ForeignKey('Friend', on_delete=models.CASCADE, null=True)
+	users = models.ManyToManyField("User")
+#	friend_group = models.ForeignKey('Friend', on_delete=models.CASCADE, null=True)
