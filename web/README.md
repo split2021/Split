@@ -1,1 +1,2 @@
-Web README test
+yarn install
+yarn start
