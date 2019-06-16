@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
-from api.models import User, Group, Payment_user
+from api.models import User, Group, PaymentMethod
 
 # Register your models here.
 
@@ -31,13 +31,12 @@ class UserAdmin(DjangoUserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
 
-class PaymentUserAdmin(admin.ModelAdmin):
-	model = Payment_user
+
+@admin.register(PaymentMethod)
+class PaymentMethodAdmin(admin.ModelAdmin):
 	list_display = ['name']
 
-class GroupsAdmin(admin.ModelAdmin):
-	model = Group
-	list_display = ['name']
 
-admin.site.register(Group, GroupsAdmin)
-admin.site.register(Payment_user, PaymentUserAdmin)
+@admin.register(Group)
+class GroupAdmin(admin.ModelAdmin):
+	list_display = ['name']

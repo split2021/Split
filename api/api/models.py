@@ -65,6 +65,7 @@ class User(AbstractUser, JsonizableMixin):
     email = models.EmailField('email address', unique=True)
     phone = models.CharField(max_length=20, unique=True)
     friends = models.ManyToManyField("self")
+    payment_methods = models.ManyToManyField("PaymentMethod")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
@@ -73,12 +74,17 @@ class User(AbstractUser, JsonizableMixin):
 
     objects = UserManager()
 
-class Payment_user(models.Model):
 
-	name = models.CharField(max_length=40)
-	users = models.ManyToManyField("User")
+class PaymentMethod(models.Model):
+    """
+    """
+
+    name = models.CharField(max_length=40)
+
 
 class Group(models.Model):
+    """
+    """
 
-	name = models.CharField(max_length=40)
-	users = models.ManyToManyField("User")
+    name = models.CharField(max_length=40)
+    users = models.ManyToManyField("User")

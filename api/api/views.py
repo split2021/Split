@@ -10,8 +10,8 @@ class UsersView(MultipleObjectsAPIView):
     model = User
 
 
-#class GroupView(SingleObjectAPIView):
-#    model = Group
+class GroupView(SingleObjectAPIView):
+    model = Group
 
-#class GroupsView(MultipleObjectsAPIView):
-#    model = Group
+class GroupsView(MultipleObjectsAPIView):
+    model = Group
