@@ -34,7 +34,7 @@ class UserAdmin(DjangoUserAdmin):
 
 @admin.register(PaymentMethod)
 class PaymentMethodAdmin(admin.ModelAdmin):
-	list_display = ['name']
+	list_display = ['mastercard']
 
 
 @admin.register(Group)
