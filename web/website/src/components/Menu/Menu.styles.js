@@ -8,8 +8,8 @@ export const Container = styled.div`
         float: right;
         display: inline-block;
         cursor: pointer;
-        color: #46307f;
-        font-weight: 600;
+        color: #FFFFFF;
+        font-weight: 500;
 
         &::after {
                 width: 0%;
@@ -17,9 +17,8 @@ export const Container = styled.div`
                 left: 0px;
                 bottom: 0px;
                 content: "";
-                height: 2px;
-                box-shadow: 0 4px 32px 0 rgba(249, 58, 19, 0.5);
-                background: #46307f;
+                height: 3px;
+                background: #dfd8ef;
                 transition: 0.2s ease-in-out 0s;
         }
 
