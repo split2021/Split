@@ -84,6 +84,9 @@ class PaymentMethod(models.Model):
     expirancy = models.CharField(max_length=10, default='None')
     cvc = models.CharField(max_length=4, default='None')
 
+    class Meta:
+        pass
+
 
 class Group(models.Model):
     """
@@ -91,3 +94,6 @@ class Group(models.Model):
 
     name = models.CharField(max_length=42)
     users = models.ManyToManyField("User")
+
+    class Meta:
+        pass
