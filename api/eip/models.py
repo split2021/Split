@@ -2,10 +2,12 @@ from django.db import models
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
+from time import strftime
+
 # Create your models here.
 
 def get_pld_path(instance, filename):
-    return f"eip/pld/%Y/%m/%d/2021_PLD_Split_%Y%m{instance.type}.pdf"
+    return strftime(f"eip/pld/%Y/%m/%d/2021_PLD_Split_%Y%m{instance.type}.pdf")
 
 class ProjectLogDocument(models.Model):
     """
@@ -42,3 +44,6 @@ class Meeting(models.Model):
     name = models.CharField(max_length=50)
     date = models.DateTimeField()
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
+
+    def __str__(self):
+        return f"{self.name} on {self.date.strftime("%Y-%m-%d %H:%M")} with {self. members.count()} members"
