@@ -1,5 +1,5 @@
 from api.classviews import SingleObjectAPIView, MultipleObjectsAPIView
-from api.models import User#, Group
+from api.models import User, Group
 
 # Create your views here.
 
