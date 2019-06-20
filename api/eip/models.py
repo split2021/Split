@@ -46,4 +46,4 @@ class Meeting(models.Model):
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
     def __str__(self):
-        return f"{self.name} on {self.date.strftime("%Y-%m-%d %H:%M")} with {self. members.count()} members"
+        return f"{self.name} on {self.date.strftime('%Y-%m-%d %H:%M')} with {self. members.count()} members"
