@@ -18,6 +18,7 @@ class UserTestCase(TestCase):
 
         self.emptyRequest = HttpRequest()
         self.emptyRequest.META['CONTENT_LENGTH'] = 0
+        self.emptyRequest._body = b""
 
         User.objects.create_user(email="test@email.fr",
                                 password="testpassword",
@@ -80,7 +81,7 @@ class UserTestCase(TestCase):
         self.assertEqual(user.last_name,  "patchlastname")
         self.assertEqual(user.username,  "patchusername")
 
-    def test_patch_existing_user_with_content(self):
+    def test_patch_existing_user_without_content(self):
         user = User.objects.get(email="test@email.fr")
 
         response = self.userView.patch(request=self.emptyRequest, id=user.id)
@@ -104,3 +105,28 @@ class UserTestCase(TestCase):
 
         self.assertEqual(content_json['reason'], "user not found")
         self.assertEqual(content_json['statuscode'], 404)
+
+
+    def test_post_user_with_content(self):
+        request = HttpRequest()
+        request._body = json.dumps({
+            'email': "test2@email.fr",
+            'password': "test2password",
+            'phone': "+33 2 15 35 95 75",
+            'first_name': "test2firstname",
+            'last_name': "test2lastname",
+            'username': "test2username",
+        }).encode()
+        request.META['CONTENT_LENGTH'] = 42
+        response = self.userView.post(request=request)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['reason'], "user created successfully")
+        self.assertEqual(content_json['statuscode'], 201)
+
+    def test_post_user_without_content(self):
+        response = self.userView.post(request=self.emptyRequest)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['reason'], "Exception caught: Expecting value: line 1 column 1 (char 0)")
+        self.assertEqual(content_json['statuscode'], 500)

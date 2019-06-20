@@ -113,8 +113,8 @@ class SingleObjectAPIView(APIView):
 
     def post(self, request, *args, **kwargs):
         data = request.body.decode('utf-8')
-        json_data = json.loads(data)
         try:
+            json_data = json.loads(data)
             object_ = self.model.objects.create(**json_data)
             return APIResponse(201, f"{self.model._meta.verbose_name} created successfully", object_.json())
         except Exception as e:
