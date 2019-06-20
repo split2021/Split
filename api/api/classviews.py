@@ -122,8 +122,8 @@ class SingleObjectAPIView(APIView):
 
     def put(self, request, *args, **kwargs):
         data = request.body.decode('utf-8')
-        json_data = json.loads(data)
         try:
+            json_data = json.loads(data)
             object_ = self.model.objects.get(id=kwargs['id'])
             json_data.pop('id', None)
             for key, value in json_data.items():

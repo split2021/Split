@@ -130,3 +130,68 @@ class UserTestCase(TestCase):
 
         self.assertEqual(content_json['reason'], "Exception caught: Expecting value: line 1 column 1 (char 0)")
         self.assertEqual(content_json['statuscode'], 500)
+
+
+    def test_put_existing_user_with_content(self):
+        user = User.objects.get(email="test@email.fr")
+
+        request = HttpRequest()
+        request._body = json.dumps({
+            'email': "testput@email.fr",
+            'phone': "+33 3 15 35 95 75",
+            'first_name': "putfirstname",
+            'last_name': "putlastname",
+            'username': "putusername"
+        }).encode()
+        request.META['CONTENT_LENGTH'] = 42
+        response = self.userView.put(request=request, id=user.id)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['reason'], "user updated successfully")
+        self.assertEqual(content_json['statuscode'], 200)
+
+        user = User.objects.get(id=user.id)
+        self.assertEqual(user.email, "testput@email.fr")
+        self.assertEqual(user.phone, "+33 3 15 35 95 75")
+        self.assertEqual(user.first_name, "putfirstname")
+        self.assertEqual(user.last_name,  "putlastname")
+        self.assertEqual(user.username,  "putusername")
+
+    def test_put_nonexisting_user_with_content(self):
+        request = HttpRequest()
+        request._body = json.dumps({
+            'email': "testput@email.fr",
+            'phone': "+33 3 15 35 95 75",
+            'first_name': "putfirstname",
+            'last_name': "putlastname",
+            'username': "putusername"
+        }).encode()
+        request.META['CONTENT_LENGTH'] = 42
+        response = self.userView.put(request=request, id=42)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['reason'], "user created successfully")
+        self.assertEqual(content_json['statuscode'], 200)
+
+        user = User.objects.get(id=42)
+        self.assertEqual(user.email, "testput@email.fr")
+        self.assertEqual(user.phone, "+33 3 15 35 95 75")
+        self.assertEqual(user.first_name, "putfirstname")
+        self.assertEqual(user.last_name,  "putlastname")
+        self.assertEqual(user.username,  "putusername")
+
+    def test_put_existing_user_without_content(self):
+        user = User.objects.get(email="test@email.fr")
+
+        response = self.userView.put(request=self.emptyRequest, id=user.id)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['reason'], "Exception caught: Expecting value: line 1 column 1 (char 0)")
+        self.assertEqual(content_json['statuscode'], 500)
+
+    def test_put_nonexisting_user_without_content(self):
+        response = self.userView.put(request=self.emptyRequest, id=42)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['reason'], "Exception caught: Expecting value: line 1 column 1 (char 0)")
+        self.assertEqual(content_json['statuscode'], 500)
