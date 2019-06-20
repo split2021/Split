@@ -186,12 +186,29 @@ class UserTestCase(TestCase):
         response = self.userView.put(request=self.emptyRequest, id=user.id)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "Exception caught: Expecting value: line 1 column 1 (char 0)")
-        self.assertEqual(content_json['statuscode'], 500)
+        self.assertEqual(content_json['reason'], "A content is required to update user")
+        self.assertEqual(content_json['statuscode'], 204)
 
     def test_put_nonexisting_user_without_content(self):
         response = self.userView.put(request=self.emptyRequest, id=42)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "Exception caught: Expecting value: line 1 column 1 (char 0)")
-        self.assertEqual(content_json['statuscode'], 500)
+        self.assertEqual(content_json['reason'], "A content is required to update user")
+        self.assertEqual(content_json['statuscode'], 204)
+
+
+    def test_delete_existing_user(self):
+        user = User.objects.get(email="test@email.fr")
+
+        response = self.userView.delete(request=self.emptyRequest, id=user.id)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['reason'], "user deleted successfully")
+        self.assertEqual(content_json['statuscode'], 200)
+
+    def test_delete_nonexisting_user(self):
+        response = self.userView.delete(request=self.emptyRequest, id=42)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['reason'], "user not found")
+        self.assertEqual(content_json['statuscode'], 404)

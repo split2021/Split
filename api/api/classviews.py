@@ -97,10 +97,10 @@ class SingleObjectAPIView(APIView):
             return ExceptionCaught(e)
 
     def patch(self, request, *args, **kwargs):
+        if not request.META['CONTENT_LENGTH']:
+            return APIResponse(204, f"A content is required to update {self.model._meta.verbose_name}")
+        data = request.body.decode('utf-8')
         try:
-            if not request.META['CONTENT_LENGTH']:
-                return APIResponse(204, f"A content is required to update {self.model._meta.verbose_name}")
-            data = request.body.decode('utf-8')
             json_data = json.loads(data)
             object_ = self.model.objects.filter(id=kwargs['id'])
             if object_.count():
@@ -115,12 +115,17 @@ class SingleObjectAPIView(APIView):
         data = request.body.decode('utf-8')
         try:
             json_data = json.loads(data)
-            object_ = self.model.objects.create(**json_data)
-            return APIResponse(201, f"{self.model._meta.verbose_name} created successfully", object_.json())
+            object_, created = self.model.objects.get_or_create(**json_data)
+            if created:
+                return APIResponse(201, f"{self.model._meta.verbose_name} created successfully", object_.json())
+            else:
+                return APIResponse(409, f"{self.model._meta.verbose_name} already exist", object_.json())
         except Exception as e:
             return ExceptionCaught(e)
 
     def put(self, request, *args, **kwargs):
+        if not request.META['CONTENT_LENGTH']:
+            return APIResponse(204, f"A content is required to update {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
         try:
             json_data = json.loads(data)
