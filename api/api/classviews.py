@@ -112,6 +112,8 @@ class SingleObjectAPIView(APIView):
             return ExceptionCaught(e)
 
     def post(self, request, *args, **kwargs):
+        if not request.META['CONTENT_LENGTH']:
+            return APIResponse(204, f"A content is required to create {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
         try:
             json_data = json.loads(data)
@@ -125,7 +127,7 @@ class SingleObjectAPIView(APIView):
 
     def put(self, request, *args, **kwargs):
         if not request.META['CONTENT_LENGTH']:
-            return APIResponse(204, f"A content is required to update {self.model._meta.verbose_name}")
+            return APIResponse(204, f"A content is required to emplace {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
         try:
             json_data = json.loads(data)
@@ -171,9 +173,11 @@ class MultipleObjectsAPIView(APIView):
         return NotAllowed()
 
     def post(self, request, *args, **kwargs):
+        if not request.META['CONTENT_LENGTH']:
+            return APIResponse(204, f"A content is required to create {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
-        json_data = json.loads(data)
         try:
+            json_data = json.loads(data)
             object_ = self.model.objects.create(**json_data)
             return APIResponse(201, f"{self.model._meta.verbose_name} created successfully", object_.json())
         except Exception as e:

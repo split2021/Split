@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.http import HttpRequest
 
 from api.models import User
-from api.views import UserView
+from api.views import UserView, UsersView
 
 import json
 
@@ -27,11 +27,6 @@ class UserTestCase(TestCase):
                                 last_name="testlastname",
                                 username="testusername"
                                 )
-
-    def test_user_password(self):
-        user = User.objects.get(email="test@email.fr")
-        self.assertTrue(user.check_password("testpassword"))
-
 
     def test_get_existing_user(self):
         user = User.objects.get(email="test@email.fr")
@@ -71,8 +66,8 @@ class UserTestCase(TestCase):
         response = self.userView.patch(request=request, id=user.id)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "user updated successfully")
         self.assertEqual(content_json['statuscode'], 200)
+        self.assertEqual(content_json['reason'], "user updated successfully")
 
         user = User.objects.get(id=user.id)
         self.assertEqual(user.email, "testpatch@email.fr")
@@ -87,8 +82,8 @@ class UserTestCase(TestCase):
         response = self.userView.patch(request=self.emptyRequest, id=user.id)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "A content is required to update user")
         self.assertEqual(content_json['statuscode'], 204)
+        self.assertEqual(content_json['reason'], "A content is required to update user")
 
     def test_patch_existing_user_with_content(self):
         request = HttpRequest()
@@ -103,8 +98,8 @@ class UserTestCase(TestCase):
         response = self.userView.patch(request=request, id=42)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "user not found")
         self.assertEqual(content_json['statuscode'], 404)
+        self.assertEqual(content_json['reason'], "user not found")
 
 
     def test_post_user_with_content(self):
@@ -121,15 +116,15 @@ class UserTestCase(TestCase):
         response = self.userView.post(request=request)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "user created successfully")
         self.assertEqual(content_json['statuscode'], 201)
+        self.assertEqual(content_json['reason'], "user created successfully")
 
     def test_post_user_without_content(self):
         response = self.userView.post(request=self.emptyRequest)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "Exception caught: Expecting value: line 1 column 1 (char 0)")
-        self.assertEqual(content_json['statuscode'], 500)
+        self.assertEqual(content_json['statuscode'], 204)
+        self.assertEqual(content_json['reason'], "A content is required to create user")
 
 
     def test_put_existing_user_with_content(self):
@@ -147,8 +142,8 @@ class UserTestCase(TestCase):
         response = self.userView.put(request=request, id=user.id)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "user updated successfully")
         self.assertEqual(content_json['statuscode'], 200)
+        self.assertEqual(content_json['reason'], "user updated successfully")
 
         user = User.objects.get(id=user.id)
         self.assertEqual(user.email, "testput@email.fr")
@@ -170,8 +165,8 @@ class UserTestCase(TestCase):
         response = self.userView.put(request=request, id=42)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "user created successfully")
         self.assertEqual(content_json['statuscode'], 200)
+        self.assertEqual(content_json['reason'], "user created successfully")
 
         user = User.objects.get(id=42)
         self.assertEqual(user.email, "testput@email.fr")
@@ -186,15 +181,15 @@ class UserTestCase(TestCase):
         response = self.userView.put(request=self.emptyRequest, id=user.id)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "A content is required to update user")
         self.assertEqual(content_json['statuscode'], 204)
+        self.assertEqual(content_json['reason'], "A content is required to emplace user")
 
     def test_put_nonexisting_user_without_content(self):
         response = self.userView.put(request=self.emptyRequest, id=42)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "A content is required to update user")
         self.assertEqual(content_json['statuscode'], 204)
+        self.assertEqual(content_json['reason'], "A content is required to emplace user")
 
 
     def test_delete_existing_user(self):
@@ -203,12 +198,83 @@ class UserTestCase(TestCase):
         response = self.userView.delete(request=self.emptyRequest, id=user.id)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "user deleted successfully")
         self.assertEqual(content_json['statuscode'], 200)
+        self.assertEqual(content_json['reason'], "user deleted successfully")
 
     def test_delete_nonexisting_user(self):
         response = self.userView.delete(request=self.emptyRequest, id=42)
         content_json = getJsonFromResponse(response)
 
-        self.assertEqual(content_json['reason'], "user not found")
         self.assertEqual(content_json['statuscode'], 404)
+        self.assertEqual(content_json['reason'], "user not found")
+
+
+class UsersTestCase(TestCase):
+    def setUp(self):
+        self.usersView = UsersView()
+
+        self.emptyRequest = HttpRequest()
+        self.emptyRequest.META['CONTENT_LENGTH'] = 0
+        self.emptyRequest._body = b""
+
+        User.objects.create_user(email="test@email.fr",
+                                password="testpassword",
+                                phone="+33 1 15 35 95 75",
+                                first_name="testfirstname",
+                                last_name="testlastname",
+                                username="testusername"
+                                )
+
+    def test_get_users(self):
+        response = self.usersView.get(request=self.emptyRequest)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['statuscode'], 200)
+        self.assertEqual(content_json['reason'], "users retrieved successfully")
+
+        self.assertEqual(type(content_json['data']), list)
+
+    def test_patch_users(self):
+        response = self.usersView.patch(request=self.emptyRequest)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['statuscode'], 405)
+        self.assertEqual(content_json['reason'], "Verb not allowed")
+
+    def test_post_users_with_content(self):
+        request = HttpRequest()
+        request._body = json.dumps({
+            'email': "test2@email.fr",
+            'password': "test2password",
+            'phone': "+33 2 15 35 95 75",
+            'first_name': "test2firstname",
+            'last_name': "test2lastname",
+            'username': "test2username",
+        }).encode()
+        request.META['CONTENT_LENGTH'] = 42
+        response = self.usersView.post(request=request)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['statuscode'], 201)
+        self.assertEqual(content_json['reason'], "user created successfully")
+
+    def test_post_users_without_content(self):
+        response = self.usersView.post(request=self.emptyRequest)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['statuscode'], 204)
+        self.assertEqual(content_json['reason'], "A content is required to create user")
+
+    def test_put_users(self):
+        response = self.usersView.put(request=self.emptyRequest)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['statuscode'], 405)
+        self.assertEqual(content_json['reason'], "Verb not allowed")
+
+    def test_delete_users(self):
+        response = self.usersView.delete(request=self.emptyRequest)
+        content_json = getJsonFromResponse(response)
+
+        self.assertEqual(content_json['statuscode'], 405)
+        self.assertEqual(content_json['reason'], "Verb not allowed")
