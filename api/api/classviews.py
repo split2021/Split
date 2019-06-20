@@ -183,9 +183,4 @@ class MultipleObjectsAPIView(APIView):
         return NotAllowed()
 
     def delete(self, request, *args, **kwargs):
-        try:
-            objects = self.model.objects.all()
-            objects.delete()
-            return APIResponse(200, f"{self.model._meta.verbose_name} deleted successfully", [object_.json() for object_ in objects])
-        except Exception as e:
-            return ExceptionCaught(e)
+        return NotAllowed()
