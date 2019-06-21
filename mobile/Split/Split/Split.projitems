@@ -24,10 +24,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Group.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\MasterMenuItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PhoneContact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Requests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Token.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\DetailViews\ContactPage.xaml.cs">
       <DependentUpon>ContactPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\DetailViews\CreateAccountPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\DetailViews\GroupPage.xaml.cs">
@@ -89,5 +93,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\DetailViews\CreateAccountPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="C:\Users\Hugo\Documents\GitHub\Split\Split\Split\Views\DetailViews\CreateAccountPage.xaml.cs">
+      <DependentUpon>CreateAccountPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
