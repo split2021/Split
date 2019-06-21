@@ -8,6 +8,7 @@ from eip.models import ProjectLogDocument, Meeting
 class ProjectLogDocumentAdmin(admin.ModelAdmin):
     """
     """
+    list_display = ('type', 'file', 'meeting')    
 
 @admin.register(Meeting)
 class MeetingAdmin(admin.ModelAdmin):

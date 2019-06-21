@@ -4,3 +4,6 @@
 # Python compiled
 *.pyc
 api/db.sqlite3
+
+# Medias
+api/media/

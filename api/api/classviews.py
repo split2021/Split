@@ -97,32 +97,40 @@ class SingleObjectAPIView(APIView):
             return ExceptionCaught(e)
 
     def patch(self, request, *args, **kwargs):
-        data = request.body.decode('utf-8')
-        if not data:
+        if not request.META['CONTENT_LENGTH']:
             return APIResponse(204, f"A content is required to update {self.model._meta.verbose_name}")
-        json_data = json.loads(data)
+        data = request.body.decode('utf-8')
         try:
+            json_data = json.loads(data)
             object_ = self.model.objects.filter(id=kwargs['id'])
-            object_.update(**json_data)
-            return APIResponse(200, f"{self.model._meta.verbose_name} updated successfully", object_.json())
-        except ObjectDoesNotExist:
-            return APIResponse(404, f"{self.model._meta.verbose_name} not found")
+            if object_.count():
+                object_.update(**json_data)
+                return APIResponse(200, f"{self.model._meta.verbose_name} updated successfully", object_.first().json())
+            else:
+                return APIResponse(404, f"{self.model._meta.verbose_name} not found")
         except Exception as e:
             return ExceptionCaught(e)
 
     def post(self, request, *args, **kwargs):
+        if not request.META['CONTENT_LENGTH']:
+            return APIResponse(204, f"A content is required to create {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
-        json_data = json.loads(data)
         try:
-            object_ = self.model.objects.create(**json_data)
-            return APIResponse(201, f"{self.model._meta.verbose_name} created successfully", object_.json())
+            json_data = json.loads(data)
+            object_, created = self.model.objects.get_or_create(**json_data)
+            if created:
+                return APIResponse(201, f"{self.model._meta.verbose_name} created successfully", object_.json())
+            else:
+                return APIResponse(409, f"{self.model._meta.verbose_name} already exist", object_.json())
         except Exception as e:
             return ExceptionCaught(e)
 
     def put(self, request, *args, **kwargs):
+        if not request.META['CONTENT_LENGTH']:
+            return APIResponse(204, f"A content is required to emplace {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
-        json_data = json.loads(data)
         try:
+            json_data = json.loads(data)
             object_ = self.model.objects.get(id=kwargs['id'])
             json_data.pop('id', None)
             for key, value in json_data.items():
@@ -165,9 +173,11 @@ class MultipleObjectsAPIView(APIView):
         return NotAllowed()
 
     def post(self, request, *args, **kwargs):
+        if not request.META['CONTENT_LENGTH']:
+            return APIResponse(204, f"A content is required to create {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
-        json_data = json.loads(data)
         try:
+            json_data = json.loads(data)
             object_ = self.model.objects.create(**json_data)
             return APIResponse(201, f"{self.model._meta.verbose_name} created successfully", object_.json())
         except Exception as e:
@@ -177,9 +187,4 @@ class MultipleObjectsAPIView(APIView):
         return NotAllowed()
 
     def delete(self, request, *args, **kwargs):
-        try:
-            objects = self.model.objects.all()
-            objects.delete()
-            return APIResponse(200, f"{self.model._meta.verbose_name} deleted successfully", [object_.json() for object_ in objects])
-        except Exception as e:
-            return ExceptionCaught(e)
+        return NotAllowed()
