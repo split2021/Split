@@ -1,64 +1,81 @@
-# Build partie ANDROID
-jobs:
-  - job: MOBILE_Android
-    pool:
-      vmImage: 'vs2017-win2016'
-    variables:
-      buildConfiguration: 'Release'
-      outputDirectory: './mobile/build/$(buildConfiguration)'
-    steps:
-    - task: NuGetToolInstaller@0
-    - task: NuGetCommand@2
-      inputs:
-        restoreSolution: '**/*.sln'
-    - task: XamarinAndroid@1
-      inputs:
-        projectFile: './mobile/Split/Split.Android/*droid.csproj'
-        outputDirectory: '$(outputDirectory)'
-        configuration: '$(buildConfiguration)'
+stages:
+  # [BUILDS]
+  - stage: Builds
+    jobs:
+      # Android
+      - job: MOBILE_Android
+        pool:
+          vmImage: 'vs2017-win2016'
+        variables:
+          buildConfiguration: 'Release'
+          outputDirectory: './mobile/build/$(buildConfiguration)'
+        steps:
+        - task: NuGetToolInstaller@0
+        - task: NuGetCommand@2
+          inputs:
+            restoreSolution: '**/*.sln'
+        - task: XamarinAndroid@1
+          inputs:
+            projectFile: './mobile/Split/Split.Android/*droid.csproj'
+            outputDirectory: '$(outputDirectory)'
+            configuration: '$(buildConfiguration)'
+      # iOS
+      - job: MOBILE_iOS
+        pool:
+          vmImage: 'macOS-10.13'
+        variables:
+          buildConfiguration: 'Release'
+        steps:
+        - task: NuGetToolInstaller@0
+        - task: NuGetCommand@2
+          inputs:
+            restoreSolution: '**/*.sln'
+        - task: XamariniOS@2
+          inputs:
+            solutionFile: './mobile/Split/Split.iOS/*iOS.csproj'
+            configuration: '$(buildConfiguration)'
+            buildForSimulator: true
+            packageApp: false
+      # Web
+      - job: WEB
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+        - script: yarn install
+          displayName: 'Yarn install'
+          workingDirectory: './web/website/'
+        - script: yarn build
+          displayName: 'Yarn build'
+          workingDirectory: './web/website/'
+      # API
+      - job: API
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+        - script: docker-compose build
+          displayName: 'Docker build'
+          workingDirectory: './api/'
 
-  # Build partie iOS
-  - job: MOBILE_iOS
-    pool:
-      vmImage: 'macOS-10.13'
-    variables:
-      buildConfiguration: 'Release'
-    steps:
-    - task: NuGetToolInstaller@0
-    - task: NuGetCommand@2
-      inputs:
-        restoreSolution: '**/*.sln'
-    - task: XamariniOS@2
-      inputs:
-        solutionFile: './mobile/Split/Split.iOS/*iOS.csproj'
-        configuration: '$(buildConfiguration)'
-        buildForSimulator: true
-        packageApp: false
+  # [TESTS]
+  - stage: Tests
+    jobs:
+      # Web
+      - job: WEB
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+        - script: yarn test
+          displayName: 'Run mocha tests'
+          workingDirectory: './web/website/'
 
-  # Build Web
-  - job: WEB
-    pool:
-      vmImage: 'ubuntu-16.04'
-    steps:
-    - script: yarn install
-      displayName: 'Yarn install'
-      workingDirectory: './web/website/'
-    - script: yarn build
-      displayName: 'Yarn build'
-      workingDirectory: './web/website/'
-
-  # Build API
-  - job: API
-    pool:
-      vmImage: 'ubuntu-16.04'
-    steps:
-    - script: docker-compose build
-      displayName: 'Docker build'
-      workingDirectory: './api/'
-  
-  # Publish to Azure
-  - job: Deploy_files_to_Azure
-    steps:
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(System.DefaultWorkingDirectory)'
+  # [PUBLISH TESTS]
+  - stage: Publish_Tests
+    jobs:
+      # Web
+      - job: WEB
+        steps:
+        - task: PublishTestResults@2
+          condition: succeededOrFailed()
+          inputs:
+            testRunner: JUnit
+            testResultsFiles: '**/TEST-RESULTS.xml'
