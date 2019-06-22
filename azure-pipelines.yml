@@ -64,6 +64,9 @@ stages:
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
+        - script: yarn install
+          displayName: 'Yarn install'
+          workingDirectory: './web/website/'
         - script: yarn test
           displayName: 'Run mocha tests'
           workingDirectory: './web/website/'
