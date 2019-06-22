@@ -41,6 +41,7 @@ jobs:
     vmImage: 'ubuntu-16.04'
   steps:
   - script: yarn install
+    displayName: 'Yarn install'
     workingDirectory: './web/website/'
 
 # Build API
@@ -48,5 +49,6 @@ jobs:
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
-  - script: docker-compose build -t
+  - script: docker-compose build
+    displayName: 'Docker build'
     workingDirectory: './api/'
