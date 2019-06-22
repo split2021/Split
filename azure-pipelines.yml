@@ -43,6 +43,9 @@ jobs:
   - script: yarn install
     displayName: 'Yarn install'
     workingDirectory: './web/website/'
+  - script: yarn build
+    displayName: 'Yarn build'
+    workingDirectory: './web/website/'
 
 # Build API
 - job: API
