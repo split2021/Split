@@ -16,7 +16,7 @@ class ProjectLogDocument(models.Model):
     PLD_TYPE_CHOICES = [
         ('KO', 'Kick off'),
         ('FU', 'Follow up'),
-        ('D', 'Delviery'),
+        ('D', 'Delivery'),
     ]
 
     type = models.CharField(max_length=2, choices=PLD_TYPE_CHOICES)
