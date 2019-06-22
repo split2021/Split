@@ -57,6 +57,8 @@ jobs:
       workingDirectory: './api/'
   
   # Publish to Azure
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: '$(System.DefaultWorkingDirectory)'
+  - job: Deploy_files_to_Azure
+    steps:
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(System.DefaultWorkingDirectory)'
