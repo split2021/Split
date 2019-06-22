@@ -3,25 +3,44 @@
 # Add steps that test, sign, and distribute an app, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
 
-trigger:
-- master
+jobs:
+- job: MOBILE-Android
+  pool:
+    vmImage: 'vs2017-win2016'
+  variables:
+    buildConfiguration: 'Release'
+    outputDirectory: './mobile/build/$(buildConfiguration)'
+  steps:
+  - task: NuGetToolInstaller@0
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '**/*.sln'
+  - task: XamarinAndroid@1
+    inputs:
+      projectFile: './mobile/Split/Split.Android/*droid.csproj'
+      outputDirectory: '$(outputDirectory)'
+      configuration: '$(buildConfiguration)'
 
-pool:
-  vmImage: 'vs2017-win2016'
+- job: MOBILE-iOS
+  pool:
+    vmImage: 'macOS-10.13'
+  variables:
+    buildConfiguration: 'Release'
+  steps:
+  - task: NuGetToolInstaller@0
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '**/*.sln'
+  - task: XamariniOS@2
+    inputs:
+      solutionFile: ''./mobile/Split/Split.iOS/*iOS.csproj'
+      configuration: '$(buildConfiguration)'
+      buildForSimulator: true
+      packageApp: false
 
-variables:
-  buildConfiguration: 'Release'
-  outputDirectory: './mobile/build/$(buildConfiguration)'
-
-steps:
-- task: NuGetToolInstaller@0
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '**/*.sln'
-
-- task: XamarinAndroid@1
-  inputs:
-    projectFile: './mobile/Split/Split.Android/*droid*.csproj'
-    outputDirectory: '$(outputDirectory)'
-    configuration: '$(buildConfiguration)'
+- job: WEB
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - script: yarn install
+    workingDirectory: './web/website/'
