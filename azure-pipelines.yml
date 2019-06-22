@@ -33,7 +33,7 @@ jobs:
       restoreSolution: '**/*.sln'
   - task: XamariniOS@2
     inputs:
-      solutionFile: ./mobile/Split/Split.iOS/*iOS.csproj'
+      solutionFile: './mobile/Split/Split.iOS/*iOS.csproj'
       configuration: '$(buildConfiguration)'
       buildForSimulator: true
       packageApp: false
