@@ -14,23 +14,21 @@ namespace Split.Views.Menu
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MasterPage : ContentPage
 	{
-        public ListView Listview { get { return ListView; } }
-        public List<MasterMenuItem> items;
 
         public MasterPage ()
 		{
 			InitializeComponent();
-            SetItem();
 		}
 
-        void SetItem()
+        async void GroupsPage(object sender, EventArgs e)
         {
-            items = new List<MasterMenuItem>();
-            items.Add(new MasterMenuItem("Groupes", "icon_group.png", Color.White, typeof(GroupPage)));
-            items.Add(new MasterMenuItem("Contacts", "icon_contact.png", Color.White, typeof(ContactPage)));
-            ListView.ItemsSource = items;
+            await Navigation.PushAsync(new GroupPage());
         }
 
+        async void ContactPage(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ContactPage());
+        }
         async void LogOutProcedure(object sender, EventArgs e)
         {
             if (Device.RuntimePlatform.Equals("Android"))
