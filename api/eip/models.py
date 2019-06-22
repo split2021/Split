@@ -28,12 +28,10 @@ class ProjectLogDocument(models.Model):
             raise ValidationError("The file must be of pdf type")
 
     def save(self, *args, **kwargs):
-        try:
-            this = ProjectLogDocument.objects.get(id=self.id)
-            if this.file != self.file:
-                this.file.delete()
-        except:
-            pass
+        old = ProjectLogDocument.objects.filter(id=self.id)
+        if old.count:
+            if old.file != self.file:
+                old.file.delete()
         super(ProjectLogDocument, self).save(*args, **kwargs)
 
 
