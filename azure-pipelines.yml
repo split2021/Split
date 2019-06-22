@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
 
 jobs:
-- job: MOBILE-Android
+- job: MOBILE_Android
   pool:
     vmImage: 'vs2017-win2016'
   variables:
@@ -21,7 +21,7 @@ jobs:
       outputDirectory: '$(outputDirectory)'
       configuration: '$(buildConfiguration)'
 
-- job: MOBILE-iOS
+- job: MOBILE_iOS
   pool:
     vmImage: 'macOS-10.13'
   variables:
