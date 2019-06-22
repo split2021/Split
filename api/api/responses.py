@@ -31,5 +31,5 @@ class ExceptionCaught(APIResponse):
 
 class NotAllowed(APIResponse):
 
-    def __init__(self, exception, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(405, f"Verb not allowed", *args, **kwargs)
