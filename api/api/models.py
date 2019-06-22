@@ -64,6 +64,7 @@ class User(AbstractUser, JsonizableMixin):
 
     email = models.EmailField('email address', unique=True)
     phone = models.CharField(max_length=20, unique=True)
+    username = models.CharField(max_length=20, blank=True)
     friends = models.ManyToManyField("self")
     payment_methods = models.ManyToManyField("PaymentMethod")
 
