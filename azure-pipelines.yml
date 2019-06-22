@@ -81,4 +81,4 @@ stages:
           condition: succeededOrFailed()
           inputs:
             testRunner: JUnit
-            testResultsFiles: '**/TEST-RESULTS.xml'
+            testResultsFiles: './testsOutput/web.xml'
