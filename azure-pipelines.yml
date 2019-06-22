@@ -1,8 +1,4 @@
-# Xamarin.Android
-# Build a Xamarin.Android project.
-# Add steps that test, sign, and distribute an app, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
-
+# Build partie ANDROID
 jobs:
 - job: MOBILE_Android
   pool:
@@ -21,6 +17,7 @@ jobs:
       outputDirectory: '$(outputDirectory)'
       configuration: '$(buildConfiguration)'
 
+# Build partie iOS
 - job: MOBILE_iOS
   pool:
     vmImage: 'macOS-10.13'
@@ -38,9 +35,19 @@ jobs:
       buildForSimulator: true
       packageApp: false
 
+# Build Web
 - job: WEB
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
   - script: yarn install
     workingDirectory: './web/website/'
+
+# Build API
+- job: API
+  pool:
+    vmImage: 'ubuntu-16.04'
+  variables:
+  steps:
+  - script: docker-compose build -t
+    workingDirectory: './api/'
