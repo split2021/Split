@@ -47,7 +47,6 @@ jobs:
 - job: API
   pool:
     vmImage: 'ubuntu-16.04'
-  variables:
   steps:
   - script: docker-compose build -t
     workingDirectory: './api/'
