@@ -17,7 +17,7 @@ namespace Split.Views.DetailViews
         public string GroupName;
         public PhoneContact Me;
         public List<PhoneContact> GroupPhoneContact;
-
+        public List<PhoneContact> ContactList = new List<PhoneContact>();
         public ContactPage ()
 		{
 			InitializeComponent ();
@@ -26,7 +26,10 @@ namespace Split.Views.DetailViews
 
         void Init()
         {
-            ContactListView.ItemsSource = Constants.ContactList;
+            ContactList.Add(new PhoneContact("Hugo", "MARTIN", "0612345678"));
+            ContactList.Add(new PhoneContact("Valentin", "RUBIO", "0612345678"));
+            ContactList.Add(new PhoneContact("Tiphaine", "Laurent", "0612345678"));
+            ContactListView.ItemsSource = ContactList;
         }
 
         void CreateGroup(object sender, EventArgs e)
@@ -38,7 +41,7 @@ namespace Split.Views.DetailViews
             Me.FirstName = "Moi";
             Me.PhoneNumber = "0102030405";
             GroupPhoneContact.Add(Me);
-            foreach (var PhoneContact in Constants.ContactList)
+            foreach (var PhoneContact in ContactList)
             {
                 if (PhoneContact.Selected == true)
                 {

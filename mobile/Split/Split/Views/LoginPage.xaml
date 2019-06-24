@@ -5,7 +5,7 @@
     <StackLayout x:Name="MasterLayout">
 
         <StackLayout x:Name="LogoLayout" VerticalOptions="FillAndExpand">
-            <Image x:Name="LoginIcon" Source="logo.png" Margin="0,80,0,0"/>
+            <Image x:Name="LoginIcon" Source="Split_banner_v1.png" Margin="0,60,0,0"/>
         </StackLayout>
 
         <StackLayout x:Name="LoginLayout" VerticalOptions="StartAndExpand">
@@ -13,13 +13,15 @@
                 <OnIdiom x:TypeArguments="Thickness" Phone="40,0,40,0" Tablet="140,150,140,0"/>
             </StackLayout.Padding>
 
-            <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="true"/>
+            <ActivityIndicator x:Name="ActivitySpinner" Color="#19234B" IsVisible="False" IsRunning="True"/>
 
-            <Entry x:Name="Entry_Username" Placeholder="Identifiant" />
-            <Entry x:Name="Entry_Password" Placeholder="Mot de passe" />
-            <Button x:Name="Btn_Signin" Text="Se connecter" Clicked="SingInProcedure" />
+            <Entry x:Name="Entry_Username" Placeholder="Identifiant" PlaceholderColor="Black"/>    
+            <Entry x:Name="Entry_Password" Placeholder="Mot de passe" PlaceholderColor="Black" IsPassword="True"/>
+            <Button x:Name="Btn_CreateAccount" Text="Nouveau ? Créer un compte" Clicked="CreateAccount" BackgroundColor="Transparent" TextColor="#19234B"/>
 
         </StackLayout>
+
+        <Button x:Name="Btn_Signin" Text="Se connecter" TextColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Clicked="CreateAccount" BackgroundColor="#19234B"/>
 
     </StackLayout>
 </ContentPage>
