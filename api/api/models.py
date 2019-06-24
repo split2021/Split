@@ -101,7 +101,7 @@ class Group(models.Model, JsonizableMixin):
     """
 
     name = models.CharField(max_length=42)
-    users = models.ManyToManyField("User")
+    users = models.ManyToManyField("User", blank=True)
 
     json_fields = ['name', 'users']
 
