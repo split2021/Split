@@ -6,9 +6,9 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed
+from api.models import Log
 
 
-@method_decorator(csrf_exempt, name='dispatch')
 class APIView(View):
     """
      Describes how all API views are implemented by default
@@ -17,6 +17,17 @@ class APIView(View):
     model = None
     safe_methods = ('head', 'options', 'get')
     implemented_methods = ()
+
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+        Log.objects.create(
+            path=request.path,
+            method=request.method,
+            headers=request.headers,
+            body=request.body,
+            cookies=request.COOKIES
+        )
+        return super(GenerateReportView, self).dispatch(*args, **kwargs)
 
     def head(self, request, *args, **kwargs):
         """

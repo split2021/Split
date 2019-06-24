@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from api.models import User, Group, PaymentMethod
+from api.models import User, Group, PaymentMethod, Log
 
 # Register your models here.
 
@@ -83,3 +83,9 @@ class GroupAdmin(admin.ModelAdmin):
 
     def users_count(self, instance):
         return instance.users.count()
+
+
+@admin.register(Log)
+class LogAdmin(admin.ModelAdmin):
+    """
+    """

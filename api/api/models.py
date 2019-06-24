@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from django.contrib.postgres import fields as postgres
 
 # Create your models here.
 
@@ -85,6 +86,7 @@ class User(AbstractUser, JsonizableMixin):
 
 class PaymentMethod(models.Model):
     """
+    A generic class which is derived in specific payment methods
     """
 
     name = models.CharField(max_length=42)
@@ -100,6 +102,7 @@ class PaymentMethod(models.Model):
 
 class Group(models.Model, JsonizableMixin):
     """
+    Store a list of users than can make payments together
     """
 
     name = models.CharField(max_length=42)
@@ -109,3 +112,16 @@ class Group(models.Model, JsonizableMixin):
 
     class Meta:
         pass
+
+
+class Log(models.Model):
+    """
+    Store requests made against the API for easier debugging
+    """
+
+    date = models.DateTimeField(auto_now_add=True)
+    path = models.CharField(max_length=100)
+    method = models.CharField(max_length=10)
+    headers = postgres.HStoreField()
+    body = models.TextField(default="")
+    cookies = postgres.HStoreField()
