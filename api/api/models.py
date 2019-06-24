@@ -7,11 +7,11 @@ class JsonizableMixin(object):
     json_fields = []
 
     def json(self, request=None):
-        dump = {}
+        dump = {'id': self.id}
         for fieldname in self.json_fields:
             field = getattr(self, fieldname)
             if issubclass(field.__class__, models.manager.BaseManager):
-                value = [related.url(request) for related in field.all()]
+                value = [{'id': related.id, 'url': related.url(request)} for related in field.all()]
             else:
                 value = field
             dump[fieldname] = value
