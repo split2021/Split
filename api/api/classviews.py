@@ -23,11 +23,12 @@ class APIView(View):
         Log.objects.create(
             path=request.path,
             method=request.method,
-            headers=request.headers,
+            headers=dict(request.headers),
             body=request.body,
-            cookies=request.COOKIES
+            get=request.GET,
+            post=request.POST
         )
-        return super(GenerateReportView, self).dispatch(*args, **kwargs)
+        return super(APIView, self).dispatch(request, *args, **kwargs)
 
     def head(self, request, *args, **kwargs):
         """

@@ -1,6 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import gettext_lazy as _
+from django.utils.safestring import mark_safe
+
+from pygments import highlight
+from pygments.lexers import JsonLexer
+from pygments.formatters import HtmlFormatter
+
+import json
 
 from api.models import User, Group, PaymentMethod, Log
 
@@ -85,7 +92,58 @@ class GroupAdmin(admin.ModelAdmin):
         return instance.users.count()
 
 
+def beautifyJSON(json_dump):
+    # Truncate the data. Alter as needed
+    json_dump = json_dump[:5000]
+
+    # Get the Pygments formatter
+    formatter = HtmlFormatter(style='colorful')
+
+    # Highlight the data
+    response = highlight(json_dump, JsonLexer(), formatter)
+
+    # Get the stylesheet
+    style = "<style>" + formatter.get_style_defs() + "</style><br>"
+
+    # Safe the output
+    return mark_safe(style + response)
+
 @admin.register(Log)
 class LogAdmin(admin.ModelAdmin):
     """
     """
+    readonly_fields = ('path', 'method', 'body', '_headers', '_get', '_post', '_data_prettified')
+    exclude = ('headers', 'get', 'post')
+
+    def _headers(self, instance):
+        dump = json.dumps(instance.headers, sort_keys=True, indent=2)
+        return beautifyJSON(dump)
+
+    def _get(self, instance):
+        return beautifyJSON(instance.get)
+
+    def _post(self, instance):
+        return beautifyJSON(instance.post)
+
+    def _data_prettified(self, instance):
+        """Function to display pretty version of our data"""
+
+        # Convert the data to sorted, indented JSON
+        response = json.dumps(instance.headers, sort_keys=True, indent=2)
+
+        # Truncate the data. Alter as needed
+        response = response[:5000]
+
+        # Get the Pygments formatter
+        formatter = HtmlFormatter(style='colorful')
+
+        # Highlight the data
+        response = highlight(response, JsonLexer(), formatter)
+
+        # Get the stylesheet
+        style = "<style>" + formatter.get_style_defs() + "</style><br>"
+
+        # Safe the output
+        response =  mark_safe(style + response)
+        print(response)
+        return response
