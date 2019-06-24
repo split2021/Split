@@ -88,12 +88,20 @@ class PaymentMethod(models.Model):
         pass
 
 
-class Group(models.Model):
+class Group(models.Model, JsonizableMixin):
     """
     """
 
     name = models.CharField(max_length=42)
     users = models.ManyToManyField("User")
+
+    json_fields = ['name']
+
+    def json(self):
+        dump = {}
+        dump['url'] = f"http://api/{self.Meta.verbose_name_plural.lower()}/{self.id}"
+        dump['name'] = self.name
+        dump['users'] = list(self.users)
 
     class Meta:
         pass
