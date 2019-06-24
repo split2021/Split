@@ -92,6 +92,8 @@ class PaymentMethod(models.Model):
     expirancy = models.CharField(max_length=10, default='None')
     cvc = models.CharField(max_length=4, default='None')
 
+    json_fields = ['name', 'user_set']
+
     class Meta:
         pass
 

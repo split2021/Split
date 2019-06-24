@@ -40,10 +40,10 @@ class PaymentMethodAdmin(admin.ModelAdmin):
     list_display = ('mastercard',)
 
 
-class IsEmptyListFilter(admin.SimpleListFilter):
+class IsGroupEmptyListFilter(admin.SimpleListFilter):
     # Human-readable title which will be displayed in the
     # right admin sidebar just above the filter options.
-    title = _('Is empty')
+    title = _('empty')
 
     # Parameter for the filter that will be used in the URL query.
     parameter_name = 'isempty'
@@ -76,7 +76,10 @@ class IsEmptyListFilter(admin.SimpleListFilter):
 class GroupAdmin(admin.ModelAdmin):
     """
     """
-    list_display = ('name',)
+    list_display = ('name', 'users_count')
     filter_horizontal = ('users',)
-    list_filter = (IsEmptyListFilter,)
+    list_filter = (IsGroupEmptyListFilter,)
     search_fields = ('name',)
+
+    def users_count(self, instance):
+        return instance.users.count()
