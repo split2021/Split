@@ -6,14 +6,21 @@ from django.db import models
 class JsonizableMixin(object):
     json_fields = []
 
-    def json(self):
+    def json(self, request=None):
         dump = {}
-        for field in self.json_fields:
-            value = getattr(self, field)
-            dump[field] = value
-        dump['url'] = f"http://api/{self.Meta.verbose_name_plural.lower()}/{self.id}"
+        for fieldname in self.json_fields:
+            field = getattr(self, fieldname)
+            if issubclass(field.__class__, models.manager.BaseManager):
+                value = [related.url(request) for related in field.all()]
+            else:
+                value = field
+            dump[fieldname] = value
+        if request is not None:
+            dump['url'] = self.url(request)
         return dump
 
+    def url(self, request):
+        return f"http://{request.get_host()}/api/{self._meta.verbose_name_plural}/{self.id}"
 
 class UserManager(BaseUserManager):
     """
@@ -71,7 +78,7 @@ class User(AbstractUser, JsonizableMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
 
-    json_fields = ['email', 'last_name', 'first_name', 'phone', 'username']
+    json_fields = ['email', 'last_name', 'first_name', 'phone', 'username', 'friends', 'payment_methods', 'group_set']
 
     objects = UserManager()
 
@@ -96,13 +103,7 @@ class Group(models.Model, JsonizableMixin):
     name = models.CharField(max_length=42)
     users = models.ManyToManyField("User")
 
-    json_fields = ['name']
-
-    def json(self):
-        dump = {}
-        dump['url'] = f"http://api/{self.Meta.verbose_name_plural.lower()}/{self.id}"
-        dump['name'] = self.name
-        dump['users'] = list(self.users)
+    json_fields = ['name', 'users']
 
     class Meta:
         pass
