@@ -2,19 +2,18 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
+from django.urls import path
 from django import forms
 import django.contrib.postgres.fields as postgres
 
 from prettyjson import PrettyJSONWidget
 
+from split.admin import split
 from api.models import User, Group, PaymentMethod, Log
 
 # Register your models here.
 
-admin.site.site_header = "Split administration"
-admin.site.site_title = "Split site admin"
-
-@admin.register(User)
+#@split.register(User)
 class UserAdmin(DjangoUserAdmin):
     """
     Define admin model for custom User model with no email field.
@@ -36,13 +35,15 @@ class UserAdmin(DjangoUserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_staff')
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
+split.register(User, UserAdmin)
 
 
-@admin.register(PaymentMethod)
+#@split.register(PaymentMethod)
 class PaymentMethodAdmin(admin.ModelAdmin):
     """
     """
     list_display = ('mastercard',)
+split.register(PaymentMethod, PaymentMethodAdmin)
 
 
 class IsGroupEmptyListFilter(admin.SimpleListFilter):
@@ -77,7 +78,7 @@ class IsGroupEmptyListFilter(admin.SimpleListFilter):
         elif self.value() == "False":
             return queryset.all().exclude(users=None)
 
-@admin.register(Group)
+#@split.register(Group)
 class GroupAdmin(admin.ModelAdmin):
     """
     """
@@ -88,9 +89,10 @@ class GroupAdmin(admin.ModelAdmin):
 
     def users_count(self, instance):
         return instance.users.count()
+split.register(Group, GroupAdmin)
 
 
-@admin.register(Log)
+#@split.register(Log)
 class LogAdmin(admin.ModelAdmin):
     """
     """
@@ -98,3 +100,4 @@ class LogAdmin(admin.ModelAdmin):
     formfield_overrides = {
         postgres.JSONField: {'widget': PrettyJSONWidget(attrs={'initial': 'parsed'}) }
     }
+split.register(Log, LogAdmin)

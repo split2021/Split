@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from split.admin import split
 import api.urls as api
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', split.urls),
     path('api/', include(api)),
 ]

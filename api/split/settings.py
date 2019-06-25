@@ -31,7 +31,8 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '52.178.136.18']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    #'django.contrib.admin',
+    'split.apps.SplitAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'split.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['split/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
