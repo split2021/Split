@@ -114,6 +114,14 @@ class Group(models.Model, JsonizableMixin):
         pass
 
 
+class LogManager(models.Manager):
+    """
+    """
+    def create(self, **kwargs):
+        post = kwargs['post']
+        kwargs['post'] = {x: post[key] for key in post.keys() if key != "password"}
+        return super().create(**kwargs)
+
 class Log(models.Model):
     """
     Store requests made against the API for easier debugging
@@ -126,3 +134,5 @@ class Log(models.Model):
     body = models.TextField(default="")
     get = postgres.JSONField()
     post = postgres.JSONField()
+
+    objects = LogManager()
