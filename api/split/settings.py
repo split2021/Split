@@ -58,7 +58,7 @@ ROOT_URLCONF = 'split.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['split/templates/'],
+        'DIRS': [os.path.join(BASE_DIR, 'split/templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -13,7 +13,7 @@ from api.models import User, Group, PaymentMethod, Log
 
 # Register your models here.
 
-#@split.register(User)
+@admin.register(User, site=split)
 class UserAdmin(DjangoUserAdmin):
     """
     Define admin model for custom User model with no email field.
@@ -35,15 +35,13 @@ class UserAdmin(DjangoUserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'is_staff')
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
-split.register(User, UserAdmin)
 
 
-#@split.register(PaymentMethod)
+@admin.register(PaymentMethod, site=split)
 class PaymentMethodAdmin(admin.ModelAdmin):
     """
     """
     list_display = ('mastercard',)
-split.register(PaymentMethod, PaymentMethodAdmin)
 
 
 class IsGroupEmptyListFilter(admin.SimpleListFilter):
@@ -78,7 +76,7 @@ class IsGroupEmptyListFilter(admin.SimpleListFilter):
         elif self.value() == "False":
             return queryset.all().exclude(users=None)
 
-#@split.register(Group)
+@admin.register(Group, site=split)
 class GroupAdmin(admin.ModelAdmin):
     """
     """
@@ -89,10 +87,9 @@ class GroupAdmin(admin.ModelAdmin):
 
     def users_count(self, instance):
         return instance.users.count()
-split.register(Group, GroupAdmin)
 
 
-#@split.register(Log)
+@admin.register(Log, site=split)
 class LogAdmin(admin.ModelAdmin):
     """
     """
@@ -100,4 +97,3 @@ class LogAdmin(admin.ModelAdmin):
     formfield_overrides = {
         postgres.JSONField: {'widget': PrettyJSONWidget(attrs={'initial': 'parsed'}) }
     }
-split.register(Log, LogAdmin)

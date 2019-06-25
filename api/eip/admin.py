@@ -3,12 +3,14 @@ from django.utils.translation import gettext_lazy as _
 
 from datetime import datetime
 
+from split.admin import split
+
 from api.models import User
 from eip.models import ProjectLogDocument, Meeting
 
 # Register your models here.
 
-@admin.register(ProjectLogDocument)
+@admin.register(ProjectLogDocument, site=split)
 class ProjectLogDocumentAdmin(admin.ModelAdmin):
     """
     """
@@ -49,7 +51,7 @@ class IsMeetingEndedListFilter(admin.SimpleListFilter):
         elif self.value() == "past":
             return queryset.filter(date__lte=now)
 
-@admin.register(Meeting)
+@admin.register(Meeting, site=split)
 class MeetingAdmin(admin.ModelAdmin):
     """
     """
