@@ -90,9 +90,6 @@ class PaymentMethod(models.Model):
     """
 
     name = models.CharField(max_length=42)
-    mastercard = models.CharField(max_length=40)
-    expirancy = models.CharField(max_length=10, default='None')
-    cvc = models.CharField(max_length=4, default='None')
 
     json_fields = ['name', 'user_set']
 

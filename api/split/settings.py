@@ -27,6 +27,22 @@ DEBUG = os.environ['DEBUG']
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '52.178.136.18']
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': "DEBUG" if DEBUG else "ERROR",
+        },
+    },
+}
+
 
 # Application definition
 

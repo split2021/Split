@@ -32,16 +32,18 @@ class UserAdmin(DjangoUserAdmin):
             'fields': ('email', 'password1', 'password2', 'phone', 'username', 'first_name', 'last_name'),
         }),
     )
+    filter_horizontal = ('friends', 'payment_methods')
     list_display = ('email', 'first_name', 'last_name', 'is_staff')
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
+    list_select_related = True
 
 
 @admin.register(PaymentMethod, site=split)
 class PaymentMethodAdmin(admin.ModelAdmin):
     """
     """
-    list_display = ('mastercard',)
+    list_display = ('name',)
 
 
 class IsGroupEmptyListFilter(admin.SimpleListFilter):
