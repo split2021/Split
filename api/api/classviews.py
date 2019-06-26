@@ -109,7 +109,7 @@ class SingleObjectAPIView(APIView):
             return ExceptionCaught(e)
 
     def patch(self, request, *args, **kwargs):
-        if not request.META['CONTENT_LENGTH']:
+        if request.META['CONTENT_LENGTH'] == "0":
             return APIResponse(204, f"A content is required to update {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
         try:
@@ -124,7 +124,7 @@ class SingleObjectAPIView(APIView):
             return ExceptionCaught(e)
 
     def post(self, request, *args, **kwargs):
-        if not request.META['CONTENT_LENGTH']:
+        if request.META['CONTENT_LENGTH'] == "0":
             return APIResponse(204, f"A content is required to create {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
         try:
@@ -138,7 +138,7 @@ class SingleObjectAPIView(APIView):
             return ExceptionCaught(e)
 
     def put(self, request, *args, **kwargs):
-        if not request.META['CONTENT_LENGTH']:
+        if request.META['CONTENT_LENGTH'] == "0":
             return APIResponse(204, f"A content is required to emplace {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
         try:
@@ -185,7 +185,7 @@ class MultipleObjectsAPIView(APIView):
         return NotAllowed()
 
     def post(self, request, *args, **kwargs):
-        if not request.META['CONTENT_LENGTH']:
+        if request.META['CONTENT_LENGTH'] == "0":
             return APIResponse(204, f"A content is required to create {self.model._meta.verbose_name}")
         data = request.body.decode('utf-8')
         try:
