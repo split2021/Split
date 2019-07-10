@@ -17,4 +17,4 @@ class SplitAdminSite(admin.AdminSite):
             path('profile/', self.admin_view(ProfileView.as_view()), name="profile"),
         ]
 
-split = SplitAdminSite()
+split = SplitAdminSite(name="Split")

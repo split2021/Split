@@ -20,6 +20,7 @@ from split.admin import split
 import api.urls as api
 
 urlpatterns = [
-    path('admin/', split.urls),
+    path('admin/', admin.site.urls),
+    path('dashboard/', split.urls),
     path('api/', include(api)),
 ]
