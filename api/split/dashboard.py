@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from jet.dashboard import modules
 from jet.dashboard.dashboard import Dashboard, AppIndexDashboard
 
-from split.modules import Calendar
+from split.modules import Calendar, Documentation
 
 
 class SplitIndexDashboard(Dashboard):
@@ -25,3 +25,4 @@ class SplitIndexDashboard(Dashboard):
         ))
 
         self.available_children.append(Calendar)
+        self.available_children.append(Documentation)

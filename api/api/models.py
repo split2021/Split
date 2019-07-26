@@ -75,8 +75,8 @@ class User(AbstractUser, JsonizableMixin):
     email = models.EmailField('email address', unique=True)
     phone = models.CharField(max_length=20, unique=True)
     username = models.CharField(max_length=20, blank=True)
-    friends = models.ManyToManyField("self")
-    payment_methods = models.ManyToManyField("PaymentMethod")
+    friends = models.ManyToManyField("self", blank=True)
+    payment_methods = models.ManyToManyField("PaymentMethod", blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']

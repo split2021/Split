@@ -172,6 +172,7 @@ MEDIA_ROOT = BASE_DIR + MEDIA_URL
 # Jet
 
 JET_INDEX_DASHBOARD = 'split.dashboard.SplitIndexDashboard'
+JET_APP_INDEX_DASHBOARD = 'split.dashboard.SplitIndexDashboard'
 
 JET_THEMES = [
     {
