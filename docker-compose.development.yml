@@ -7,8 +7,11 @@ services:
       - "5432:5432"
 
   api:
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "
+        python manage.py migrate
+        && python manage.py collectstatic --noinput
+        && python manage.py runserver 0.0.0.0:8000"
     environment:
-      STAGE: "2"
+      STAGE: "0"
     depends_on:
       - db
