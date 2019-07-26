@@ -20,7 +20,7 @@ from split.admin import split
 import api.urls as api
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('dashboard/', split.urls),
     path('api/', include(api)),
     path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
