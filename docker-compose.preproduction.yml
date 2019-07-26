@@ -15,3 +15,5 @@ services:
       STAGE: "1"
     depends_on:
       - db
+    ports:
+      - "80:80"

@@ -5,5 +5,3 @@ services:
     build: ./api
     volumes:
       - ./api:/api
-    ports:
-      - "8000:8000"
