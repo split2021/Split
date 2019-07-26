@@ -25,7 +25,7 @@ SECRET_KEY = 'ni^)v*b622$&8@8mf)l!&0()iotz4s%#o-f$q_g6v719p6n_3e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['DEBUG']
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '52.178.136.18']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '52.178.136.18', '40.112.78.121']
 
 LOGGING = {
     'version': 1,
@@ -47,8 +47,10 @@ LOGGING = {
 # Application definition
 
 INSTALLED_APPS = [
-    #'django.contrib.admin',
-    'split.apps.SplitAdminConfig',
+    'jet.dashboard',
+    'jet',
+    'django.contrib.admin',
+    #'split.apps.SplitAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
