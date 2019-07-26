@@ -2,12 +2,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from jet.dashboard.modules import DashboardModule, LinkList
 
+from api.models import Log
+
 
 class Calendar(DashboardModule):
     title = "Split calendar"
     title_url = "https://calendar.google.com/calendar/embed?src=0q3rugurp4nqr8s2e2tlsqu9jc%40group.calendar.google.com&ctz=Europe%2FBrussels"
     template = 'split/modules/calendar.html'
-    limit = 1
 
 
 class Documentation(LinkList):
@@ -31,3 +32,11 @@ class Documentation(LinkList):
                 'external': True,
             },
         ]
+
+
+class RequestsEndpoints(DashboardModule):
+    title = "Requests endpoints"
+    template = 'split/modules/requests_endpoints.html'
+
+    def init_with_context(self, context):
+        Log.objects.values('path')

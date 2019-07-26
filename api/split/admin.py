@@ -17,4 +17,7 @@ class SplitAdminSite(admin.AdminSite):
             path('profile/', self.admin_view(ProfileView.as_view()), name="profile"),
         ]
 
+    class Media:
+        js = ("https://www.gstatic.com/charts/loader.js", "split/modules/js/logs_ratio.js")
+
 split = SplitAdminSite(name="Split")
