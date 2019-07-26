@@ -77,7 +77,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE = 'split.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'split.storage.WhiteNoiseStaticFilesStorage'
 
 ROOT_URLCONF = 'split.urls'
 
