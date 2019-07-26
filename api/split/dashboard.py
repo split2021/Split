@@ -1,6 +1,9 @@
 from django.utils.translation import ugettext_lazy as _
+
 from jet.dashboard import modules
 from jet.dashboard.dashboard import Dashboard, AppIndexDashboard
+
+from split.modules import Calendar
 
 
 class SplitIndexDashboard(Dashboard):
@@ -16,22 +19,9 @@ class SplitIndexDashboard(Dashboard):
                     'url': 'https://labeip.epitech.eu/svn/2021/split/',
                     'external': True,
                 }
-#                {
-#                    'title': _('Split'),
-#                    'url': 'http://docs.djangoproject.com/',
-#                    'external': True,
-#                },
-#                {
-#                    'title': _('Django "django-users" mailing list'),
-#                    'url': 'http://groups.google.com/group/django-users',
-#                    'external': True,
-#                },
-#                {
-#                    'title': _('Django irc channel'),
-#                    'url': 'irc://irc.freenode.net/django',
-#                    'external': True,
-#                },
             ],
             column=0,
             order=0
         ))
+
+        self.available_children.append(Calendar)
