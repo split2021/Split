@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'prettyjson',
     'api',
     'eip',
+    'split_dashboard',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,7 @@ ROOT_URLCONF = 'split.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'split/templates/')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -179,8 +180,8 @@ MEDIA_ROOT = BASE_DIR + MEDIA_URL
 
 # Jet
 
-JET_INDEX_DASHBOARD = 'split.dashboard.SplitIndexDashboard'
-JET_APP_INDEX_DASHBOARD = 'split.dashboard.SplitIndexDashboard'
+JET_INDEX_DASHBOARD = 'split_dashboard.dashboard.SplitIndexDashboard'
+JET_APP_INDEX_DASHBOARD = 'split_dashboard.dashboard.SplitIndexDashboard'
 
 JET_THEMES = [
     {

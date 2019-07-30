@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from split.views import ProfileView
+from split_dashboard.views import ProfileView
 
 
 class SplitAdminSite(admin.AdminSite):

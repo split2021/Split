@@ -9,7 +9,7 @@ from api.models import Log
 class Calendar(DashboardModule):
     title = "Split calendar"
     title_url = "https://calendar.google.com/calendar/embed?src=0q3rugurp4nqr8s2e2tlsqu9jc%40group.calendar.google.com&ctz=Europe%2FBrussels"
-    template = 'split/modules/calendar.html'
+    template = 'split_dashboard/modules/calendar.html'
 
 
 class Documentation(LinkList):
@@ -37,10 +37,12 @@ class Documentation(LinkList):
 
 class RequestsMethods(DashboardModule):
     title = "Requests methods"
-    template = 'split/modules/requests_methods.html'
-    context = { Log.objects.all() }
+    template = 'split_dashboard/modules/requests_methods.html'
+
+    count = 0
 
     def __init__(self, *args, **kwargs):
+        RequestsMethods.count += 1
         return super().__init__(*args, **kwargs)
 
     def init_with_context(self, context):
@@ -48,11 +50,20 @@ class RequestsMethods(DashboardModule):
         for method in Log.METHODS:
             methods.append([method, Log.objects.filter(method=method).count()])
         context['methods'] = methods
+        context['count'] = RequestsMethods.count
+
+    class Media:
+        js = ("split_dashboard/modules/js/gcharts-loader.js",)
 
 class RequestsEndpoints(DashboardModule):
     title = "Requests endpoints"
-    template = 'split/modules/requests_endpoints.html'
-    context = { Log.objects.all() }
+    template = 'split_dashboard/modules/requests_endpoints.html'
+
+    count = 0
+
+    def __init__(self, *args, **kwargs):
+        RequestsEndpoints.count += 1
+        return super().__init__(*args, **kwargs)
 
     def init_with_context(self, context):
         endpoints = [['Endpoints', 'Count']]
@@ -62,3 +73,7 @@ class RequestsEndpoints(DashboardModule):
             else:
                 endpoints.append([f"{log['path'][:log['path'].rindex('/') + 1]}{{id}}", log['path__count']])
         context['endpoints'] = endpoints
+        context['count'] = RequestsEndpoints.count
+
+    class Media:
+        js = ("split_dashboard/modules/js/gcharts-loader.js",)

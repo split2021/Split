@@ -1,14 +1,14 @@
 from django.views import View
 from django.shortcuts import render, redirect
 
-from split.forms import UserUpdateForm
+from split_dashboard.forms import UserUpdateForm
 
 
 class ProfileView(View):
     """
     """
 
-    template_name = "split/user_update_profile.html"
+    template_name = "dashboard/user_update_profile.html"
 
     def get(self, request, *args, **kwargs):
         """

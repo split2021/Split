@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from jet.dashboard import modules
 from jet.dashboard.dashboard import Dashboard, AppIndexDashboard
 
-from split.modules import Calendar, Documentation, RequestsMethods, RequestsEndpoints
+from split_dashboard.modules import Calendar, Documentation, RequestsMethods, RequestsEndpoints
 
 
 class SplitIndexDashboard(Dashboard):
