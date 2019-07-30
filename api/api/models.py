@@ -134,6 +134,7 @@ class Log(models.Model):
     """
     Store requests made against the API for easier debugging
     """
+    METHODS = ('HEAD', 'OPTIONS', 'GET', 'PATCH', 'POST', 'PUT', 'DELETE')
 
     date = models.DateTimeField(auto_now_add=True)
     path = models.CharField(max_length=100)

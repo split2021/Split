@@ -7,15 +7,15 @@
 
   function drawChart() {
     const data = google.visualization.arrayToDataTable(
-    {{ endpoints|safe }}
+    {{ methods|safe }}
     );
 
     const options = {
       title: 'My Daily Activities'
     };
 
-    const chart = new google.visualization.PieChart(document.getElementById('requests_endpoints'));
+    const chart = new google.visualization.PieChart(document.getElementById('requests_methods'));
     chart.draw(data, options);
   }
 </script>
-<div id="requests_endpoints" style="width: 100%; height: 100%;"></div>
+<div id="requests_methods" style="width: 100%; height: 100%;"></div>
