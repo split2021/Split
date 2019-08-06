@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
         height: calc(60px - 21px);
         padding-top: 21px;
-        margin-right: 20px;
+        margin-right: 40px;
         position: relative;
         float: right;
         display: inline-block;

@@ -9,6 +9,7 @@ export const Container = styled.div`
         border-bottom: solid 1px #dfd8ef;
         position: fixed;
         top: 0;
+        z-index: 100;
 `;
 
 export const Elements = styled.div`

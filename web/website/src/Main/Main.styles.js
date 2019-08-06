@@ -16,6 +16,5 @@ export const Container = styled.div`
         line-height: 1.618;
         letter-spacing: normal;
         color: #000000;
-        margin-top: 60px;
         overflow-y: scroll;
 `;

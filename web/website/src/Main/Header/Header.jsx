@@ -1,5 +1,10 @@
 import React from 'react';
-import { Container, Logo, Elements, MenuTab } from './Header.styles';
+import {
+  Container,
+  Logo,
+  Elements,
+  MenuTab
+} from './Header.styles';
 
 export default class Header extends React.Component {
   render() {
