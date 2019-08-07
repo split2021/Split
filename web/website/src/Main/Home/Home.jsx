@@ -7,7 +7,6 @@ import {
   Text,
   Devise,
   DeviseTxt,
-  Discover,
   Animation,
   Phone,
   Terminal,
@@ -17,12 +16,16 @@ import {
   faMobileAlt,
   faRocket
 } from '@fortawesome/free-solid-svg-icons';
+import Button from '../../components/Button/Button';
+import Trombi from '../../components/Trombi/Trombi'
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
+    this.animRef = React.createRef();
     this.handleScroll = this.handleScroll.bind(this);
+    this.discover = this.discover.bind(this);
     this.state = {
       scroll : 0,
     };
@@ -37,8 +40,18 @@ export default class Home extends React.Component {
   }
 
   handleScroll() {
-    if (this.myRef && -this.myRef.current.getBoundingClientRect().y + 90 < 450) {
-      this.setState({scroll : -this.myRef.current.getBoundingClientRect().y + 90});
+    if (this.myRef && -this.myRef.current.getBoundingClientRect().y < 450) {
+      this.setState({scroll : -this.myRef.current.getBoundingClientRect().y});
+    }
+  }
+
+  discover() {
+    console.log('test');
+    if (this.animRef) {
+      this.animRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
     }
   }
 
@@ -46,7 +59,7 @@ export default class Home extends React.Component {
     return (
       <Container ref={this.myRef}>
 
-        <Block>
+        <Block first={true}>
           <Title>Le paiement à plusieurs repensé</Title>
           <Text>Le service le plus rapide pour diviser les paiements en groupe</Text>
           <Devise>
@@ -61,9 +74,10 @@ export default class Home extends React.Component {
             <FontAwesomeIcon icon={faRocket} size="3x" color="#4caf50" />
             <DeviseTxt>Aucune attente de paiement</DeviseTxt>
           </Devise>
-          <Discover>Découvrir</Discover>
+          <Button onclick={this.discover}>Découvrir</Button>
         </Block>
-        <Animation>
+
+        <Animation ref={this.animRef}>
           <Phone right={this.state.scroll} src={process.env.PUBLIC_URL + 'phone.png'}/>
           <Terminal left={this.state.scroll} src={process.env.PUBLIC_URL + 'terminal.png'}/>
         </Animation>
@@ -75,10 +89,15 @@ export default class Home extends React.Component {
 
         <Block>
           <Title>Notre équipe</Title>
+          <Trombi/>
         </Block>
 
-        <Block>
+        <Block contact={true}>
           <Title>Contact</Title>
+          <Title contact={true}>Retrouvez nous dans les locaux d'Epitech</Title>
+          <Text>24 Rue Pasteur, 94270 Le Kremlin-Bicêtre, France</Text>
+          <Title contact={true}>Contactez nous directement</Title>
+          <Text>contact@split-pay.fr</Text>
         </Block>
       </Container>
     )

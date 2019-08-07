@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Button from '../../components/Button/Button';
 
 export const Container = styled.div`
   color: #5570dd;
@@ -8,6 +7,7 @@ export const Container = styled.div`
 
 export const Animation = styled.div`
   text-align: center;
+  padding-top: 100px;
   width: 100%;
   height: 400px;
 `;
@@ -33,11 +33,14 @@ export const Phone = styled.img`
 `;
 
 export const Block = styled.div`
-  margin: 90px auto;
+  display: block;
+  margin: ${props => props.first ? '200px auto 100px' : '90px auto'};
   max-width: 1120px;
   width: 100%;
+  color: ${props => props.contact ? 'white' : '#5570dd'};
   border-radius: 6px;
-  background-color: white;
+  background-position: center;
+  ${props => props.contact ? `background-image: url(${process.env.PUBLIC_URL + 'epitech-img.jpg'})` : 'background-color: white'};
   text-align: center;
   padding-top: 5%;
   padding-bottom: 5%;
@@ -45,8 +48,9 @@ export const Block = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 30px;
+  font-size: ${props => props.contact ? 20 : 30}px;
   font-weight: 700;
+  margin-top: ${props => props.contact ? 40 : 0}px;
 `;
 
 export const Text = styled.div`
@@ -71,9 +75,4 @@ export const DeviseTxt = styled.div`
   font-weight: 700;
   opacity: 0.9;
   color: #5570dd;
-`;
-
-export const Discover = styled(Button)`
-  margin-left: auto;
-  margin-right: auto;
 `;
