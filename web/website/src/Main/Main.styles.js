@@ -17,4 +17,5 @@ export const Container = styled.div`
         letter-spacing: normal;
         color: #000000;
         overflow-y: scroll;
+        overflow-x: hidden;
 `;
