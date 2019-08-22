@@ -7,3 +7,11 @@ export const Container = styled.div`
   height: 90px;
   padding: 20px;
 `;
+
+export const Inner = styled.div`
+  width: 100%;
+  max-width: 1120px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+`;
