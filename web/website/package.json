@@ -7,8 +7,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "font-awesome": "^4.7.0",
-    "mocha": "^6.1.4",
-    "mocha-junit-reporter": "^1.23.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
@@ -17,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=../../testsOutput/web.xml",
+    "test": "",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
