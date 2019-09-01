@@ -11,9 +11,9 @@ export default class Header extends React.Component {
     return (
       <Container>
         <Elements>
-          <Logo src={process.env.PUBLIC_URL + "logo-split.png"}/>
-          <MenuTab>MON COMPTE</MenuTab>
-          <MenuTab>S'INSCRIRE</MenuTab>
+          <Logo to={'/'}/>
+          <MenuTab redirect={'/login'}>MON COMPTE</MenuTab>
+          <MenuTab redirect={'/subscribe'}>S'INSCRIRE</MenuTab>
         </Elements>
       </Container>
     )

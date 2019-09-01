@@ -4,7 +4,7 @@ import { Container, Text } from './Button.styles';
 export default class Button extends React.Component {
   render() {
     return (
-      <Container onClick={this.props.onclick}>
+      <Container form={this.props.form} onClick={this.props.onclick}>
         <Text children={this.props.children}/>
       </Container>
     )

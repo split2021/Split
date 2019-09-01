@@ -40,7 +40,7 @@ export default class Home extends React.Component {
   }
 
   handleScroll() {
-    if (this.myRef && -this.myRef.current.getBoundingClientRect().y < 450) {
+    if (this.myRef && this.myRef.current && - this.myRef.current.getBoundingClientRect().y < 450) {
       this.setState({scroll : -this.myRef.current.getBoundingClientRect().y});
     }
   }
