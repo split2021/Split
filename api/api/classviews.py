@@ -4,6 +4,8 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 import json
+import base64
+import time
 
 from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed
 from api.models import Log
@@ -20,15 +22,26 @@ class APIView(View):
 
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
+        headers = dict(request.headers)
         Log.objects.create(
             path=request.path,
             method=request.method,
-            headers=dict(request.headers),
+            headers=headers,
             body=request.body,
             get=request.GET,
             post=request.POST
         )
-        return super(APIView, self).dispatch(request, *args, **kwargs)
+        header, payload, signature = headers['Authorization'].split(".")
+        decoded_header = base64.b64decode(bytearray(header + "====", 'utf-8'))
+        json_header = json.loads(decoded_header)
+
+        token_time = json_header['time']
+        now = time.time()
+
+        if now - token_time:
+            return super(APIView, self).dispatch(request, *args, **kwargs)
+        else:
+            return TokenExpired()
 
     def head(self, request, *args, **kwargs):
         """
