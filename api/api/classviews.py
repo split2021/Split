@@ -8,11 +8,10 @@ import json
 import base64
 import time
 import hmac
-import hashlib
 
 from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed, TokenExpired, InvalidToken
 from api.models import Log
-
+from api.token import Token
 
 class APIView(View):
     """
@@ -22,8 +21,6 @@ class APIView(View):
     model = None
     safe_methods = ('head', 'options', 'get')
     implemented_methods = ()
-
-    base_signature = bytes(base64.b64encode(hmac.new(settings.SECRET_TOKEN, b"signature", hashlib.sha512).digest()).strip(b"="))
 
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
@@ -41,7 +38,7 @@ class APIView(View):
             return InvalidToken()
         header, payload, signature = bytes(headers['Authorization'], 'utf-8').split(b".")
 
-        if signature != APIView.base_signature:
+        if signature != Token.base_signature:
             return InvalidToken("invalid signature")
 
         decoded_payload = base64.b64decode(payload + b"====")
