@@ -34,7 +34,7 @@ class Documentation(LinkList):
                 'url': ("https://split2021.postman.co/collections/"
                        "6975668-bede7db7-aa15-4f0a-afd2-ff562c6a2e86"
                        "?version=latest"
-                       "&workspace=4a5d98f4-d78c-46c2-8285-56f173abf468")
+                       "&workspace=4a5d98f4-d78c-46c2-8285-56f173abf468"),
                 'external': True,
             },
         ]
