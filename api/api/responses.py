@@ -43,5 +43,5 @@ class TokenExpired(APIResponse):
 
 class InvalidToken(APIResponse):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(401, "Invalid token", *args, **kwargs)
+    def __init__(self, reason, *args, **kwargs):
+        super().__init__(401, f"Invalid token: {reason}", *args, **kwargs)

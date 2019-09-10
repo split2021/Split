@@ -2,10 +2,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 import json
 import base64
 import time
+import hmac
+import hashlib
 
 from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed, TokenExpired, InvalidToken
 from api.models import Log
@@ -20,6 +23,8 @@ class APIView(View):
     safe_methods = ('head', 'options', 'get')
     implemented_methods = ()
 
+    base_signature = bytes(base64.b64encode(hmac.new(settings.SECRET_TOKEN, b"signature", hashlib.sha512).digest()).strip(b"="))
+
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         headers = dict(request.headers)
@@ -31,14 +36,19 @@ class APIView(View):
             get=request.GET,
             post=request.POST
         )
+
         if not 'Authorization' in headers:
             return InvalidToken()
-        header, payload, signature = headers['Authorization'].split(".")
-        decoded_payload = base64.b64decode(payload + "====")
+        header, payload, signature = bytes(headers['Authorization'], 'utf-8').split(b".")
+
+        if signature != APIView.base_signature:
+            return InvalidToken("invalid signature")
+
+        decoded_payload = base64.b64decode(payload + b"====")
         json_payload = json.loads(decoded_payload)
 
         if not 'time' in json_payload:
-            return InvalidToken()
+            return InvalidToken("invalid payload")
         token_time = json_payload['time']
         now = time.time()
 
