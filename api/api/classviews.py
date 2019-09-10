@@ -7,7 +7,7 @@ import json
 import base64
 import time
 
-from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed
+from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed, TokenExpired, InvalidToken
 from api.models import Log
 
 
@@ -31,14 +31,18 @@ class APIView(View):
             get=request.GET,
             post=request.POST
         )
+        if not 'Authorization' in headers:
+            return InvalidToken()
         header, payload, signature = headers['Authorization'].split(".")
-        decoded_header = base64.b64decode(bytearray(header + "====", 'utf-8'))
-        json_header = json.loads(decoded_header)
+        decoded_payload = base64.b64decode(payload + "====")
+        json_payload = json.loads(decoded_payload)
 
-        token_time = json_header['time']
+        if not 'time' in json_payload:
+            return InvalidToken()
+        token_time = json_payload['time']
         now = time.time()
 
-        if now - token_time:
+        if now - token_time < 3600:
             return super(APIView, self).dispatch(request, *args, **kwargs)
         else:
             return TokenExpired()
