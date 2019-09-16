@@ -67,9 +67,7 @@ stages:
         - script: yarn install
           displayName: 'Yarn install'
           workingDirectory: './web/website/'
-        - script: yarn test
-          displayName: 'Run mocha tests'
-          workingDirectory: './web/website/'
+        
 
   # [PUBLISH TESTS]
   - stage: Publish_Tests
