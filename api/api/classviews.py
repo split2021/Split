@@ -11,7 +11,7 @@ import hmac
 
 from api.responses import APIResponse, NotImplemented, ExceptionCaught, NotAllowed, TokenExpired, InvalidToken
 from api.models import Log
-from api.token import Token
+from api.token import Token, generate_signature
 
 class APIView(View):
     """
@@ -24,6 +24,13 @@ class APIView(View):
 
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
+        """
+         Parse incoming request
+         Generate a Log record
+         Verify authentification token
+         Dispatch the request to the appropriate method
+        """
+
         headers = dict(request.headers)
         Log.objects.create(
             path=request.path,
@@ -38,14 +45,14 @@ class APIView(View):
             return InvalidToken()
         header, payload, signature = bytes(headers['Authorization'], 'utf-8').split(b".")
 
-        if signature != Token.base_signature:
-            return InvalidToken("invalid signature")
+        if signature != generate_signature(header + payload):
+            return InvalidToken("Invalid signature")
 
         decoded_payload = base64.b64decode(payload + b"====")
         json_payload = json.loads(decoded_payload)
 
         if not 'time' in json_payload:
-            return InvalidToken("invalid payload")
+            return InvalidToken("Invalid payload")
         token_time = json_payload['time']
         now = time.time()
 
@@ -66,7 +73,7 @@ class APIView(View):
         """
          Return possible verbs for this endpoint
         """
-        response = APIResponse(204, f"Possible options")
+        response = APIResponse(204, "Possible options")
         response['Allow'] = ", ".join(self.implemented_methods)
         return response
 

@@ -12,19 +12,18 @@ class Token(object):
     """
     """
 
-    base_signature = generate_signature(b"signature")
-
     header = base64.b64encode(bytes(json.dumps({'typ': "split", 'alg': "SHA512"}), 'utf-8')).strip(b"=")
     payload = b""
-    signature = base_signature
+    signature = ""
 
-    complete = b""
+    complete = ""
 
     def __init__(self, payload, *args, **kwargs):
         """
         """
 
         self.payload = self.generate_payload(payload)
+        self.sign()
         self.complete = f"{self.header.decode('utf-8')}.{self.payload.decode('utf-8')}.{self.signature.decode('utf-8')}"
 
     def __str__(self):
@@ -36,3 +35,6 @@ class Token(object):
             return base64.b64encode(bytes(json.dumps(payload), 'utf-8')).strip(b"=")
         else:
             return base64.b64encode(payload).strip(b"=")
+
+    def sign(self):
+        self.signature = generate_signature(self.header + self.payload)
