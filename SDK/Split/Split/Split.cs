@@ -186,5 +186,33 @@ namespace Split2021
 
             return await client.SendAsync(request);
         }
+
+        public async Task<HttpResponseMessage> EmplaceRecord(string entityType, int entityId, object data)
+        {
+            if (!IsConnected())
+            {
+                if (_autoRefresh)
+                {
+                    await Connect(_email, _password);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            var request = new HttpRequestMessage()
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"),
+                RequestUri = new Uri($"{Constants.APIBaseURI}/{entityType}/{entityId}"),
+                Method = HttpMethod.Put,
+                Headers =
+                {
+                    { HttpRequestHeader.Authorization.ToString(), _token.ToString() }
+                }
+            };
+
+            return await client.SendAsync(request);
+        }
     }
 }
