@@ -1,0 +1,11 @@
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\bin\Debug\netcoreapp2.2\TestCore.deps.json
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\bin\Debug\netcoreapp2.2\TestCore.runtimeconfig.json
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\bin\Debug\netcoreapp2.2\TestCore.runtimeconfig.dev.json
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\bin\Debug\netcoreapp2.2\TestCore.dll
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\obj\Debug\netcoreapp2.2\TestCore.csprojAssemblyReference.cache
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\obj\Debug\netcoreapp2.2\TestCore.csproj.CoreCompileInputs.cache
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\obj\Debug\netcoreapp2.2\TestCore.AssemblyInfoInputs.cache
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\obj\Debug\netcoreapp2.2\TestCore.AssemblyInfo.cs
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\bin\Debug\netcoreapp2.2\TestCore.pdb
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\obj\Debug\netcoreapp2.2\TestCore.dll
+C:\Users\Tiphaine LAURENT\source\repos\TestCore\TestCore\obj\Debug\netcoreapp2.2\TestCore.pdb

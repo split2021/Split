@@ -1,0 +1,9 @@
+C:\Users\Tiphaine LAURENT\source\repos\Split\Split\bin\Debug\netstandard2.0\Split.deps.json
+C:\Users\Tiphaine LAURENT\source\repos\Split\Split\bin\Debug\netstandard2.0\Split.dll
+C:\Users\Tiphaine LAURENT\source\repos\Split\Split\bin\Debug\netstandard2.0\Split.pdb
+C:\Users\Tiphaine LAURENT\source\repos\Split\Split\obj\Debug\netstandard2.0\Split.csproj.CoreCompileInputs.cache
+C:\Users\Tiphaine LAURENT\source\repos\Split\Split\obj\Debug\netstandard2.0\Split.AssemblyInfoInputs.cache
+C:\Users\Tiphaine LAURENT\source\repos\Split\Split\obj\Debug\netstandard2.0\Split.AssemblyInfo.cs
+C:\Users\Tiphaine LAURENT\source\repos\Split\Split\obj\Debug\netstandard2.0\Split.dll
+C:\Users\Tiphaine LAURENT\source\repos\Split\Split\obj\Debug\netstandard2.0\Split.pdb
+C:\Users\Tiphaine LAURENT\source\repos\Split\Split\obj\Debug\netstandard2.0\Split.csprojAssemblyReference.cache
