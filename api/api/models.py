@@ -118,15 +118,16 @@ class LogManager(models.Manager):
     """
     def create(self, **kwargs):
         if kwargs['post']:
-            post = kwargs['post']
-            kwargs['post'] = {key: post[key] for key in post.keys() if key != "password"}
+            if 'password' in kwargs['post']:
+                kwargs['post']['password'] = "**********"
         if kwargs['headers']['Content-Type'] == "application/json":
             try:
                 json_body = json.loads(kwargs['body'].decode())
             except:
                 pass
             else:
-                json_body = {key: json_body[key] for key in json_body.keys() if key != "password"}
+                if 'password' in json_body:
+                    json_body['password'] = "**********"
                 kwargs['body'] = json.dumps(json_body)
         return super().create(**kwargs)
 

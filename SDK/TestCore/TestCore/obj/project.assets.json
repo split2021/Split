@@ -332,7 +332,7 @@
           "lib/netstandard2.0/Nito.Disposables.dll": {}
         }
       },
-      "Split2021/1.0.1": {
+      "Split2021/1.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.5.0",
@@ -1056,14 +1056,14 @@
         "nito.disposables.nuspec"
       ]
     },
-    "Split2021/1.0.1": {
-      "sha512": "j+1mXQHAetzGk2iJXc/24WD6qAnwdMSWOVafSfpaRl0IlMigPzKvmKQR7lGNN94sS/M5JcrKF65ro5stdpBBRQ==",
+    "Split2021/1.0.3": {
+      "sha512": "WWGgAsJQ/BIJk784qMg8S+DB4dgClzOT2M8uVTN3Qo6ZfZyDv2AGngPs8Cssa5rGQLY7ha6Ot2aWxqGA4SsS1Q==",
       "type": "package",
-      "path": "split2021/1.0.1",
+      "path": "split2021/1.0.3",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Split.dll",
-        "split2021.1.0.1.nupkg.sha512",
+        "split2021.1.0.3.nupkg.sha512",
         "split2021.nuspec"
       ]
     },
@@ -1095,7 +1095,7 @@
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
       "Nito.AsyncEx >= 5.0.0",
-      "Split2021 >= 1.0.1"
+      "Split2021 >= 1.0.3"
     ]
   },
   "packageFolders": {
@@ -1105,11 +1105,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\TestCore\\TestCore\\TestCore.csproj",
+      "projectUniqueName": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\EIP\\Split\\SDK\\TestCore\\TestCore\\TestCore.csproj",
       "projectName": "TestCore",
-      "projectPath": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\TestCore\\TestCore\\TestCore.csproj",
+      "projectPath": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\EIP\\Split\\SDK\\TestCore\\TestCore\\TestCore.csproj",
       "packagesPath": "C:\\Users\\Tiphaine LAURENT\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\TestCore\\TestCore\\obj\\",
+      "outputPath": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\EIP\\Split\\SDK\\TestCore\\TestCore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1123,7 +1123,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\Tiphaine LAURENT\\source\\repos\\Split\\Split\\bin\\Debug": {},
+        "C:\\Users\\Tiphaine LAURENT\\source\\repos\\EIP\\Split\\SDK\\Split\\Split\\bin\\Debug": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1152,7 +1152,7 @@
           },
           "Split2021": {
             "target": "Package",
-            "version": "[1.0.1, )"
+            "version": "[1.0.3, )"
           }
         },
         "imports": [

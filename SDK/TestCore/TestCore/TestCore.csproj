@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Nito.AsyncEx" Version="5.0.0" />
-    <PackageReference Include="Split2021" Version="1.0.1" />
+    <PackageReference Include="Split2021" Version="1.0.3" />
   </ItemGroup>
 
 </Project>

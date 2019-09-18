@@ -2,11 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Split2021</id>
-    <version>1.0.1</version>
+    <version>1.0.3</version>
     <authors>Split</authors>
     <owners>Split</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Package Description</description>
+    <releaseNotes>Fix Json of Connect method</releaseNotes>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
         <dependency id="Microsoft.CSharp" version="4.5.0" exclude="Build,Analyzers" />

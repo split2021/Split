@@ -94,6 +94,7 @@ class GroupAdmin(admin.ModelAdmin):
 class LogAdmin(admin.ModelAdmin):
     """
     """
+    list_display = ('method', 'path', 'date')
     readonly_fields = ('path', 'method', 'body')
     formfield_overrides = {
         postgres.JSONField: {'widget': PrettyJSONWidget(attrs={'initial': 'parsed'}) }

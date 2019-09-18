@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Split/1.0.1": {
+      "Split/1.0.3": {
         "dependencies": {
           "Microsoft.CSharp": "4.5.0",
           "NETStandard.Library": "2.0.3",
@@ -42,7 +42,7 @@
     }
   },
   "libraries": {
-    "Split/1.0.1": {
+    "Split/1.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

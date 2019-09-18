@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "576b12a165a2742f23a112dd65f78d9ffc375831"
+    "signature": "3b71b09c77c2300f8d34a43bc4a9e8eb2b21eb09"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,7 +9,7 @@
       "TestCore/1.0.0": {
         "dependencies": {
           "Nito.AsyncEx": "5.0.0",
-          "Split2021": "1.0.1"
+          "Split2021": "1.0.3"
         },
         "runtime": {
           "TestCore.dll": {}
@@ -121,15 +121,15 @@
           }
         }
       },
-      "Split2021/1.0.1": {
+      "Split2021/1.0.3": {
         "dependencies": {
           "Microsoft.CSharp": "4.5.0",
           "Newtonsoft.Json": "12.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/Split.dll": {
-            "assemblyVersion": "1.0.1.0",
-            "fileVersion": "1.0.1.0"
+            "assemblyVersion": "1.0.3.0",
+            "fileVersion": "1.0.3.0"
           }
         }
       },
@@ -219,12 +219,12 @@
       "path": "nito.disposables/2.0.0",
       "hashPath": "nito.disposables.2.0.0.nupkg.sha512"
     },
-    "Split2021/1.0.1": {
+    "Split2021/1.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-j+1mXQHAetzGk2iJXc/24WD6qAnwdMSWOVafSfpaRl0IlMigPzKvmKQR7lGNN94sS/M5JcrKF65ro5stdpBBRQ==",
-      "path": "split2021/1.0.1",
-      "hashPath": "split2021.1.0.1.nupkg.sha512"
+      "sha512": "sha512-WWGgAsJQ/BIJk784qMg8S+DB4dgClzOT2M8uVTN3Qo6ZfZyDv2AGngPs8Cssa5rGQLY7ha6Ot2aWxqGA4SsS1Q==",
+      "path": "split2021/1.0.3",
+      "hashPath": "split2021.1.0.3.nupkg.sha512"
     },
     "System.Collections.Immutable/1.4.0": {
       "type": "package",

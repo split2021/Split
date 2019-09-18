@@ -19,6 +19,7 @@ class APIView(View):
     """
 
     model = None
+    authentification = True
     safe_methods = ('head', 'options', 'get')
     implemented_methods = ()
 
@@ -41,8 +42,11 @@ class APIView(View):
             post=request.POST
         )
 
+        if not self.authentification:
+            return super(APIView, self).dispatch(request, *args, **kwargs)
+
         if not 'Authorization' in headers:
-            return InvalidToken()
+            return InvalidToken("Missing token")
         header, payload, signature = bytes(headers['Authorization'], 'utf-8').split(b".")
 
         if signature != generate_signature(header + payload):

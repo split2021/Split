@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Tiphaine LAURENT\\source\\repos\\TestCore\\TestCore\\TestCore.csproj": {}
+    "C:\\Users\\Tiphaine LAURENT\\source\\repos\\EIP\\Split\\SDK\\TestCore\\TestCore\\TestCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Tiphaine LAURENT\\source\\repos\\TestCore\\TestCore\\TestCore.csproj": {
+    "C:\\Users\\Tiphaine LAURENT\\source\\repos\\EIP\\Split\\SDK\\TestCore\\TestCore\\TestCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\TestCore\\TestCore\\TestCore.csproj",
+        "projectUniqueName": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\EIP\\Split\\SDK\\TestCore\\TestCore\\TestCore.csproj",
         "projectName": "TestCore",
-        "projectPath": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\TestCore\\TestCore\\TestCore.csproj",
+        "projectPath": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\EIP\\Split\\SDK\\TestCore\\TestCore\\TestCore.csproj",
         "packagesPath": "C:\\Users\\Tiphaine LAURENT\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\TestCore\\TestCore\\obj\\",
+        "outputPath": "C:\\Users\\Tiphaine LAURENT\\source\\repos\\EIP\\Split\\SDK\\TestCore\\TestCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -25,7 +25,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\Tiphaine LAURENT\\source\\repos\\Split\\Split\\bin\\Debug": {},
+          "C:\\Users\\Tiphaine LAURENT\\source\\repos\\EIP\\Split\\SDK\\Split\\Split\\bin\\Debug": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -54,7 +54,7 @@
             },
             "Split2021": {
               "target": "Package",
-              "version": "[1.0.1, )"
+              "version": "[1.0.3, )"
             }
           },
           "imports": [

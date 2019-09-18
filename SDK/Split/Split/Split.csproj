@@ -6,7 +6,8 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Split2021</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.3</Version>
+    <PackageReleaseNotes>Fix Json of Connect method</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

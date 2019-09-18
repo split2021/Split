@@ -25,7 +25,7 @@ namespace Split2021
 
         public async Task<bool> Connect(string email, string password, bool remember = true)
         {
-            var response = await client.PostAsync(Constants.AuthentificationEndpoint, new StringContent($"{{'email':{email},'password':{password}}}", Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync(Constants.AuthentificationEndpoint, new StringContent($"{{\"email\":\"{email}\",\"password\":\"{password}\"}}", Encoding.UTF8, "application/json"));
             var stringResponse = await response.Content.ReadAsStringAsync();
 
             dynamic jsonResponse = JsonConvert.DeserializeObject(stringResponse);
