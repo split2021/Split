@@ -16,6 +16,8 @@ namespace TestCore
             var split = new Split();
             Console.WriteLine(await split.Connect("", ""));
             Console.WriteLine(await split.Connect("split_2021@labeip.epitech.eu", "X#9q@XCy7qy&"));
+
+            Console.WriteLine(await (await split.RetrieveMultipleRecords("user")).Content.ReadAsStringAsync());
         }
     }
 }

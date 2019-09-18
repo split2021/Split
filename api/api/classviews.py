@@ -47,7 +47,7 @@ class APIView(View):
 
         if not 'Authorization' in headers:
             return InvalidToken("Missing token")
-        header, payload, signature = bytes(headers['Authorization'], 'utf-8').split(b".")
+        header, payload, signature = bytes(headers['Authorization'].split(" ")[-1], 'utf-8').split(b".")
 
         if signature != generate_signature(header + payload):
             return InvalidToken("Invalid signature")

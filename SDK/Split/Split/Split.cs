@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -28,7 +29,7 @@ namespace Split2021
             var response = await client.PostAsync(Constants.AuthentificationEndpoint, new StringContent($"{{\"email\":\"{email}\",\"password\":\"{password}\"}}", Encoding.UTF8, "application/json"));
             var stringResponse = await response.Content.ReadAsStringAsync();
 
-            dynamic jsonResponse = JsonConvert.DeserializeObject(stringResponse);
+            var jsonResponse = JObject.Parse(stringResponse);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
@@ -37,7 +38,7 @@ namespace Split2021
                     _email = email;
                     _password = password;
                 }
-                _token = new Token(jsonResponse.data.token);
+                _token = new Token(jsonResponse.SelectToken("data").Value<string>("token"));
                 _connected = true;
                 _lastConnected = DateTime.Now;
             }
@@ -148,7 +149,7 @@ namespace Split2021
 
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri($"{Constants.APIBaseURI}/{entityType}/"),
+                RequestUri = new Uri($"{Constants.APIBaseURI}/{entityType}s/"),
                 Method = HttpMethod.Get,
                 Headers =
                 {
