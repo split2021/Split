@@ -6,9 +6,10 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Split2021</PackageId>
-    <Version>1.0.6</Version>
-    <PackageReleaseNotes>Fix Collection endpoint</PackageReleaseNotes>
+    <Version>1.1.4</Version>
+    <PackageReleaseNotes>Fix ReadJson error</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>A C# SDK to help using the Split API</Description>
   </PropertyGroup>
 
   <ItemGroup>

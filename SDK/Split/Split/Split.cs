@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -15,7 +16,7 @@ namespace Split2021
         private DateTime _lastConnected = new DateTime();
         private string _email = null;
         private string _password = null;
-        private bool _autoRefresh = true;
+        private readonly bool _autoRefresh = true;
 
         private static readonly HttpClient client = new HttpClient();
 
@@ -51,7 +52,8 @@ namespace Split2021
             return _connected || DateTime.Now.Subtract(_lastConnected).TotalSeconds < 3600;
         }
 
-        public async Task<HttpResponseMessage> CreateRecord(string entityType, object data)
+        public async Task<T> CreateRecord<T>(T data)
+            where T : Entities.Entity
         {
             if (!IsConnected())
             {
@@ -68,7 +70,7 @@ namespace Split2021
             var request = new HttpRequestMessage()
             {
                 Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"),
-                RequestUri = new Uri($"{Constants.APIBaseURI}/{entityType}/"),
+                RequestUri = new Uri($"{Constants.APIBaseURI}/{typeof(T).Name.ToLower()}s/"),
                 Method = HttpMethod.Post,
                 Headers =
                 {
@@ -76,10 +78,14 @@ namespace Split2021
                 }
             };
 
-            return await client.SendAsync(request);
+            var response = await client.SendAsync(request);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JObject.Parse(stringResponse);
+            return jsonResponse.GetValue("data").ToObject<T>();
         }
 
-        public async Task<HttpResponseMessage> DeleteRecord(string entityType, int entityId)
+        public async Task<T> DeleteRecord<T>(int entityId)
+            where T : Entities.Entity
         {
             if (!IsConnected())
             {
@@ -95,7 +101,7 @@ namespace Split2021
 
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri($"{Constants.APIBaseURI}/{entityType}/{entityId}"),
+                RequestUri = new Uri($"{Constants.APIBaseURI}/{typeof(T).Name.ToLower()}s/{entityId}"),
                 Method = HttpMethod.Delete,
                 Headers =
                 {
@@ -103,10 +109,14 @@ namespace Split2021
                 }
             };
 
-            return await client.SendAsync(request);
+            var response = await client.SendAsync(request);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JObject.Parse(stringResponse);
+            return jsonResponse.GetValue("data").ToObject<T>();
         }
 
-        public async Task<HttpResponseMessage> RetrieveRecord(string entityType, int entityId)
+        public async Task<T> RetrieveRecord<T>(int entityId)
+            where T : Entities.Entity
         {
             if (!IsConnected())
             {
@@ -122,7 +132,7 @@ namespace Split2021
 
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri($"{Constants.APIBaseURI}/{entityType}/{entityId}"),
+                RequestUri = new Uri($"{Constants.APIBaseURI}/{typeof(T).Name.ToLower()}s/{entityId}"),
                 Method = HttpMethod.Get,
                 Headers =
                 {
@@ -130,10 +140,14 @@ namespace Split2021
                 }
             };
 
-            return await client.SendAsync(request);
+            var response = await client.SendAsync(request);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JObject.Parse(stringResponse);
+            return jsonResponse.GetValue("data").ToObject<T>();
         }
 
-        public async Task<HttpResponseMessage> RetrieveMultipleRecords(string entityType)
+        public async Task<List<T>> RetrieveMultipleRecords<T>()
+            where T : Entities.Entity
         {
             if (!IsConnected())
             {
@@ -149,7 +163,7 @@ namespace Split2021
 
             var request = new HttpRequestMessage()
             {
-                RequestUri = new Uri($"{Constants.APIBaseURI}/{entityType}s/"),
+                RequestUri = new Uri($"{Constants.APIBaseURI}/{typeof(T).Name.ToLower()}s/"),
                 Method = HttpMethod.Get,
                 Headers =
                 {
@@ -157,10 +171,14 @@ namespace Split2021
                 }
             };
 
-            return await client.SendAsync(request);
+            var response = await client.SendAsync(request);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JObject.Parse(stringResponse);
+            return jsonResponse.GetValue("data").ToObject<List<T>>();
         }
 
-        public async Task<HttpResponseMessage> UpdateRecord(string entityType, int entityId, object data)
+        public async Task<T> UpdateRecord<T>(int entityId, T data)
+            where T : Entities.Entity
         {
             if (!IsConnected())
             {
@@ -177,7 +195,7 @@ namespace Split2021
             var request = new HttpRequestMessage()
             {
                 Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"),
-                RequestUri = new Uri($"{Constants.APIBaseURI}/{entityType}/{entityId}"),
+                RequestUri = new Uri($"{Constants.APIBaseURI}/{typeof(T).Name.ToLower()}s/{entityId}"),
                 Method = new HttpMethod("PATCH"),
                 Headers =
                 {
@@ -185,10 +203,14 @@ namespace Split2021
                 }
             };
 
-            return await client.SendAsync(request);
+            var response = await client.SendAsync(request);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JObject.Parse(stringResponse);
+            return jsonResponse.GetValue("data").ToObject<T>();
         }
 
-        public async Task<HttpResponseMessage> EmplaceRecord(string entityType, int entityId, object data)
+        public async Task<T> EmplaceRecord<T>(int entityId, T data)
+            where T : Entities.Entity
         {
             if (!IsConnected())
             {
@@ -205,7 +227,7 @@ namespace Split2021
             var request = new HttpRequestMessage()
             {
                 Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json"),
-                RequestUri = new Uri($"{Constants.APIBaseURI}/{entityType}/{entityId}"),
+                RequestUri = new Uri($"{Constants.APIBaseURI}/{typeof(T).Name.ToLower()}s/{entityId}"),
                 Method = HttpMethod.Put,
                 Headers =
                 {
@@ -213,7 +235,10 @@ namespace Split2021
                 }
             };
 
-            return await client.SendAsync(request);
+            var response = await client.SendAsync(request);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JObject.Parse(stringResponse);
+            return jsonResponse.GetValue("data").ToObject<T>();
         }
     }
 }
