@@ -15,16 +15,19 @@ namespace TestCore
 
         static async void MainAsync(string[] args)
         {
+            var a = new User();
+            Console.WriteLine(typeof(User).BaseType.GetProperty("collectionName").GetValue(a));
+
             var split = new Split();
             Console.WriteLine(await split.Connect("", ""));
             Console.WriteLine(await split.Connect("split_2021@labeip.epitech.eu", "X#9q@XCy7qy&"));
 
             var user = await split.RetrieveRecord<User>(1);
-            Console.WriteLine(user.email);
+            Console.WriteLine(user.Email);
             Console.WriteLine(JsonConvert.SerializeObject(user));
 
-            var users = await split.RetrieveMultipleRecords<User>();
-            Console.WriteLine(users[0].email);
+            /*var users = await split.RetrieveMultipleRecords<User>();
+            Console.WriteLine(users[0].Email);*/
         }
     }
 }
