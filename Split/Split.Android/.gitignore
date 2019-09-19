@@ -138,7 +138,6 @@ publish/
 # NuGet Packages Directory
 packages/
 *.nuget.targets
-*.nuget.g.targets
 *.lock.json
 *.nuget.props
 
