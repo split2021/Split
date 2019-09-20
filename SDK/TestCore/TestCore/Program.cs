@@ -26,8 +26,8 @@ namespace TestCore
             Console.WriteLine(user.Email);
             Console.WriteLine(JsonConvert.SerializeObject(user));
 
-            /*var users = await split.RetrieveMultipleRecords<User>();
-            Console.WriteLine(users[0].Email);*/
+            var users = await split.RetrieveMultipleRecords<User>();
+            Console.WriteLine(users[0].Email);
         }
     }
 }

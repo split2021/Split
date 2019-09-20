@@ -6,8 +6,8 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Split2021</PackageId>
-    <Version>1.1.8</Version>
-    <PackageReleaseNotes>Change Id type from int to long</PackageReleaseNotes>
+    <Version>1.1.9</Version>
+    <PackageReleaseNotes>Fix RetrieveMultiple method</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>A C# SDK to help using the Split API</Description>
   </PropertyGroup>

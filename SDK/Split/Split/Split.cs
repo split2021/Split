@@ -174,8 +174,9 @@ namespace Split2021
 
             var response = await client.SendAsync(request);
             var stringResponse = await response.Content.ReadAsStringAsync();
-            var jsonResponse = JObject.Parse(stringResponse);
-            return jsonResponse.GetValue("data").ToObject<List<T>>();
+            var jsonResponse = JsonConvert.DeserializeObject<Response>(stringResponse);
+            var list = jsonResponse.data.ToObject<List<AttributesCollection>>() as List<AttributesCollection>;
+            return list.ConvertAll(attributes => new T { Attributes = attributes });
         }
 
         public async Task<T> UpdateRecord<T>(T entity)
