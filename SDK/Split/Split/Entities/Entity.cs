@@ -27,10 +27,13 @@ namespace Split2021.Entities
 
     public class Entity
     {
-        public static string singleName { get; private set; }
-        public static string collectionName { get; private set; }
+        public static readonly string SingleName;
+        public static readonly string CollectionName;
 
-        public AttributesCollection Attributes = new AttributesCollection{ { "id", -1 } };
+        public string singleName { get; private set; }
+        public string collectionName { get; private set; }
+
+        public AttributesCollection Attributes = new AttributesCollection{ { "id", Constants.InvalidId } };
 
         public Entity()
             : this("")
@@ -65,6 +68,12 @@ namespace Split2021.Entities
             get { return (long)Attributes["id"]; }
             set { Attributes["id"] = value; }
         }
+
+        public EntityReference ToEntityReference()
+        {
+            return new EntityReference(this);
+        }
+
     }
 
 }

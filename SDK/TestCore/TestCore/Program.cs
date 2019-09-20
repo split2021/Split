@@ -16,7 +16,7 @@ namespace TestCore
         static async void MainAsync(string[] args)
         {
             var a = new User();
-            Console.WriteLine(typeof(User).BaseType.GetProperty("collectionName").GetValue(a));
+            Console.WriteLine(typeof(User).GetField("CollectionName").GetValue(a));
 
             var split = new Split();
             Console.WriteLine(await split.Connect("", ""));
@@ -27,7 +27,7 @@ namespace TestCore
             Console.WriteLine(JsonConvert.SerializeObject(user));
 
             var users = await split.RetrieveMultipleRecords<User>();
-            Console.WriteLine(users[0].Email);
+            Console.WriteLine(users[0].Friends[0].Id);
         }
     }
 }

@@ -6,6 +6,6 @@
         public static readonly string APIBaseURI = BaseURI + "/api";
         public static readonly string AuthentificationEndpoint = APIBaseURI + "/login";
 
-        public static readonly int InvalidId = -1;
+        public static readonly long InvalidId = -1;
     }
 }

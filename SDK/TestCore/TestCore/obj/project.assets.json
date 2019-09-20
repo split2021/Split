@@ -332,7 +332,7 @@
           "lib/netstandard2.0/Nito.Disposables.dll": {}
         }
       },
-      "Split2021/1.1.9": {
+      "Split2021/1.1.14": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.5.0",
@@ -1056,14 +1056,14 @@
         "nito.disposables.nuspec"
       ]
     },
-    "Split2021/1.1.9": {
-      "sha512": "f7ifJyYZvnCsG741fuPVTcx2zm6xw55qJZcgQd9e0e5m16ryCdt4fZ7eZoW1wOPsgj0vW4xvESFc55jlNkUVIg==",
+    "Split2021/1.1.14": {
+      "sha512": "hqABoE5805jFuzq6FgN6FVpdn5oAm6R29F1oBW10LHbSq5Wu6A7jisKfBxD83Xc5lIuKbRjcv9OIIlJlQzhSyw==",
       "type": "package",
-      "path": "split2021/1.1.9",
+      "path": "split2021/1.1.14",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/Split.dll",
-        "split2021.1.1.9.nupkg.sha512",
+        "split2021.1.1.14.nupkg.sha512",
         "split2021.nuspec"
       ]
     },
@@ -1095,7 +1095,7 @@
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
       "Nito.AsyncEx >= 5.0.0",
-      "Split2021 >= 1.1.9"
+      "Split2021 >= 1.1.14"
     ]
   },
   "packageFolders": {
@@ -1152,7 +1152,7 @@
           },
           "Split2021": {
             "target": "Package",
-            "version": "[1.1.9, )"
+            "version": "[1.1.14, )"
           }
         },
         "imports": [
