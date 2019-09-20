@@ -13,13 +13,13 @@
 namespace Split.Views.Menu {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("C:\\Users\\Hugo\\Documents\\GitHub\\Split\\Split\\Split\\Views\\Menu\\MasterDetail.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("/Users/chiliwa/Documents/GitHub/Split/Split/Split/Views/Menu/MasterDetail.xaml")]
     public partial class MasterDetail : global::Xamarin.Forms.MasterDetailPage {
         
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private global::Split.Views.Menu.MasterPage masterpage;
         
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(MasterDetail));
             masterpage = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Split.Views.Menu.MasterPage>(this, "masterpage");

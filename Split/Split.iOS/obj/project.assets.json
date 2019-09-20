@@ -11,7 +11,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "Xamarin.Forms/4.0.0.425677": {
+      "Xamarin.Forms/4.2.0.815419": {
         "type": "package",
         "compile": {
           "lib/Xamarin.iOS10/Xamarin.Forms.Core.dll": {},
@@ -132,6 +132,15 @@
         "build": {
           "build/Xamarin.Forms.props": {},
           "build/Xamarin.Forms.targets": {}
+        }
+      },
+      "Xamarin.TestCloud.Agent/0.21.8": {
+        "type": "package",
+        "compile": {
+          "lib/Xamarin.iOS/Calabash.dll": {}
+        },
+        "runtime": {
+          "lib/Xamarin.iOS/Calabash.dll": {}
         }
       }
     },
@@ -145,7 +154,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "Xamarin.Forms/4.0.0.425677": {
+      "Xamarin.Forms/4.2.0.815419": {
         "type": "package",
         "compile": {
           "lib/Xamarin.iOS10/Xamarin.Forms.Core.dll": {},
@@ -266,6 +275,15 @@
         "build": {
           "build/Xamarin.Forms.props": {},
           "build/Xamarin.Forms.targets": {}
+        }
+      },
+      "Xamarin.TestCloud.Agent/0.21.8": {
+        "type": "package",
+        "compile": {
+          "lib/Xamarin.iOS/Calabash.dll": {}
+        },
+        "runtime": {
+          "lib/Xamarin.iOS/Calabash.dll": {}
         }
       }
     },
@@ -279,7 +297,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "Xamarin.Forms/4.0.0.425677": {
+      "Xamarin.Forms/4.2.0.815419": {
         "type": "package",
         "compile": {
           "lib/Xamarin.iOS10/Xamarin.Forms.Core.dll": {},
@@ -400,6 +418,15 @@
         "build": {
           "build/Xamarin.Forms.props": {},
           "build/Xamarin.Forms.targets": {}
+        }
+      },
+      "Xamarin.TestCloud.Agent/0.21.8": {
+        "type": "package",
+        "compile": {
+          "lib/Xamarin.iOS/Calabash.dll": {}
+        },
+        "runtime": {
+          "lib/Xamarin.iOS/Calabash.dll": {}
         }
       }
     },
@@ -413,7 +440,7 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
-      "Xamarin.Forms/4.0.0.425677": {
+      "Xamarin.Forms/4.2.0.815419": {
         "type": "package",
         "compile": {
           "lib/Xamarin.iOS10/Xamarin.Forms.Core.dll": {},
@@ -534,6 +561,15 @@
         "build": {
           "build/Xamarin.Forms.props": {},
           "build/Xamarin.Forms.targets": {}
+        }
+      },
+      "Xamarin.TestCloud.Agent/0.21.8": {
+        "type": "package",
+        "compile": {
+          "lib/Xamarin.iOS/Calabash.dll": {}
+        },
+        "runtime": {
+          "lib/Xamarin.iOS/Calabash.dll": {}
         }
       }
     }
@@ -569,10 +605,10 @@
         "newtonsoft.json.nuspec"
       ]
     },
-    "Xamarin.Forms/4.0.0.425677": {
-      "sha512": "drwO/MimaMUnmvkULASYjU5MRciVIJyiLxD3ihFq8P+DWynQZ2NLNej0Vrs3k2L7UdmqvcgCxEJdfT7uFl2KVg==",
+    "Xamarin.Forms/4.2.0.815419": {
+      "sha512": "GrKE8TBjR5chew92HBcoaTuqwo6Jnpp0djVaN4/wtGQW/URZAt3Eb3zF8rQ6jRA2WKuTKm3wyPTCPrB2PekIfQ==",
       "type": "package",
-      "path": "xamarin.forms/4.0.0.425677",
+      "path": "xamarin.forms/4.2.0.815419",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -792,12 +828,13 @@
         "lib/uap10.0/Xamarin.Forms.Platform.UAP.pdb",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP.pri",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/AutoSuggestStyle.xbf",
+        "lib/uap10.0/Xamarin.Forms.Platform.UAP/CollectionView/ItemsViewStyles.xbf",
+        "lib/uap10.0/Xamarin.Forms.Platform.UAP/FormsCheckBoxStyle.xbf",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/FormsCommandBarStyle.xbf",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/FormsEmbeddedPageWrapper.xbf",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/FormsFlyout.xbf",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/FormsProgressBarStyle.xbf",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/FormsTextBoxStyle.xbf",
-        "lib/uap10.0/Xamarin.Forms.Platform.UAP/Items/ItemsViewStyles.xbf",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/MasterDetailControlStyle.xbf",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/PageControlStyle.xbf",
         "lib/uap10.0/Xamarin.Forms.Platform.UAP/Properties/Xamarin.Forms.Platform.UAP.rd.xml",
@@ -810,15 +847,30 @@
         "lib/uap10.0/Xamarin.Forms.Xaml.dll",
         "lib/uap10.0/Xamarin.Forms.Xaml.pdb",
         "lib/uap10.0/Xamarin.Forms.Xaml.xml",
-        "xamarin.forms.4.0.0.425677.nupkg.sha512",
+        "xamarin.forms.4.2.0.815419.nupkg.sha512",
         "xamarin.forms.nuspec"
+      ]
+    },
+    "Xamarin.TestCloud.Agent/0.21.8": {
+      "sha512": "SUpK4HIxwISIzz7q8IfCnXAcKxHuZhhc9wm/3wPOi5+Jwj2dCvfd8C5IJpB7UK0orCerWK0n+DRjkv9h6dcyaw==",
+      "type": "package",
+      "path": "xamarin.testcloud.agent/0.21.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "epl-v10.html",
+        "lib/Xamarin.iOS/Calabash.dll",
+        "xamarin.testcloud.agent.0.21.8.nupkg.sha512",
+        "xamarin.testcloud.agent.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
     "Xamarin.iOS,Version=v1.0": [
       "Newtonsoft.Json >= 12.0.2",
-      "Xamarin.Forms >= 4.0.0.425677"
+      "Xamarin.Forms >= 4.2.0.815419",
+      "Xamarin.TestCloud.Agent >= 0.21.8"
     ]
   },
   "packageFolders": {
@@ -858,7 +910,11 @@
           },
           "Xamarin.Forms": {
             "target": "Package",
-            "version": "[4.0.0.425677, )"
+            "version": "[4.2.0.815419, )"
+          },
+          "Xamarin.TestCloud.Agent": {
+            "target": "Package",
+            "version": "[0.21.8, )"
           }
         }
       }
