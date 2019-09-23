@@ -12,6 +12,8 @@ node_modules
 # Python compiled
 *.pyc
 api/db.sqlite3
+*.log
+api/static/
 
 *.idea
 # Medias
