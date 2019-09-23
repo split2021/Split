@@ -17,16 +17,12 @@ class LoginView(APIView):
         """
         """
         data = request.body.decode('utf-8')
-        try:
-            json_data = json.loads(data)
-            user = authenticate(username=json_data['email'], password=json_data['password'])
-        except Exception as e:
-            return ExceptionCaught(e)
+        json_data = json.loads(data)
+        user = authenticate(username=json_data['email'], password=json_data['password'])
+        if user is not None:
+            return APIResponse(200, "User logged in", {'token': str(Token({'time': int(time.time())}))})
         else:
-            if user is not None:
-                return APIResponse(200, "User logged in", {'token': str(Token({'time': int(time.time())}))})
-            else:
-                return APIResponse(401, "Wrong user credentials")
+            return APIResponse(401, "Wrong user credentials")
 
 class UserView(SingleObjectAPIView):
     model = User
