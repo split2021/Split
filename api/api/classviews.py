@@ -32,38 +32,43 @@ class APIView(View):
          Dispatch the request to the appropriate method
         """
 
-        headers = dict(request.headers)
-        Log.objects.create(
-            path=request.path,
-            method=request.method,
-            headers=headers,
-            body=request.body,
-            get=request.GET,
-            post=request.POST
-        )
+        try:
 
-        if not self.authentification:
-            return super(APIView, self).dispatch(request, *args, **kwargs)
+            headers = dict(request.headers)
+            Log.objects.create(
+                path=request.path,
+                method=request.method,
+                headers=headers,
+                body=request.body,
+                get=request.GET,
+                post=request.POST
+            )
 
-        if not 'Authorization' in headers:
-            return InvalidToken("Missing token")
-        header, payload, signature = bytes(headers['Authorization'].split(" ")[-1], 'utf-8').split(b".")
+            if not self.authentification:
+                return super(APIView, self).dispatch(request, *args, **kwargs)
 
-        if signature != generate_signature(header + payload):
-            return InvalidToken("Invalid signature")
+            if not 'Authorization' in headers:
+                return InvalidToken("Missing token")
+            header, payload, signature = bytes(headers['Authorization'].split(" ")[-1], 'utf-8').split(b".")
 
-        decoded_payload = base64.b64decode(payload + b"====")
-        json_payload = json.loads(decoded_payload)
+            if signature != generate_signature(header + payload):
+                return InvalidToken("Invalid signature")
 
-        if not 'time' in json_payload:
-            return InvalidToken("Invalid payload")
-        token_time = json_payload['time']
-        now = time.time()
+            decoded_payload = base64.b64decode(payload + b"====")
+            json_payload = json.loads(decoded_payload)
 
-        if now - token_time < 3600:
-            return super(APIView, self).dispatch(request, *args, **kwargs)
-        else:
-            return TokenExpired()
+            if not 'time' in json_payload:
+                return InvalidToken("Invalid payload")
+            token_time = json_payload['time']
+            now = time.time()
+
+            if now - token_time < 3600:
+                return super(APIView, self).dispatch(request, *args, **kwargs)
+            else:
+                return TokenExpired()
+
+        except Exception as e:
+            return ExceptionCaught(e)
 
     def head(self, request, *args, **kwargs):
         """
