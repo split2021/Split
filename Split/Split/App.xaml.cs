@@ -3,6 +3,12 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+// App Center dependencies (Check App Tool)
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+//
+
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Split
 {
@@ -10,6 +16,8 @@ namespace Split
     {
         public App()
         {
+            Analytics.TrackEvent("App Launched"); //Send info to App Center
+
             InitializeComponent();
 
             MainPage = new LoginPage();

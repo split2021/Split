@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+//App Center Library
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+// UI Test library
 using Foundation;
 using UIKit;
 
@@ -22,8 +26,12 @@ namespace Split.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            //AppCenter addr to send datas
+            AppCenter.Start("f5acdb1a-0fa3-460d-a102-e1ea80185cca",
+                   typeof(Analytics), typeof(Crashes));
+            //UI test part
             #if ENABLE_TEST_CLOUD
-                Xamarin.Calabash.Start();
+            Xamarin.Calabash.Start();
             #endif
 
             global::Xamarin.Forms.Forms.Init();
