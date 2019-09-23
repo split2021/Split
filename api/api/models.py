@@ -120,7 +120,7 @@ class LogManager(models.Manager):
         if kwargs['post']:
             if 'password' in kwargs['post']:
                 kwargs['post']['password'] = "**********"
-        if kwargs['headers']['Content-Type'] == "application/json":
+        if 'Content-Type' in kwargs['headers'] and kwargs['headers']['Content-Type'] == "application/json":
             try:
                 json_body = json.loads(kwargs['body'].decode())
             except:
