@@ -32,4 +32,16 @@ class ExceptionCaught(APIResponse):
 class NotAllowed(APIResponse):
 
     def __init__(self, *args, **kwargs):
-        super().__init__(405, f"Verb not allowed", *args, **kwargs)
+        super().__init__(405, "Verb not allowed", *args, **kwargs)
+
+
+class TokenExpired(APIResponse):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(401, "Token expired", *args, **kwargs)
+
+
+class InvalidToken(APIResponse):
+
+    def __init__(self, reason, *args, **kwargs):
+        super().__init__(401, f"Invalid token: {reason}", *args, **kwargs)

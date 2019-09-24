@@ -1,5 +1,8 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
+from django.contrib.postgres import fields as postgres
+
+import json
 
 # Create your models here.
 
@@ -7,11 +10,11 @@ class JsonizableMixin(object):
     json_fields = []
 
     def json(self, request=None):
-        dump = {}
+        dump = {'id': self.id}
         for fieldname in self.json_fields:
             field = getattr(self, fieldname)
             if issubclass(field.__class__, models.manager.BaseManager):
-                value = [related.url(request) for related in field.all()]
+                value = [{'id': related.id, 'url': related.url(request)} for related in field.all()]
             else:
                 value = field
             dump[fieldname] = value
@@ -72,8 +75,8 @@ class User(AbstractUser, JsonizableMixin):
     email = models.EmailField('email address', unique=True)
     phone = models.CharField(max_length=20, unique=True)
     username = models.CharField(max_length=20, blank=True)
-    friends = models.ManyToManyField("self")
-    payment_methods = models.ManyToManyField("PaymentMethod")
+    friends = models.ManyToManyField("self", blank=True)
+    payment_methods = models.ManyToManyField("PaymentMethod", blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
@@ -85,12 +88,12 @@ class User(AbstractUser, JsonizableMixin):
 
 class PaymentMethod(models.Model):
     """
+    A generic class which is derived in specific payment methods
     """
 
     name = models.CharField(max_length=42)
-    mastercard = models.CharField(max_length=40)
-    expirancy = models.CharField(max_length=10, default='None')
-    cvc = models.CharField(max_length=4, default='None')
+
+    json_fields = ['name', 'user_set']
 
     class Meta:
         pass
@@ -98,12 +101,48 @@ class PaymentMethod(models.Model):
 
 class Group(models.Model, JsonizableMixin):
     """
+    Store a list of users than can make payments together
     """
 
     name = models.CharField(max_length=42)
-    users = models.ManyToManyField("User")
+    users = models.ManyToManyField("User", blank=True)
 
     json_fields = ['name', 'users']
 
     class Meta:
         pass
+
+
+class LogManager(models.Manager):
+    """
+    """
+    def create(self, **kwargs):
+        if kwargs['post']:
+            if 'password' in kwargs['post']:
+                kwargs['post']['password'] = "**********"
+        if 'Content-Type' in kwargs['headers'] and kwargs['headers']['Content-Type'] == "application/json":
+            try:
+                json_body = json.loads(kwargs['body'].decode())
+            except:
+                pass
+            else:
+                if 'password' in json_body:
+                    json_body['password'] = "**********"
+                kwargs['body'] = json.dumps(json_body)
+        return super().create(**kwargs)
+
+class Log(models.Model):
+    """
+    Store requests made against the API for easier debugging
+    """
+    METHODS = ('HEAD', 'OPTIONS', 'GET', 'PATCH', 'POST', 'PUT', 'DELETE')
+
+    date = models.DateTimeField(auto_now_add=True)
+    path = models.CharField(max_length=100)
+    method = models.CharField(max_length=10)
+    headers = postgres.JSONField()
+    body = models.TextField(default="")
+    get = postgres.JSONField()
+    post = postgres.JSONField()
+
+    objects = LogManager()
