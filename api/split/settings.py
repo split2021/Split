@@ -191,6 +191,11 @@ JET_THEMES = [
         'title': 'Default' # theme title
     },
     {
+        'theme': "split",
+        'color': '#473280',
+        'title': "Split"
+    },
+    {
         'theme': 'green',
         'color': '#44b78b',
         'title': 'Green'
