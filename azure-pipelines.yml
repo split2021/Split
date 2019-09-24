@@ -78,10 +78,10 @@ stages:
           inputs:
             versionSpec: '3.6'
         - script: |
-          pip install pytest
-          pip install pytest-cov
-          pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
-        displayName: 'Test with pytest'
+            pip install pytest
+            pip install pytest-cov
+            pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+          displayName: 'Test with pytest'
         
 
   # [PUBLISH TESTS]
