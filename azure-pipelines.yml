@@ -80,7 +80,7 @@ stages:
         - script: |
             pip install pytest
             pip install pytest-cov
-            pytest ./api/api/tests.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+            pytest ./api/api/tests.py --doctest-modules --junitxml=./testsOutput/api.xml --cov=com --cov-report=xml --cov-report=html
           displayName: 'Test with pytest'
         
 
