@@ -69,7 +69,7 @@ stages:
           workingDirectory: './web/website/'
         - script: yarn test
           displayName:'Run jest test'
-          workingDirectory: './web/website/test'
+          workingDirectory: './web/website/test/'
         
 
   # [PUBLISH TESTS]
