@@ -1,60 +1,60 @@
 stages:
-  # [BUILDS]
-  - stage: Builds
-    jobs:
-      # Android
-      - job: MOBILE_Android
-        pool:
-          vmImage: 'vs2017-win2016'
-        variables:
-          buildConfiguration: 'Release'
-          outputDirectory: './mobile/build/$(buildConfiguration)'
-        steps:
-        - task: NuGetToolInstaller@0
-        - task: NuGetCommand@2
-          inputs:
-            restoreSolution: '**/*.sln'
-        - task: XamarinAndroid@1
-          inputs:
-            projectFile: './mobile/Split/Split.Android/*droid.csproj'
-            outputDirectory: '$(outputDirectory)'
-            configuration: '$(buildConfiguration)'
-      # iOS
-      - job: MOBILE_iOS
-        pool:
-          vmImage: 'macOS-10.13'
-        variables:
-          buildConfiguration: 'Release'
-        steps:
-        - task: NuGetToolInstaller@0
-        - task: NuGetCommand@2
-          inputs:
-            restoreSolution: '**/*.sln'
-        - task: XamariniOS@2
-          inputs:
-            solutionFile: './mobile/Split/Split.iOS/*iOS.csproj'
-            configuration: '$(buildConfiguration)'
-            buildForSimulator: true
-            packageApp: false
-      # Web
-      - job: WEB
-        pool:
-          vmImage: 'ubuntu-16.04'
-        steps:
-        - script: yarn install
-          displayName: 'Yarn install'
-          workingDirectory: './web/website/'
-        - script: yarn build
-          displayName: 'Yarn build'
-          workingDirectory: './web/website/'
-      # API
-      - job: API
-        pool:
-          vmImage: 'ubuntu-16.04'
-        steps:
-        - script: docker-compose build
-          displayName: 'Docker build'
-          workingDirectory: './api/'
+  # # [BUILDS]
+  # - stage: Builds
+  #   jobs:
+  #     # Android
+  #     - job: MOBILE_Android
+  #       pool:
+  #         vmImage: 'vs2017-win2016'
+  #       variables:
+  #         buildConfiguration: 'Release'
+  #         outputDirectory: './mobile/build/$(buildConfiguration)'
+  #       steps:
+  #       - task: NuGetToolInstaller@0
+  #       - task: NuGetCommand@2
+  #         inputs:
+  #           restoreSolution: '**/*.sln'
+  #       - task: XamarinAndroid@1
+  #         inputs:
+  #           projectFile: './mobile/Split/Split.Android/*droid.csproj'
+  #           outputDirectory: '$(outputDirectory)'
+  #           configuration: '$(buildConfiguration)'
+  #     # iOS
+  #     - job: MOBILE_iOS
+  #       pool:
+  #         vmImage: 'macOS-10.13'
+  #       variables:
+  #         buildConfiguration: 'Release'
+  #       steps:
+  #       - task: NuGetToolInstaller@0
+  #       - task: NuGetCommand@2
+  #         inputs:
+  #           restoreSolution: '**/*.sln'
+  #       - task: XamariniOS@2
+  #         inputs:
+  #           solutionFile: './mobile/Split/Split.iOS/*iOS.csproj'
+  #           configuration: '$(buildConfiguration)'
+  #           buildForSimulator: true
+  #           packageApp: false
+  #     # Web
+  #     - job: WEB
+  #       pool:
+  #         vmImage: 'ubuntu-16.04'
+  #       steps:
+  #       - script: yarn install
+  #         displayName: 'Yarn install'
+  #         workingDirectory: './web/website/'
+  #       - script: yarn build
+  #         displayName: 'Yarn build'
+  #         workingDirectory: './web/website/'
+  #     # API
+  #     - job: API
+  #       pool:
+  #         vmImage: 'ubuntu-16.04'
+  #       steps:
+  #       - script: docker-compose build
+  #         displayName: 'Docker build'
+  #         workingDirectory: './api/'
 
   # [TESTS]
   - stage: Tests
