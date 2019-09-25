@@ -21,7 +21,8 @@
 
         </StackLayout>
 
-        <Button x:Name="Btn_Signin" Text="Se connecter" TextColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Clicked="CreateAccount" BackgroundColor="#19234B"/>
+        <Button x:Name="Btn_Signin" AutomationId="LogIn" Text="Se connecter" TextColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Clicked="CreateAccount" BackgroundColor="#19234B"/>
+
 
     </StackLayout>
 </ContentPage>
