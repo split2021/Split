@@ -74,9 +74,7 @@ class APIView(View):
         """
          Return header for this endpoint
         """
-        response = self.get(request, *args, **kwargs)
-        response.content = ""
-        return response
+        return APIResponse(200, "")
 
     def options(self, request, *args, **kwargs):
         """
