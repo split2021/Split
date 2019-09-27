@@ -135,7 +135,7 @@ class SingleObjectAPIView(APIView):
     """
      API view helper class to access single object
     """
-    implemented_methods = ('get', 'post', 'put', 'delete')
+    implemented_methods = ('get', 'patch', 'post', 'put', 'delete')
 
     def get(self, request, *args, **kwargs):
         try:
@@ -198,7 +198,7 @@ class MultipleObjectsAPIView(APIView):
     """
      API view helper class to access single object
     """
-    implemented_methods = ('get', 'post', 'delete')
+    implemented_methods = ('get', 'post')
 
     def get(self, request, *args, **kwargs):
         objects = self.model.objects.all()
