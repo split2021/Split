@@ -15,6 +15,8 @@ class JsonizableMixin(object):
             field = getattr(self, fieldname)
             if issubclass(field.__class__, models.manager.BaseManager):
                 value = [{'id': related.id, 'url': related.url(request)} for related in field.all()]
+            elif callable(field):
+                value = field()
             else:
                 value = field
             dump[fieldname] = value
@@ -23,7 +25,10 @@ class JsonizableMixin(object):
         return dump
 
     def url(self, request):
-        return f"http://{request.get_host()}/api/{self._meta.verbose_name_plural}/{self.id}"
+        if request is not None:
+            return f"http://{request.get_host()}/api/{self._meta.verbose_name_plural}/{self.id}"
+        else:
+            return f"/api/{self._meta.verbose_name_plural}/{self.id}"
 
 class UserManager(BaseUserManager):
     """
