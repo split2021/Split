@@ -75,13 +75,13 @@ class User(AbstractUser, JsonizableMixin):
     email = models.EmailField('email address', unique=True)
     phone = models.CharField(max_length=20, unique=True)
     username = models.CharField(max_length=20, blank=True)
-    friends = models.ManyToManyField("self", blank=True)
-    payment_methods = models.ManyToManyField("PaymentMethod", blank=True)
+    friends = models.ManyToManyField("self", blank=True, related_name="users")
+    payment_methods = models.ManyToManyField("PaymentMethod", blank=True, related_name="users")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password']
 
-    json_fields = ['email', 'last_name', 'first_name', 'phone', 'username', 'friends', 'payment_methods', 'group_set']
+    json_fields = ['email', 'last_name', 'first_name', 'phone', 'username', 'friends', 'payment_methods', 'groups']
 
     objects = UserManager()
 
@@ -93,7 +93,7 @@ class PaymentMethod(models.Model):
 
     name = models.CharField(max_length=42)
 
-    json_fields = ['name', 'user_set']
+    json_fields = ['name', 'users']
 
     class Meta:
         pass
@@ -105,7 +105,7 @@ class Group(models.Model, JsonizableMixin):
     """
 
     name = models.CharField(max_length=42)
-    users = models.ManyToManyField("User", blank=True)
+    users = models.ManyToManyField("User", blank=True, related_name="groups")
 
     json_fields = ['name', 'users']
 
