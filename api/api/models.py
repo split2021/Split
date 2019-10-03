@@ -103,6 +103,11 @@ class PaymentMethod(models.Model):
     class Meta:
         pass
 
+    
+class GroupMembership(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
 
 class Group(models.Model, JsonizableMixin):
     """
@@ -110,7 +115,7 @@ class Group(models.Model, JsonizableMixin):
     """
 
     name = models.CharField(max_length=42)
-    users = models.ManyToManyField("User", blank=True, related_name="groups")
+    users = models.ManyToManyField("User", blank=True, related_name="groups", through="GroupMembership", through_fields=('group', 'user'))
 
     json_fields = ['name', 'users']
 
