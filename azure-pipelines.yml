@@ -56,7 +56,7 @@ stages:
           displayName: 'Docker build'
           workingDirectory: './api/'
 
-  [TESTS]
+  # [TESTS]
   - stage: Tests
     jobs:
       # Web
