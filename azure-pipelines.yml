@@ -70,19 +70,19 @@ stages:
         - script: yarn test
           displayName: 'Run jest test'
           workingDirectory: './web/website/'
-      - job: API
-        pool:
-          vmImage: 'ubuntu-16.04'
-        steps:
-        - task: UsePythonVersion@0
-          inputs:
-            versionSpec: '3.6'
-        - script: |
-            pip install pytest
-            pip install pytest-cov
-            pytest ./api/api/tests.py --doctest-modules --junitxml=./testsOutput/api.xml --cov=com --cov-report=xml --cov-report=html
-          displayName: 'Test with pytest'
-          workingDirectory: './web/website/'        
+      # - job: API
+      #   pool:
+      #     vmImage: 'ubuntu-16.04'
+      #   steps:
+      #   - task: UsePythonVersion@0
+      #     inputs:
+      #       versionSpec: '3.6'
+      #   - script: |
+      #       pip install pytest
+      #       pip install pytest-cov
+      #       pytest ./api/api/tests.py --doctest-modules --junitxml=./testsOutput/api.xml --cov=com --cov-report=xml --cov-report=html
+      #     displayName: 'Test with pytest'
+      #     workingDirectory: './web/website/'        
 
   # [PUBLISH TESTS]
   - stage: Publish_Tests
@@ -96,10 +96,10 @@ stages:
             testRunner: JUnit
             testResultsFiles: './testsOutput/web.xml'
       # API
-      - job: API
-        steps:
-        - task: PublishTestResults@2
-          condition: succeededOrFailed()
-          inputs:
-            testResultsFiles: './testsOutput/api.xml'
-            testRunTitle: 'Publish test results for Python $(python.version)'
+      # - job: API
+      #   steps:
+      #   - task: PublishTestResults@2
+      #     condition: succeededOrFailed()
+      #     inputs:
+      #       testResultsFiles: './testsOutput/api.xml'
+      #       testRunTitle: 'Publish test results for Python $(python.version)'
