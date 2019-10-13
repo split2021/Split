@@ -1,20 +1,16 @@
-[![Build Status](https://dev.azure.com/valentinrubio/Split/_apis/build/status/split2021.Split?branchName=master)](https://dev.azure.com/valentinrubio/Split/_build/latest?definitionId=1&branchName=master)
+# split
 
-# Split
+A new Flutter project.
 
-**Description succincte du projet**
-Split est une application mobile qui permet à un groupe de personnes de diviser une addition au restaurant.
-Chaque personne est débitée d'une somme égale, ou modifiable selon les besoins, instantanément.
-Une seule personne se charge de régler l'addition, aucune cagnotte, ni remboursement.
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-**Equipe**
-Tiphaine LAURENT
-Thibault LECOINTE
-Alex SAUVADE
-Nicolas DJUROVIC
-Mathieu LACHENAIT
-Valentin RUBIO
-Hugo MARTIN
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-**Responsable EIP**
-Faizal Nguyen
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
