@@ -46,7 +46,6 @@ export default class Home extends React.Component {
   }
 
   discover() {
-    console.log('test');
     if (this.animRef) {
       this.animRef.current.scrollIntoView({
         behavior: 'smooth',
