@@ -18,6 +18,9 @@ stages:
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
+        - script: echo git submodule update --init --recursive
+          displayName: 'Add subrepo'
+          workingDirectory: './'
         - script: docker-compose build
           displayName: 'Docker build'
           workingDirectory: './api/'
