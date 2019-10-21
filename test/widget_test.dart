@@ -8,9 +8,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:split/main.dart';
+import 'package:split/login/login.dart';
 
 void main() {
+/*
+testWidgets('MyWidget has a title and message', (WidgetTester tester) async {
+    // Create the widget by telling the tester to build it.
+    await tester.pumpWidget(LogIn());
+  });
+test('Check connexion', () async {
+   
+    //await tester.pumpWidget(LogIn());
+    //await tester.enterText(find.byType(TextField), 'hi');
+  });
+*/
+  /*
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
@@ -27,4 +39,5 @@ void main() {
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
   });
+  */
 }

@@ -15,6 +15,7 @@ class _LogInState extends State<LogIn> {
   final _usernameInput = TextEditingController();
   final _passwordInput = TextEditingController();
 
+  
   bool _obscureText = true;
 
   void showHidePassword() {
@@ -105,9 +106,12 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+      title:'logInPage',
+    home:Scaffold(
       backgroundColor: Colors.white,
       body: _body(),
+    ),
     );
   }
 }
