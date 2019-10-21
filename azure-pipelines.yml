@@ -50,13 +50,10 @@ stages:
         - script: git submodule update --init --recursive
           displayName: 'Install API Submodule'
           workingDirectory: './'
-        - script: docker-compose -f docker-compose.yml -f docker-compose.development.yml up -d
-          displayName: 'Docker compose'
-          workingDirectory: './'
         - script: |
             pip install pytest
             pip install pytest-cov
-            pytest ./api/api/tests.py --doctest-modules --junitxml=./testsOutput/api.xml --cov=com --cov-report=xml --cov-report=html
+            docker-compose -f docker-compose.yml -f docker-compose.development.yml run api python manage.py test --doctest-modules --junitxml=./testsOutput/api.xml --cov=com --cov-report=xml --cov-report=html
           displayName: 'Test with pytest'
           workingDirectory: './'
 
