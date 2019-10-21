@@ -7,7 +7,7 @@ import Button from '../../components/Button/Button';
 
 describe('Test Block exist', () => {
     it('Exist test', () => {
-        const homeWrapper = shallow(<Home />);
+        const homeWrapper  = shallow(<Home />);
         expect(homeWrapper.find(Block)).toHaveLength(4);
 
     });
