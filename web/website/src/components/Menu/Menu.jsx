@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Container } from './Menu.styles';
 
-const Menu = ({ children }) => {
+const Menu = ({ redirect, children }) => {
     return (
-        <Container children={children}/>
+        <Container to={redirect} children={children}/>
     );
 };
 

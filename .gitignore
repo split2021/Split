@@ -1,9 +1,19 @@
+# Node modules
+node_modules
+*/node_modules
+*/*/node_modules
+
+# Webstorm
+.idea
+
 # VSCode config
 .vscode
 
 # Python compiled
 *.pyc
 api/db.sqlite3
+*.log
+api/static/
 
 *.idea
 # Medias

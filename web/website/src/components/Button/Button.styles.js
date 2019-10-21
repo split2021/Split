@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.button`
-  width: 150px;
+  width: ${props => props.form ? '450px' : '150px'};
   height: 45px;
   border: none;
   border-radius: 24px;
@@ -14,6 +14,8 @@ export const Container = styled.button`
   cursor: pointer;
   outline: none;
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
  
   &::before {
     display:block;

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\testsOutput",
+    "\\web",
+    "\\web\\website",
+    "\\web\\website\\src",
+    "\\web\\website\\src\\components",
+    "\\web\\website\\src\\components\\Trombi",
+    "\\web\\website\\src\\Main",
+    "\\web\\website\\src\\Main\\Header",
+    "\\web\\website\\src\\Main\\Home"
+  ],
+  "SelectedNode": "\\azure-pipelines.yml",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Container, Text } from './Button.styles';
 
-const Button = ({ children }) => {
-  return (
-    <Container>
-      <Text children={children}/>
-    </Container>
-  );
+export default class Button extends React.Component {
+  render() {
+    return (
+      <Container form={this.props.form} onClick={this.props.onclick}>
+        <Text children={this.props.children}/>
+      </Container>
+    )
+  }
 };
-
-export default Button;

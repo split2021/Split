@@ -1,4 +1,0 @@
-django>=2.2
-psycopg2
-gunicorn
-comtypes
