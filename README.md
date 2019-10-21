@@ -1,7 +1,8 @@
 # split
 
-[![Codemagic build status](https://api.codemagic.io/apps/5dadc696813e33422e6d7dab/5dadc696813e33422e6d7daa/status_badge.svg)](https://codemagic.io/apps/5dadc696813e33422e6d7dab/5dadc696813e33422e6d7daa/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/5dadd852813e33528455eb5e/5dadd852813e33528455eb5d/status_badge.svg)](https://codemagic.io/apps/5dadd852813e33528455eb5e/5dadd852813e33528455eb5d/latest_build)
 
+[![Build Status](https://dev.azure.com/valentinrubio/Split/_apis/build/status/split2021.Split?branchName=master)](https://dev.azure.com/valentinrubio/Split/_build/latest?definitionId=1&branchName=master)
 
 # Split
 
@@ -25,7 +26,7 @@ Hugo MARTIN
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 **Responsable EIP**
-Faizal Nguyen
+Jean-Luc Phan
 
 -- --
 
