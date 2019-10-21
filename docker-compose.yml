@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  api:
+    build: ./api
+    volumes:
+      - ./api:/api
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
