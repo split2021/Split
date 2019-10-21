@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Home from './Home';
 import { Block, Text, Title, DeviseTxt, Devise } from './Home.styles';
+import Button from '../../components/Button/Button';
 
 
 describe('Test Block exist', () => {
@@ -37,4 +38,14 @@ describe('Test Block exist', () => {
         const deviseTxtFindWrapper = baliseDeviseTxtWrapper.find(DeviseTxt);
         expect(deviseTxtFindWrapper).toHaveLength(3);
     });
+
+
+    it('exist Button in Home', () => {
+        const wrapperMaster = shallow(<Home />);
+        const buttonWrapper = wrapperMaster.find(Button);
+        console.log(buttonWrapper);
+        expect(buttonWrapper).toHaveLength(1);
+        buttonWrapper.find('Button').simulate('onClick');
+    });
+
 });

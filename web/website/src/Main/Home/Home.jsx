@@ -73,7 +73,7 @@ export default class Home extends React.Component {
             <FontAwesomeIcon icon={faRocket} size="3x" color="#4caf50" />
             <DeviseTxt>Aucune attente de paiement</DeviseTxt>
           </Devise>
-          <Button onclick={this.discover}>Découvrir</Button>
+          <Button onclick={this.discover}>Découvrir</Button> 
         </Block>
 
         <Animation ref={this.animRef}>
