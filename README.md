@@ -1,5 +1,7 @@
 [![Build Status](https://dev.azure.com/valentinrubio/Split/_apis/build/status/split2021.Split?branchName=master)](https://dev.azure.com/valentinrubio/Split/_build/latest?definitionId=1&branchName=master)
 
+[![Codemagic build status](https://api.codemagic.io/apps/5dadc696813e33422e6d7dab/5dadc696813e33422e6d7daa/status_badge.svg)](https://codemagic.io/apps/5dadc696813e33422e6d7dab/5dadc696813e33422e6d7daa/latest_build)
+
 
 # Split
 
