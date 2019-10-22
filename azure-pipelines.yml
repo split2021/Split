@@ -73,5 +73,5 @@ stages:
         - task: PublishTestResults@2
           condition: succeededOrFailed()
           inputs:
-            testResultsFiles: './api/testsOutput/api.xml'
+            testResultsFiles: './testsOutput/api.xml'
             testRunTitle: 'Publish test results for Python $(python.version)'
