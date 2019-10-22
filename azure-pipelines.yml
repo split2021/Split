@@ -51,10 +51,9 @@ stages:
           displayName: 'Install API Submodule'
           workingDirectory: './'
         - script: |
-            pip install pytest
-            pip install pytest-cov
-            docker-compose -f docker-compose.yml -f docker-compose.development.yml run api python manage.py test --doctest-modules --junitxml=./testsOutput/api.xml --cov=com --cov-report=xml --cov-report=html
-          displayName: 'Test with pytest'
+            docker-compose -f ./docker-compose.yml -f ./docker-compose.development.yml run api coverage run --source='.' manage.py test
+            docker-compose -f ./docker-compose.yml -f ./docker-compose.development.yml run api coverage xml -o ./testsOutput/api.xml
+          displayName: 'Run tests and export coverage'
           workingDirectory: './'
 
   # [PUBLISH TESTS]
@@ -74,5 +73,5 @@ stages:
         - task: PublishTestResults@2
           condition: succeededOrFailed()
           inputs:
-            testResultsFiles: './testsOutput/api.xml'
+            testResultsFiles: './api/testsOutput/api.xml'
             testRunTitle: 'Publish test results for Python $(python.version)'
