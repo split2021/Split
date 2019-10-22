@@ -12,9 +12,6 @@ import 'package:split/home/home.dart';
 import 'package:split/contact/contact_page.dart';
 import 'package:split/settings/settings_page.dart';
 
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
-
-
 void main() {
 
 testWidgets('Check if every elements in home page are here + Click On Connect', (WidgetTester tester) async {
