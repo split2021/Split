@@ -9,11 +9,11 @@ class GroupManager extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _GroupManager();
+    return _GroupManagerState();
   }
 }
 
-class _GroupManager extends State<GroupManager> {
+class _GroupManagerState extends State<GroupManager> {
   final List<Group> _groups = [];
 
   @override

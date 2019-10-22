@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class ContactPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _ContactPage();
+    return _ContactPageState();
   }
 }
 
-class _ContactPage extends State<ContactPage> {
+class _ContactPageState extends State<ContactPage> {
   TextEditingController editingController = TextEditingController();
   final duplicateItems = List<String>.generate(100, (i) => "Item $i");
   var items = List<String>();
