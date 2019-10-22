@@ -13,7 +13,7 @@ class Group {
     final _random = new Random().nextInt(5);
     //
 
-    this.name = "Name's group";
+    this.name = "Group's name";
     this.image = "assets/food_4k_" + (_random + 1).toString() + ".jpg";
 
     this.contactList = new List<Contact>();
