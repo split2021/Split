@@ -65,6 +65,9 @@ export default class Subscribe extends React.Component {
       this.setState({token: this.state.data.data.token});
       if (this.state.data.statuscode === 201) {
         this.props.history.push('/login');
+      } else if (this.state.data.statuscode !== 200) {
+        console.log(this.state.data.statuscode, this.state.data.reason);
+        if (this.state.error) console.log(this.state.error);
       }
     }
   }

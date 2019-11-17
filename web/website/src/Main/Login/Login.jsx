@@ -27,6 +27,9 @@ export default class SignIn extends React.Component {
     if (prevProps.data !== this.state.data) {
       if (this.state.data.statuscode === 200) {
         this.props.history.push('/');
+      } else {
+        console.log(this.state.data.statuscode, this.state.data.reason);
+        if (this.state.error) console.log(this.state.error);
       }
     }
   }
