@@ -7,13 +7,17 @@ import {
 } from './Header.styles';
 
 export default class Header extends React.Component {
+  handleClick(direction) {
+    this.props.history.push(direction);
+  }
+
   render() {
     return (
       <Container>
         <Elements>
-          <Logo to={'/'}/>
-          <MenuTab redirect={'/login'}>MON COMPTE</MenuTab>
-          <MenuTab redirect={'/subscribe'}>S'INSCRIRE</MenuTab>
+          <Logo onClick={() => {this.handleClick('/')}}/>
+          <MenuTab onClick={() => {this.handleClick('/login')}}>MON COMPTE</MenuTab>
+          <MenuTab onClick={() => {this.handleClick('/subscribe')}}>S'INSCRIRE</MenuTab>
         </Elements>
       </Container>
     )

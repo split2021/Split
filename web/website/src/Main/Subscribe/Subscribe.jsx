@@ -12,6 +12,7 @@ import {
   SignUpLink,
 } from './Subscribe.styles.js';
 import Button from '../../components/Button/Button';
+import Header from '../Header/Header';
 
 export default class Subscribe extends React.Component {
   constructor(props) {
@@ -26,10 +27,66 @@ export default class Subscribe extends React.Component {
     };
   }
 
+  request = (call, data) => {
+    let header = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    };
+    if (call === 'users/') {
+      header = {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.state.token,
+      };
+    }
+    let requestOptions = {
+      method: 'POST',
+      headers: header,
+      body: JSON.stringify(data),
+      redirect: 'follow'
+    };
+    fetch('http://52.178.136.18:443/api/' + call, requestOptions)
+        .then(response => response.json())
+        .then(result => this.setState({data: result, isLoading: false}))
+        .catch(error => this.setState({error, isLoading: false}));
+  };
+
+  componentDidMount() {
+    this.setState({ isLoading: true });
+    let data = {
+      email: 'test@split.fr',
+      password: '93BaqTWsM0GH',
+    };
+    this.request('login', data);
+  }
+
+  componentDidUpdate(prevState, prevProps) {
+    if (prevProps.data !== this.state.data) {
+      this.setState({token: this.state.data.data.token});
+      if (this.state.data.statuscode === 201) {
+        this.props.history.push('/login');
+      }
+    }
+  }
+
+  subscribe = () => {
+    this.setState({ isLoading: true });
+    let data = {
+      email: this.state.email,
+      password: this.state.password,
+      username: this.state.prenom,
+      first_name: this.state.prenom,
+      last_name: this.state.nom,
+      phone: this.state.phone,
+    };
+    this.request('users/', data);
+  };
+
   render() {
     const { nom, prenom, email, phone, password, passwordBis } = this.state;
     return (
       <Container>
+        <Header {...this.props}/>
         <Login>
           <Title>Inscription</Title>
           <LoginForm onSubmit={this.handleSubmit}>
@@ -99,14 +156,25 @@ export default class Subscribe extends React.Component {
     )
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
     });
   };
 
-  handleSubmit = () => {
-    console.log("Submitting");
-    console.log(this.state);
+  handleSubmit = (event) => {
+    event.preventDefault();
+    let fieldEmpty = false;
+    for (let key in this.state) {
+      if (this.state[key] === '') {
+        fieldEmpty = true;
+      }
+    }
+    if (!fieldEmpty
+        && this.state.password === this.state.passwordBis
+        && !this.state.isLoading
+        && this.state.token) {
+      this.subscribe();
+    }
   };
 }
