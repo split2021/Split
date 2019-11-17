@@ -18,8 +18,8 @@ export const Login = styled.div`
 export const Title = styled.div`
   width: 100%;
   text-align: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   font-size: 42px;
   font-weight: 800;
 `;
@@ -34,7 +34,7 @@ export const InputContainer = styled.div`
   width: ${props => props.name === "nom" ? '213px' : '450px'};
   margin-right: 2.5%;
   margin-left: 2.5%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const InputName = styled.span`
