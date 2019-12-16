@@ -68,8 +68,8 @@ stages:
           displayName: 'Yarn install'
           workingDirectory: './web/website/'
         - script: yarn test
-          displayName:'Run jest test'
-          workingDirectory:'./web/website/'
+          displayName: 'Run jest test'
+          workingDirectory: './web/website/'
         
 
   # [PUBLISH TESTS]
