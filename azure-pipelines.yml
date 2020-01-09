@@ -2,40 +2,6 @@ stages:
   # [BUILDS]
   - stage: Builds
     jobs:
-      # Android
-      - job: MOBILE_Android
-        pool:
-          vmImage: 'vs2017-win2016'
-        variables:
-          buildConfiguration: 'Release'
-          outputDirectory: './mobile/build/$(buildConfiguration)'
-        steps:
-        - task: NuGetToolInstaller@0
-        - task: NuGetCommand@2
-          inputs:
-            restoreSolution: '**/*.sln'
-        - task: XamarinAndroid@1
-          inputs:
-            projectFile: './mobile/Split/Split.Android/*droid.csproj'
-            outputDirectory: '$(outputDirectory)'
-            configuration: '$(buildConfiguration)'
-      # iOS
-      - job: MOBILE_iOS
-        pool:
-          vmImage: 'macOS-10.13'
-        variables:
-          buildConfiguration: 'Release'
-        steps:
-        - task: NuGetToolInstaller@0
-        - task: NuGetCommand@2
-          inputs:
-            restoreSolution: '**/*.sln'
-        - task: XamariniOS@2
-          inputs:
-            solutionFile: './mobile/Split/Split.iOS/*iOS.csproj'
-            configuration: '$(buildConfiguration)'
-            buildForSimulator: true
-            packageApp: false
       # Web
       - job: WEB
         pool:
@@ -47,11 +13,14 @@ stages:
         - script: yarn build
           displayName: 'Yarn build'
           workingDirectory: './web/website/'
-      # API
+      # API 
       - job: API
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
+        - script: git submodule update --init --recursive
+          displayName: 'Add subrepo'
+          workingDirectory: './'
         - script: docker-compose build
           displayName: 'Docker build'
           workingDirectory: './api/'
@@ -70,19 +39,22 @@ stages:
         - script: yarn test
           displayName: 'Run jest test'
           workingDirectory: './web/website/'
-      # - job: API
-      #   pool:
-      #     vmImage: 'ubuntu-16.04'
-      #   steps:
-      #   - task: UsePythonVersion@0
-      #     inputs:
-      #       versionSpec: '3.6'
-      #   - script: |
-      #       pip install pytest
-      #       pip install pytest-cov
-      #       pytest ./api/api/tests.py --doctest-modules --junitxml=./testsOutput/api.xml --cov=com --cov-report=xml --cov-report=html
-      #     displayName: 'Test with pytest'
-      #     workingDirectory: './web/website/'        
+      # API
+      - job: API
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '3.6'
+        - script: git submodule update --init --recursive
+          displayName: 'Install API Submodule'
+          workingDirectory: './'
+        - script: |
+            docker-compose -f ./docker-compose.yml -f ./docker-compose.development.yml run api coverage run --source='.' manage.py test
+            docker-compose -f ./docker-compose.yml -f ./docker-compose.development.yml run api coverage xml -o ./testsOutput/api.xml
+          displayName: 'Run tests and export coverage'
+          workingDirectory: './'
 
   # [PUBLISH TESTS]
   - stage: Publish_Tests
@@ -96,10 +68,10 @@ stages:
             testRunner: JUnit
             testResultsFiles: './testsOutput/web.xml'
       # API
-      # - job: API
-      #   steps:
-      #   - task: PublishTestResults@2
-      #     condition: succeededOrFailed()
-      #     inputs:
-      #       testResultsFiles: './testsOutput/api.xml'
-      #       testRunTitle: 'Publish test results for Python $(python.version)'
+      - job: API
+        steps:
+        - task: PublishTestResults@2
+          condition: succeededOrFailed()
+          inputs:
+            testResultsFiles: './testsOutput/api.xml'
+            testRunTitle: 'Publish test results for Python $(python.version)'
