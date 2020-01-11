@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../login/login.dart';
+import 'package:split/login/login.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
