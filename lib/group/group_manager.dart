@@ -28,13 +28,19 @@ class _GroupManagerState extends State<GroupManager> {
     });
   }
 
+  void _delGroup(int removeIndex) {
+    setState(() {
+      _groups.removeAt(removeIndex);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           Expanded(
-            child: Groups(_groups),
+            child: Groups(_groups, _delGroup),
           )
         ],
       ),
