@@ -42,15 +42,15 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - mobile/assets/Logo_Split_v1.png
-    - mobile/assets/Logo_Split_v1_no_border.png
-    - mobile/assets/Logo_Split_v1_no_circle.png
-    - mobile/assets/food_4k_1.jpg
-    - mobile/assets/food_4k_2.jpg
-    - mobile/assets/food_4k_3.jpg
-    - mobile/assets/food_4k_4.jpg
-    - mobile/assets/food_4k_5.jpg
-    - mobile/assets/contact_blank.png
+    - assets/Logo_Split_v1.png
+    - assets/Logo_Split_v1_no_border.png
+    - assets/Logo_Split_v1_no_circle.png
+    - assets/food_4k_1.jpg
+    - assets/food_4k_2.jpg
+    - assets/food_4k_3.jpg
+    - assets/food_4k_4.jpg
+    - assets/food_4k_5.jpg
+    - assets/contact_blank.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -66,14 +66,14 @@ flutter:
   fonts:
     - family: Montserrat
       fonts:
-         - asset: mobile/fonts/Montserrat-Regular.ttf
+         - asset: fonts/Montserrat-Regular.ttf
     - family: LemonBrush
       fonts:
-         - asset: mobile/fonts/Lemon Brush - Personal Use.otf
+         - asset: fonts/Lemon Brush - Personal Use.otf
   #   - family: Trajan Pro
   #     fonts:
-  #       - asset: mobile/fonts/TrajanPro.ttf
-  #       - asset: mobile/fonts/TrajanPro_Bold.ttf
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,

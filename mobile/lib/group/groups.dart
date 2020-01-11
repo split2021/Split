@@ -5,9 +5,8 @@ import '../payment/payment.dart';
 
 class Groups extends StatelessWidget {
   final List<Group> groups;
-  final Function delGroup;
 
-  Groups(this.groups, this.delGroup);
+  Groups(this.groups);
 
   void onTapped(int indexTapped, BuildContext context) {
     showDialog(
@@ -30,14 +29,6 @@ class Groups extends StatelessWidget {
               child: Text("Annuler", style: TextStyle(color: Colors.white),),
               color: Colors.red,
               onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-                        RaisedButton(
-              child: Text("Supprimer", style: TextStyle(color: Colors.white),),
-              color: Colors.red,
-              onPressed: () {
-                delGroup(indexTapped);
                 Navigator.pop(context);
               },
             ),
