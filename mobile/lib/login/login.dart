@@ -75,7 +75,7 @@ class _LogInState extends State<LogIn> {
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            backgroundImage("assets/food_4k_1.jpg"),
+            backgroundImage("mobile/assets/food_4k_1.jpg"),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -83,7 +83,7 @@ class _LogInState extends State<LogIn> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      _logoImage('assets/Logo_Split_v1_no_circle.png'),
+                      _logoImage('mobile/assets/Logo_Split_v1_no_circle.png'),
                       buildTextFieldLogIn('Email', context, _usernameInput,
                           false, showHidePassword),
                       SizedBox(height: 20),
