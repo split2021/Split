@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'universal-cookie';
 import {
   Container,
   Login,
@@ -14,19 +15,29 @@ import {
 import Button from '../../components/Button/Button';
 import Header from '../Header/Header';
 
+
 export default class SignIn extends React.Component {
+
   constructor(props) {
     super(props);
+    this.cookies = new Cookies();
     this.state = {
       email: "",
       password: "",
     };
   }
 
+  componentDidMount() {
+    if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
+      this.props.history.push('/account');
+    }
+  }
+
   componentDidUpdate(prevState, prevProps) {
     if (prevProps.data !== this.state.data) {
       if (this.state.data.statuscode === 200) {
-        this.props.history.push('/');
+        this.cookies.set('auth', this.state.data.data.token, { path: '/', maxAge: 3540});
+        this.props.history.push('/account');
       } else {
         console.log(this.state.data.statuscode, this.state.data.reason);
         if (this.state.error) console.log(this.state.error);

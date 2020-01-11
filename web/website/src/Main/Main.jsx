@@ -4,9 +4,9 @@ import Home from './Home/Home.jsx';
 import Subscribe from './Subscribe/Subscribe.jsx';
 import Login from './Login/Login';
 import Footer from './Footer/Footer';
+import Account from './Account/Account';
 import { Router, Route } from 'react-router-dom';
 import History from '../components/History/History';
-// import SettingsTab from './Settings/Subscribe.jsx';
 
 export default class App extends React.Component {
   render() {
@@ -16,6 +16,7 @@ export default class App extends React.Component {
           <Route exact path="/" component={Home}/>
           <Route path="/subscribe" component={Subscribe}/>
           <Route path="/login" component={Login}/>
+          <Route path="/account" component={Account}/>
           <Footer/>
         </Router>
       </Container>
