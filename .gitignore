@@ -22,12 +22,12 @@
 
 # Flutter/Dart/Pub related
 **/doc/api/
-.dart_tool/
-.flutter-plugins
-.packages
-.pub-cache/
-.pub/
-/build/
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.packages
+mobile/.pub-cache/
+mobile/.pub/
+mobile/build/
 
 # Android related
 **/android/**/gradle-wrapper.jar
