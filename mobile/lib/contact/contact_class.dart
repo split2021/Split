@@ -4,6 +4,7 @@ class Contact {
   String email;
   String phoneNumber;
   String profilPicture;
+  double value;
 
   Contact() {
     this.firstName = 'Firstname';
@@ -11,5 +12,6 @@ class Contact {
     this.email = 'Email';
     this.phoneNumber = 'Phonenumber';
     this.profilPicture = 'assets/contact_blank.png';
+    this.value = 10.0;
   }
 }

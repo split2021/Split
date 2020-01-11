@@ -7,11 +7,11 @@ import '../settings/settings_page.dart';
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _Home();
+    return _HomeState();
   }
 }
 
-class _Home extends State<Home> with SingleTickerProviderStateMixin {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final PageController _pageController = PageController();
   int _currPageIndex = 0;
 
