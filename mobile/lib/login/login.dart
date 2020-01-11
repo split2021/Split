@@ -106,12 +106,6 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title:'logInPage',
-    home:Scaffold(
-      backgroundColor: Colors.white,
-      body: _body(),
-    ),
-    );
+    return  _body();
   }
 }
