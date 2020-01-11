@@ -13,7 +13,6 @@ export const Container = styled.div`
 
 export const Elements = styled.div`
   width: 100%;
-  max-width: 1120px;
   height: 100%;
   margin-left: auto;
   margin-right: auto;
