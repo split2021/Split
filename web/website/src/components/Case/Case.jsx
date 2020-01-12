@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Container, CaseBackground, CaseTitle } from './Case.styles';
 
-const Case = ({Title, Background}) => {
+const Case = ({onClick, Title, Background}) => {
+
   return (
-    <Container>
+    <Container onClick={onClick}>
       <CaseBackground style={{backgroundImage: `url(${Background})`}}/>
       <CaseTitle>
           {Title}
