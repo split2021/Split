@@ -5,7 +5,9 @@ export const Container = styled.div`
   display: inline-block;
   width: 300px;
   height: 150px;
-  margin: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 40px;
   border-radius: 6px;
   cursor: pointer;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

@@ -5,6 +5,10 @@ import Subscribe from './Subscribe/Subscribe.jsx';
 import Login from './Login/Login';
 import Footer from './Footer/Footer';
 import Account from './Account/Account';
+import Groupes from './Account/Groupes/Groupes';
+import PayementMethods from './Account/PaymentMethods/PayementMethods';
+import Payements from './Account/Payments/Payements';
+import Settings from './Account/Settings/Settings';
 import { Router, Route } from 'react-router-dom';
 import History from '../components/History/History';
 
@@ -17,6 +21,10 @@ export default class App extends React.Component {
           <Route path="/subscribe" component={Subscribe}/>
           <Route path="/login" component={Login}/>
           <Route path="/account" component={Account}/>
+          <Route path="/groupes" component={Groupes}/>
+          <Route path="/payementmethods" component={PayementMethods}/>
+          <Route path="/history" component={Payements}/>
+          <Route path="/settings" component={Settings}/>
           <Footer/>
         </Router>
       </Container>

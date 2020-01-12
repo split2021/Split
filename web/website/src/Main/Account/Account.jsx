@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../Header/Header';
 import Case from '../../components/Case/Case';
+import Cookies from 'universal-cookie';
 import {
   Tab,
   Container,
   Title,
 } from './Account.styles.js';
-import Cookies from "universal-cookie";
 
 export default class SettingsTab extends React.Component {
 
@@ -35,18 +35,22 @@ export default class SettingsTab extends React.Component {
           <Tab>
             <Title>Mon Compte</Title>
             <Case
+                onClick={() => this.handleRedirect('/groupes')}
                 Title={'Groupes'}
                 Background={process.env.PUBLIC_URL + 'groupes.jpg'}
             />
             <Case
+                onClick={() => this.handleRedirect('/history')}
                 Title={'Historique de paiements'}
                 Background={process.env.PUBLIC_URL + 'historique.jpg'}
             />
             <Case
+                onClick={() => this.handleRedirect('/payementmethods')}
                 Title={'Moyens de paiement'}
                 Background={process.env.PUBLIC_URL + 'paiements.png'}
             />
             <Case
+                onClick={() => this.handleRedirect('/settings')}
                 Title={'Paramètres de mon compte'}
                 Background={process.env.PUBLIC_URL + 'settings.jpg'}
             />

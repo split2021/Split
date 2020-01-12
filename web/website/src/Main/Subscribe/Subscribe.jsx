@@ -54,8 +54,8 @@ export default class Subscribe extends React.Component {
   componentDidMount() {
     this.setState({ isLoading: true });
     let data = {
-      email: 'test@split.fr',
-      password: '93BaqTWsM0GH',
+      email: 'split_2021@labeip.epitech.eu',
+      password: 'X#9q@XCy7qy&',
     };
     this.request('login', data);
   }
