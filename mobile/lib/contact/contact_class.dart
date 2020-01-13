@@ -7,19 +7,12 @@ class Contact {
   String profilPicture;
   double value;
 
-  // Contact(
-  //   this.username,
-  //   this.firstName,
-  //   this.lastName,
-  //   this.email,
-  //   this.phoneNumber,
-  // );
-  // factory Contact.fromJson(dynamic json) {
-  //   return Contact(
-  //       json['username'] as String,
-  //       json['first_name'] as String,
-  //       json['last_name'] as String,
-  //       json['email'] as String,
-  //       json['phone_number'] as String);
-  // }
+  Contact({this.username, this.firstName, this.lastName, this.email, this.phoneNumber});
+
+  Contact.fromJson(Map<String, dynamic> data)
+      : username = data['username'],
+        firstName = data['first_name'],
+        lastName = data['last_name'],
+        email = data['email'],
+        phoneNumber = data['phone'];
 }

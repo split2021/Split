@@ -80,9 +80,10 @@ class Requests {
       return false;
   }
 
-  static Future<void> getContactList() async {
+  static Future<List<Contact>> getContactList() async {
+    List<Contact> listContact = [];
     String adminToken = await getAdminToken();
-    if (adminToken == null) return false;
+    if (adminToken == null) return null;
     print("Admin token: " + adminToken);
     String url = 'http://52.178.136.18:443/api/users/';
     Map<String, String> headers = {
@@ -95,7 +96,8 @@ class Requests {
     print("Get contact list body reqquest " + body);
     var parsedJson = jsonDecode(body);
     for (var contact in parsedJson["data"]) {
-      print(contact);
+      listContact.add(Contact.fromJson(contact));
     }
+    return listContact;
   }
 }
