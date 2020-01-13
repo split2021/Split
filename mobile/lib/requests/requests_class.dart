@@ -139,7 +139,6 @@ class Requests {
         '",	"phone": "' +
         User.phoneNumber +
         '"}';
-    print("TEST");
     Response response = await patch(url, headers: headers, body: json);
     int statusCode = response.statusCode;
     String body = response.body;
