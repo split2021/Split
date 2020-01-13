@@ -9,11 +9,11 @@ class GroupManager extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _GroupManager();
+    return _GroupManagerState();
   }
 }
 
-class _GroupManager extends State<GroupManager> {
+class _GroupManagerState extends State<GroupManager> {
   final List<Group> _groups = [];
 
   @override
@@ -28,13 +28,19 @@ class _GroupManager extends State<GroupManager> {
     });
   }
 
+  void _delGroup(int removeIndex) {
+    setState(() {
+      _groups.removeAt(removeIndex);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           Expanded(
-            child: Groups(_groups),
+            child: Groups(_groups, _delGroup),
           )
         ],
       ),

@@ -1,67 +1,43 @@
 import 'package:flutter/material.dart';
 
 import 'group_class.dart';
+import '../payment/payment.dart';
 
 class Groups extends StatelessWidget {
   final List<Group> groups;
+  final Function delGroup;
 
-  Groups(this.groups);
+  Groups(this.groups, this.delGroup);
 
   void onTapped(int indexTapped, BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: <Color>[
-                  Color.fromRGBO(85, 112, 221, 1.0),
-                  Color.fromRGBO(71, 50, 128, 1.0),
-                ],
-              ),
-            ),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: groups[indexTapped].contactList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Container(
-                    height: 40,
-                    child: Row(
-                      children: <Widget>[
-                        Image.asset(groups[indexTapped]
-                            .contactList[index]
-                            .profilPicture),
-                        SizedBox(height: 0, width: 5),
-                        Text((groups[indexTapped]
-                                .contactList[index]
-                                .firstName) +
-                            " " +
-                            (groups[indexTapped].contactList[index].lastName)),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          contentPadding: EdgeInsets.all(0.0),
           actions: <Widget>[
             RaisedButton(
-              child: Text('Paiement'),
-              textColor: Colors.white,
-              color: Colors.lightGreen,
-              onPressed: () {},
+              child: Text("Paiement", style: TextStyle(color: Colors.white),),
+              color: Colors.green,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PaymentPage(groups[indexTapped])));
+              },
             ),
             RaisedButton(
-              child: Text('Annuler'),
-              textColor: Colors.white,
+              child: Text("Annuler", style: TextStyle(color: Colors.white),),
               color: Colors.red,
               onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+                        RaisedButton(
+              child: Text("Supprimer", style: TextStyle(color: Colors.white),),
+              color: Colors.red,
+              onPressed: () {
+                delGroup(indexTapped);
                 Navigator.pop(context);
               },
             ),
