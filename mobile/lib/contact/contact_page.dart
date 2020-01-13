@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../requests/requests_class.dart';
+
 class ContactPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -9,13 +11,14 @@ class ContactPage extends StatefulWidget {
 
 class _ContactPageState extends State<ContactPage> {
   TextEditingController editingController = TextEditingController();
-  final duplicateItems = List<String>.generate(100, (i) => "Item $i");
+  final userList = List<String>.generate(100, (i) => "Item $i");
   var items = List<String>();
   String typedText;
 
   @override
   void initState() {
-    items.addAll(duplicateItems);
+    Requests.getContactList();
+    items.addAll(userList);
     typedText = '';
     super.initState();
   }
@@ -45,7 +48,8 @@ class _ContactPageState extends State<ContactPage> {
               shrinkWrap: true,
               itemCount: items.length,
               itemBuilder: (context, index) {
-                return (items[index].toLowerCase().contains(typedText) == true ||
+                return (items[index].toLowerCase().contains(typedText) ==
+                            true ||
                         typedText == ''
                     ? Text('${items[index]}')
                     : Container());
