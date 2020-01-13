@@ -98,4 +98,54 @@ class Requests {
       print(contact);
     }
   }
+
+  static Future<String> getUserFullname() async {
+    String adminToken = await getAdminToken();
+    if (adminToken == null) return "null";
+    print("Admin token: " + adminToken);
+    String url = 'http://52.178.136.18:443/api/users/32';
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": adminToken
+    };
+    Response response = await get(url, headers: headers);
+    String body = response.body;
+    var parsedBody = jsonDecode(body);
+    return parsedBody["data"]["first_name"] +
+        " " +
+        parsedBody["data"]["last_name"];
+  }
+
+  static Future<bool> editUserProfile() async {
+    String adminToken = await getAdminToken();
+    if (adminToken == null) return false;
+    print("Admin token: " + adminToken);
+    String url = 'http://52.178.136.18:443/api/users/32';
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": adminToken
+    };
+    print(User.password);
+    String json = '{"email": "' +
+        User.email +
+        '",	"username": "' +
+        User.username +
+        '",	"first_name": "' +
+        User.firstName +
+        '",	"last_name": "' +
+        User.lastName +
+        '",	"phone": "' +
+        User.phoneNumber +
+        '"}';
+    print("TEST");
+    Response response = await patch(url, headers: headers, body: json);
+    int statusCode = response.statusCode;
+    String body = response.body;
+    print("Edit User Profile request " + body);
+
+    if (statusCode == 200)
+      return true;
+    else
+      return false;
+  }
 }

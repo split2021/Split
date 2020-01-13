@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../requests/requests_class.dart';
+import '../user/user_class.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -28,10 +30,22 @@ class _EditProfile extends State<EditProfile> {
     return Container(
         width: MediaQuery.of(context).size.width - 20,
         child: TextField(
+            onChanged: (value) {
+              if (hintText == "Username")
+                User.username = value;
+              else if (hintText == "Mail")
+                User.email = value;
+              else if (hintText == "First name")
+                User.firstName = value;
+              else if (hintText == "Name")
+                User.lastName = value;
+              else if (hintText == "Phone number") User.phoneNumber = value;
+            },
             decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey, fontSize: 16, height: 0.50),
-        )));
+              hintText: hintText,
+              hintStyle:
+                  TextStyle(color: Colors.grey, fontSize: 16, height: 0.50),
+            )));
   }
 
   @override
@@ -51,13 +65,15 @@ class _EditProfile extends State<EditProfile> {
                             color: Color.fromRGBO(71, 50, 128, 1.0),
                             fontWeight: FontWeight.bold,
                             fontSize: 24)))),
-            _createTextInput("First Name"),
+            _createTextInput("First name"),
             _createTextInput("Name"),
             _createTextInput("Username"),
             _createTextInput("Mail"),
             _createTextInput("Phone number"),
             new GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Requests.editUserProfile();
+                },
                 child: new Container(
                     height: 40,
                     margin: const EdgeInsets.all(30.0),
