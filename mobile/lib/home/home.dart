@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../contact/contact_page.dart';
 import '../group/group_manager.dart';
-import '../settings/settings_page.dart';
+import '../profile/profile_page.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
             IconButton(
               color: _currPageIndex == 2 ? Colors.white : Colors.grey,
-              icon: Icon(Icons.settings),
+              icon: Icon(Icons.account_circle),
               onPressed: () {
                 _pageController.jumpToPage(2);
               },
@@ -74,7 +74,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       children: <Widget>[
         GroupManager(),
         ContactPage(),
-        SettingsPage(),
+        ProfilePage(),
       ],
       onPageChanged: (i) {
         _setIconColor(i);
