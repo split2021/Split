@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../requests/requests_class.dart';
+import '../contact/contact_class.dart';
 
 class ContactPage extends StatefulWidget {
   @override
@@ -11,16 +12,19 @@ class ContactPage extends StatefulWidget {
 
 class _ContactPageState extends State<ContactPage> {
   TextEditingController editingController = TextEditingController();
-  final userList = List<String>.generate(100, (i) => "Item $i");
-  var items = List<String>();
+  List<Contact> listContact = [];
   String typedText;
 
   @override
   void initState() {
-    Requests.getContactList();
-    items.addAll(userList);
     typedText = '';
     super.initState();
+  }
+
+  void _updateList() {
+    Requests.getContactList().then((value) {
+      listContact = value;
+    });
   }
 
   @override
@@ -32,7 +36,10 @@ class _ContactPageState extends State<ContactPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               onChanged: (value) {
-                typedText = value;
+                _updateList();
+                setState(() {
+                  typedText = value;
+                });
               },
               controller: editingController,
               decoration: InputDecoration(
@@ -46,12 +53,15 @@ class _ContactPageState extends State<ContactPage> {
           Expanded(
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: items.length,
+              itemCount: listContact.length,
               itemBuilder: (context, index) {
-                return (items[index].toLowerCase().contains(typedText) ==
+                return (listContact[index]
+                                .username
+                                .toLowerCase()
+                                .contains(typedText) ==
                             true ||
                         typedText == ''
-                    ? Text('${items[index]}')
+                    ? Text('${listContact[index].username}')
                     : Container());
               },
             ),
