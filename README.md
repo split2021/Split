@@ -12,9 +12,8 @@ Split est une application mobile qui permet à un groupe de personnes de diviser
 Chaque personne est débitée d'une somme égale, ou modifiable selon les besoins, instantanément.
 Une seule personne se charge de régler l'addition, aucune cagnotte, ni remboursement.
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
 ## Equipe
+
 Tiphaine LAURENT
 Thibault LECOINTE
 Alex SAUVADE
@@ -23,12 +22,11 @@ Mathieu LACHENAIT
 Valentin RUBIO
 Hugo MARTIN
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
 ## Responsable EIP
+
 Jean-Luc Phan
 
--- --
+## Bootsrap
 
 This project is managed by docker using docker-compose
 
