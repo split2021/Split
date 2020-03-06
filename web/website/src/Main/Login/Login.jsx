@@ -1,4 +1,5 @@
 import React from 'react';
+import API from '../../components/Api/Api';
 import Cookies from 'universal-cookie';
 import {
   Container,
@@ -49,16 +50,10 @@ export default class SignIn extends React.Component {
     let header = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     };
-    let requestOptions = {
-      method: 'POST',
-      headers: header,
-      body: JSON.stringify(data),
-      redirect: 'follow'
-    };
-    fetch('http://52.178.136.18:443/api/' + call, requestOptions)
-        .then(response => response.json())
-        .then(result => this.setState({data: result, isLoading: false}))
+    API.post(call, JSON.stringify(data), {headers: header})
+        .then(response => this.setState({data: response.data, isLoading: false}))
         .catch(error => this.setState({error, isLoading: false}));
   };
 

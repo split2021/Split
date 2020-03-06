@@ -7,15 +7,17 @@
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@types/jest": "^24.0.19",
+    "axios": "^0.19.2",
     "font-awesome": "^4.7.0",
     "history": "^4.10.1",
+    "prop-types": "latest",
     "react": "^16.8.6",
+    "react-axios": "^2.0.3",
     "react-cookie": "^4.0.3",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "styled-components": "^4.3.1",
-    "prop-types": "latest",
     "universal-cookie": "latest"
   },
   "scripts": {
