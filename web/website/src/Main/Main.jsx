@@ -9,6 +9,7 @@ import Groupes from './Account/Groupes/Groupes';
 import PayementMethods from './Account/PaymentMethods/PayementMethods';
 import Payements from './Account/Payments/Payements';
 import Settings from './Account/Settings/Settings';
+import ChangePassword from './Account/Password/Password';
 import { Router, Route } from 'react-router-dom';
 import History from '../components/History/History';
 
@@ -25,6 +26,7 @@ export default class App extends React.Component {
           <Route path="/payementmethods" component={PayementMethods}/>
           <Route path="/history" component={Payements}/>
           <Route path="/settings" component={Settings}/>
+          <Route path="/password" component={ChangePassword}/>
           <Footer/>
         </Router>
       </Container>
