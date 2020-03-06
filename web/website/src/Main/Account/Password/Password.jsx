@@ -1,4 +1,5 @@
 import React from 'react';
+import API from '../../../components/Api/Api';
 import Header from '../../Header/Header';
 
 import Cookies from 'universal-cookie';
@@ -30,6 +31,7 @@ export default class ChangePassword extends React.Component {
             console.log('cookie présent');
             this.state = {
                 connected: true,
+                token: this.cookies.cookies.auth,
             };
         } else {
             console.log('cookie non présent');
@@ -42,25 +44,11 @@ export default class ChangePassword extends React.Component {
         let header = {
             Accept: 'application/json',
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.state.token,
         };
-        if (call === 'users/') {
-            header = {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.state.token,
-            };
-        }
-        let requestOptions = {
-            method: 'PATCH',
-            headers: header,
-            body: JSON.stringify(data),
-            redirect: 'follow'
-        };
-
-        fetch('http://52.178.136.18:443/api/' + call, requestOptions)
-            .then(response => response.json())
-            .then(result => this.setState({ data: result, isLoading: false }))
-            .catch(error => this.setState({ error, isLoading: false }));
+        API.post(call, JSON.stringify(data), {headers: header})
+            .then(response => this.setState({data: response.data, isLoading: false}))
+            .catch(error => this.setState({error, isLoading: false}));
     };
 
 
