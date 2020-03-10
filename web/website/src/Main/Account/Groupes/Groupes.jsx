@@ -4,7 +4,8 @@ import {
     Container,
     Tab,
     Title,
-} from './Groupes.styles.js';
+    Goback,
+} from '../Global.styles.js';
 import Cookies from 'universal-cookie';
 
 export default class Groupes extends React.Component {
@@ -33,6 +34,7 @@ export default class Groupes extends React.Component {
                 <Header {...this.props}/>
                 <Tab>
                     <Title>Mes Groupes</Title>
+                    <Goback onClick={() => {this.handleRedirect('/account')}}>&larr;  Retourner vers mon Compte</Goback>
                 </Tab>
 
             </Container>

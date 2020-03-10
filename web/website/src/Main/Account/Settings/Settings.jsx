@@ -4,7 +4,8 @@ import {
     Container,
     Tab,
     Title,
-} from './Settings.styles.js';
+    Goback,
+} from '../Global.styles.js';
 import Cookies from 'universal-cookie';
 
 export default class Settings extends React.Component {
@@ -33,6 +34,7 @@ export default class Settings extends React.Component {
                 <Header {...this.props}/>
                 <Tab>
                     <Title>Paramètres de mon compte</Title>
+                    <Goback onClick={() => {this.handleRedirect('/account')}}>&larr;  Retourner vers mon Compte</Goback>
                 </Tab>
 
             </Container>
