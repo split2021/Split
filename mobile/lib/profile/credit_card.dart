@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import './paypal.dart';
-import './credit_card.dart';
+import '../requests/requests_class.dart';
+import '../user/user_class.dart';
 
-class PaymentMethods extends StatefulWidget {
+class CreditCard extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _PaymentMethods();
+    return _CreditCard();
   }
 }
 
-class _PaymentMethods extends State<PaymentMethods> {
+class _CreditCard extends State<CreditCard> {
   Widget _appBar() {
     return AppBar(
       title: Container(),
@@ -26,9 +26,32 @@ class _PaymentMethods extends State<PaymentMethods> {
     );
   }
 
+  Widget _createTextInput(String hintText) {
+    return Container(
+        width: MediaQuery.of(context).size.width - 20,
+        child: TextField(
+            onChanged: (value) {
+              if (hintText == "Username")
+                User.username = value;
+              else if (hintText == "Mail")
+                User.email = value;
+              else if (hintText == "First name")
+                User.firstName = value;
+              else if (hintText == "Name")
+                User.lastName = value;
+              else if (hintText == "Phone number") User.phoneNumber = value;
+            },
+            decoration: InputDecoration(
+              hintText: hintText,
+              hintStyle:
+                  TextStyle(color: Colors.grey, fontSize: 16, height: 0.50),
+            )));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
         appBar: _appBar(),
         body: Container(
             child: Column(children: <Widget>[
@@ -38,20 +61,24 @@ class _PaymentMethods extends State<PaymentMethods> {
                 alignment: FractionalOffset.topCenter,
                 child: Padding(
                     padding: EdgeInsets.only(top: 10.0, bottom: 30.0),
-                    child: Text("Registered methods",
+                    child: Text("Edit your Profile",
                         style: TextStyle(
                             color: Color.fromRGBO(71, 50, 128, 1.0),
                             fontWeight: FontWeight.bold,
                             fontSize: 24)))),
+            _createTextInput("First name"),
+            _createTextInput("Name"),
+            _createTextInput("Username"),
+            _createTextInput("Mail"),
+            _createTextInput("Phone number"),
             new GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Paypal()));
+                  // Requests.addUserCreditCard();
                 },
                 child: new Container(
                     height: 40,
                     margin: const EdgeInsets.all(30.0),
-                    width: MediaQuery.of(context).size.width - 60,
+                    width: MediaQuery.of(context).size.width / 2,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40.0),
                       gradient: LinearGradient(
@@ -65,32 +92,7 @@ class _PaymentMethods extends State<PaymentMethods> {
                     ),
                     child: Center(
                         child: Text(
-                      "Add PayPal account",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )))),
-            new GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => CreditCard()));
-                },
-                child: new Container(
-                    height: 40,
-                    margin: const EdgeInsets.all(30.0),
-                    width: MediaQuery.of(context).size.width - 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40.0),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: <Color>[
-                          Color.fromRGBO(85, 112, 221, 1.0),
-                          Color.fromRGBO(71, 50, 128, 1.0),
-                        ],
-                      ),
-                    ),
-                    child: Center(
-                        child: Text(
-                      "Add credit card",
+                      "Edit",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ))))
           ]))

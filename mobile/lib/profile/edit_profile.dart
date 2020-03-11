@@ -51,6 +51,7 @@ class _EditProfile extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
         appBar: _appBar(),
         body: Container(
             child: Column(children: <Widget>[
