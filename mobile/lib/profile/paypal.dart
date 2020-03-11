@@ -25,7 +25,6 @@ class _Paypal extends State<Paypal> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(

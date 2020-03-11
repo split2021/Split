@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../requests/requests_class.dart';
-import '../user/user_class.dart';
+import 'package:flutter_credit_card/credit_card_form.dart';
+import 'package:flutter_credit_card/credit_card_model.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class CreditCard extends StatefulWidget {
   @override
@@ -10,6 +11,12 @@ class CreditCard extends StatefulWidget {
 }
 
 class _CreditCard extends State<CreditCard> {
+  String cardNumber = '';
+  String expiryDate = '';
+  String cardHolderName = '';
+  String cvvCode = '';
+  bool isCvvFocused = false;
+
   Widget _appBar() {
     return AppBar(
       title: Container(),
@@ -26,54 +33,41 @@ class _CreditCard extends State<CreditCard> {
     );
   }
 
-  Widget _createTextInput(String hintText) {
-    return Container(
-        width: MediaQuery.of(context).size.width - 20,
-        child: TextField(
-            onChanged: (value) {
-              if (hintText == "Username")
-                User.username = value;
-              else if (hintText == "Mail")
-                User.email = value;
-              else if (hintText == "First name")
-                User.firstName = value;
-              else if (hintText == "Name")
-                User.lastName = value;
-              else if (hintText == "Phone number") User.phoneNumber = value;
-            },
-            decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle:
-                  TextStyle(color: Colors.grey, fontSize: 16, height: 0.50),
-            )));
+  void onChange(CreditCardModel creditCardModel) {
+    setState(() {
+      cardNumber = creditCardModel.cardNumber;
+      expiryDate = creditCardModel.expiryDate;
+      cardHolderName = creditCardModel.cardHolderName;
+      cvvCode = creditCardModel.cvvCode;
+      isCvvFocused = creditCardModel.isCvvFocused;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
-        appBar: _appBar(),
-        body: Container(
-            child: Column(children: <Widget>[
-          Expanded(
-              child: Column(children: <Widget>[
-            Align(
-                alignment: FractionalOffset.topCenter,
-                child: Padding(
-                    padding: EdgeInsets.only(top: 10.0, bottom: 30.0),
-                    child: Text("Edit your Profile",
-                        style: TextStyle(
-                            color: Color.fromRGBO(71, 50, 128, 1.0),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24)))),
-            _createTextInput("First name"),
-            _createTextInput("Name"),
-            _createTextInput("Username"),
-            _createTextInput("Mail"),
-            _createTextInput("Phone number"),
+      appBar: _appBar(),
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            CreditCardWidget(
+              cardNumber: cardNumber,
+              expiryDate: expiryDate,
+              cardHolderName: cardHolderName,
+              cvvCode: cvvCode,
+              showBackView: isCvvFocused,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: CreditCardForm(
+                  onCreditCardModelChange: onChange,
+                ),
+              ),
+            ),
             new GestureDetector(
                 onTap: () {
                   // Requests.addUserCreditCard();
+                Navigator.pop(context);
                 },
                 child: new Container(
                     height: 40,
@@ -92,10 +86,12 @@ class _CreditCard extends State<CreditCard> {
                     ),
                     child: Center(
                         child: Text(
-                      "Edit",
+                      "Add",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ))))
-          ]))
-        ])));
+          ],
+        ),
+      ),
+    );
   }
 }
