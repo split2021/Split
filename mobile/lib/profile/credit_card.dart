@@ -43,10 +43,39 @@ class _CreditCard extends State<CreditCard> {
     });
   }
 
+  Widget _addCreditCard() {
+    return GestureDetector(
+        onTap: () {
+          // Requests.addUserCreditCard();
+          Navigator.pop(context);
+        },
+        child: new Container(
+            height: 40,
+            margin: const EdgeInsets.all(30.0),
+            width: MediaQuery.of(context).size.width / 2,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40.0),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+                  Color.fromRGBO(85, 112, 221, 1.0),
+                  Color.fromRGBO(71, 50, 128, 1.0),
+                ],
+              ),
+            ),
+            child: Center(
+                child: Text(
+              "Add",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ))));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -64,31 +93,7 @@ class _CreditCard extends State<CreditCard> {
                 ),
               ),
             ),
-            new GestureDetector(
-                onTap: () {
-                  // Requests.addUserCreditCard();
-                Navigator.pop(context);
-                },
-                child: new Container(
-                    height: 40,
-                    margin: const EdgeInsets.all(30.0),
-                    width: MediaQuery.of(context).size.width / 2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40.0),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: <Color>[
-                          Color.fromRGBO(85, 112, 221, 1.0),
-                          Color.fromRGBO(71, 50, 128, 1.0),
-                        ],
-                      ),
-                    ),
-                    child: Center(
-                        child: Text(
-                      "Add",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ))))
+            _addCreditCard()
           ],
         ),
       ),
