@@ -39,34 +39,78 @@ export default class ChangePassword extends React.Component {
         }
     }
 
+   request = (call, data) => {
+        let header = {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        };
+       if (call === 'users/35') {
+           header = {
+               Accept: 'application/json',
+               'Content-Type': 'application/json',
+               'Authorization': 'Bearer ' + this.state.token,
+               'Access-Control-Allow-Origin': '*',
+           };
+           API.patch(call, JSON.stringify(data), { headers: header })
+               .then(response => this.setState({ data: response.data, isLoading: false }))
+               .catch(error => this.setState({ error, isLoading: false }));
+       } else if (call === 'login') {
+           API.post(call, JSON.stringify(data), { headers: header })
+               .then(response => this.setState({ data: response.data, isLoading: false }))
+               .catch(error => this.setState({ error, isLoading: false }));
+       }
+        
+    };
 
-    request = (call, data) => {
+    /*request = (call, data) => {
         let header = {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + this.state.token,
         };
-        API.post(call, JSON.stringify(data), {headers: header})
-            .then(response => this.setState({data: response.data, isLoading: false}))
-            .catch(error => this.setState({error, isLoading: false}));
-    };
+        API.patch(call, JSON.stringify(data), { headers: header })
+            .then(response => this.setState({ data: response.data, isLoading: false }))
+            .catch(error => this.setState({ error, isLoading: false }));
+    };*/
 
+    componentDidMount() {
+        this.setState({ isLoading: true });
+        let data = {
+            email: 'split_2021@labeip.epitech.eu',
+            password: 'X#9q@XCy7qy&',
+        };
+        this.request('login', data);
+    }
 
     componentDidUpdate(prevState, prevProps) {
         if (prevProps.data !== this.state.data) {
-            console.log(this.state.data.statuscode, this.state.data.reason);
-            //this.props.history.push('/account');
+            this.setState({ token: this.state.data.data.token });
+             if (this.state.data.statuscode !== 200) {
+                console.log(this.state.data.statuscode, this.state.data.reason);
                 if (this.state.error) console.log(this.state.error);
+            }
         }
     }
 
-    subscribe = () => {
+
+
+
+    /*componentDidUpdate(prevState, prevProps) {
+        if (prevProps.data !== this.state.data) {
+            this.setState({ token: this.state.data.data.token });
+            console.log(this.state.data.statuscode, this.state.data.reason);
+           //this.props.history.push('/account');
+            if (this.state.error) console.log(this.state.error);
+        }
+    }*/
+
+    /*subscribe = () => {
         this.setState({ isLoading: true });
         let data = {
             password: this.state.password,
         };
-        this.request('users/', data);
-    };
+        this.request('users/35', data);
+    };*/
 
     handleRedirect(direction) {
         this.props.history.push(direction);
@@ -130,7 +174,8 @@ export default class ChangePassword extends React.Component {
                 password: this.state.password
             };
             console.log('hello');
-            this.request('users/', data);
+            this.request('users/35', data);
+            //this.props.history.push('/account');
         };
     };
 }
