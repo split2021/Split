@@ -1,0 +1,77 @@
+stages:
+  # [BUILDS]
+  - stage: Builds
+    jobs:
+      # Web
+      - job: WEB
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+        - script: yarn install
+          displayName: 'Yarn install'
+          workingDirectory: './web/website/'
+        - script: yarn build
+          displayName: 'Yarn build'
+          workingDirectory: './web/website/'
+      # API 
+      - job: API
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+        - script: git submodule update --init --recursive
+          displayName: 'Add subrepo'
+          workingDirectory: './'
+        - script: docker-compose build
+          displayName: 'Docker build'
+          workingDirectory: './api/'
+
+  # [TESTS]
+  - stage: Tests
+    jobs:
+      # Web
+      - job: WEB
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+        - script: yarn install
+          displayName: 'Yarn install'
+          workingDirectory: './web/website/'
+        - script: yarn test
+          displayName: 'Run jest test'
+          workingDirectory: './web/website/'
+      # API
+      - job: API
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '3.6'
+        - script: git submodule update --init --recursive
+          displayName: 'Install API Submodule'
+          workingDirectory: './'
+        - script: |
+            docker-compose -f ./docker-compose.yml -f ./docker-compose.development.yml run api coverage run --source='.' manage.py test
+            docker-compose -f ./docker-compose.yml -f ./docker-compose.development.yml run api coverage xml -o ./testsOutput/api.xml
+          displayName: 'Run tests and export coverage'
+          workingDirectory: './'
+
+  # [PUBLISH TESTS]
+  - stage: Publish_Tests
+    jobs:
+      # Web
+      - job: WEB
+        steps:
+        - task: PublishTestResults@2
+          condition: succeededOrFailed()
+          inputs:
+            testRunner: JUnit
+            testResultsFiles: './testsOutput/web.xml'
+      # API
+      - job: API
+        steps:
+        - task: PublishTestResults@2
+          condition: succeededOrFailed()
+          inputs:
+            testResultsFiles: './testsOutput/api.xml'
+            testRunTitle: 'Publish test results for Python $(python.version)'

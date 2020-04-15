@@ -43,7 +43,6 @@ describe('Test Block exist', () => {
     it('exist Button in Home', () => {
         const wrapperMaster = shallow(<Home />);
         const buttonWrapper = wrapperMaster.find(Button);
-        console.log(buttonWrapper);
         expect(buttonWrapper).toHaveLength(1);
         buttonWrapper.find('Button').simulate('onClick');
     });

@@ -1,6 +1,3 @@
 [submodule "api2"]
 	path = api2
 	url = https://github.com/split2021/API
-[submodule "api"]
-	path = api
-	url = https://github.com/split2021/API
