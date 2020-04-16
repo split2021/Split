@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
       height: screenSize.height / 2.6,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/profile_bg.png'),
+          image: AssetImage('assets/profile_bg.jpg'),
           fit: BoxFit.cover,
         ),
       ),
@@ -60,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
           borderRadius: BorderRadius.circular(80.0),
           border: Border.all(
             color: Colors.white,
-            width: 10.0,
+            width: 5.0,
           ),
         ),
       ),
@@ -127,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
 
     TextStyle _statCountTextStyle = TextStyle(
-      color: Colors.black54,
+      color: Colors.black,
       fontSize: 24.0,
       fontWeight: FontWeight.bold,
     );
@@ -151,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Container(
       width: screenSize.width / 1.6,
       height: 2.0,
-      color: Colors.black54,
+      color: Colors.black,
       margin: EdgeInsets.only(top: 4.0),
     );
   }
@@ -171,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 40.0,
                 decoration: BoxDecoration(
                   border: Border.all(),
-                  color: Color(0xFF404A5C),
+                  color: Color.fromRGBO(71, 50, 128, 1.0),
                 ),
                 child: Center(
                   child: Text(
@@ -194,14 +194,17 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Container(
                 height: 40.0,
                 decoration: BoxDecoration(
-                  border: Border.all(),
+                  border: Border.all(width: 2, color: Color.fromRGBO(71, 50, 128, 1.0)),
                 ),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Text(
                       labelTwo,
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromRGBO(71, 50, 128, 1.0)
+                        ),
                     ),
                   ),
                 ),
@@ -215,35 +218,26 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget buildLogOutButton(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        children: <Widget>[
+        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: Row(children: <Widget>[
           Expanded(
-            child: InkWell(
-              onTap: () {
-                logOut(context);
-              },
-              child: Container(
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  color: Color(0xFF404A5C),
-                ),
-                child: Center(
-                  child: Text(
-                    "Disconnect",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+              child: InkWell(
+                  onTap: () {
+                    logOut(context);
+                  },
+                  child: Container(
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        color: Color.fromRGBO(71, 50, 128, 1.0),
+                      ),
+                      child: Center(
+                          child: Text("Déconnexion",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ))))))
+        ]));
   }
 
   @override
@@ -270,15 +264,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     buildSeparator(screenSize),
                     SizedBox(height: 8.0),
                     buildButtons(
-                        "Add friend",
+                        "Ajouter un ami",
                         MaterialPageRoute(builder: (context) => EditProfile()),
-                        "Invite in group",
+                        "Rejoindre un groupe",
                         MaterialPageRoute(
                             builder: (context) => PaymentMethods())),
                     buildButtons(
-                        "Edit personal infos",
+                        "Editer le profil",
                         MaterialPageRoute(builder: (context) => EditProfile()),
-                        "Edit title",
+                        "Editer le titre",
                         MaterialPageRoute(
                             builder: (context) => PaymentMethods())),
                     buildLogOutButton(context),

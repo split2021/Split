@@ -18,7 +18,6 @@ class Requests {
     var adminToken = parsedJson["data"]["token"];
     // Debug
     print("Get admin token request body " + body);
-
     if (statusCode == 200)
       return adminToken;
     else
@@ -35,7 +34,6 @@ class Requests {
     String body = response.body;
     // Debug
     print("Log in request body " + body);
-
     if (statusCode == 200) {
       var parsedJson = jsonDecode(body);
       User.username = username;
@@ -49,7 +47,6 @@ class Requests {
   static Future<bool> createUser() async {
     String adminToken = await getAdminToken();
     if (adminToken == null) return false;
-    print("Admin token: " + adminToken);
     String url = 'http://52.178.136.18:443/api/users/';
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -73,7 +70,6 @@ class Requests {
     String body = response.body;
     // Debug
     print("Create user body request " + body);
-
     if (statusCode == 200)
       return true;
     else
@@ -84,7 +80,6 @@ class Requests {
     List<Contact> listContact = [];
     String adminToken = await getAdminToken();
     if (adminToken == null) return null;
-    print("Admin token: " + adminToken);
     String url = 'http://52.178.136.18:443/api/users/';
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -104,7 +99,6 @@ class Requests {
   static Future<String> getUserFullname() async {
     String adminToken = await getAdminToken();
     if (adminToken == null) return "null";
-    print("Admin token: " + adminToken);
     String url = 'http://52.178.136.18:443/api/users/32';
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -118,16 +112,34 @@ class Requests {
         parsedBody["data"]["last_name"];
   }
 
+    static Future<bool> addFriend() async {
+    String adminToken = await getAdminToken();
+    if (adminToken == null) return false;
+    String url = 'http://52.178.136.18:443/api/friendships/';
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": adminToken
+    };
+    String json = '{"user1_id": ' + User.id + ', "user2_id": ' + User.id + '}';
+    Response response = await post(url, headers: headers, body: json);
+    int statusCode = response.statusCode;
+    String body = response.body;
+    // Debug
+    print("Add friend request " + body);
+    if (statusCode == 200)
+      return true;
+    else
+      return false;
+  }
+
   static Future<bool> editUserProfile() async {
     String adminToken = await getAdminToken();
     if (adminToken == null) return false;
-    print("Admin token: " + adminToken);
     String url = 'http://52.178.136.18:443/api/users/32';
     Map<String, String> headers = {
       "Content-Type": "application/json",
       "Authorization": adminToken
     };
-    print(User.password);
     String json = '{"email": "' +
         User.email +
         '",	"username": "' +
@@ -139,12 +151,10 @@ class Requests {
         '",	"phone": "' +
         User.phoneNumber +
         '"}';
-    print("TEST");
     Response response = await patch(url, headers: headers, body: json);
     int statusCode = response.statusCode;
     String body = response.body;
     print("Edit User Profile request " + body);
-
     if (statusCode == 200)
       return true;
     else

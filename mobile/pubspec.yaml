@@ -61,7 +61,7 @@ flutter:
     - assets/food_4k_4.jpg
     - assets/food_4k_5.jpg
     - assets/contact_blank.png
-    - assets/profile_bg.png
+    - assets/profile_bg.jpg
     - assets/default_profile.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
