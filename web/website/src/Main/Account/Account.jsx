@@ -12,9 +12,9 @@ export default class SettingsTab extends React.Component {
 
   constructor(props) {
     super(props);
-    this.cookies = new Cookies();
+      this.cookies = new Cookies();
     if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
-      console.log('cookie présent');
+        console.log('cookie présent');
       this.state = {
         connected: true,
       };
@@ -25,15 +25,15 @@ export default class SettingsTab extends React.Component {
   }
 
   handleRedirect(direction) {
-    this.props.history.push(direction);
+      this.props.history.push(direction);
   }
 
-  render() {
+    render() {
     return (
       <Container>
         <Header {...this.props}/>
-          <Tab>
-            <Title>Mon Compte</Title>
+            <Tab>
+                <Title>Mon Compte </Title> 
             <Case
                 onClick={() => this.handleRedirect('/groupes')}
                 Title={'Groupes'}
