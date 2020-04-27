@@ -33,7 +33,7 @@ export default class SettingsTab extends React.Component {
       <Container>
         <Header {...this.props}/>
             <Tab>
-                <Title>Mon Compte </Title> 
+                <Title>Mon Compte</Title> 
             <Case
                 onClick={() => this.handleRedirect('/groupes')}
                 Title={'Groupes'}

@@ -6,6 +6,7 @@ import {
     Title,
     Goback,
 } from '../Global.styles.js';
+import Case from '../../../components/Case/Case'
 import Cookies from 'universal-cookie';
 
 export default class Settings extends React.Component {
@@ -34,7 +35,12 @@ export default class Settings extends React.Component {
                 <Header {...this.props}/>
                 <Tab>
                     <Title>Paramètres de mon compte</Title>
-                    <Goback onClick={() => {this.handleRedirect('/account')}}>&larr;  Retourner vers mon Compte</Goback>
+                    <Goback onClick={() => { this.handleRedirect('/account') }}>&larr;  Retourner vers mon Compte</Goback>
+                    <Case
+                        onClick={() => this.handleRedirect('/password')}
+                        Title={'Change Password'}
+                        Background={process.env.PUBLIC_URL + 'password2.png'}
+                    />
                 </Tab>
 
             </Container>
