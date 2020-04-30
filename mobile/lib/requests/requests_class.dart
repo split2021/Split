@@ -36,7 +36,7 @@ class Requests {
     // Debug
     print("Log in request body " + body);
 
-    if (statusCode == 200) {
+    if (statusCode == 200 && await getUserInfo() == true) {
       var parsedJson = jsonDecode(body);
       User.username = username;
       User.password = password;
@@ -99,6 +99,35 @@ class Requests {
       listContact.add(Contact.fromJson(contact));
     }
     return listContact;
+  }
+
+  static Future<bool> getUserInfo() async {
+    String adminToken = await getAdminToken();
+    if (adminToken == null) return false;
+    print("Admin token: " + adminToken);
+    String url = 'http://52.178.136.18:443/api/users/32';
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": adminToken
+    };
+    User.friendsIds = new List<int>();
+    User.groupsIds = new List<int>();
+    Response response = await get(url, headers: headers);
+    String body = response.body;
+    int statusCode = response.statusCode;
+    print("Get user info body reqquest " + body);
+    if (statusCode != 200) return false;
+    var parsedJson = jsonDecode(body);
+    User.email = parsedJson["data"]["email"];
+    User.firstName = parsedJson["data"]["first_name"];
+    User.lastName = parsedJson["data"]["last_name"];
+    User.phoneNumber = parsedJson["data"]["phone"];
+    User.id = parsedJson["data"]["id"];
+    for (var friendId in parsedJson["data"]["friends"])
+      User.friendsIds.add(friendId["id"]);
+    for (var groupId in parsedJson["data"]["payment_groups"])
+      User.groupsIds.add(groupId["id"]);
+    return true;
   }
 
   static Future<String> getUserFullname() async {

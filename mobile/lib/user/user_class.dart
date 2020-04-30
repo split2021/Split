@@ -6,5 +6,7 @@ class User {
   static String lastName;
   static String password;
   static String token;
-  static String id;
+  static int id;
+  static List<int> friendsIds;
+  static List<int> groupsIds;
 }

@@ -4,7 +4,7 @@ import 'dart:math';
 class Group {
   String name;
   String image;
-  String id;
+  int id;
 
   List<Contact> contactList;
 

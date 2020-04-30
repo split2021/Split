@@ -7,7 +7,7 @@ class Contact {
   String profilPicture;
   double value;
 
-  Contact({this.username, this.firstName, this.lastName, this.email, this.phoneNumber});
+  Contact({this.username, this.firstName, this.lastName, this.email, this.phoneNumber, this.profilPicture = "assets/contact_blank.png"});
 
   Contact.fromJson(Map<String, dynamic> data)
       : username = data['username'],

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../requests/requests_class.dart';
-import '../contact/contact_class.dart';
+import 'contact_class.dart';
+import 'contact_listtile.dart';
 
 class ContactPage extends StatefulWidget {
   @override
@@ -25,6 +26,36 @@ class _ContactPageState extends State<ContactPage> {
     Requests.getContactList().then((value) {
       listContact = value;
     });
+  }
+
+  void onTapped(String username) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Ajout d\'amis'),
+          content: Text('Voulez-vous ajouter ' + username + " en amis ?"),
+          actions: <Widget>[
+            RaisedButton(
+              child: Text(
+                "Oui",
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            RaisedButton(
+              child: Text(
+                "Non",
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -55,14 +86,19 @@ class _ContactPageState extends State<ContactPage> {
               shrinkWrap: true,
               itemCount: listContact.length,
               itemBuilder: (context, index) {
-                return (listContact[index]
-                                .username
-                                .toLowerCase()
-                                .contains(typedText) ==
-                            true ||
-                        typedText == ''
-                    ? Text('${listContact[index].username}')
-                    : Container());
+                return (GestureDetector(
+                  child: listContact[index]
+                                  .username
+                                  .toLowerCase()
+                                  .contains(typedText) ==
+                              true ||
+                          typedText == ''
+                      ? ContactListTile(listContact[index])
+                      : Container(),
+                  onTap: () {
+                    onTapped(listContact[index].username);
+                  },
+                ));
               },
             ),
           ),
