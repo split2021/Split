@@ -41,40 +41,6 @@ export default class ChangePassword extends React.Component {
         }
     }
 
-   request = (call, data) => {
-        let header = {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        };
-       if (call === 'users/2') {
-           header = {
-               Accept: 'application/json',
-               'Content-Type': 'application/json',
-               'Authorization': 'Bearer ' + this.state.token,
-               'Access-Control-Allow-Origin': '*',
-           };
-           API.patch(call, JSON.stringify(data), { headers: header })
-               .then(response => this.setState({ data: response.data, isLoading: false }))
-               .catch(error => this.setState({ error, isLoading: false }));
-       } else if (call === 'login') {
-           API.post(call, JSON.stringify(data), { headers: header })
-               .then(response => this.setState({ data: response.data, isLoading: false }))
-               .catch(error => this.setState({ error, isLoading: false }));
-       }
-        
-    };
-
-    /*request = (call, data) => {
-        let header = {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + this.state.token,
-        };
-        API.patch(call, JSON.stringify(data), { headers: header })
-            .then(response => this.setState({ data: response.data, isLoading: false }))
-            .catch(error => this.setState({ error, isLoading: false }));
-    };*/
-
     componentDidMount() {
         this.setState({ isLoading: true });
         let data = {
@@ -93,9 +59,6 @@ export default class ChangePassword extends React.Component {
             }
         }
     }
-
-
-
 
     /*componentDidUpdate(prevState, prevProps) {
         if (prevProps.data !== this.state.data) {
