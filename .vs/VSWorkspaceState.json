@@ -1,16 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\testsOutput",
-    "\\web",
+    "\\api",
     "\\web\\website",
-    "\\web\\website\\src",
     "\\web\\website\\src\\components",
-    "\\web\\website\\src\\components\\Trombi",
-    "\\web\\website\\src\\Main",
-    "\\web\\website\\src\\Main\\Header",
-    "\\web\\website\\src\\Main\\Home"
+    "\\web\\website\\src\\Main\\Account",
+    "\\web\\website\\src\\Main\\Account\\Settings",
+    "\\web\\website\\src\\Main\\Login",
+    "\\web\\website\\src\\Main\\Subscribe"
   ],
-  "SelectedNode": "\\azure-pipelines.yml",
+  "SelectedNode": "\\api\\requirements.txt",
   "PreviewInSolutionExplorer": false
 }
