@@ -6,8 +6,9 @@ import '../payment/payment.dart';
 class Groups extends StatelessWidget {
   final List<Group> groups;
   final Function delGroup;
+  final Function updateList;
 
-  Groups(this.groups, this.delGroup);
+  Groups(this.groups, this.delGroup, this.updateList);
 
   void onLongPressed(int indexTapped, BuildContext context) {
     showDialog(
@@ -80,9 +81,11 @@ class Groups extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: _buildGroupItem,
-      itemCount: groups.length,
-    );
+    return RefreshIndicator(
+        child: ListView.builder(
+          itemBuilder: _buildGroupItem,
+          itemCount: groups.length,
+        ),
+        onRefresh: updateList);
   }
 }
