@@ -37,6 +37,7 @@ export default class SignIn extends React.Component {
   componentDidUpdate(prevState, prevProps) {
     if (prevProps.data !== this.state.data) {
       if (this.state.data.statuscode === 200) {
+        console.log(this.state);
         this.cookies.set('auth', this.state.data.data.token, { path: '/', maxAge: 3540});
         this.props.history.push('/account');
       } else {
