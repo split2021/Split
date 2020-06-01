@@ -17,13 +17,43 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   final _usernameInput = TextEditingController();
   final _passwordInput = TextEditingController();
+  String typedUsername;
+  String typedPassword;
 
   bool _obscureText = true;
+
+  _updateTypedUsername() {
+    typedUsername = _usernameInput.text;
+    setState(() {});
+  }
+
+  _updateTypedPassword() {
+    typedPassword = _passwordInput.text;
+    setState(() {});
+  }
 
   void showHidePassword() {
     setState(() {
       _obscureText == true ? _obscureText = false : _obscureText = true;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    typedUsername = "";
+    typedPassword = "";
+    setState(() {});
+
+    _usernameInput.addListener(_updateTypedUsername);
+    _passwordInput.addListener(_updateTypedPassword);
+  }
+
+  void dispose() {
+    _usernameInput.dispose();
+    _passwordInput.dispose();
+    super.dispose();
   }
 
   Widget _logoImage(String assets) {
@@ -33,6 +63,8 @@ class _LogInState extends State<LogIn> {
   }
 
   Widget _connectionButton() {
+    User.username = _usernameInput.text;
+    User.password = _passwordInput.text;
     return RaisedButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       color: Theme.of(context).primaryColor,

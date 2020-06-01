@@ -31,9 +31,8 @@ class _GroupManagerState extends State<GroupManager> {
   }
 
   void _addGroup() {
-    setState(() {
-      _groups.add(new Group("New group"));
-    });
+    _groups.add(new Group("New group"));
+    setState(() {});
   }
 
   void _delGroup(int removeIndex) {

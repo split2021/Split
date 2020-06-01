@@ -16,16 +16,33 @@ class _ContactPageState extends State<ContactPage> {
   List<Contact> listContact = [];
   String typedText;
 
-  @override
-  void initState() {
-    typedText = '';
-    super.initState();
+  _updateTypedValue() {
+    typedText = editingController.text;
+    setState(() {});
   }
 
-  void _updateList() {
+  @override
+  void initState() {
+    super.initState();
+    Requests.getContactList().then((value) {
+      listContact = value;
+      typedText = "";
+      setState(() {});
+    });
+
+    editingController.addListener(_updateTypedValue);
+  }
+
+  void dispose() {
+    editingController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _updateList() async {
     Requests.getContactList().then((value) {
       listContact = value;
     });
+    setState(() {});
   }
 
   void onTapped(String username) {
@@ -60,50 +77,52 @@ class _ContactPageState extends State<ContactPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onChanged: (value) {
-                _updateList();
-                setState(() {
-                  typedText = value;
-                });
-              },
-              controller: editingController,
-              decoration: InputDecoration(
-                  labelText: "Rechercher",
-                  hintText: "Rechercher",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(25.0)))),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: listContact.length,
-              itemBuilder: (context, index) {
-                return (GestureDetector(
-                  child: listContact[index]
-                                  .username
-                                  .toLowerCase()
-                                  .contains(typedText) ==
-                              true ||
-                          typedText == ''
-                      ? ContactListTile(listContact[index])
-                      : Container(),
-                  onTap: () {
-                    onTapped(listContact[index].username);
+    return RefreshIndicator(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: editingController,
+                  decoration: InputDecoration(
+                      labelText: "Rechercher",
+                      hintText: "Rechercher",
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(25.0)))),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: listContact.length,
+                  itemBuilder: (context, index) {
+                    return (GestureDetector(
+                      child: listContact[index]
+                                      .firstName
+                                      .toLowerCase()
+                                      .contains(typedText.toLowerCase()) ==
+                                  true ||
+                              listContact[index]
+                                      .lastName
+                                      .toLowerCase()
+                                      .contains(typedText.toLowerCase()) ==
+                                  true ||
+                              typedText == ''
+                          ? ContactListTile(listContact[index])
+                          : Container(),
+                      onTap: () {
+                        onTapped(listContact[index].firstName + " " + listContact[index].lastName);
+                      },
+                    ));
                   },
-                ));
-              },
-            ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ),
+        onRefresh: _updateList);
   }
 }
