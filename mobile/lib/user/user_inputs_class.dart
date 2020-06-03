@@ -6,5 +6,4 @@ class UserInputs {
   static String lastName;
   static String passwordConfirm;
   static String phoneNumber;
-  static String id;
 }

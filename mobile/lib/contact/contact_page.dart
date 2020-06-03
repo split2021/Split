@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../requests/requests_class.dart';
-import 'contact_class.dart';
-import 'contact_listtile.dart';
-import '../user/user_class.dart';
+import '../contact/contact_class.dart';
 
 class ContactPage extends StatefulWidget {
   @override
@@ -17,124 +15,59 @@ class _ContactPageState extends State<ContactPage> {
   List<Contact> listContact = [];
   String typedText;
 
-  _updateTypedValue() {
-    typedText = editingController.text;
-    setState(() {});
-  }
-
   @override
   void initState() {
+    typedText = '';
     super.initState();
-    Requests.getContactList().then((value) {
-      listContact = value;
-      typedText = "";
-      setState(() {});
-    });
-
-    editingController.addListener(_updateTypedValue);
   }
 
-  void dispose() {
-    editingController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _updateList() async {
+  void _updateList() {
     Requests.getContactList().then((value) {
       listContact = value;
     });
-    setState(() {});
-  }
-
-  Future<void> _addFriend(int id1, int id2) async {
-    Requests.addFriends(id1, id2).then((value) {});
-    Requests.updateUser(User.username, User.password);
-    setState(() {});
-  }
-
-  void onTapped(Contact contact) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Ajout d\'amis'),
-          content: Text('Voulez-vous ajouter ' +
-              contact.firstName +
-              " " +
-              contact.lastName +
-              " en amis ?"),
-          actions: <Widget>[
-            RaisedButton(
-              child: Text(
-                "Oui",
-              ),
-              onPressed: () {
-                _addFriend(User.id, contact.id);
-                Navigator.pop(context);
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "Non",
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: editingController,
-                  decoration: InputDecoration(
-                      labelText: "Rechercher",
-                      hintText: "Rechercher",
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(25.0)))),
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: listContact.length,
-                  itemBuilder: (context, index) {
-                    return (GestureDetector(
-                      child: listContact[index]
-                                      .firstName
-                                      .toLowerCase()
-                                      .contains(typedText.toLowerCase()) ==
-                                  true ||
-                              listContact[index]
-                                      .lastName
-                                      .toLowerCase()
-                                      .contains(typedText.toLowerCase()) ==
-                                  true ||
-                              typedText == ''
-                          ? ContactListTile(listContact[index])
-                          : Container(),
-                      onTap: () {
-                        onTapped(listContact[index]);
-                      },
-                    ));
-                  },
-                ),
-              ),
-            ],
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: (value) {
+                _updateList();
+                setState(() {
+                  typedText = value;
+                });
+              },
+              controller: editingController,
+              decoration: InputDecoration(
+                  labelText: "Rechercher",
+                  hintText: "Rechercher",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+            ),
           ),
-        ),
-        onRefresh: _updateList);
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: listContact.length,
+              itemBuilder: (context, index) {
+                return (listContact[index]
+                                .username
+                                .toLowerCase()
+                                .contains(typedText) ==
+                            true ||
+                        typedText == ''
+                    ? Text('${listContact[index].username}')
+                    : Container());
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
