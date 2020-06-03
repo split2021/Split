@@ -75,7 +75,7 @@ class _LogInState extends State<LogIn> {
       onPressed: () async {
         if (User.username != null &&
             User.password != null &&
-            await Requests.logIn(User.username, User.password) == true) {
+            await Requests.updateUser(User.username, User.password) == true) {
           // Debug
           print("Username: " + User.username + " Password: " + User.password);
           Navigator.push(

@@ -29,8 +29,8 @@ class _PaymentPageState extends State<PaymentPage> {
         width: MediaQuery.of(context).size.width,
         child: Row(
           children: <Widget>[
-            Text(_group.contactList[index].firstName[0] + _group.contactList[index].lastName[0]),
-            SizedBox(height: 0, width: 5),
+            //Text(_group.contactList[index].firstName[0] + _group.contactList[index].lastName[0]),
+            //SizedBox(height: 0, width: 5),
             Expanded(
               child: Column(
                 children: <Widget>[
@@ -85,7 +85,6 @@ class _PaymentPageState extends State<PaymentPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(_group.name);
     return Scaffold(
       appBar: _appBar(),
       body: Container(

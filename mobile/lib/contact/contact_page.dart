@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../requests/requests_class.dart';
 import 'contact_class.dart';
 import 'contact_listtile.dart';
+import '../user/user_class.dart';
 
 class ContactPage extends StatefulWidget {
   @override
@@ -45,19 +46,30 @@ class _ContactPageState extends State<ContactPage> {
     setState(() {});
   }
 
-  void onTapped(String username) {
+  Future<void> _addFriend(int id1, int id2) async {
+    Requests.addFriends(id1, id2).then((value) {});
+    Requests.updateUser(User.username, User.password);
+    setState(() {});
+  }
+
+  void onTapped(Contact contact) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Ajout d\'amis'),
-          content: Text('Voulez-vous ajouter ' + username + " en amis ?"),
+          content: Text('Voulez-vous ajouter ' +
+              contact.firstName +
+              " " +
+              contact.lastName +
+              " en amis ?"),
           actions: <Widget>[
             RaisedButton(
               child: Text(
                 "Oui",
               ),
               onPressed: () {
+                _addFriend(User.id, contact.id);
                 Navigator.pop(context);
               },
             ),
@@ -114,7 +126,7 @@ class _ContactPageState extends State<ContactPage> {
                           ? ContactListTile(listContact[index])
                           : Container(),
                       onTap: () {
-                        onTapped(listContact[index].firstName + " " + listContact[index].lastName);
+                        onTapped(listContact[index]);
                       },
                     ));
                   },
