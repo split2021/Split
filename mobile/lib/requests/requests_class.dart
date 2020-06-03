@@ -205,7 +205,7 @@ class Requests {
   static Future<String> getUserFullname() async {
     String adminToken = await getAdminToken();
     if (adminToken == null) return "null";
-    String url = 'http://' + urlRequest + '/api/users/32';
+    String url = 'http://' + urlRequest + '/api/users/' + User.id.toString();
     Map<String, String> headers = {
       "Content-type": "application/json",
       "Authorization": adminToken
@@ -215,26 +215,6 @@ class Requests {
     print("GetUsername BODY" + body);
     var parsedBody = jsonDecode(body);
     return parsedBody["data"]["first_name"] + " " + parsedBody["data"]["last_name"];
-  }
-
-    static Future<bool> addFriend() async {
-    String adminToken = await getAdminToken();
-    if (adminToken == null) return false;
-    String url = 'http://52.178.136.18:443/api/friendships/';
-    Map<String, String> headers = {
-      "Content-type": "application/json",
-      "Authorization": adminToken
-    };
-    String json = '{"user1_id": ' + User.id + ', "user2_id": ' + User.id + '}';
-    Response response = await post(url, headers: headers, body: json);
-    int statusCode = response.statusCode;
-    String body = response.body;
-    // Debug
-    print("Add friend request " + body);
-    if (statusCode == 200)
-      return true;
-    else
-      return false;
   }
 
   static Future<bool> addFriends(int id1, int id2) async {

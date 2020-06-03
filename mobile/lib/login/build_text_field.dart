@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../user/user_class.dart';
-
 Widget buildTextFieldLogIn(
   String hintText,
   BuildContext context,

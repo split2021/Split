@@ -5,7 +5,6 @@ import 'groups.dart';
 import 'group_class.dart';
 import '../user/user_class.dart';
 import '../requests/requests_class.dart';
-import '../contact/contact_class.dart';
 
 class GroupManager extends StatefulWidget {
   @override
