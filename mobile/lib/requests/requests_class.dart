@@ -46,7 +46,7 @@ class Requests {
     String body = response.body;
     // Debug
     print("Update request: " + statusCode.toString());
-
+    print("Data: " + body);
     User.friendsIds = new List<int>();
     User.groupsIds = new List<int>();
     User.contactList = new List<Contact>();
@@ -244,7 +244,7 @@ class Requests {
   static Future<bool> editUserProfile() async {
     String adminToken = await getAdminToken();
     if (adminToken == null) return false;
-    String url = 'http://' + urlRequest + '/api/users/32';
+    String url = 'http://' + urlRequest + '/api/users/' + User.id.toString();
     Map<String, String> headers = {
       "Content-Type": "application/json",
       "Authorization": adminToken

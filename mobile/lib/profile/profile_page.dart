@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:split/login/login.dart';
 import './edit_profile.dart';
 import './payment_methods.dart';
-import '../requests/requests_class.dart';
 import '../user/user_class.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -13,15 +12,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String userFullname;
-
-  @override
-  void initState() {
-    Requests.getUserFullname().then((_userFullname) {
-      setState(() => this.userFullname = _userFullname);
-    });
-    super.initState();
-  }
 
   void logOut(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
@@ -76,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
 
     return Text(
-      this.userFullname,
+      User.firstName + " " + User.lastName,
       style: _nameTextStyle,
     );
   }
@@ -243,7 +233,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    if (this.userFullname == null)
+    if (User.id <= 0)
       return new Container();
     else
       return Scaffold(
