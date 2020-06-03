@@ -39,6 +39,8 @@ class Requests {
       User.username = username;
       User.password = password;
       User.token = parsedJson["data"]["token"];
+      print("Parsed Body" + parsedJson["data"]["user"]["id"].toString());
+      User.id = parsedJson["data"]["user"]["id"].toString();
       return true;
     } else
       return false;
@@ -99,17 +101,16 @@ class Requests {
   static Future<String> getUserFullname() async {
     String adminToken = await getAdminToken();
     if (adminToken == null) return "null";
-    String url = 'http://52.178.136.18:443/api/users/32';
+    String url = 'http://52.178.136.18:443/api/users/' + User.id;
     Map<String, String> headers = {
       "Content-type": "application/json",
       "Authorization": adminToken
     };
     Response response = await get(url, headers: headers);
     String body = response.body;
+    print("GetUsername BODY" + body);
     var parsedBody = jsonDecode(body);
-    return parsedBody["data"]["first_name"] +
-        " " +
-        parsedBody["data"]["last_name"];
+    return parsedBody["data"]["first_name"] + " " + parsedBody["data"]["last_name"];
   }
 
     static Future<bool> addFriend() async {
