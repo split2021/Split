@@ -24,6 +24,9 @@ class _GroupManagerState extends State<GroupManager> {
       _groups = value;
       setState(() {});
     });
+    Requests.updateUser(User.username, User.password).then((value) {
+      setState(() {});
+    });
   }
 
   Future<void> _updateList() async {

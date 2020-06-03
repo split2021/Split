@@ -56,7 +56,7 @@ class _PaymentPageState extends State<PaymentPage> {
             Container(
               width: 40,
               child: Text(
-                  _group.contactList[index].value.toStringAsFixed(0) + "%"),
+                  _group.contactList[index].value.toStringAsFixed(0)),
             )
           ],
         ),
@@ -83,6 +83,28 @@ class _PaymentPageState extends State<PaymentPage> {
     );
   }
 
+  void onTapped() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Paiement'),
+          content: Text("Paiement en cours d'envoi, regardez vos mails !"),
+          actions: <Widget>[
+            RaisedButton(
+              child: Text(
+                "Ok",
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +120,7 @@ class _PaymentPageState extends State<PaymentPage> {
             ),
             GestureDetector(
               onTap: () {
-                print("Payment");
+                onTapped();
               },
               child: Container(
                 height: 40,
