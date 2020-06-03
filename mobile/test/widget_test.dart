@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:split/login/login.dart';
 import 'package:split/home/home.dart';
 import 'package:split/contact/contact_page.dart';
-import 'package:split/settings/settings_page.dart';
+import 'package:split/profile/profile_page.dart';
  
 void main() {
 
@@ -50,11 +50,11 @@ testWidgets('Navigation to Page Home', (WidgetTester tester) async {
    expect(find.byType(Container), findsOneWidget);
   });
 
-  testWidgets('SettingsPage', (WidgetTester tester) async {
+  testWidgets('ProfilePage', (WidgetTester tester) async {
     // Create the widget by telling the tester to build it.
     await tester.pumpWidget(MaterialApp(
     home: Scaffold(
-      body: SettingsPage(),
+      body: ProfilePage(),
     ),
   ));
   ////

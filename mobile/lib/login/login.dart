@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import './build_text_field.dart';
 import '../home/home.dart';
 import '../widgets/background_image.dart';
+import '../requests/requests_class.dart';
+import '../user/user_class.dart';
+import 'create_account_page.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -37,16 +40,27 @@ class _LogInState extends State<LogIn> {
         'Connexion',
         style: TextStyle(color: Colors.white),
       ),
-      onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home()));
+      onPressed: () async {
+        if (User.username != null &&
+            User.password != null &&
+            await Requests.logIn(User.username, User.password) == true) {
+          // Debug
+          print("Username: " + User.username + " Password: " + User.password);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Home()));
+        } else
+          // Debug
+          print("Username or password incorrect");
       },
     );
   }
 
-  Widget _newAccountButton() {
+  Widget _newAccountButton(BuildContext context) {
     return FlatButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => CreateAccount()));
+      },
       child: Text(
         'Nouveau ? Créer un compte',
         style: TextStyle(color: Theme.of(context).primaryColor),
@@ -64,7 +78,7 @@ class _LogInState extends State<LogIn> {
     );
   }
 
-  Widget _body() {
+  Widget _body(context) {
     return SingleChildScrollView(
       child: Container(
         height: MediaQuery.of(context).size.height,
@@ -91,7 +105,7 @@ class _LogInState extends State<LogIn> {
                       SizedBox(height: 20),
                       _connectionButton(),
                       _forgotPasswordButton(),
-                      _newAccountButton(),
+                      _newAccountButton(context),
                     ],
                   ),
                 )
@@ -110,7 +124,7 @@ class _LogInState extends State<LogIn> {
         primaryColor: Color.fromRGBO(85, 112, 221, 1.0),
       ),
       home: Scaffold(
-        body: _body(),
+        body: _body(context),
       ),
     );
   }
