@@ -6,12 +6,13 @@ import {
     Title,
     Goback,
 } from '../Global.styles.js';
-import Cookies from 'universal-cookie';
 import {
-    NbElem, Tableau
-} from "./Groupes.styles";
+    Tableau,
+    NbElem
+} from './Amis.styles';
+import Cookies from 'universal-cookie';
 
-export default class Groupes extends React.Component {
+export default class Amis extends React.Component {
 
     constructor(props) {
         super(props);
@@ -37,10 +38,10 @@ export default class Groupes extends React.Component {
             <Container>
                 <Header {...this.props}/>
                 <Tab>
-                    <Title>Mes Groupes</Title>
+                    <Title>Mes Amis</Title>
                     <Goback onClick={() => {this.handleRedirect('/account')}}>&larr;  Retourner vers mon Compte</Goback>
                     <Tableau>
-                        <NbElem>Vous avez : {this.state.elem} Groupes</NbElem>
+                        <NbElem>Vous avez : {this.state.elem} amis</NbElem>
 
                     </Tableau>
                 </Tab>

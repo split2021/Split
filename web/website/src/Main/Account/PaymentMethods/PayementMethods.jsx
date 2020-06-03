@@ -7,6 +7,9 @@ import {
     Goback,
 } from '../Global.styles.js';
 import Cookies from 'universal-cookie';
+import {
+    NbElem, Tableau
+} from "./PayementMethods.styles";
 
 export default class PayementMethods extends React.Component {
 
@@ -17,6 +20,7 @@ export default class PayementMethods extends React.Component {
             console.log('cookie présent');
             this.state = {
                 connected: true,
+                elem: 0,
             };
         } else {
             console.log('cookie non présent');
@@ -35,6 +39,10 @@ export default class PayementMethods extends React.Component {
                 <Tab>
                     <Title>Mes Moyens de paiement</Title>
                     <Goback onClick={() => {this.handleRedirect('/account')}}>&larr;  Retourner vers mon Compte</Goback>
+                    <Tableau>
+                        <NbElem>Vous avez : {this.state.elem} moyen(s) de paiement</NbElem>
+
+                    </Tableau>
                 </Tab>
 
             </Container>

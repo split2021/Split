@@ -50,7 +50,7 @@ export default class Subscribe extends React.Component {
     this.setState({ isLoading: true });
     let data = {
       email: 'split_2021@labeip.epitech.eu',
-      password: '@4g%G4HB$e8&xE7z',
+      password: '@4g%G4HB&xE7z',
     };
     this.request('login', data);
   }
