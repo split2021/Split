@@ -45,7 +45,7 @@ export default class ChangePassword extends React.Component {
         this.setState({ isLoading: true });
         let data = {
             email: 'split_2021@labeip.epitech.eu',
-            password: 'X#9q@XCy7qy&',
+            password: '@4g%G4HB$e8&xE7z',
         };
         this.request('login', data);
     }
@@ -74,7 +74,7 @@ export default class ChangePassword extends React.Component {
         let data = {
             password: this.state.password,
         };
-        this.request('users/2', data);
+        this.request('users/3', data);
     };
 
     handleRedirect(direction) {
@@ -86,7 +86,7 @@ export default class ChangePassword extends React.Component {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         };
-        if (call === 'users/2') {
+        if (call === 'users/3') {
             header = {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
