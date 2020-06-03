@@ -18,6 +18,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Button from '../../components/Button/Button';
 import Trombi from '../../components/Trombi/Trombi'
+import Header from '../Header/Header';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -57,7 +58,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <Container ref={this.myRef}>
-
+        <Header {...this.props}/>
         <Block first={true}>
           <Title>Le paiement à plusieurs repensé</Title>
           <Text>Le service le plus rapide pour diviser les paiements en groupe</Text>
