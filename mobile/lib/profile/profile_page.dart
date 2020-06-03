@@ -15,14 +15,18 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void logOut(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+    User.username = null;
     User.email = null;
+    User.phoneNumber = null;
     User.firstName = null;
-    User.id = null;
     User.lastName = null;
     User.password = null;
-    User.phoneNumber = null;
     User.token = null;
-    User.username = null;
+    User.id = null;
+    User.friendsIds.clear();
+    User.groupsIds.clear();
+    User.contactList.clear();
+    User.groupsList.clear();
   }
 
   Widget buildBackground(Size screenSize) {
