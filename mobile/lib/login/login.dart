@@ -78,6 +78,7 @@ class _LogInState extends State<LogIn> {
             await Requests.updateUser(User.username, User.password) == true) {
           // Debug
           print("Username: " + User.username + " Password: " + User.password);
+          await Requests.updateUser(User.username, User.password);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Home()));
         } else
