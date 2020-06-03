@@ -6,38 +6,32 @@ import '../payment/payment.dart';
 class Groups extends StatelessWidget {
   final List<Group> groups;
   final Function delGroup;
+  final Function updateList;
 
-  Groups(this.groups, this.delGroup);
+  Groups(this.groups, this.delGroup, this.updateList);
 
-  void onTapped(int indexTapped, BuildContext context) {
+  void onLongPressed(int indexTapped, BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          title: Text('Supprimer le groupe'),
+          content: Text('Voulez-vous supprimer le groupe ?'),
           actions: <Widget>[
             RaisedButton(
-              child: Text("Paiement", style: TextStyle(color: Colors.white),),
-              color: Colors.green,
+              child: Text(
+                "Oui",
+              ),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            PaymentPage(groups[indexTapped])));
-              },
-            ),
-            RaisedButton(
-              child: Text("Annuler", style: TextStyle(color: Colors.white),),
-              color: Colors.red,
-              onPressed: () {
+                delGroup(indexTapped);
                 Navigator.pop(context);
               },
             ),
-                        RaisedButton(
-              child: Text("Supprimer", style: TextStyle(color: Colors.white),),
-              color: Colors.red,
+            RaisedButton(
+              child: Text(
+                "Non",
+              ),
               onPressed: () {
-                delGroup(indexTapped);
                 Navigator.pop(context);
               },
             ),
@@ -74,16 +68,24 @@ class Groups extends StatelessWidget {
         ),
       ),
       onTap: () {
-        onTapped(index, context);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PaymentPage(groups[index])));
+      },
+      onLongPress: () {
+        onLongPressed(index, context);
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: _buildGroupItem,
-      itemCount: groups.length,
-    );
+    return RefreshIndicator(
+        child: ListView.builder(
+          itemBuilder: _buildGroupItem,
+          itemCount: groups.length,
+        ),
+        onRefresh: updateList);
   }
 }
