@@ -29,7 +29,6 @@ class _LogInState extends State<LogIn> {
   @override
   void initState() {
     super.initState();
-    setState(() {});
   }
 
   Widget _logoImage(String assets) {
@@ -41,6 +40,7 @@ class _LogInState extends State<LogIn> {
   Widget _connectionButton() {
     User.username = _usernameInput.text;
     User.password = _passwordInput.text;
+    print("NOUVEAU NOM: " + _usernameInput.text + " " + _passwordInput.text);
     return RaisedButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       color: Theme.of(context).primaryColor,
