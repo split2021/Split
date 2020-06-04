@@ -52,7 +52,7 @@ class Requests {
     String body = response.body;
     // Debug
     //print("Update request: " + statusCode.toString());
-    //print("Data: " + body);
+    print("Data: " + body);
     User.friendsIds = new List<int>();
     User.groupsIds = new List<int>();
     User.contactList = new List<Contact>();
@@ -66,6 +66,7 @@ class Requests {
       User.lastName = parsedJson["data"]["user"]["last_name"];
       User.phoneNumber = parsedJson["data"]["user"]["phone"];
       User.id = parsedJson["data"]["user"]["id"];
+      User.profilePic = parsedJson["data"]["user"]["icon"];
       for (var friendId in parsedJson["data"]["user"]["friends"] ?? []) {
         User.friendsIds.add(friendId["id"]);
       }

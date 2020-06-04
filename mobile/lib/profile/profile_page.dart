@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:split/login/login.dart';
 import './edit_profile.dart';
-import './payment_methods.dart';
 import '../user/user_class.dart';
+import '../contact/contact_page.dart';
+import '../group/group_manager.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -23,6 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
     User.password = null;
     User.token = null;
     User.id = null;
+    User.profilePic = null;
     User.friendsIds.clear();
     User.groupsIds.clear();
     User.contactList.clear();
@@ -34,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
       height: screenSize.height / 2.6,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/profile_bg.jpg'),
+          image: AssetImage("assets/profile_bg.jpg"),
           fit: BoxFit.cover,
         ),
       ),
@@ -48,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
         height: 140.0,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/default_profile.jpg'),
+            image: NetworkImage(User.profilePic),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(80.0),
@@ -259,16 +261,16 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(height: 8.0),
                     buildButtons(
                         "Ajouter un ami",
-                        MaterialPageRoute(builder: (context) => EditProfile()),
-                        "Rejoindre un groupe",
+                        MaterialPageRoute(builder: (context) => ContactPage()),
+                        "Créer un groupe",
                         MaterialPageRoute(
-                            builder: (context) => PaymentMethods())),
+                            builder: (context) => GroupManager())),
                     buildButtons(
                         "Editer le profil",
                         MaterialPageRoute(builder: (context) => EditProfile()),
                         "Editer le titre",
                         MaterialPageRoute(
-                            builder: (context) => PaymentMethods())),
+                            builder: (context) => ContactPage())),
                     buildLogOutButton(context),
                   ],
                 ),

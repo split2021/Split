@@ -9,6 +9,7 @@ class User {
   static String lastName;
   static String password;
   static String token;
+  static String profilePic;
   static String adminToken;
   static DateTime adminTokenTimer;
   static int id;
