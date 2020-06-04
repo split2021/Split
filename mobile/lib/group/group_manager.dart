@@ -21,15 +21,22 @@ class _GroupManagerState extends State<GroupManager> {
   void initState() {
     super.initState();
     Requests.getGroups(User.groupsIds).then((value) {
-      _groups = value;
-      setState(() {});
+      setState(() {
+        _groups = value;
+      });
     });
   }
 
   Future<void> _updateList() async {
-    _groups = await Requests.getGroups(User.groupsIds);
-    await Requests.updateUser(User.username, User.password);
-    setState(() {});
+    Requests.updateUser(User.username, User.password).then((value) {
+      setState(() {
+        Requests.getGroups(User.groupsIds).then((value) {
+          setState(() {
+            _groups = value;
+          });
+        });
+      });
+    });
   }
 
   void _showContact() {
@@ -78,6 +85,7 @@ class _GroupManagerState extends State<GroupManager> {
               ),
               onPressed: () {
                 Requests.createGroup(editingController.text);
+                _updateList();
                 Navigator.pop(context);
               },
             ),
@@ -100,8 +108,8 @@ class _GroupManagerState extends State<GroupManager> {
   }
 
   void _delGroup(int removeIndex) {
-    setState(() {
-      _groups.removeAt(removeIndex);
+    Requests.deleteGroupById(_groups[removeIndex].id).then((value) {
+      _updateList();
     });
   }
 

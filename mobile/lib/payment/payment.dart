@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:split/requests/requests_class.dart';
 
 import '../group/group_class.dart';
 
@@ -55,8 +56,7 @@ class _PaymentPageState extends State<PaymentPage> {
             SizedBox(height: 0, width: 5),
             Container(
               width: 40,
-              child: Text(
-                  _group.contactList[index].value.toStringAsFixed(0)),
+              child: Text(_group.contactList[index].value.toStringAsFixed(0)),
             )
           ],
         ),
@@ -84,7 +84,6 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   void onTapped() {
-    
     showDialog(
       context: context,
       builder: (BuildContext context) {

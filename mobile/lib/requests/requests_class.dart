@@ -37,7 +37,6 @@ class Requests {
         return User.adminToken;
       else
         return null;
-      
     }
     return User.adminToken;
   }
@@ -97,7 +96,6 @@ class Requests {
     String json =
         '{"name": "' + groupName + '", "users": [' + usersIdsToString + ']}';
     print(json);
-    Requests.updateUser(User.username, User.password);
     Response response = await post(url, headers: headers, body: json);
     int statusCode = response.statusCode;
     print("Create group request: " + statusCode.toString());
@@ -160,6 +158,26 @@ class Requests {
     return listContact;
   }
 
+  static Future<bool> deleteGroupById(int id) async {
+    String adminToken = await getAdminToken();
+    if (adminToken == null) return null;
+    String url =
+        'http://' + urlRequest + '/api/payment_groups/' + id.toString();
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": adminToken
+    };
+    Response response = await delete(url, headers: headers);
+    print("Delete group " +
+        id.toString() +
+        " request: " +
+        response.statusCode.toString());
+    if (response.statusCode == 200)
+      return true;
+    else
+      return false;
+  }
+
   static Future<Contact> getUserInfoById(int id) async {
     String adminToken = await getAdminToken();
     if (adminToken == null) return null;
@@ -208,7 +226,7 @@ class Requests {
               phoneNumber: value.phoneNumber));
         });
       }
-      fetchedGroups.add(new Group(parsedJson["data"]["name"], userIds));
+      fetchedGroups.add(new Group(parsedJson["data"]["name"], userIds, id));
     }
     return fetchedGroups;
   }

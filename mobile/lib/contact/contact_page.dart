@@ -18,38 +18,38 @@ class _ContactPageState extends State<ContactPage> {
   String typedText;
 
   _updateTypedValue() {
-    typedText = editingController.text;
-    setState(() {});
+    setState(() {
+      typedText = editingController.text;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     Requests.getContactList().then((value) {
-      listContact = value;
-      typedText = "";
-      setState(() {});
+      setState(() {
+        listContact = value;
+        typedText = "";
+      });
     });
 
     editingController.addListener(_updateTypedValue);
   }
 
-  void dispose() {
-    editingController.dispose();
-    super.dispose();
-  }
-
   Future<void> _updateList() async {
     Requests.getContactList().then((value) {
-      listContact = value;
+      setState(() {
+        listContact = value;
+      });
     });
-    setState(() {});
   }
 
   Future<void> _addFriend(int id1, int id2) async {
-    Requests.addFriends(id1, id2).then((value) {});
-    Requests.updateUser(User.username, User.password);
-    setState(() {});
+    Requests.addFriends(id1, id2).then((value) {}).then((value) {
+      Requests.updateUser(User.username, User.password).then((value) {
+        setState(() {});
+      });
+    });
   }
 
   void onTapped(Contact contact) {
