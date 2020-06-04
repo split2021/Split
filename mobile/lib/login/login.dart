@@ -17,20 +17,8 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   final _usernameInput = TextEditingController();
   final _passwordInput = TextEditingController();
-  String typedUsername;
-  String typedPassword;
 
   bool _obscureText = true;
-
-  _updateTypedUsername() {
-    typedUsername = _usernameInput.text;
-    setState(() {});
-  }
-
-  _updateTypedPassword() {
-    typedPassword = _passwordInput.text;
-    setState(() {});
-  }
 
   void showHidePassword() {
     setState(() {
@@ -41,19 +29,7 @@ class _LogInState extends State<LogIn> {
   @override
   void initState() {
     super.initState();
-
-    typedUsername = "";
-    typedPassword = "";
     setState(() {});
-
-    _usernameInput.addListener(_updateTypedUsername);
-    _passwordInput.addListener(_updateTypedPassword);
-  }
-
-  void dispose() {
-    _usernameInput.dispose();
-    _passwordInput.dispose();
-    super.dispose();
   }
 
   Widget _logoImage(String assets) {
@@ -76,9 +52,6 @@ class _LogInState extends State<LogIn> {
         if (User.username != null &&
             User.password != null &&
             await Requests.updateUser(User.username, User.password) == true) {
-          // Debug
-          print("Username: " + User.username + " Password: " + User.password);
-          await Requests.updateUser(User.username, User.password);
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Home()));
         } else

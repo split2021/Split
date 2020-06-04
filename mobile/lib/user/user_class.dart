@@ -9,6 +9,8 @@ class User {
   static String lastName;
   static String password;
   static String token;
+  static String adminToken;
+  static DateTime adminTokenTimer;
   static int id;
   static List<int> friendsIds;
   static List<int> groupsIds;

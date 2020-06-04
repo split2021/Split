@@ -18,22 +18,28 @@ class Requests {
   static String urlRequest = "40.112.78.121:80";
 
   static Future<String> getAdminToken() async {
-    String url = 'http://' + urlRequest + '/api/login';
-    Map<String, String> headers = {"Content-type": "application/json"};
-    String json =
-        '{"email": "split_2021@labeip.epitech.eu", "password": "@4g%G4HB&xE7z"}';
-    Response response = await post(url, headers: headers, body: json);
-    int statusCode = response.statusCode;
-    String body = response.body;
-    var parsedJson = jsonDecode(body);
-    var adminToken = parsedJson["data"]["token"];
-    // Debug
-    print("Get admin token request: " + statusCode.toString());
-
-    if (statusCode == 200)
-      return adminToken;
-    else
-      return null;
+    if (User.token == null ||
+        User.adminTokenTimer == null ||
+        User.adminTokenTimer.difference(DateTime.now()).inMinutes < -59) {
+      String url = 'http://' + urlRequest + '/api/login';
+      Map<String, String> headers = {"Content-type": "application/json"};
+      String json =
+          '{"email": "split_2021@labeip.epitech.eu", "password": "@4g%G4HB&xE7z"}';
+      Response response = await post(url, headers: headers, body: json);
+      int statusCode = response.statusCode;
+      String body = response.body;
+      var parsedJson = jsonDecode(body);
+      User.adminToken = parsedJson["data"]["token"];
+      // Debug
+      print("Get admin token request: " + statusCode.toString());
+      User.adminTokenTimer = DateTime.now();
+      if (statusCode == 200)
+        return User.adminToken;
+      else
+        return null;
+      
+    }
+    return User.adminToken;
   }
 
   static Future<bool> updateUser(String username, String password) async {
@@ -89,7 +95,7 @@ class Requests {
     };
     String usersIdsToString = usersIds.join(", ");
     String json =
-        '{"name": "' + groupName + '", "users": "[' + usersIdsToString + ']"}';
+        '{"name": "' + groupName + '", "users": [' + usersIdsToString + ']}';
     print(json);
     Requests.updateUser(User.username, User.password);
     Response response = await post(url, headers: headers, body: json);
@@ -194,7 +200,12 @@ class Requests {
       for (var userId in parsedJson["data"]["users"]) {
         Requests.getUserInfoById(userId["id"]).then((value) {
           //print(value.firstName + value.lastName + value.email + value.id.toString() + value.phoneNumber);
-          userIds.add(new Contact(firstName: value.firstName, lastName: value.lastName, email: value.email, id: value.id, phoneNumber: value.phoneNumber));
+          userIds.add(new Contact(
+              firstName: value.firstName,
+              lastName: value.lastName,
+              email: value.email,
+              id: value.id,
+              phoneNumber: value.phoneNumber));
         });
       }
       fetchedGroups.add(new Group(parsedJson["data"]["name"], userIds));
@@ -214,7 +225,9 @@ class Requests {
     String body = response.body;
     print("GetUsername BODY" + body);
     var parsedBody = jsonDecode(body);
-    return parsedBody["data"]["first_name"] + " " + parsedBody["data"]["last_name"];
+    return parsedBody["data"]["first_name"] +
+        " " +
+        parsedBody["data"]["last_name"];
   }
 
   static Future<bool> addFriends(int id1, int id2) async {
@@ -240,8 +253,6 @@ class Requests {
     else
       return false;
   }
-
-  
 
   static Future<bool> editUserProfile() async {
     String adminToken = await getAdminToken();
