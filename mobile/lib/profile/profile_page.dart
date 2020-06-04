@@ -104,8 +104,8 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          buildStat("Amis", friends),
-          buildStat("Groupes", groups),
+          buildStat("Amis", User.contactList.length.toString()), //friends
+          buildStat("Groupes", User.groupsIds.length.toString()), //groups
           buildStat("Score", score),
         ],
       ),

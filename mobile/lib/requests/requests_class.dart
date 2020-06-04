@@ -50,8 +50,8 @@ class Requests {
     int statusCode = response.statusCode;
     String body = response.body;
     // Debug
-    print("Update request: " + statusCode.toString());
-    print("Data: " + body);
+    //print("Update request: " + statusCode.toString());
+    //print("Data: " + body);
     User.friendsIds = new List<int>();
     User.groupsIds = new List<int>();
     User.contactList = new List<Contact>();
