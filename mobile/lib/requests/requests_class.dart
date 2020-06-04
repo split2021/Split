@@ -1,6 +1,7 @@
 import 'package:http/http.dart';
 import 'package:split/group/group_class.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import '../user/user_class.dart';
 import '../user/user_inputs_class.dart';
@@ -37,7 +38,6 @@ class Requests {
         return User.adminToken;
       else
         return null;
-      
     }
     return User.adminToken;
   }
@@ -51,8 +51,8 @@ class Requests {
     int statusCode = response.statusCode;
     String body = response.body;
     // Debug
-    print("Update request: " + statusCode.toString());
-    print("Data: " + body);
+    //print("Update request: " + statusCode.toString());
+    //print("Data: " + body);
     User.friendsIds = new List<int>();
     User.groupsIds = new List<int>();
     User.contactList = new List<Contact>();
@@ -97,7 +97,6 @@ class Requests {
     String json =
         '{"name": "' + groupName + '", "users": [' + usersIdsToString + ']}';
     print(json);
-    Requests.updateUser(User.username, User.password);
     Response response = await post(url, headers: headers, body: json);
     int statusCode = response.statusCode;
     print("Create group request: " + statusCode.toString());
@@ -139,6 +138,62 @@ class Requests {
       return false;
   }
 
+  static Future<bool> postPayment(List<String> userList, List<String> emailList,
+      double total, int groupId) async {
+    String adminToken = await getAdminToken();
+    if (adminToken == null) return false;
+    String url = 'http://' + urlRequest + '/api/payment';
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": adminToken
+    };
+    String json = '{"group": ' +
+        groupId.toString() +
+        ',	"users": {' +
+        userList.join(", ") +
+        '},	"total": ' +
+        total.round().toString() +
+        ',	"target": "' +
+        "sb-uzjfr871438@business.example.com" +
+        '"}';
+    Response response = await post(url, headers: headers, body: json);
+    int statusCode = response.statusCode;
+    String body = response.body;
+
+    var parsedJson = jsonDecode(body);
+    var data = parsedJson["data"];
+    for (var email in emailList) {
+      int i = 0;
+      for (var value in data[email]) {
+        i++;
+        int y = 0;
+        if (i == 2)
+          for (var link in value) {
+            y++;
+            if (y == 2) sendEmail(email, link);
+          }
+      }
+    }
+    if (statusCode == 200)
+      return true;
+    else
+      return false;
+  }
+
+  static Future<bool> sendEmail(String recipient, String body) async {
+    Map<String, String> headers = new Map();
+    headers["Authorization"] = "Bearer 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";
+    headers["Content-Type"] = "application/json";
+
+    var url = 'https://api.sendgrid.com/v3/mail/send';
+    var response = await http.post(url,
+        headers: headers,
+        body:
+            '{"personalizations": [{"to": [{"email": "' + recipient + '"}]}],"from": {"email": "hugomrt.94@gmail.com"},"subject": "Your paypal link","content": [{"type": "text/plain", "value": "' + body + '"}]}');
+    print('Response status: ${response.statusCode}');
+    return true;
+  }
+
   static Future<List<Contact>> getContactList() async {
     List<Contact> listContact = [];
     String adminToken = await getAdminToken();
@@ -158,6 +213,26 @@ class Requests {
       listContact.add(Contact.fromJson(contact));
     }
     return listContact;
+  }
+
+  static Future<bool> deleteGroupById(int id) async {
+    String adminToken = await getAdminToken();
+    if (adminToken == null) return null;
+    String url =
+        'http://' + urlRequest + '/api/payment_groups/' + id.toString();
+    Map<String, String> headers = {
+      "Content-type": "application/json",
+      "Authorization": adminToken
+    };
+    Response response = await delete(url, headers: headers);
+    print("Delete group " +
+        id.toString() +
+        " request: " +
+        response.statusCode.toString());
+    if (response.statusCode == 200)
+      return true;
+    else
+      return false;
   }
 
   static Future<Contact> getUserInfoById(int id) async {
@@ -208,7 +283,7 @@ class Requests {
               phoneNumber: value.phoneNumber));
         });
       }
-      fetchedGroups.add(new Group(parsedJson["data"]["name"], userIds));
+      fetchedGroups.add(new Group(parsedJson["data"]["name"], userIds, id));
     }
     return fetchedGroups;
   }
