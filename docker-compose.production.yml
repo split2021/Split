@@ -10,3 +10,5 @@ services:
       STAGE: "2"
     ports:
       - "443:443"
+    env_file:
+      - split.env
