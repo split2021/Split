@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import '../login/login.dart';
 import '../requests/requests_class.dart';
-import '../user/user_inputs_class.dart';
+import '../ui/background_image.dart';
+import '../decorations/login_decorations.dart';
 
 class CreateAccount extends StatefulWidget {
   @override
@@ -11,98 +14,175 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccount extends State<CreateAccount> {
-  Widget _buildTextField(String hintText) {
-    return Container(
-        width: MediaQuery.of(context).size.width - 20,
-        child: TextField(
-          onChanged: (value) {
-            if (hintText == "Nom d'utilisateur")
-              UserInputs.username = value;
-            else if (hintText == "Email")
-              UserInputs.email = value;
-            else if (hintText == "Mot de passe")
-              UserInputs.password = value;
-            else if (hintText == "Prénom")
-              UserInputs.firstName = value;
-            else if (hintText == "Nom")
-              UserInputs.lastName = value;
-            else if (hintText == "Numéros de téléphone")
-              UserInputs.phoneNumber = value;
-          },
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle:
-                TextStyle(color: Colors.grey, fontSize: 15, height: 0.50),
+  final _emailInput = TextEditingController();
+  final _passwordInput = TextEditingController();
+  final _usernameInput = TextEditingController();
+  final _firstNameInput = TextEditingController();
+  final _lastNameInput = TextEditingController();
+  final _phoneNumberInput = TextEditingController();
+
+  Widget _buildCustomTextField(
+      String title, String hint, TextEditingController controller) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          title,
+          style: logInLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: logInBoxDecorationStyle,
+          height: 60.0,
+          child: TextField(
+            keyboardType: TextInputType.emailAddress,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.email,
+                color: Colors.white,
+              ),
+              hintText: hint,
+              hintStyle: logInHintTextStyle,
+            ),
+            controller: controller,
           ),
-        ));
+        ),
+      ],
+    );
   }
 
-  Widget _appBar() {
-    return AppBar(
-      title: Container(),
-      flexibleSpace: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: <Color>[
-              Color.fromRGBO(85, 112, 221, 1.0),
-              Color.fromRGBO(71, 50, 128, 1.0),
-            ],
+  Widget _buildCreateButton() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: RaisedButton(
+        elevation: 5.0,
+        onPressed: () async {
+          if (_emailInput != null &&
+              _passwordInput != null &&
+              _firstNameInput != null &&
+              _lastNameInput != null &&
+              _phoneNumberInput != null &&
+              await Requests.createUser(
+                      _emailInput.text,
+                      _passwordInput.text,
+                      _usernameInput.text,
+                      _firstNameInput.text,
+                      _lastNameInput.text,
+                      _phoneNumberInput.text) ==
+                  true) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LogIn()));
+          } else
+            // Debug
+            print("Username or password incorrect");
+        },
+        padding: EdgeInsets.all(15.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        color: Colors.white,
+        child: Text(
+          'Créer le compte',
+          style: TextStyle(
+            color: Color(0xFF527DAA),
+            letterSpacing: 1.5,
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'OpenSans',
           ),
         ),
       ),
-      automaticallyImplyLeading: true,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _appBar(),
-        body: Container(
-          child: Column(
+      resizeToAvoidBottomPadding: false,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: GestureDetector(
+          onTap: () => {FocusScope.of(context).unfocus(), print("UNFOCUS")},
+          child: Stack(
+            fit: StackFit.expand,
             children: <Widget>[
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    _buildTextField("Nom d'utilisateur"),
-                    _buildTextField("Email"),
-                    _buildTextField("Mot de passe"),
-                    _buildTextField("Confirmez le mot de passe"),
-                    _buildTextField("Prénom"),
-                    _buildTextField("Nom"),
-                    _buildTextField("Numéros de téléphone"),
-                  ],
+              backgroundImage("assets/food_4k_1.jpg"),
+              Container(
+                color: Color.fromRGBO(21, 58, 81, 0.9),
+              ),
+              Container(
+                height: double.infinity,
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 40.0,
+                    vertical: 50.0,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Créer un compte',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'OpenSans',
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 30.0),
+                      _buildCustomTextField(
+                          "Entrez votre mail", "Email", _emailInput),
+                      SizedBox(height: 20.0),
+                      _buildCustomTextField("Entrez votre mot de passe",
+                          "Mot de passe", _passwordInput),
+                      SizedBox(height: 20.0),
+                      _buildCustomTextField("Entrez votre nom d'utilisateur",
+                          "Nom d'utilisateur", _usernameInput),
+                      SizedBox(height: 20.0),
+                      _buildCustomTextField(
+                          "Entrez votre prénom", "Prénom", _firstNameInput),
+                      SizedBox(height: 20.0),
+                      _buildCustomTextField(
+                          "Entrez votre nom", "Nom", _lastNameInput),
+                      SizedBox(height: 20.0),
+                      _buildCustomTextField("Entrez votre numéros de téléphone",
+                          "Numéros de téléphone", _phoneNumberInput),
+                      SizedBox(height: 10.0),
+                      _buildCreateButton(),
+                    ],
+                  ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Requests.createUser();
-                },
+              Positioned(
+                top: 10,
+                left: 10,
                 child: Container(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: <Color>[
-                        Color.fromRGBO(85, 112, 221, 1.0),
-                        Color.fromRGBO(71, 50, 128, 1.0),
-                      ],
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Créer",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      print("CLOSED");
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.close,
+                      color: Colors.white,
                     ),
                   ),
                 ),
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

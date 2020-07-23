@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import '../user/user_class.dart';
-import '../user/user_inputs_class.dart';
 import '../contact/contact_class.dart';
 import '../group/group_class.dart';
 
@@ -107,7 +106,7 @@ class Requests {
       return false;
   }
 
-  static Future<bool> createUser() async {
+  static Future<bool> createUser(String email, String password, String username, String firstName, String lastName, String phoneNumber) async {
     String adminToken = await getAdminToken();
     if (adminToken == null) return false;
     String url = 'http://' + urlRequest + '/api/users/';
@@ -116,17 +115,17 @@ class Requests {
       "Authorization": adminToken
     };
     String json = '{"email": "' +
-        UserInputs.email +
+        email +
         '",	"password": "' +
-        UserInputs.password +
+        password +
         '",	"username": "' +
-        UserInputs.username +
+        username +
         '",	"first_name": "' +
-        UserInputs.firstName +
+        firstName +
         '",	"last_name": "' +
-        UserInputs.lastName +
+        lastName +
         '",	"phone": "' +
-        UserInputs.phoneNumber +
+        phoneNumber +
         '"}';
     Response response = await post(url, headers: headers, body: json);
     int statusCode = response.statusCode;
