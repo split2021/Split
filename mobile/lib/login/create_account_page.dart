@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:split/login/account_created.dart';
 
-import '../login/login.dart';
 import '../requests/requests_class.dart';
 import '../ui/background_image.dart';
 import '../decorations/login_decorations.dart';
+import '../utils/show_dialog.dart';
 
 class CreateAccount extends StatefulWidget {
   @override
@@ -45,7 +46,7 @@ class _CreateAccount extends State<CreateAccount> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.contacts,
                 color: Colors.white,
               ),
               hintText: hint,
@@ -79,10 +80,9 @@ class _CreateAccount extends State<CreateAccount> {
                       _phoneNumberInput.text) ==
                   true) {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => LogIn()));
+                context, MaterialPageRoute(builder: (context) => AccountCreated()));
           } else
-            // Debug
-            print("Username or password incorrect");
+            buildShowDialog(context, Requests.statusCodeRequest, Requests.reasonRequest);
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

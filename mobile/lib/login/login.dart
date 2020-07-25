@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:split/home/home.dart';
 
-import '../home/home.dart';
 import '../ui/background_image.dart';
 import '../requests/requests_class.dart';
 import '../user/user_class.dart';
 import 'create_account_page.dart';
 import '../decorations/login_decorations.dart';
+import '../utils/show_dialog.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -155,8 +156,7 @@ class _LogInState extends State<LogIn> {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Home()));
           } else
-            // Debug
-            print("Username or password incorrect");
+          buildShowDialog(context, Requests.statusCodeRequest, Requests.reasonRequest);
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
