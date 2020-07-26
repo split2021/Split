@@ -14,14 +14,7 @@ class GroupControl extends StatelessWidget {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: <Color>[
-                  Color.fromRGBO(85, 112, 221, 1.0),
-                  Color.fromRGBO(71, 50, 128, 1.0),
-                ],
-              ),
+              color: Color.fromRGBO(21, 58, 81, 1),
               shape: BoxShape.circle,
             ),
           ),
