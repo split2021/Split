@@ -35,7 +35,7 @@ class Requests {
       statusCodeRequest = parsedJson["statuscode"].toString();
       User.adminToken = parsedJson["data"]["token"];
       // Debug
-      print("Get admin token request: " + statusCode.toString());
+      //print("Get admin token request: " + statusCode.toString());
       User.adminTokenTimer = DateTime.now();
       if (statusCode == 200)
         return User.adminToken;
@@ -118,6 +118,7 @@ class Requests {
 
   static Future<bool> createUser(String email, String password, String username,
       String firstName, String lastName, String phoneNumber) async {
+    return true;
     String adminToken = await getAdminToken();
     if (adminToken == null) return false;
     String url = 'http://' + _urlRequest + '/api/users/';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 
 import '../contact/contact_page.dart';
 import '../group/group_manager.dart';
@@ -12,81 +13,64 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  final PageController _pageController = PageController();
-  int _currPageIndex = 0;
+  final PageController _pageController =
+      PageController(initialPage: 0, keepPage: true);
+  int _currBtmNavIndex = 0;
 
-  _setIconColor(int curPageIndex) {
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
+
+  Widget _buildBottomAppBar() {
+    return TitledBottomNavigationBar(
+        reverse: true,
+        currentIndex:
+            _currBtmNavIndex, // Use this to update the Bar giving a position
+        onTap: (index) {
+          setState(() {
+            _currBtmNavIndex = index;
+            _pageController.jumpToPage(index);
+            //pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+          });
+        },
+        items: [
+          TitledNavigationBarItem(title: Text('Groupes'), icon: Icons.group),
+          TitledNavigationBarItem(
+              title: Text('Rechercher'), icon: Icons.search),
+          TitledNavigationBarItem(
+              title: Text('Profil'), icon: Icons.person_outline),
+        ]);
+  }
+
+  void _pageChanged(int index) {
     setState(() {
-      _currPageIndex = curPageIndex;
+      _currBtmNavIndex = index;
     });
   }
 
-  Widget _appBar() {
-    return AppBar(
-      title: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              color: _currPageIndex == 0 ? Colors.white : Colors.grey,
-              icon: Icon(Icons.group),
-              onPressed: () {
-                _pageController.jumpToPage(0);
-              },
-            ),
-            IconButton(
-              color: _currPageIndex == 1 ? Colors.white : Colors.grey,
-              icon: Icon(Icons.contact_phone),
-              onPressed: () {
-                _pageController.jumpToPage(1);
-              },
-            ),
-            IconButton(
-              color: _currPageIndex == 2 ? Colors.white : Colors.grey,
-              icon: Icon(Icons.account_circle),
-              onPressed: () {
-                _pageController.jumpToPage(2);
-              },
-            ),
-          ],
-        ),
-      ),
-      flexibleSpace: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: <Color>[
-              Color.fromRGBO(85, 112, 221, 1.0),
-              Color.fromRGBO(71, 50, 128, 1.0),
-            ],
-          ),
-        ),
-      ),
-      automaticallyImplyLeading: false,
-    );
-  }
-
-  Widget _pageView() {
+  Widget _buildPageView() {
     return PageView(
       scrollDirection: Axis.horizontal,
       controller: _pageController,
+      onPageChanged: (index) {
+        _pageChanged(index);
+      },
       children: <Widget>[
         GroupManager(),
         ContactPage(),
         ProfilePage(),
       ],
-      onPageChanged: (i) {
-        _setIconColor(i);
-      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
-      body: _pageView(),
+      resizeToAvoidBottomPadding: false,
+      bottomNavigationBar: _buildBottomAppBar(),
+      body: _buildPageView(),
     );
   }
 }
