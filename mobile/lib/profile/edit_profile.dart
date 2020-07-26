@@ -15,13 +15,9 @@ class _EditProfile extends State<EditProfile> {
       title: Container(),
       flexibleSpace: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[
-            Color.fromRGBO(85, 112, 221, 1.0),
-            Color.fromRGBO(71, 50, 128, 1.0),
-          ]))),
+              color: Color.fromRGBO(21, 58, 81, 1),
+          )
+        ),
       automaticallyImplyLeading: true,
     );
   }
@@ -31,15 +27,12 @@ class _EditProfile extends State<EditProfile> {
         width: MediaQuery.of(context).size.width - 20,
         child: TextField(
             onChanged: (value) {
-              if (hintText == "Username")
+              if (hintText == "Nom d'utilisateur")
                 User.username = value;
-              else if (hintText == "Mail")
-                User.email = value;
-              else if (hintText == "First name")
+              else if (hintText == "Prénom")
                 User.firstName = value;
-              else if (hintText == "Name")
+              else if (hintText == "Nom")
                 User.lastName = value;
-              else if (hintText == "Phone number") User.phoneNumber = value;
             },
             decoration: InputDecoration(
               hintText: hintText,
@@ -59,18 +52,11 @@ class _EditProfile extends State<EditProfile> {
             width: MediaQuery.of(context).size.width / 2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(40.0),
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: <Color>[
-                  Color.fromRGBO(85, 112, 221, 1.0),
-                  Color.fromRGBO(71, 50, 128, 1.0),
-                ],
-              ),
+              color: Color.fromRGBO(21, 58, 81, 1),
             ),
             child: Center(
                 child: Text(
-              "Edit",
+              "Confirmer",
               style: TextStyle(color: Colors.white, fontSize: 20),
             ))));
   }
@@ -88,16 +74,14 @@ class _EditProfile extends State<EditProfile> {
                 alignment: FractionalOffset.topCenter,
                 child: Padding(
                     padding: EdgeInsets.only(top: 10.0, bottom: 30.0),
-                    child: Text("Edit your Profile",
+                    child: Text("Modifiez vos informations personnelles",
                         style: TextStyle(
-                            color: Color.fromRGBO(71, 50, 128, 1.0),
+                            color: Color.fromRGBO(21, 58, 81, 1),
                             fontWeight: FontWeight.bold,
                             fontSize: 24)))),
-            _createTextInput("First name"),
-            _createTextInput("Name"),
-            _createTextInput("Username"),
-            _createTextInput("Mail"),
-            _createTextInput("Phone number"),
+            _createTextInput("Prénom"),
+            _createTextInput("Nom"),
+            _createTextInput("Nom d'utilisateur"),
             _editProfileButton(context)
           ]))
         ])));

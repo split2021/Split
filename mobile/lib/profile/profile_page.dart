@@ -77,26 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildTitle(BuildContext context, String title) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 6.0),
-      decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(4.0),
-      ),
-      child: Text(
-        title,
-        style: TextStyle(
-          fontFamily: 'Spectral',
-          color: Colors.black,
-          fontSize: 20.0,
-          fontWeight: FontWeight.w300,
-        ),
-      ),
-    );
-  }
-
-  Widget buildStats(String friends, String groups, String score) {
+  Widget buildStats() {
     return Container(
       height: 60.0,
       margin: EdgeInsets.only(top: 8.0),
@@ -108,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: <Widget>[
           buildStat("Amis", User.contactList.length.toString()), //friends
           buildStat("Groupes", User.groupsIds.length.toString()), //groups
-          buildStat("Score", score),
+          buildStat("Points", "79"),
         ],
       ),
     );
@@ -167,7 +148,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 40.0,
                 decoration: BoxDecoration(
                   border: Border.all(),
-                  color: Color.fromRGBO(71, 50, 128, 1.0),
+                  color: Color.fromRGBO(21, 58, 81, 1),
                 ),
                 child: Center(
                   child: Text(
@@ -190,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Container(
                 height: 40.0,
                 decoration: BoxDecoration(
-                  border: Border.all(width: 2, color: Color.fromRGBO(71, 50, 128, 1.0)),
+                  border: Border.all(width: 2, color: Color.fromRGBO(21, 58, 81, 1)),
                 ),
                 child: Center(
                   child: Padding(
@@ -199,7 +180,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       labelTwo,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Color.fromRGBO(71, 50, 128, 1.0)
+                        color: Color.fromRGBO(21, 58, 81, 1)
                         ),
                     ),
                   ),
@@ -225,7 +206,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 40.0,
                       decoration: BoxDecoration(
                         border: Border.all(),
-                        color: Color.fromRGBO(71, 50, 128, 1.0),
+                        color: Color.fromRGBO(21, 58, 81, 1),
                       ),
                       child: Center(
                           child: Text("Déconnexion",
@@ -253,24 +234,21 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(height: screenSize.height / 5),
                     buildProfilePicture(),
                     buildUsername(),
-                    buildTitle(context, "Splitter aguerri"),
-                    buildStats("14", "2", "79"),
-                    // _buildBio(context),
-                    SizedBox(height: 10.0),
+                    buildStats(),
+                    SizedBox(height: 15.0),
                     buildSeparator(screenSize),
-                    SizedBox(height: 8.0),
+                    SizedBox(height: 15.0),
                     buildButtons(
                         "Ajouter un ami",
                         MaterialPageRoute(builder: (context) => ContactPage()),
                         "Créer un groupe",
-                        MaterialPageRoute(
-                            builder: (context) => GroupManager())),
+                        MaterialPageRoute(builder: (context) => GroupManager())),
                     buildButtons(
                         "Editer le profil",
                         MaterialPageRoute(builder: (context) => EditProfile()),
                         "Editer le titre",
-                        MaterialPageRoute(
-                            builder: (context) => ContactPage())),
+                        MaterialPageRoute(builder: (context) => ContactPage())),
+                    SizedBox(height: 12.0),  
                     buildLogOutButton(context),
                   ],
                 ),
