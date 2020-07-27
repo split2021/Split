@@ -147,8 +147,8 @@ class _LogInState extends State<LogIn> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () async {
-          if (User.username != null &&
-              User.password != null &&
+          if (_emailInput.text != null &&
+              _passwordInput.text != null &&
               await Requests.updateUser(
                       _emailInput.text, _passwordInput.text) ==
                   true) {
