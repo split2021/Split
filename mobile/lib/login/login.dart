@@ -4,7 +4,6 @@ import 'package:split/home/home.dart';
 
 import '../ui/background_image.dart';
 import '../requests/requests_class.dart';
-import '../user/user_class.dart';
 import 'create_account_page.dart';
 import '../decorations/login_decorations.dart';
 import '../utils/show_dialog.dart';

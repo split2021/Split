@@ -118,7 +118,6 @@ class Requests {
 
   static Future<bool> createUser(String email, String password, String username,
       String firstName, String lastName, String phoneNumber) async {
-    return true;
     String adminToken = await getAdminToken();
     if (adminToken == null) return false;
     String url = 'http://' + _urlRequest + '/api/users/';
