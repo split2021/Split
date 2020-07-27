@@ -31,8 +31,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         onTap: (index) {
           setState(() {
             _currBtmNavIndex = index;
-            _pageController.jumpToPage(index);
-            //pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+            _pageController.animateToPage(index,
+                duration: Duration(milliseconds: 500), curve: Curves.ease);
           });
         },
         indicatorColor: Color.fromRGBO(21, 58, 81, 1),
