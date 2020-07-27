@@ -35,8 +35,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             //pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
           });
         },
+        indicatorColor: Color.fromRGBO(21, 58, 81, 1),
+        activeColor: Color.fromRGBO(21, 58, 81, 1),
         items: [
-          TitledNavigationBarItem(title: Text('Groupes'), icon: Icons.group),
+          TitledNavigationBarItem(
+              title: Text('Groupes'),
+              icon: Icons.group,
+              backgroundColor: Colors.white),
           TitledNavigationBarItem(
               title: Text('Rechercher'), icon: Icons.search),
           TitledNavigationBarItem(

@@ -141,9 +141,6 @@ class _LogInState extends State<LogIn> {
   }
 
   Widget _buildLoginBtn() {
-    User.username = _emailInput.text;
-    User.password = _passwordInput.text;
-
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -152,11 +149,14 @@ class _LogInState extends State<LogIn> {
         onPressed: () async {
           if (User.username != null &&
               User.password != null &&
-              await Requests.updateUser(User.username, User.password) == true) {
+              await Requests.updateUser(
+                      _emailInput.text, _passwordInput.text) ==
+                  true) {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Home()));
           } else
-          buildShowDialog(context, Requests.statusCodeRequest, Requests.reasonRequest);
+            buildShowDialog(
+                context, Requests.statusCodeRequest, Requests.reasonRequest);
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
