@@ -79,10 +79,11 @@ class _CreateAccount extends State<CreateAccount> {
                       _lastNameInput.text,
                       _phoneNumberInput.text) ==
                   true) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AccountCreated()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AccountCreated()));
           } else
-            buildShowDialog(context, Requests.statusCodeRequest, Requests.reasonRequest);
+            buildShowDialog(
+                context, Requests.statusCodeRequest, Requests.reasonRequest);
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -155,7 +156,7 @@ class _CreateAccount extends State<CreateAccount> {
                           "Entrez votre nom", "Nom", _lastNameInput),
                       SizedBox(height: 20.0),
                       _buildCustomTextField("Entrez votre numéros de téléphone",
-                          "Numéros de téléphone", _phoneNumberInput),
+                          "Numéro de téléphone", _phoneNumberInput),
                       SizedBox(height: 10.0),
                       _buildCreateButton(),
                     ],

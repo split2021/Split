@@ -131,7 +131,7 @@ class _LogInState extends State<LogIn> {
             ),
           ),
           Text(
-            'Restez connecté',
+            'Rester connecté',
             style: logInLabelStyle,
           ),
         ],
@@ -180,7 +180,7 @@ class _LogInState extends State<LogIn> {
     return Column(
       children: <Widget>[
         Text(
-          '- OR -',
+          '- OU -',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w400,
@@ -260,7 +260,7 @@ class _LogInState extends State<LogIn> {
               ),
             ),
             TextSpan(
-              text: 'Se connecter',
+              text: 'Créer un compte',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
