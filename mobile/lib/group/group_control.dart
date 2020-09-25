@@ -8,7 +8,7 @@ class GroupControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => {addGroup()},
+      onPressed: () => {addGroup(context)},
       tooltip: 'Ajouter un groupe',
       child: Stack(
         children: <Widget>[

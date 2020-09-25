@@ -235,6 +235,7 @@ class Requests {
     statusCodeRequest = parsedJson["statuscode"].toString();
     for (var contact in parsedJson["data"]) {
       listContact.add(Contact.fromJson(contact));
+      print(contact["email"]);
     }
     return listContact;
   }

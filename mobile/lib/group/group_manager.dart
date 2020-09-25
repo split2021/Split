@@ -39,72 +39,77 @@ class _GroupManagerState extends State<GroupManager> {
     });
   }
 
-  void _showContact() {
+  void _showContact(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Choisissez les membres du groupe"),
-          content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return Column(
-                children: [
-                  TextField(
-                    controller: editingController,
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: User.contactList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return CheckboxListTile(
-                            title: Text(User.contactList[index].firstName +
-                                " " +
-                                User.contactList[index].lastName),
-                            value: User.contactList[index].checked,
-                            subtitle: Text(User.contactList[index].phoneNumber),
-                            onChanged: (bool newValue) {
-                              setState(() {
-                                User.contactList[index].checked = newValue;
-                              });
-                            },
-                          );
-                        },
+        return Container(
+          margin: EdgeInsets.symmetric(vertical: 60.0),
+          child: AlertDialog(
+            title: Text("Choisissez les membres du groupe"),
+            content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                return Column(
+                  children: [
+                    TextField(
+                      controller: editingController,
+                    ),
+                    Expanded(
+                      child: Container(
+                        width: double.maxFinite,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: User.contactList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CheckboxListTile(
+                              title: Text(User.contactList[index].firstName +
+                                  " " +
+                                  User.contactList[index].lastName),
+                              value: User.contactList[index].checked,
+                              subtitle:
+                                  Text(User.contactList[index].phoneNumber),
+                              onChanged: (bool newValue) {
+                                setState(() {
+                                  User.contactList[index].checked = newValue;
+                                });
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              );
-            },
+                  ],
+                );
+              },
+            ),
+            actions: <Widget>[
+              RaisedButton(
+                child: Text(
+                  "Créer",
+                ),
+                onPressed: () {
+                  Requests.createGroup(editingController.text);
+                  _updateList();
+                  Navigator.pop(context);
+                },
+              ),
+              RaisedButton(
+                child: Text(
+                  "Annuler",
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
           ),
-          actions: <Widget>[
-            RaisedButton(
-              child: Text(
-                "Créer",
-              ),
-              onPressed: () {
-                Requests.createGroup(editingController.text);
-                _updateList();
-                Navigator.pop(context);
-              },
-            ),
-            RaisedButton(
-              child: Text(
-                "Non",
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
         );
       },
     );
   }
 
-  void _addGroup() {
-    _showContact();
+  void _addGroup(BuildContext context) {
+    _showContact(context);
   }
 
   void _delGroup(int removeIndex) {

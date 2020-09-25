@@ -117,11 +117,6 @@ class _ContactPageState extends State<ContactPage> {
                                       .toLowerCase()
                                       .contains(typedText.toLowerCase()) ==
                                   true ||
-                              listContact[index]
-                                      .lastName
-                                      .toLowerCase()
-                                      .contains(typedText.toLowerCase()) ==
-                                  true ||
                               typedText == ''
                           ? ContactListTile(listContact[index])
                           : Container(),

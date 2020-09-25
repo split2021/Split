@@ -56,17 +56,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 
   Widget _buildPageView() {
-    return PageView(
-      scrollDirection: Axis.horizontal,
-      controller: _pageController,
-      onPageChanged: (index) {
-        _pageChanged(index);
-      },
-      children: <Widget>[
-        GroupManager(),
-        ContactPage(),
-        ProfilePage(),
-      ],
+    return Container(
+      margin: MediaQuery.of(context).padding,
+      child: PageView(
+        scrollDirection: Axis.horizontal,
+        controller: _pageController,
+        onPageChanged: (index) {
+          _pageChanged(index);
+        },
+        children: <Widget>[
+          GroupManager(),
+          ContactPage(),
+          ProfilePage(),
+        ],
+      ),
     );
   }
 
