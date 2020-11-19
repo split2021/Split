@@ -59,6 +59,12 @@ export default class SettingsTab extends React.Component {
                 Title={'Paramètres de mon compte'}
                 Background={process.env.PUBLIC_URL + 'settings.jpg'}
             />
+
+            <Case
+                onClick={() => this.handleRedirect('/dashboard')}
+                    Title={'Dashboard Conso'}
+                    Background={process.env.PUBLIC_URL + 'dashboard.jpeg'}
+            />
           </Tab>
       </Container>
     )

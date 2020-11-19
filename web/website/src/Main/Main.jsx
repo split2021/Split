@@ -13,6 +13,7 @@ import Settings from './Account/Settings/Settings';
 import { Router, Route } from 'react-router-dom';
 import History from '../components/History/History';
 import ChangePassword from './Account/Password/Password.jsx';
+import Dashboard from '../components/Dashboard/Dashboard.jsx';
 
 export default class App extends React.Component {
   render() {
@@ -29,6 +30,7 @@ export default class App extends React.Component {
           <Route path="/history" component={Payements}/>
           <Route path="/settings" component={Settings}/>
           <Route path="/password" component={ChangePassword} />
+          <Route path="/dashboard" component={Dashboard} />
           <Footer/>
         </Router>
       </Container>
