@@ -12,7 +12,7 @@ import {
   AlreadySignUp,
   SignUpLink,
 } from './Subscribe.styles.js';
-import Button from '../../components/Button/Button';
+import Button from '@material-ui/core/Button';
 import Header from '../Header/Header';
 
 export default class Subscribe extends React.Component {
@@ -50,7 +50,7 @@ export default class Subscribe extends React.Component {
     this.setState({ isLoading: true });
     let data = {
       email: 'split_2021@labeip.epitech.eu',
-      password: '@4g%G4HB&xE7z',
+      password: 'X#9q@XCy7qy&',
     };
     this.request('login', data);
   }

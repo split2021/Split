@@ -3,7 +3,7 @@ import API from '../../../components/Api/Api';
 import Header from '../../Header/Header';
 
 import Cookies from 'universal-cookie';
-import Button from '../../../components/Button/Button';
+import Button from '@material-ui/core/Button';
 import {
     Container,
     Login,
@@ -30,13 +30,13 @@ export default class ChangePassword extends React.Component {
 
         this.cookies = new Cookies();
         if (this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
-            console.log('cookie présent');
+            console.log('cookie prï¿½sent');
             this.state = {
                 connected: true,
                 token: this.cookies.cookies.auth,
             };
         } else {
-            console.log('cookie non présent');
+            console.log('cookie non prï¿½sent');
             this.handleRedirect('/');
         }
     }

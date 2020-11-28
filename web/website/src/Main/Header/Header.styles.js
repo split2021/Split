@@ -1,14 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
-  height: 60px;
-  background-color: #5570dd;
-  display: inline-block;
-  position: fixed;
+  height: 100px;
   top: 0;
-  z-index: 100;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  background-color: white;
 `;
 
 export const Elements = styled.div`
@@ -20,10 +15,10 @@ export const Elements = styled.div`
 
 export const Logo = styled.div`
   float: left;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   margin-left: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
   background-image: url(${process.env.PUBLIC_URL + "logo-split.png"});
   background-position: top left;
   background-size: contain;
@@ -34,32 +29,33 @@ export const Logo = styled.div`
 `;
 
 export const MenuTab = styled.div`
-  height: calc(60px - 21px);
-  padding-top: 21px;
+  margin-top: 20px;
   margin-right: 40px;
   position: relative;
   float: right;
   display: inline-block;
   cursor: pointer;
   color: #FFFFFF;
+  font-size: 24px;
   font-weight: 500;
   text-decoration: none;
-  
-  &::after {
-    width: 0%;
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
-    content: "";
-    height: 3px;
-    background: #dfd8ef;
-    transition: 0.2s ease-in-out 0s;
-  }
+`;
+
+export const MenuTxt = styled.span`
+    text-transform: none;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 16px 8px 16px;
+`;
+
+export const Title = styled.div`
+    float: left;
+    margin-top: 10px;
+    margin-left: 2px;
+    font-size: 48px;
+    font-weight: 600;
 
   &:hover {
     cursor: pointer;
-    &::after {
-      width: 100% !important;
-    }
   }
 `;

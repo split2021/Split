@@ -34,28 +34,41 @@ export const Phone = styled.img`
 
 export const Block = styled.div`
   display: block;
-  margin: ${props => props.first ? '200px auto 100px' : '90px auto'};
-  max-width: 1120px;
+  margin: 0px auto;
+  padding: ${props => props.first ? '100px 0px' : '100px 0px 100px'};
+  max-width: ${props => props.Trombi || props.contact ? '100%' : '1120px'};
   width: 100%;
   color: ${props => props.contact ? 'white' : '#5570dd'};
-  border-radius: 6px;
   background-position: center;
-  ${props => props.contact ? `background-image: url(${process.env.PUBLIC_URL + 'epitech-img.jpg'})` : 'background-color: white'};
+  ${props => props.contact ? `background-image: url(${process.env.PUBLIC_URL + 'epitech-img.jpg'})` : 'background-color: transparent'};
   text-align: center;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 `;
 
 export const Title = styled.div`
-  font-size: ${props => props.contact ? 20 : 30}px;
+  font-size: ${props => props.contact ? 20 : 80}px;
   font-weight: 700;
   margin-top: ${props => props.contact ? 40 : 0}px;
+  margin-bottom: ${props => props.first ? '150px' : '0px'};
 `;
 
 export const Text = styled.div`
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 700;
+  margin-top: 30px;
+  width: 60%;
+  margin-left: 20%;
+`;
+
+export const BtnText = styled.div`
+  font-size: 20px;
+  font-weight: 600;
+  padding: 8px 16px 8px 16px;
+  text-transform: none;
+`;
+
+export const BigText = styled.div`
+  font-size: 40px;
+  font-weight: 600;
   margin-top: 30px;
   width: 60%;
   margin-left: 20%;
@@ -75,4 +88,13 @@ export const DeviseTxt = styled.div`
   font-weight: 700;
   opacity: 0.9;
   color: #5570dd;
+`;
+
+export const Back = styled.div`
+  background-color: #f6f6f8;
+  height: 700px;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+  margin-top: -700px;
 `;

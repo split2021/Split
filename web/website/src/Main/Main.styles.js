@@ -7,7 +7,7 @@ export const Container = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: #f6f9fc;
+  background: white;
   font-family: Roboto;
   font-size: 16px;
   font-weight: 500;

@@ -4,8 +4,11 @@ import {
   Container,
   Logo,
   Elements,
-  MenuTab
+  MenuTab,
+  MenuTxt,
+  Title
 } from './Header.styles';
+import Button from '@material-ui/core/Button';
 
 export default class Header extends React.Component {
 
@@ -36,17 +39,24 @@ export default class Header extends React.Component {
   }
 
   render() {
-    return (
+    return(
       <Container>
         <Elements>
           <Logo onClick={() => {this.handleClick('/')}}/>
-          {this.state.connected ?
-              [<MenuTab onClick={() => {this.disconnection()}}>DECONNEXION</MenuTab>,
-                  <MenuTab onClick={() => {this.handleClick('/account')}}>MON COMPTE</MenuTab>]
+          <Title onClick={() => {this.handleClick('/')}}>plit</Title>
+          <MenuTab>
+            {this.state.connected ?
+              [<Button style={{marginRight: '16px', borderRadius: '30px'}} color="primary" onClick={() => {this.disconnection()}}>
+                <MenuTxt>Déconnexion</MenuTxt></Button>,
+                <Button style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={() => {this.handleClick('/account')}}>
+                  <MenuTxt>Mon compte</MenuTxt></Button>]
               :
-              [<MenuTab onClick={() => {this.handleClick('/login')}}>SE CONNECTER</MenuTab>,
-                  <MenuTab onClick={() => {this.handleClick('/subscribe')}}>S'INSCRIRE</MenuTab>]
-          }
+                [<Button style={{marginRight: '16px', borderRadius: '30px'}} color="primary" onClick={() => {this.handleClick('/login')}}>
+                  <MenuTxt>Se connecter</MenuTxt></Button>,
+                <Button style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={() => {this.handleClick('/subscribe')}}>
+                  <MenuTxt>S'inscrire</MenuTxt></Button>]
+            }
+          </MenuTab>
         </Elements>
       </Container>
     )
