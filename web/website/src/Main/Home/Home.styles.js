@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  color: #5570dd;
+  color: #556DFF;
   width: 100%;
 `;
 
@@ -38,7 +38,7 @@ export const Block = styled.div`
   padding: ${props => props.first ? '100px 0px' : '100px 0px 100px'};
   max-width: ${props => props.Trombi || props.contact ? '100%' : '1120px'};
   width: 100%;
-  color: ${props => props.contact ? 'white' : '#5570dd'};
+  color: ${props => props.contact ? 'white' : '#556DFF'};
   background-position: center;
   ${props => props.contact ? `background-image: url(${process.env.PUBLIC_URL + 'epitech-img.jpg'})` : 'background-color: transparent'};
   text-align: center;
@@ -48,7 +48,7 @@ export const Title = styled.div`
   font-size: ${props => props.contact ? 20 : 80}px;
   font-weight: 700;
   margin-top: ${props => props.contact ? 40 : 0}px;
-  margin-bottom: ${props => props.first ? '150px' : '0px'};
+  margin-bottom: ${props => props.first ? '150px' : '10 0px'};
 `;
 
 export const Text = styled.div`

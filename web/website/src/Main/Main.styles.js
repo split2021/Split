@@ -15,7 +15,7 @@ export const Container = styled.div`
   font-stretch: normal;
   line-height: 1.618;
   letter-spacing: normal;
-  color: #000000;
+  color: #556DFF;
   overflow-y: auto;
   overflow-x: hidden;
 `;

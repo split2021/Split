@@ -145,7 +145,6 @@ export default class ChangePassword extends React.Component {
         const { password, passwordBis } = this.state;
         return (
             <Container>
-                <Header {...this.props} />
                 <Login>
                     <Title> Change Password </Title>
                     

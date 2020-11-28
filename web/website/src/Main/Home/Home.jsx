@@ -61,7 +61,6 @@ export default class Home extends React.Component {
   render() {
     return (
       <Container ref={this.myRef}>
-        <Header {...this.props}/>
         <Block first={true}>
           <Title first={true}>Le paiement à plusieurs repensé</Title>
           <Button style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={this.discover}>

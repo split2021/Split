@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  color: #5570dd;
+  color: ##556DFF;
   width: 100%;
   min-height: calc(100% - 250px);
 `;
 
 export const Login = styled.div`
-  margin: 120px auto 40px;
+  margin: 0px auto 40px;
   width: 600px;
   background-color: white;
   border-radius: 6px;

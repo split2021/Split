@@ -35,7 +35,6 @@ export default class Payements extends React.Component {
     render() {
         return (
             <Container>
-                <Header {...this.props}/>
                 <Tab>
                     <Title>Historique de paiement</Title>
                     <Goback onClick={() => {this.handleRedirect('/account')}}>&larr;  Retourner vers mon Compte</Goback>

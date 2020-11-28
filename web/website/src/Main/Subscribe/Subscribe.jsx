@@ -62,20 +62,29 @@ export default class Subscribe extends React.Component {
 
   componentDidUpdate(prevState, prevProps) {
     if (prevProps.data !== this.state.data) {
-      if (this.state.data.statuscode === 200) {
-        this.setState({token: this.state.data.data.token});
-        this.setState({connectedDb: true});
-      }
-      if (this.state.data.statuscode === 201) {
-        this.props.history.push('/login');
-        Notification('success', '', 'Votre compte a bien été créé !');
-      } else if (this.state.data.statuscode !== 200) {
-        console.log(this.state.data.statuscode, this.state.data.reason);
-        if (this.state.error) {
+
+      switch (this.state.data.statuscode) {
+        case 200:
+          this.setState({token: this.state.data.data.token});
+          this.setState({connectedDb: true});
+          break;
+
+        case 201:
+          this.props.history.push('/login');
+          Notification('success', '', 'Votre compte a bien été créé !');
+          break;
+
+        case 400:
+          console.log(this.state.data.statuscode, this.state.data.reason);
+          Notification('danger', '', 'Erreur de requête veuillez contacter le support.');
+          break;
+
+        default:
           Notification('danger', '', this.state.connectedDb ?
               'Informations incorrectes ou compte déjà existant': 'API hors ligne');
-          console.log(this.state.error);
-        }
+          console.log(this.state.data.statuscode, this.state.data.reason);
+          if (this.state.error) console.log(this.state.error);
+          break;
       }
     }
   }
@@ -97,7 +106,6 @@ export default class Subscribe extends React.Component {
     const { nom, prenom, email, phone, password, passwordBis } = this.state;
     return (
       <Container>
-        <Header {...this.props}/>
         <Login>
           <Title>Inscription</Title>
           <AlreadySignUp>Déjà inscrit ? <SignUpLink to={'/login'}>Connectez-vous ici</SignUpLink></AlreadySignUp>
