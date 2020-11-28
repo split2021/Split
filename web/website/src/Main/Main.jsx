@@ -12,12 +12,15 @@ import Payements from './Account/Payments/Payements';
 import Settings from './Account/Settings/Settings';
 import { Router, Route } from 'react-router-dom';
 import History from '../components/History/History';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import ChangePassword from './Account/Password/Password.jsx';
 
 export default class App extends React.Component {
   render() {
     return (
       <Container>
+        <ReactNotification />
         <Router history={History}>
           <Route exact path="/" component={Home}/>
           <Route path="/subscribe" component={Subscribe}/>

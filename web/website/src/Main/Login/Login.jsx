@@ -1,5 +1,6 @@
 import React from 'react';
 import API from '../../components/Api/Api';
+import Notification from '../../components/Notification/Notification';
 import Cookies from 'universal-cookie';
 import {
   Container,
@@ -15,6 +16,7 @@ import {
 } from '../Subscribe/Subscribe.styles';
 import Button from '@material-ui/core/Button';
 import Header from '../Header/Header';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 export default class SignIn extends React.Component {
@@ -25,6 +27,7 @@ export default class SignIn extends React.Component {
     this.state = {
       email: "",
       password: "",
+      isLoading: false,
     };
   }
 
@@ -37,10 +40,11 @@ export default class SignIn extends React.Component {
   componentDidUpdate(prevState, prevProps) {
     if (prevProps.data !== this.state.data) {
       if (this.state.data.statuscode === 200) {
-        console.log(this.state);
+        Notification('success', '', 'Connexion effectuée !');
         this.cookies.set('auth', this.state.data.data.token, { path: '/', maxAge: 3540});
         this.props.history.push('/account');
       } else {
+        Notification('danger', '', 'Mauvais email ou mot de passe !');
         console.log(this.state.data.statuscode, this.state.data.reason);
         if (this.state.error) console.log(this.state.error);
       }
@@ -53,9 +57,10 @@ export default class SignIn extends React.Component {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
     };
+    this.setState({isLoading: true});
     API.post(call, JSON.stringify(data), {headers: header})
         .then(response => this.setState({data: response.data, isLoading: false}))
-        .catch(error => this.setState({error, isLoading: false}));
+        .catch(error => this.setState({error, data: error, isLoading: false}));
   };
 
   render() {
@@ -65,6 +70,9 @@ export default class SignIn extends React.Component {
         <Header {...this.props}/>
         <Login>
           <Title>Connexion</Title>
+          <AlreadySignUp>Pas encore inscrit ? <SignUpLink to={'/subscribe'}>
+            Inscrivez-vous ici
+          </SignUpLink></AlreadySignUp>
           <LoginForm onSubmit={this.handleSubmit}>
             <InputContainer>
               <InputName>Email</InputName>
@@ -85,10 +93,27 @@ export default class SignIn extends React.Component {
               />
             </InputContainer>
             <LoginButton>
-              <Button type="submit" form={true}>Connexion</Button>
+              <Button style={{
+                borderRadius: '30px',
+                width: this.state.isLoading ? '390px' : '450px',
+                left: '0px',
+                height: '45px',
+                textTransform: 'none',
+                fontWeight: '600',
+                fontSize: '18px',
+                float: 'left'
+              }}
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      form={true}
+                      disabled={this.state.isLoading}
+              >
+                Connexion
+              </Button>
+              {this.state.isLoading && <CircularProgress style={{float: 'left', marginLeft: '20px'}} />}
             </LoginButton>
           </LoginForm>
-          <AlreadySignUp>Pas encore inscrit ? <SignUpLink to={'/subscribe'}>Inscrivez-vous ici</SignUpLink></AlreadySignUp>
         </Login>
       </Container>
     )

@@ -1,5 +1,6 @@
 import React from 'react';
 import API from '../../components/Api/Api';
+import Notification from '../../components/Notification/Notification';
 import {
   Container,
   Login,
@@ -14,6 +15,7 @@ import {
 } from './Subscribe.styles.js';
 import Button from '@material-ui/core/Button';
 import Header from '../Header/Header';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class Subscribe extends React.Component {
   constructor(props) {
@@ -25,6 +27,8 @@ export default class Subscribe extends React.Component {
       phone: "",
       password: "",
       passwordBis: "",
+      isLoading: false,
+      connectedDb: false,
     };
   }
 
@@ -33,6 +37,7 @@ export default class Subscribe extends React.Component {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     };
+    this.setState({isLoading: true});
     if (call === 'users/') {
       header = {
         Accept: 'application/json',
@@ -43,26 +48,34 @@ export default class Subscribe extends React.Component {
     }
     API.post(call, JSON.stringify(data), {headers: header})
         .then(response => this.setState({data: response.data, isLoading: false}))
-        .catch(error => this.setState({error, isLoading: false}));
+        .catch(error => this.setState({error, data: error, isLoading: false}));
   };
 
   componentDidMount() {
     this.setState({ isLoading: true });
     let data = {
       email: 'split_2021@labeip.epitech.eu',
-      password: 'X#9q@XCy7qy&',
+      password: '@4g%G4HB&xE7z',
     };
     this.request('login', data);
   }
 
   componentDidUpdate(prevState, prevProps) {
     if (prevProps.data !== this.state.data) {
-      this.setState({token: this.state.data.data.token});
+      if (this.state.data.statuscode === 200) {
+        this.setState({token: this.state.data.data.token});
+        this.setState({connectedDb: true});
+      }
       if (this.state.data.statuscode === 201) {
         this.props.history.push('/login');
+        Notification('success', '', 'Votre compte a bien été créé !');
       } else if (this.state.data.statuscode !== 200) {
         console.log(this.state.data.statuscode, this.state.data.reason);
-        if (this.state.error) console.log(this.state.error);
+        if (this.state.error) {
+          Notification('danger', '', this.state.connectedDb ?
+              'Informations incorrectes ou compte déjà existant': 'API hors ligne');
+          console.log(this.state.error);
+        }
       }
     }
   }
@@ -87,6 +100,7 @@ export default class Subscribe extends React.Component {
         <Header {...this.props}/>
         <Login>
           <Title>Inscription</Title>
+          <AlreadySignUp>Déjà inscrit ? <SignUpLink to={'/login'}>Connectez-vous ici</SignUpLink></AlreadySignUp>
           <LoginForm onSubmit={this.handleSubmit}>
             <InputContainer name={"nom"}>
               <InputName>Nom</InputName>
@@ -145,10 +159,28 @@ export default class Subscribe extends React.Component {
               />
             </InputContainer>
             <LoginButton>
-              <Button type="submit" form={true}>Inscription</Button>
+              <Button style={{
+                borderRadius: '30px',
+                width: this.state.isLoading ? '390px' : '450px',
+                transitionDuration: '1s',
+                left: '0px',
+                height: '45px',
+                textTransform: 'none',
+                fontWeight: '600',
+                fontSize: '18px',
+                float: 'left'
+              }}
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      form={true}
+                      disabled={this.state.isLoading}
+              >
+                Inscription
+              </Button>
+              {this.state.isLoading && <CircularProgress style={{float: 'left', marginLeft: '20px'}} />}
             </LoginButton>
           </LoginForm>
-          <AlreadySignUp>Déjà inscrit ? <SignUpLink to={'/login'}>Connectez-vous ici</SignUpLink></AlreadySignUp>
         </Login>
       </Container>
     )

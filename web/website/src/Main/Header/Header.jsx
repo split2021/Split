@@ -1,5 +1,6 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
+import Notification from '../../components/Notification/Notification';
 import {
   Container,
   Logo,
@@ -35,6 +36,7 @@ export default class Header extends React.Component {
   disconnection() {
     this.cookies.remove('auth');
     this.setState({connected: false});
+    Notification('default','', 'Vous êtes maintenant déconnecté.');
     this.handleClick('/');
   }
 

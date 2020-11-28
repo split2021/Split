@@ -6,6 +6,7 @@ export const Container = styled.div`
   width: 100%;
   height: 90px;
   padding: 20px;
+  border-top: 1px solid #e9e7eb;
 `;
 
 export const Inner = styled.div`
