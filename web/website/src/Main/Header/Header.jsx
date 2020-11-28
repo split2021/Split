@@ -46,7 +46,7 @@ export default class Header extends React.Component {
     this.unlisten();
   }
 
-  disconnection() {
+  async disconnection() {
     this.cookies.remove('auth');
     this.setState({connected: false});
     Notification('default','', 'Vous êtes maintenant déconnecté.');
