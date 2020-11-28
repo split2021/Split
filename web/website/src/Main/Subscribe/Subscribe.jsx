@@ -1,6 +1,7 @@
 import React from 'react';
-import API from '../../components/Api/Api';
+import Request from '../../components/Api/Request';
 import Notification from '../../components/Notification/Notification';
+import AdminData from '../../components/Api/AdminData';
 import {
   Container,
   Login,
@@ -29,34 +30,6 @@ export default class Subscribe extends React.Component {
       isLoading: false,
       connectedDb: false,
     };
-  }
-
-  request = (call, data) => {
-    let header = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    };
-    this.setState({isLoading: true});
-    if (call === 'users/') {
-      header = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.state.token,
-        'Access-Control-Allow-Origin': '*',
-      };
-    }
-    API.post(call, JSON.stringify(data), {headers: header})
-        .then(response => this.setState({data: response.data, isLoading: false}))
-        .catch(error => this.setState({error, data: error, isLoading: false}));
-  };
-
-  componentDidMount() {
-    this.setState({ isLoading: true });
-    let data = {
-      email: 'split_2021@labeip.epitech.eu',
-      password: '@4g%G4HB&xE7z',
-    };
-    this.request('login', data);
   }
 
   componentDidUpdate(prevState, prevProps) {
@@ -88,8 +61,7 @@ export default class Subscribe extends React.Component {
     }
   }
 
-  subscribe = () => {
-    this.setState({ isLoading: true });
+  async subscribe() {
     let data = {
       email: this.state.email,
       password: this.state.password,
@@ -98,7 +70,10 @@ export default class Subscribe extends React.Component {
       last_name: this.state.nom,
       phone: this.state.phone,
     };
-    this.request('users/', data);
+    this.setState({ isLoading: true });
+    this.setState( await Request('login', AdminData))
+    if (!this.state.error) this.setState( await Request('users/', data));
+    this.setState({ isLoading: false });
   };
 
   render() {
@@ -209,8 +184,7 @@ export default class Subscribe extends React.Component {
     }
     if (!fieldEmpty
         && this.state.password === this.state.passwordBis
-        && !this.state.isLoading
-        && this.state.token) {
+        && !this.state.isLoading) {
       this.subscribe();
     }
   };

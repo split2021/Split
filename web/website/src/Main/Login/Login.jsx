@@ -1,5 +1,5 @@
 import React from 'react';
-import API from '../../components/Api/Api';
+import Request from '../../components/Api/Request';
 import Notification from '../../components/Notification/Notification';
 import Cookies from 'universal-cookie';
 import {
@@ -62,18 +62,6 @@ export default class SignIn extends React.Component {
     }
   }
 
-  request = (call, data) => {
-    let header = {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    };
-    this.setState({isLoading: true});
-    API.post(call, JSON.stringify(data), {headers: header})
-        .then(response => this.setState({data: response.data, isLoading: false}))
-        .catch(error => this.setState({error, data: error, isLoading: false}));
-  };
-
   render() {
     const { email, password } = this.state;
     return (
@@ -135,13 +123,13 @@ export default class SignIn extends React.Component {
     });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     this.setState({ isLoading: true });
     let data = {
       email: this.state.email,
       password: this.state.password,
     };
-    this.request('login', data);
+    this.setState( await Request('login', data));
   };
 }
