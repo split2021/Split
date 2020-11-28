@@ -6,7 +6,7 @@ WORKDIR /web
 
 COPY package*.json /web
 
-RUN yarn install
+RUN yarn install --network-timeout 1000000
 
 COPY . /web
 
