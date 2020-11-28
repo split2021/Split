@@ -21,7 +21,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Button from '@material-ui/core/Button';
 import Trombi from '../../components/Trombi/Trombi'
-import Header from '../Header/Header';
 
 export default class Home extends React.Component {
   constructor(props) {

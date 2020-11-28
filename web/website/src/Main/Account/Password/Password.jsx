@@ -1,6 +1,5 @@
 import React from 'react';
 import API from '../../../components/Api/Api';
-import Header from '../../Header/Header';
 
 import Cookies from 'universal-cookie';
 import Button from '@material-ui/core/Button';

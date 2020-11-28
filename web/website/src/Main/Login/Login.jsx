@@ -15,7 +15,6 @@ import {
   SignUpLink,
 } from '../Subscribe/Subscribe.styles';
 import Button from '@material-ui/core/Button';
-import Header from '../Header/Header';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 

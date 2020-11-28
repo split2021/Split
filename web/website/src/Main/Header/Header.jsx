@@ -10,27 +10,40 @@ import {
   Title
 } from './Header.styles';
 import Button from '@material-ui/core/Button';
+import History from "../../components/History/History";
 
 export default class Header extends React.Component {
 
   constructor(props) {
     super(props);
-    this.cookies = new Cookies();
-    if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
-      console.log('cookie présent');
-      this.state = {
-        connected: true,
-      };
-    } else {
-      console.log('cookie non présent');
-      this.state = {
-        connected: false,
-      };
+    this.state = {
+      connected: false,
     }
   }
 
   handleClick(direction) {
     this.props.history.push(direction);
+  }
+
+  componentDidMount() {
+    this.unlisten = History.listen( location =>  {
+      this.cookies = new Cookies();
+      if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
+        console.log('cookie présent');
+        this.setState({
+          connected: true,
+        });
+      } else {
+        console.log('cookie non présent');
+        this.setState({
+          connected: false,
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.unlisten();
   }
 
   disconnection() {

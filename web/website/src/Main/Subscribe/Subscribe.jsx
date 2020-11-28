@@ -14,7 +14,6 @@ import {
   SignUpLink,
 } from './Subscribe.styles.js';
 import Button from '@material-ui/core/Button';
-import Header from '../Header/Header';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class Subscribe extends React.Component {

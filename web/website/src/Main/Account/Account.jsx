@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../Header/Header';
 import Case from '../../components/Case/Case';
 import Cookies from 'universal-cookie';
 import {
