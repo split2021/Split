@@ -22,9 +22,6 @@ import { mainListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
-import {
-    Goback
-} from '../../Main/Account/Global.styles';
 
 const drawerWidth = 240;
 
@@ -109,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -117,13 +114,13 @@ export default function Dashboard() {
         setOpen(false);
     };
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
    
     return (
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
+
                     <IconButton
                         edge="start"
                         color="inherit"
