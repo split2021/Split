@@ -12,13 +12,13 @@ services:
     command: bash -c "
         python manage.py migrate
         && python manage.py collectstatic --noinput
-        && gunicorn split.wsgi:application --bind 0.0.0.0:80 --workers 3"
+        && gunicorn split.wsgi:application --bind 0.0.0.0:8000 --workers 3"
     environment:
       STAGE: "1"
     depends_on:
       - db
     ports:
-      - "80:80"
+      - "8000:8000"
   
   web:
     build: ./web/website
@@ -26,7 +26,4 @@ services:
     depends_on:
       - api
     ports:
-      - target: 3000
-        published: 3000
-        protocol: tcp
-        mode: host
+      - "3000:3000"
