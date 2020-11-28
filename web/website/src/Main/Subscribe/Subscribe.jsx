@@ -53,7 +53,7 @@ export default class Subscribe extends React.Component {
 
         default:
           Notification('danger', '', this.state.connectedDb ?
-              'Informations incorrectes ou compte déjà existant': 'API hors ligne');
+              'Informations incorrectes ou compte déjà existant': 'API hors ligne, veuillez reesayer plus tard.');
           console.log(this.state.data.statuscode, this.state.data.reason);
           if (this.state.error) console.log(this.state.error);
           break;
