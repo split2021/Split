@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 export const Container = styled.div`
   color: ##556DFF;
@@ -14,6 +15,12 @@ export const Login = styled.div`
   border-radius: 6px;
   box-shadow: 0px 2px 8px rgba(17, 17, 29, 0.12);
   border: 1px solid #E9E7EB;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    border: 0px;
+    box-shadow: none;
+  }
 `;
 
 export const Title = styled.div`
@@ -28,6 +35,11 @@ export const Title = styled.div`
 export const LoginForm = styled.form`
   margin: auto auto 100px auto;
   width: 80%;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -36,6 +48,10 @@ export const InputContainer = styled.div`
   margin-right: 2.5%;
   margin-left: 2.5%;
   margin-bottom: 10px;
+  
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 export const InputName = styled.span`

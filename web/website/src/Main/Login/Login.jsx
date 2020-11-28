@@ -93,7 +93,7 @@ export default class SignIn extends React.Component {
             <LoginButton>
               <Button style={{
                 borderRadius: '30px',
-                width: this.state.isLoading ? '390px' : '450px',
+                width: this.state.isLoading ? 'calc(100% - 76px)' : 'calc(100% - 6px)',
                 left: '0px',
                 height: '45px',
                 textTransform: 'none',
@@ -123,7 +123,7 @@ export default class SignIn extends React.Component {
     });
   };
 
-  handleSubmit = async (event) => {
+  handleSubmit = async(event) => {
     event.preventDefault();
     this.setState({ isLoading: true });
     let data = {

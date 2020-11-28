@@ -49,6 +49,11 @@ export const Title = styled.div`
   font-weight: 700;
   margin-top: ${props => props.contact ? 40 : 0}px;
   margin-bottom: ${props => props.first ? '150px' : '10 0px'};
+  
+  @media (max-width: 768px) {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const Text = styled.div`
@@ -72,6 +77,10 @@ export const BigText = styled.div`
   margin-top: 30px;
   width: 60%;
   margin-left: 20%;
+  
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const Devise = styled.div`
@@ -80,6 +89,10 @@ export const Devise = styled.div`
   margin-bottom: 60px;
   display: inline-block;
   width: 30%;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 0px;
+  }
 `;
 
 export const DeviseTxt = styled.div`
@@ -97,4 +110,9 @@ export const Back = styled.div`
   position: absolute;
   z-index: -1;
   margin-top: -700px;
+  
+  @media (max-width: 768px) {
+    margin-top: -1000px;
+    height: 1000px;w
+  }
 `;

@@ -11,6 +11,10 @@ export const Container = styled.div`
   margin-right: 20px;
   margin-bottom: 40px;
   width: 300px;
+  
+  @media (max-width: 768px) {
+    margin-left: 0px;
+  }
 `;
 
 export const Profile = styled.img`

@@ -72,7 +72,11 @@ export default class Subscribe extends React.Component {
     };
     this.setState({ isLoading: true });
     this.setState( await Request('login', AdminData))
-    if (!this.state.error) this.setState( await Request('users/', data));
+    console.log(this.state.data.data);
+    if (this.state.data.data.token){
+      console.log('test');
+      this.setState( await Request('users/', data, this.state.data.data.token));
+    }
     this.setState({ isLoading: false });
   };
 
@@ -143,7 +147,7 @@ export default class Subscribe extends React.Component {
             <LoginButton>
               <Button style={{
                 borderRadius: '30px',
-                width: this.state.isLoading ? '390px' : '450px',
+                width: this.state.isLoading ? 'calc(100% - 86px)' : 'calc(100% - 6px)',
                 transitionDuration: '1s',
                 left: '0px',
                 height: '45px',

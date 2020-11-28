@@ -26,24 +26,29 @@ export default class Header extends React.Component {
   }
 
   componentDidMount() {
+    this.setCookie();
     this.unlisten = History.listen( location =>  {
-      this.cookies = new Cookies();
-      if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
-        console.log('cookie présent');
-        this.setState({
-          connected: true,
-        });
-      } else {
-        console.log('cookie non présent');
-        this.setState({
-          connected: false,
-        });
-      }
+      this.setCookie();
     });
   }
 
   componentWillUnmount() {
     this.unlisten();
+  }
+
+  setCookie() {
+    this.cookies = new Cookies();
+    if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
+      console.log('cookie présent');
+      this.setState({
+        connected: true,
+      });
+    } else {
+      console.log('cookie non présent');
+      this.setState({
+        connected: false,
+      });
+    }
   }
 
   async disconnection() {

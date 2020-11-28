@@ -1,6 +1,6 @@
 import API from "./Api";
 
-let request = async (call, data) => {
+let request = async (call, data, token) => {
 
     let header = {
         Accept: 'application/json',
@@ -10,7 +10,7 @@ let request = async (call, data) => {
         header = {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + this.state.token,
+            'Authorization': 'Bearer ' + token,
             'Access-Control-Allow-Origin': '*',
         };
     }
