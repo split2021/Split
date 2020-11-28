@@ -6,6 +6,15 @@ export const Container = styled.div`
   text-align: left;
   height: 150px;
   white-space: nowrap;
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 40px;
+  width: 300px;
+  
+  @media (max-width: 768px) {
+    margin-left: 0px;
+  }
 `;
 
 export const Profile = styled.img`

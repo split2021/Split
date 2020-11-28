@@ -1,32 +1,45 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 export const Container = styled.div`
-  color: #5570dd;
+  color: ##556DFF;
   width: 100%;
   min-height: calc(100% - 250px);
 `;
 
 export const Login = styled.div`
-  margin: 120px auto 40px;
+  margin: 0px auto 40px;
   width: 600px;
   background-color: white;
   border-radius: 6px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0px 2px 8px rgba(17, 17, 29, 0.12);
+  border: 1px solid #E9E7EB;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    border: 0px;
+    box-shadow: none;
+  }
 `;
 
 export const Title = styled.div`
   width: 100%;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 100px;
   padding-bottom: 20px;
   font-size: 42px;
   font-weight: 800;
 `;
 
 export const LoginForm = styled.form`
-  margin: auto;
+  margin: auto auto 100px auto;
   width: 80%;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -35,6 +48,10 @@ export const InputContainer = styled.div`
   margin-right: 2.5%;
   margin-left: 2.5%;
   margin-bottom: 10px;
+  
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 export const InputName = styled.span`
@@ -69,9 +86,8 @@ export const Input = styled.input`
 `;
 
 export const LoginButton = styled.div`
-  width: min-content;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
   padding-bottom: 25px;
   padding-top: 25px;
 `;

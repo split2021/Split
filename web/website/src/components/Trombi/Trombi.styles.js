@@ -1,12 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100%;
-  display: grid;
+  width: 90%;
+  margin: 0px auto 0px auto;
   text-align: center;
   margin-top: 40px;
-  margin-left: calc((100% - 401px) / 4);
-  grid-template-columns: min-content min-content;
-  grid-template-rows: auto auto auto auto;
-  grid-gap: 30px;
 `;

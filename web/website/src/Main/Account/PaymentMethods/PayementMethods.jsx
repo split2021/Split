@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../../Header/Header';
 import {
     Container,
     Tab,
@@ -35,7 +34,6 @@ export default class PayementMethods extends React.Component {
     render() {
         return (
             <Container>
-                <Header {...this.props}/>
                 <Tab>
                     <Title>Mes Moyens de paiement</Title>
                     <Goback onClick={() => {this.handleRedirect('/account')}}>&larr;  Retourner vers mon Compte</Goback>

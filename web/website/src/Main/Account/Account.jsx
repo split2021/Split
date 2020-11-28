@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../Header/Header';
 import Case from '../../components/Case/Case';
 import Cookies from 'universal-cookie';
 import {
@@ -31,8 +30,7 @@ export default class SettingsTab extends React.Component {
     render() {
     return (
       <Container>
-        <Header {...this.props}/>
-            <Tab>
+        <Tab>
             <Title>Mon Compte</Title>
             <Case
                 onClick={() => this.handleRedirect('/amis')}
@@ -59,7 +57,7 @@ export default class SettingsTab extends React.Component {
                 Title={'Paramètres de mon compte'}
                 Background={process.env.PUBLIC_URL + 'settings.jpg'}
             />
-          </Tab>
+      </Tab>
       </Container>
     )
   }

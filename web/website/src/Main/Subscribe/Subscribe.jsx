@@ -1,5 +1,7 @@
 import React from 'react';
-import API from '../../components/Api/Api';
+import Request from '../../components/Api/Request';
+import Notification from '../../components/Notification/Notification';
+import AdminData from '../../components/Api/AdminData';
 import {
   Container,
   Login,
@@ -12,8 +14,8 @@ import {
   AlreadySignUp,
   SignUpLink,
 } from './Subscribe.styles.js';
-import Button from '../../components/Button/Button';
-import Header from '../Header/Header';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class Subscribe extends React.Component {
   constructor(props) {
@@ -25,50 +27,41 @@ export default class Subscribe extends React.Component {
       phone: "",
       password: "",
       passwordBis: "",
+      isLoading: false,
+      connectedDb: false,
     };
-  }
-
-  request = (call, data) => {
-    let header = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    };
-    if (call === 'users/') {
-      header = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + this.state.token,
-        'Access-Control-Allow-Origin': '*',
-      };
-    }
-    API.post(call, JSON.stringify(data), {headers: header})
-        .then(response => this.setState({data: response.data, isLoading: false}))
-        .catch(error => this.setState({error, isLoading: false}));
-  };
-
-  componentDidMount() {
-    this.setState({ isLoading: true });
-    let data = {
-      email: 'split_2021@labeip.epitech.eu',
-      password: '@4g%G4HB&xE7z',
-    };
-    this.request('login', data);
   }
 
   componentDidUpdate(prevState, prevProps) {
     if (prevProps.data !== this.state.data) {
-      this.setState({token: this.state.data.data.token});
-      if (this.state.data.statuscode === 201) {
-        this.props.history.push('/login');
-      } else if (this.state.data.statuscode !== 200) {
-        console.log(this.state.data.statuscode, this.state.data.reason);
-        if (this.state.error) console.log(this.state.error);
+
+      switch (this.state.data.statuscode) {
+        case 200:
+          this.setState({token: this.state.data.data.token});
+          this.setState({connectedDb: true});
+          break;
+
+        case 201:
+          this.props.history.push('/login');
+          Notification('success', '', 'Votre compte a bien été créé !');
+          break;
+
+        case 400:
+          console.log(this.state.data.statuscode, this.state.data.reason);
+          Notification('danger', '', 'Erreur de requête veuillez contacter le support.');
+          break;
+
+        default:
+          Notification('danger', '', this.state.connectedDb ?
+              'Informations incorrectes ou compte déjà existant': 'API hors ligne, veuillez reesayer plus tard.');
+          console.log(this.state.data.statuscode, this.state.data.reason);
+          if (this.state.error) console.log(this.state.error);
+          break;
       }
     }
   }
 
-  subscribe = () => {
-    this.setState({ isLoading: true });
+  async subscribe() {
     let data = {
       email: this.state.email,
       password: this.state.password,
@@ -77,16 +70,23 @@ export default class Subscribe extends React.Component {
       last_name: this.state.nom,
       phone: this.state.phone,
     };
-    this.request('users/', data);
+    this.setState({ isLoading: true });
+    this.setState( await Request('login', AdminData))
+    console.log(this.state.data.data);
+    if (this.state.data.data.token){
+      console.log('test');
+      this.setState( await Request('users/', data, this.state.data.data.token));
+    }
+    this.setState({ isLoading: false });
   };
 
   render() {
     const { nom, prenom, email, phone, password, passwordBis } = this.state;
     return (
       <Container>
-        <Header {...this.props}/>
         <Login>
           <Title>Inscription</Title>
+          <AlreadySignUp>Déjà inscrit ? <SignUpLink to={'/login'}>Connectez-vous ici</SignUpLink></AlreadySignUp>
           <LoginForm onSubmit={this.handleSubmit}>
             <InputContainer name={"nom"}>
               <InputName>Nom</InputName>
@@ -145,10 +145,28 @@ export default class Subscribe extends React.Component {
               />
             </InputContainer>
             <LoginButton>
-              <Button type="submit" form={true}>Inscription</Button>
+              <Button style={{
+                borderRadius: '30px',
+                width: this.state.isLoading ? 'calc(100% - 86px)' : 'calc(100% - 6px)',
+                transitionDuration: '1s',
+                left: '0px',
+                height: '45px',
+                textTransform: 'none',
+                fontWeight: '600',
+                fontSize: '18px',
+                float: 'left'
+              }}
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      form={true}
+                      disabled={this.state.isLoading}
+              >
+                Inscription
+              </Button>
+              {this.state.isLoading && <CircularProgress style={{float: 'left', marginLeft: '20px'}} />}
             </LoginButton>
           </LoginForm>
-          <AlreadySignUp>Déjà inscrit ? <SignUpLink to={'/login'}>Connectez-vous ici</SignUpLink></AlreadySignUp>
         </Login>
       </Container>
     )
@@ -170,8 +188,7 @@ export default class Subscribe extends React.Component {
     }
     if (!fieldEmpty
         && this.state.password === this.state.passwordBis
-        && !this.state.isLoading
-        && this.state.token) {
+        && !this.state.isLoading) {
       this.subscribe();
     }
   };

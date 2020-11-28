@@ -10,15 +10,17 @@ import {
   Animation,
   Phone,
   Terminal,
+  BigText,
+  Back,
+  BtnText,
 } from './Home.styles.js';
 import {
   faCheck,
   faMobileAlt,
   faRocket
 } from '@fortawesome/free-solid-svg-icons';
-import Button from '../../components/Button/Button';
+import Button from '@material-ui/core/Button';
 import Trombi from '../../components/Trombi/Trombi'
-import Header from '../Header/Header';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -58,10 +60,17 @@ export default class Home extends React.Component {
   render() {
     return (
       <Container ref={this.myRef}>
-        <Header {...this.props}/>
         <Block first={true}>
-          <Title>Le paiement à plusieurs repensé</Title>
-          <Text>Le service le plus rapide pour diviser les paiements en groupe</Text>
+          <Title first={true}>Le paiement à plusieurs repensé</Title>
+          <Button style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={this.discover}>
+            <BtnText>Découvrir</BtnText>
+          </Button>
+          <Animation ref={this.animRef}>
+            <Phone right={this.state.scroll} src={process.env.PUBLIC_URL + 'phone.png'}/>
+            <Terminal left={this.state.scroll} src={process.env.PUBLIC_URL + 'terminal.png'}/>
+          </Animation>
+
+          <BigText>Le service le plus rapide pour diviser les paiements en groupe</BigText>
           <Devise>
             <FontAwesomeIcon icon={faMobileAlt} size="3x" color="#e51d1d" />
             <DeviseTxt>Payez en 3 cliques</DeviseTxt>
@@ -74,23 +83,21 @@ export default class Home extends React.Component {
             <FontAwesomeIcon icon={faRocket} size="3x" color="#4caf50" />
             <DeviseTxt>Aucune attente de paiement</DeviseTxt>
           </Devise>
-          <Button onclick={this.discover}>Découvrir</Button> 
         </Block>
+        <Back />
 
-        <Animation ref={this.animRef}>
-          <Phone right={this.state.scroll} src={process.env.PUBLIC_URL + 'phone.png'}/>
-          <Terminal left={this.state.scroll} src={process.env.PUBLIC_URL + 'terminal.png'}/>
-        </Animation>
 
         <Block>
           <Title>Un projet Epitech</Title>
           <Text>Split est un projet de fin d’études Epitech ayant pour but de faciliter les paiements à plusieurs sans avoir à faire de pot commun.</Text>
         </Block>
 
-        <Block>
-          <Title>Notre équipe</Title>
-          <Trombi/>
-        </Block>
+        <div style={{backgroundColor: '#f6f6f8'}}>
+          <Block Trombi={true}>
+            <Title>Notre équipe</Title>
+            <Trombi/>
+          </Block>
+        </div>
 
         <Block contact={true}>
           <Title>Contact</Title>

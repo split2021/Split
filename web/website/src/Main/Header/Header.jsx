@@ -1,27 +1,23 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
+import Notification from '../../components/Notification/Notification';
 import {
   Container,
   Logo,
   Elements,
-  MenuTab
+  MenuTab,
+  MenuTxt,
+  Title
 } from './Header.styles';
+import Button from '@material-ui/core/Button';
+import History from "../../components/History/History";
 
 export default class Header extends React.Component {
 
   constructor(props) {
     super(props);
-    this.cookies = new Cookies();
-    if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
-      console.log('cookie présent');
-      this.state = {
-        connected: true,
-      };
-    } else {
-      console.log('cookie non présent');
-      this.state = {
-        connected: false,
-      };
+    this.state = {
+      connected: false,
     }
   }
 
@@ -29,24 +25,58 @@ export default class Header extends React.Component {
     this.props.history.push(direction);
   }
 
-  disconnection() {
+  componentDidMount() {
+    this.setCookie();
+    this.unlisten = History.listen( location =>  {
+      this.setCookie();
+    });
+  }
+
+  componentWillUnmount() {
+    this.unlisten();
+  }
+
+  setCookie() {
+    this.cookies = new Cookies();
+    if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
+      console.log('cookie présent');
+      this.setState({
+        connected: true,
+      });
+    } else {
+      console.log('cookie non présent');
+      this.setState({
+        connected: false,
+      });
+    }
+  }
+
+  async disconnection() {
     this.cookies.remove('auth');
     this.setState({connected: false});
+    Notification('default','', 'Vous êtes maintenant déconnecté.');
     this.handleClick('/');
   }
 
   render() {
-    return (
+    return(
       <Container>
         <Elements>
           <Logo onClick={() => {this.handleClick('/')}}/>
-          {this.state.connected ?
-              [<MenuTab onClick={() => {this.disconnection()}}>DECONNEXION</MenuTab>,
-                  <MenuTab onClick={() => {this.handleClick('/account')}}>MON COMPTE</MenuTab>]
+          <Title onClick={() => {this.handleClick('/')}}>plit</Title>
+          <MenuTab>
+            {this.state.connected ?
+              [<Button style={{marginRight: '16px', borderRadius: '30px'}} color="primary" onClick={() => {this.disconnection()}}>
+                <MenuTxt>Déconnexion</MenuTxt></Button>,
+                <Button style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={() => {this.handleClick('/account')}}>
+                  <MenuTxt>Mon compte</MenuTxt></Button>]
               :
-              [<MenuTab onClick={() => {this.handleClick('/login')}}>SE CONNECTER</MenuTab>,
-                  <MenuTab onClick={() => {this.handleClick('/subscribe')}}>S'INSCRIRE</MenuTab>]
-          }
+                [<Button style={{marginRight: '16px', borderRadius: '30px'}} color="primary" onClick={() => {this.handleClick('/login')}}>
+                  <MenuTxt>Se connecter</MenuTxt></Button>,
+                <Button style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={() => {this.handleClick('/subscribe')}}>
+                  <MenuTxt>S'inscrire</MenuTxt></Button>]
+            }
+          </MenuTab>
         </Elements>
       </Container>
     )

@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../../Header/Header';
 import {
     Container,
     Tab,
@@ -32,7 +31,6 @@ export default class Settings extends React.Component {
     render() {
         return (
             <Container>
-                <Header {...this.props}/>
                 <Tab>
                     <Title>Paramètres de mon compte</Title>
                     <Goback onClick={() => { this.handleRedirect('/account') }}>&larr;  Retourner vers mon Compte</Goback>
