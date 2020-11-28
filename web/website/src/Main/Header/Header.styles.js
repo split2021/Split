@@ -17,7 +17,7 @@ export const Logo = styled.div`
   float: left;
   width: 60px;
   height: 60px;
-  margin-left: 20px;
+  margin-left: 40px;
   margin-top: 20px;
   background-image: url(${process.env.PUBLIC_URL + "logo-split.png"});
   background-position: top left;
