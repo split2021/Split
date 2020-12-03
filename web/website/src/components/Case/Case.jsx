@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { Container, CaseBackground, CaseTitle } from './Case.styles';
+import { Container, CaseNumber, CaseTitle, Span } from './Case.styles';
 
-const Case = ({onClick, Title, Background}) => {
+const Case = ({onClick, Title, Number}) => {
 
   return (
     <Container onClick={onClick}>
-      <CaseBackground style={{backgroundImage: `url(${Background})`}}/>
+      <CaseNumber>
+        <Span>{Number}</Span>
+      </CaseNumber>
       <CaseTitle>
-          {Title}
+        <Span>{Title}</Span>
       </CaseTitle>
     </Container>
   )

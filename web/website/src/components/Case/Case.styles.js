@@ -1,31 +1,34 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #5570dd;
+  background-color: #FFFFFF;
   display: inline-block;
-  width: 300px;
+  width: 150px;
   height: 150px;
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-top: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
   border-radius: 6px;
   cursor: pointer;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0px 2px 8px rgba(17, 17, 29, 0.12);
+  border: 1px solid #E9E7EB;
 `;
 
-export const CaseBackground = styled.div`
+export const CaseNumber = styled.div`
   width: 100%;
-  height: 70%;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background-size: cover;
+  font-size: 42px;
+  font-weight: 700;
+  padding-top: 20px;
+  text-align: center;
 `;
 
 export const CaseTitle = styled.div`
   width: 100%;
-  height: 30%;
-  padding: 10px;
-  padding-left: 20px;
-  color: white;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+`;
+
+export const Span = styled.div`
+  margin-top: auto;
 `;
