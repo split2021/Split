@@ -5,17 +5,21 @@ import {
   Tab,
   Container,
   Title,
+  Icon,
+  HistoryList,
 } from './Account.styles.js';
 
 export default class SettingsTab extends React.Component {
 
   constructor(props) {
     super(props);
-      this.cookies = new Cookies();
+    this.cookies = new Cookies();
     if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
-        console.log('cookie présent');
+      console.log('cookie présent');
       this.state = {
         connected: true,
+        token: this.cookies.cookies.auth,
+        data: JSON.parse(localStorage.getItem('userData')) || '',
       };
     } else {
       console.log('cookie non présent');
@@ -24,40 +28,35 @@ export default class SettingsTab extends React.Component {
   }
 
   handleRedirect(direction) {
-      this.props.history.push(direction);
+    this.props.history.push(direction);
   }
 
-    render() {
+  render() {
     return (
       <Container>
         <Tab>
-            <Title>Mon Compte</Title>
-            <Case
-                onClick={() => this.handleRedirect('/amis')}
-                Title={'Amis'}
-                Background={process.env.PUBLIC_URL + 'groupes.jpg'}
-            />
-            <Case
-                onClick={() => this.handleRedirect('/groupes')}
-                Title={'Groupes'}
-                Background={process.env.PUBLIC_URL + 'groupes.jpg'}
-            />
-            <Case
-                onClick={() => this.handleRedirect('/history')}
-                Title={'Historique de paiements'}
-                Background={process.env.PUBLIC_URL + 'historique.jpg'}
-            />
-            <Case
-                onClick={() => this.handleRedirect('/payementmethods')}
-                Title={'Moyens de paiement'}
-                Background={process.env.PUBLIC_URL + 'paiements.png'}
-            />
-            <Case
-                onClick={() => this.handleRedirect('/settings')}
-                Title={'Paramètres de mon compte'}
-                Background={process.env.PUBLIC_URL + 'settings.jpg'}
-            />
-      </Tab>
+          <Icon />
+          <Title>{this.state.data.user.first_name + ' ' + this.state.data.user.last_name}</Title>
+          <Case
+            onClick={() => this.handleRedirect('/amis')}
+            Title={'Amis'}
+            Number={ this.state.data.user.friends_count }
+          />
+          <Case
+            onClick={() => this.handleRedirect('/groupes')}
+            Title={'Groupes'}
+            Number={ this.state.data.user.payment_groups.length }
+          />
+          {/*<Case
+            onClick={() => this.handleRedirect('/history')}
+            Title={'Historique de paiements'}
+          />
+          <Case
+            onClick={() => this.handleRedirect('/settings')}
+            Title={'Paramètres de mon compte'}
+          />*/}
+        </Tab>
+        <HistoryList />
       </Container>
     )
   }

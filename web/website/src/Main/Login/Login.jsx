@@ -38,26 +38,24 @@ export default class SignIn extends React.Component {
 
   componentDidUpdate(prevState, prevProps) {
     if (prevProps.data !== this.state.data) {
-      if (prevProps.data !== this.state.data) {
+      switch (this.state.data.statuscode) {
+        case 200:
+          Notification('success', '', 'Connexion effectuée !');
+          this.cookies.set('auth', this.state.data.data.token, { path: '/', maxAge: 3540});
+          localStorage.setItem('userData', JSON.stringify(this.state.data.data));
+          this.props.history.push('/account');
+          break;
 
-        switch (this.state.data.statuscode) {
-          case 200:
-            Notification('success', '', 'Connexion effectuée !');
-            this.cookies.set('auth', this.state.data.data.token, { path: '/', maxAge: 3540});
-            this.props.history.push('/account');
-            break;
+        case 400:
+          console.log(this.state.data.statuscode, this.state.data.reason);
+          Notification('danger', '', 'Erreur de requête veuillez contacter le support.');
+          break;
 
-          case 400:
-            console.log(this.state.data.statuscode, this.state.data.reason);
-            Notification('danger', '', 'Erreur de requête veuillez contacter le support.');
-            break;
-
-          default:
-            Notification('danger', '', 'Mauvais email ou mot de passe !');
-            console.log(this.state.data.statuscode, this.state.data.reason);
-            if (this.state.error) console.log(this.state.error);
-            break;
-        }
+        default:
+          Notification('danger', '', 'Mauvais email ou mot de passe !');
+          console.log(this.state.data.statuscode, this.state.data.reason);
+          if (this.state.error) console.log(this.state.error);
+          break;
       }
     }
   }
