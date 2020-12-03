@@ -45,6 +45,7 @@ export default class Header extends React.Component {
       });
     } else {
       console.log('cookie non présent');
+      localStorage.clear();
       this.setState({
         connected: false,
       });
@@ -55,6 +56,7 @@ export default class Header extends React.Component {
     this.cookies.remove('auth');
     this.setState({connected: false});
     Notification('default','', 'Vous êtes maintenant déconnecté.');
+    localStorage.removeItem('userData');
     this.handleClick('/');
   }
 

@@ -6,7 +6,7 @@ let request = async (call, data, token) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
     };
-    if (call === 'users/') {
+    if (call !== 'login') {
         header = {
             Accept: 'application/json',
             'Content-Type': 'application/json',
