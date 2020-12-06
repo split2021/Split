@@ -50,11 +50,11 @@ export default class SettingsTab extends React.Component {
           {/*<Case
             onClick={() => this.handleRedirect('/history')}
             Title={'Historique de paiements'}
-          />
+          />*/
           <Case
-            onClick={() => this.handleRedirect('/settings')}
-            Title={'Paramètres de mon compte'}
-          />*/}
+            onClick={() => this.handleRedirect('/siderbar')}
+            Title={'Dashboard'}
+          />}
         </Tab>
         <HistoryList />
       </Container>
