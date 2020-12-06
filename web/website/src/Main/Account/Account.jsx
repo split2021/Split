@@ -1,5 +1,6 @@
 import React from 'react';
 import Case from '../../components/Case/Case';
+import TextCase from '../../components/Case/TextCase';
 import Cookies from 'universal-cookie';
 import {
   Tab,
@@ -7,6 +8,7 @@ import {
   Title,
   Icon,
   HistoryList,
+  FlexContainer,
 } from './Account.styles.js';
 
 export default class SettingsTab extends React.Component {
@@ -37,24 +39,22 @@ export default class SettingsTab extends React.Component {
         <Tab>
           <Icon />
           <Title>{this.state.data.user.first_name + ' ' + this.state.data.user.last_name}</Title>
-          <Case
-            onClick={() => this.handleRedirect('/amis')}
-            Title={'Amis'}
-            Number={ this.state.data.user.friends_count }
+          <FlexContainer>
+            <Case
+              onClick={() => this.handleRedirect('/amis')}
+              Title={'Amis'}
+              Number={ this.state.data.user.friends_count }
+            />
+            <Case
+              onClick={() => this.handleRedirect('/groupes')}
+              Title={'Groupes'}
+              Number={ this.state.data.user.payment_groups.length }
+            />
+          </FlexContainer>
+          <TextCase
+            onClick={ () => this.handleRedirect('/siderbar') }
+            Title={ 'Mes statistiques' }
           />
-          <Case
-            onClick={() => this.handleRedirect('/groupes')}
-            Title={'Groupes'}
-            Number={ this.state.data.user.payment_groups.length }
-          />
-          {/*<Case
-            onClick={() => this.handleRedirect('/history')}
-            Title={'Historique de paiements'}
-          />
-          <Case
-            onClick={() => this.handleRedirect('/settings')}
-            Title={'Paramètres de mon compte'}
-          />*/}
         </Tab>
         <HistoryList />
       </Container>

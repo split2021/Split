@@ -7,15 +7,15 @@ import Footer from './Footer/Footer';
 import Account from './Account/Account';
 import Amis from './Account/Amis/Amis';
 import Groupes from './Account/Groupes/Groupes';
-import Settings from './Account/Settings/Settings';
 import { Router, Route } from 'react-router-dom';
 import History from '../components/History/History';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import { ThemeProvider } from "@material-ui/core";
-import ChangePassword from './Account/Password/Password.jsx';
 import theme from '../components/Theme/Theme';
 import Header from './Header/Header';
+import Siderbar from "./Account/Dashboard/siderbar";
+import GroupsUsers from './Account/Groupes/GroupsUsers';
 
 export default class App extends React.Component {
   render() {
@@ -31,8 +31,8 @@ export default class App extends React.Component {
             <Route path="/account" component={Account}/>
             <Route path="/amis" component={Amis}/>
             <Route path="/groupes" component={Groupes}/>
-            <Route path="/settings" component={Settings}/>
-            <Route path="/password" component={ChangePassword} />
+            <Route path="/groupsUsers" component={GroupsUsers}/>
+            <Route path="/siderbar" component={Siderbar} />
             <Footer/>
           </Router>
         </Container>
