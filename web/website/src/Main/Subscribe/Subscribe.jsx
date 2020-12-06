@@ -73,9 +73,9 @@ export default class Subscribe extends React.Component {
       phone: this.state.phone,
     };
     this.setState({ isLoading: true });
-    this.setState( await Request('login', AdminData));
-    if (this.state.data.data.token){
-      this.setState( await Request('users/', data, this.state.data.data.token));
+    this.setState( await Request('login', AdminData, '', 'post'));
+    if (this.state.data.data && this.state.data.data.token){
+      this.setState( await Request('users/', data, this.state.data.data.token, 'post'));
     }
     this.setState({ isLoading: false });
   };

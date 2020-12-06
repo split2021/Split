@@ -136,9 +136,9 @@ export default class SignIn extends React.Component {
       email: this.state.email,
       password: this.state.password,
     };
-    this.setState( await Request('login', AdminData));
-    if (this.state.data.data.token) {
-      this.setState(await Request('login', data));
+    this.setState( await Request('login', AdminData, '', 'post'));
+    if (this.state.data.data && this.state.data.data.token) {
+      this.setState(await Request('login', data, '', 'post'));
     }
   };
 }

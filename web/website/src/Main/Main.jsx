@@ -15,6 +15,7 @@ import { ThemeProvider } from "@material-ui/core";
 import theme from '../components/Theme/Theme';
 import Header from './Header/Header';
 import Siderbar from "./Account/Dashboard/siderbar";
+import GroupsUsers from './Account/Groupes/GroupsUsers';
 
 export default class App extends React.Component {
   render() {
@@ -30,6 +31,7 @@ export default class App extends React.Component {
             <Route path="/account" component={Account}/>
             <Route path="/amis" component={Amis}/>
             <Route path="/groupes" component={Groupes}/>
+            <Route path="/groupsUsers" component={GroupsUsers}/>
             <Route path="/siderbar" component={Siderbar} />
             <Footer/>
           </Router>

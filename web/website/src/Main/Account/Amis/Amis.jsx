@@ -4,12 +4,18 @@ import {
     Tab,
     Title,
     Goback,
+    Collumns,
+    Collumn,
+    Loader,
 } from '../Global.styles.js';
 import {
     Tableau,
-    NbElem
+    Friend,
+    CollumnFriend,
 } from './Amis.styles';
 import Cookies from 'universal-cookie';
+import Request from '../../../components/Api/Request';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 export default class Amis extends React.Component {
 
@@ -21,6 +27,11 @@ export default class Amis extends React.Component {
             this.state = {
                 connected: true,
                 elem: 0,
+                data: JSON.parse(localStorage.getItem('userData')) || '',
+                adminData: JSON.parse(localStorage.getItem('adminData')) || '',
+                loader: true,
+                loadPercentage: 0,
+                friends: '',
             };
         } else {
             console.log('cookie non présent');
@@ -28,23 +39,79 @@ export default class Amis extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.getFriends();
+    }
+
     handleRedirect(direction) {
         this.props.history.push(direction);
     }
 
+    async retrieveFriends() {
+        let friend;
+        let result = [];
+        for (let i = 0; i < (this.state.data.user.friends).length; i++) {
+            friend = await Request(
+              'users/' + this.state.data.user.friends[i].id,
+              {},
+              this.state.adminData.token,
+              'get'
+            );
+            this.setState({ loadPercentage : (((i + 1) * 100) / (this.state.data.user.friends).length) })
+            if (friend.data.data) {
+                result.push(
+                  <Friend>
+                      <CollumnFriend>
+                          { friend.data.data.first_name + ' ' + friend.data.data.last_name }
+                      </CollumnFriend>
+                      <CollumnFriend>
+                          { friend.data.data.email }
+                      </CollumnFriend>
+                      <CollumnFriend>
+                          { friend.data.data.phone }
+                      </CollumnFriend>
+                  </Friend>
+                );
+            }
+        }
+        return result;
+    }
+
+    async getFriends() {
+        let friendList = this.state ? await this.retrieveFriends() : [];
+        this.setState({ loader : false });
+        this.setState({ friends : friendList });
+    }
+
     render() {
         return (
-            <Container>
-                <Tab>
-                    <Title>Mes Amis</Title>
-                    <Goback onClick={() => {this.handleRedirect('/account')}}>&larr;  Retourner vers mon Compte</Goback>
-                    <Tableau>
-                        <NbElem>Vous avez : {this.state.elem} amis</NbElem>
+          <Container>
+              <Tab>
+                  <Goback onClick={() => {this.handleRedirect('/account')}}>
+                      &larr;  Retourner vers mon Compte
+                  </Goback>
+                  <Title>Mes Amis</Title>
+                  <div style={ { overflow: 'auto' } }>
+                      <Tableau>
+                          <Collumns>
+                              <Collumn>Nom</Collumn>
+                              <Collumn>E-mail</Collumn>
+                              <Collumn>Numéro de téléphone</Collumn>
+                          </Collumns>
+                          {
+                              this.state ? this.state.friends : '' ||
+                              <Loader>
+                                  <LinearProgress
+                                    variant="determinate"
+                                    value={ this.state ? this.state.loadPercentage : 0 } />
+                              </Loader>
+                          }
 
-                    </Tableau>
-                </Tab>
+                      </Tableau>
+                  </div>
+              </Tab>
 
-            </Container>
+          </Container>
         )
     }
 }

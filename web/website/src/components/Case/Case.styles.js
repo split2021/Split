@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: #FFFFFF;
-  display: inline-block;
   width: 150px;
   height: 150px;
   margin-left: 20px;
@@ -48,10 +47,13 @@ export const CaseNumber = styled.div`
 `;
 
 export const CaseTitle = styled.div`
-  width: 100%;
+  width: calc(100% - 20px);
+  height: 60px;
   font-size: 18px;
   font-weight: 700;
   text-align: center;
+  overflow: visible;
+  padding: 0 10px;
 `;
 
 export const TextCaseTitle = styled.div`

@@ -4,11 +4,13 @@ import {
     Tab,
     Title,
     Goback,
+    Loader,
 } from '../Global.styles.js';
 import Cookies from 'universal-cookie';
-import {
-    NbElem, Tableau
-} from "./Groupes.styles";
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Request from "../../../components/Api/Request";
+import Case from '../../../components/Case/Case';
+import { FlexContainer } from '../Account.styles';
 
 export default class Groupes extends React.Component {
 
@@ -20,6 +22,12 @@ export default class Groupes extends React.Component {
             this.state = {
                 connected: true,
                 elem: 0,
+                data: JSON.parse(localStorage.getItem('userData')) || '',
+                adminData: JSON.parse(localStorage.getItem('adminData')) || '',
+                loader: true,
+                loadPercentage: 0,
+                groups: '',
+                groupData: [],
             };
         } else {
             console.log('cookie non présent');
@@ -27,20 +35,65 @@ export default class Groupes extends React.Component {
         }
     }
 
-    handleRedirect(direction) {
-        this.props.history.push(direction);
+    componentDidMount() {
+        this.getGroups();
+    }
+
+    handleRedirect(direction, groupData) {
+        this.props.history.push({
+            pathname: direction,
+            state: groupData,
+        });
+    }
+
+    async retrieveGroups() {
+        let group;
+        let result = [];
+        let data = [];
+        for (let i = 0; i < (this.state.data.user.payment_groups).length; i++) {
+            group = await Request(
+              'paymentgroups/' + this.state.data.user.payment_groups[i].id,
+              {},
+              this.state.adminData.token,
+              'get'
+            );
+            this.setState({ loadPercentage : (((i + 1) * 100) / (this.state.data.user.payment_groups).length) })
+            if (group.data.data) {
+                data.push(group.data.data);
+                result.push(
+                  <Case
+                    onClick={
+                        () => this.handleRedirect('/groupsUsers',
+                      { groupData: this.state.groupData, id: i })
+                    }
+                    Title={group.data.data.name}
+                    Number={(group.data.data.users).length}
+                  />
+                );
+            }
+        }
+        this.setState( { groupData : data } )
+        return result;
+    }
+
+    async getGroups() {
+        let groupList = this.state ? await this.retrieveGroups() : [];
+        this.setState({ loader : false });
+        this.setState({ groups : groupList });
     }
 
     render() {
         return (
             <Container>
                 <Tab>
-                    <Title>Mes Groupes</Title>
                     <Goback onClick={() => {this.handleRedirect('/account')}}>&larr;  Retourner vers mon Compte</Goback>
-                    <Tableau>
-                        <NbElem>Vous avez : {this.state.elem} Groupes</NbElem>
-
-                    </Tableau>
+                    <Title>Mes Groupes</Title>
+                    {
+                        <FlexContainer>{ this.state ? this.state.groups : '' }</FlexContainer> ||
+                        <Loader>
+                            <LinearProgress variant="determinate" value={this.state.loadPercentage} />
+                        </Loader>
+                    }
                 </Tab>
 
             </Container>
