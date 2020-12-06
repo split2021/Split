@@ -23,12 +23,13 @@ export default class Subscribe extends React.Component {
     this.state = {
       nom: "",
       prenom: "",
+      username: "",
       email: "",
       phone: "",
       password: "",
       passwordBis: "",
       isLoading: false,
-      connectedDb: false,
+      connectedDb: !!localStorage.getItem('adminData'),
     };
   }
 
@@ -39,6 +40,7 @@ export default class Subscribe extends React.Component {
         case 200:
           this.setState({token: this.state.data.data.token});
           this.setState({connectedDb: true});
+          localStorage.setItem('adminData', JSON.stringify(this.state.data.data));
           break;
 
         case 201:
@@ -65,13 +67,13 @@ export default class Subscribe extends React.Component {
     let data = {
       email: this.state.email,
       password: this.state.password,
-      username: this.state.prenom,
+      username: this.state.username,
       first_name: this.state.prenom,
       last_name: this.state.nom,
       phone: this.state.phone,
     };
     this.setState({ isLoading: true });
-    this.setState( await Request('login', AdminData))
+    this.setState( await Request('login', AdminData));
     if (this.state.data.data.token){
       this.setState( await Request('users/', data, this.state.data.data.token));
     }
@@ -79,13 +81,22 @@ export default class Subscribe extends React.Component {
   };
 
   render() {
-    const { nom, prenom, email, phone, password, passwordBis } = this.state;
+    const { username, nom, prenom, email, phone, password, passwordBis } = this.state;
     return (
       <Container>
         <Login>
           <Title>Inscription</Title>
           <AlreadySignUp>Déjà inscrit ? <SignUpLink to={'/login'}>Connectez-vous ici</SignUpLink></AlreadySignUp>
           <LoginForm onSubmit={this.handleSubmit}>
+            <InputContainer>
+              <InputName>Username</InputName>
+              <Input
+                name="username"
+                type="text"
+                value={username}
+                onChange={this.handleChange}
+              />
+            </InputContainer>
             <InputContainer name={"nom"}>
               <InputName>Nom</InputName>
               <Input

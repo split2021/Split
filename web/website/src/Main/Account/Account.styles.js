@@ -38,9 +38,7 @@ export const HistoryList = styled.div`
   max-width: 1200px;
   min-width: 150px;
   min-height: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 60px;
+  margin: 40px auto;
   border-radius: 6px;
   box-shadow: 0px 2px 8px rgba(17, 17, 29, 0.12);
   border: 1px solid #E9E7EB;

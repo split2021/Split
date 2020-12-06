@@ -16,6 +16,7 @@ import {
 } from '../Subscribe/Subscribe.styles';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import AdminData from '../../components/Api/AdminData';
 
 
 export default class SignIn extends React.Component {
@@ -27,6 +28,7 @@ export default class SignIn extends React.Component {
       email: "",
       password: "",
       isLoading: false,
+      connectedDb: false,
     };
   }
 
@@ -40,10 +42,15 @@ export default class SignIn extends React.Component {
     if (prevProps.data !== this.state.data) {
       switch (this.state.data.statuscode) {
         case 200:
-          Notification('success', '', 'Connexion effectuée !');
-          this.cookies.set('auth', this.state.data.data.token, { path: '/', maxAge: 3540});
-          localStorage.setItem('userData', JSON.stringify(this.state.data.data));
-          this.props.history.push('/account');
+          if (this.state.connectedDb) {
+            Notification('success', '', 'Connexion effectuée !');
+            this.cookies.set('auth', this.state.data.data.token, { path: '/', maxAge: 3540});
+            localStorage.setItem('userData', JSON.stringify(this.state.data.data));
+            this.props.history.push('/account');
+          } else {
+            this.setState({connectedDb: true});
+            localStorage.setItem('adminData', JSON.stringify(this.state.data.data));
+          }
           break;
 
         case 400:
@@ -52,7 +59,8 @@ export default class SignIn extends React.Component {
           break;
 
         default:
-          Notification('danger', '', 'Mauvais email ou mot de passe !');
+          Notification('danger', '', this.state.connectedDb ?
+            'Mauvais email ou mot de passe !': 'API hors ligne, veuillez reesayer plus tard.');
           console.log(this.state.data.statuscode, this.state.data.reason);
           if (this.state.error) console.log(this.state.error);
           break;
@@ -128,6 +136,9 @@ export default class SignIn extends React.Component {
       email: this.state.email,
       password: this.state.password,
     };
-    this.setState( await Request('login', data));
+    this.setState( await Request('login', AdminData));
+    if (this.state.data.data.token) {
+      this.setState(await Request('login', data));
+    }
   };
 }

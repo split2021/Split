@@ -12,6 +12,10 @@ export const Container = styled.div`
   cursor: pointer;
   box-shadow: 0px 2px 8px rgba(17, 17, 29, 0.12);
   border: 1px solid #E9E7EB;
+  
+  &:hover {
+    background-color: #E9E7EB;
+  }
 `;
 
 export const ContainerBis = styled.div`
@@ -29,6 +33,10 @@ export const ContainerBis = styled.div`
   vertical-align: middle;
   word-wrap: break-word;
   overflow: visible;
+  
+  &:hover {
+    background-color: #E9E7EB;
+  }
 `;
 
 export const CaseNumber = styled.div`
