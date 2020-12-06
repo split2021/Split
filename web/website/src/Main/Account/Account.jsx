@@ -1,5 +1,6 @@
 import React from 'react';
 import Case from '../../components/Case/Case';
+import TextCase from '../../components/Case/TextCase';
 import Cookies from 'universal-cookie';
 import {
   Tab,
@@ -47,14 +48,14 @@ export default class SettingsTab extends React.Component {
             Title={'Groupes'}
             Number={ this.state.data.user.payment_groups.length }
           />
+          <TextCase
+            onClick={ () => this.handleRedirect('/siderbar') }
+            Title={ 'Mes statistiques' }
+          />
           {/*<Case
             onClick={() => this.handleRedirect('/history')}
             Title={'Historique de paiements'}
-          />*/
-          <Case
-            onClick={() => this.handleRedirect('/siderbar')}
-            Title={'Dashboard'}
-          />}
+          />*/}
         </Tab>
         <HistoryList />
       </Container>

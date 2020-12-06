@@ -14,6 +14,23 @@ export const Container = styled.div`
   border: 1px solid #E9E7EB;
 `;
 
+export const ContainerBis = styled.div`
+  background-color: #FFFFFF;
+  display: block;
+  max-width: 340px;
+  min-width: 150px;
+  height: 70px;
+  margin: 0 auto;
+  margin-top: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0px 2px 8px rgba(17, 17, 29, 0.12);
+  border: 1px solid #E9E7EB;
+  vertical-align: middle;
+  word-wrap: break-word;
+  overflow: visible;
+`;
+
 export const CaseNumber = styled.div`
   width: 100%;
   font-size: 42px;
@@ -24,6 +41,15 @@ export const CaseNumber = styled.div`
 
 export const CaseTitle = styled.div`
   width: 100%;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+`;
+
+export const TextCaseTitle = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
   font-size: 18px;
   font-weight: 700;
   text-align: center;
