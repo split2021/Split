@@ -4,7 +4,7 @@ WORKDIR /web
 
 ENV PATH /web/node_modules/.bin:$PATH
 
-ADD package*.json /web
+COPY package.json /web
 
 RUN npm install yarn
 
