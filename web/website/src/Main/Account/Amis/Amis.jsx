@@ -51,13 +51,15 @@ export default class Amis extends React.Component {
         let friend;
         let result = [];
         for (let i = 0; i < (this.state.data.user.friends).length; i++) {
+            this.setState({ loadPercentage : (((i + 0.1) * 100) / (this.state.data.user.friends).length) });
             friend = await Request(
               'users/' + this.state.data.user.friends[i].id,
               {},
               this.state.adminData.token,
               'get'
             );
-            this.setState({ loadPercentage : (((i + 1) * 100) / (this.state.data.user.friends).length) })
+
+            this.setState({ loadPercentage : (((i + 1.5) * 100) / (this.state.data.user.friends).length) });
             if (friend.data.data) {
                 result.push(
                   <Friend>
@@ -99,7 +101,7 @@ export default class Amis extends React.Component {
                               <Collumn>Numéro de téléphone</Collumn>
                           </Collumns>
                           {
-                              this.state ? this.state.friends : '' ||
+                              this.state && this.state.friends ? this.state.friends :
                               <Loader>
                                   <LinearProgress
                                     variant="determinate"

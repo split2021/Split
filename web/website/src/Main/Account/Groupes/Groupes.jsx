@@ -7,7 +7,7 @@ import {
     Loader,
 } from '../Global.styles.js';
 import Cookies from 'universal-cookie';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Request from "../../../components/Api/Request";
 import Case from '../../../components/Case/Case';
 import { FlexContainer } from '../Account.styles';
@@ -89,10 +89,9 @@ export default class Groupes extends React.Component {
                     <Goback onClick={() => {this.handleRedirect('/account')}}>&larr;  Retourner vers mon Compte</Goback>
                     <Title>Mes Groupes</Title>
                     {
-                        <FlexContainer>{ this.state ? this.state.groups : '' }</FlexContainer> ||
-                        <Loader>
-                            <LinearProgress variant="determinate" value={this.state.loadPercentage} />
-                        </Loader>
+                        this.state && this.state.groups ?
+                          <FlexContainer>{ this.state.groups }</FlexContainer> :
+                          <div style={ { marginTop: '80px' } }><CircularProgress /></div>
                     }
                 </Tab>
 
