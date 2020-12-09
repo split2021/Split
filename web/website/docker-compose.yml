@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: sh -c "
+        yarn start"
+    ports:
+      - "3000:3000"
+    volumes:
+      - '.:/web'
+      - '/web/node_modules'
+    environment: 
+      - CHOKIDAR_USEPOLLING=true
