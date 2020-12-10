@@ -78,13 +78,6 @@ export const TwoText = styled.div`
   flex-direction: column;
 `;
 
-export const Image = styled.img`
-  height: 500px;
-  text-align: center;
-  box-shadow: 0 10px 100px 0 rgba(0,0,0,0.1);
-  margin: 100px auto;
-`;
-
 export const Text = styled.div`
   font-size: 20px;
   font-weight: 500;
@@ -95,6 +88,17 @@ export const Text = styled.div`
   min-width: 200px;
   line-break: normal;
   border-left: 3px solid #556DFF;
+  padding-left: 20px;
+`;
+
+export const TextContact = styled.div`
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 200px;
+  line-break: normal;
   padding-left: 20px;
 `;
 
@@ -109,7 +113,7 @@ export const BigText = styled.div`
   font-size: 40px;
   font-weight: 600;
   margin-top: 30px;
-  width: 60%;
+  width: 70%;
   margin-left: 20%;
   
   @media (max-width: 768px) {

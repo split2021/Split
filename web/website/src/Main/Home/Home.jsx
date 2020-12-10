@@ -7,6 +7,7 @@ import {
   Block,
   Title,
   Text,
+  TextContact,
   Devise,
   DeviseTxt,
   Animation,
@@ -53,6 +54,10 @@ export default class Home extends React.Component {
     }
   }
 
+  handleClick(direction) {
+    this.props.history.push(direction);
+  }
+
   discover() {
     if (this.animRef) {
       this.animRef.current.scrollIntoView({
@@ -66,8 +71,13 @@ export default class Home extends React.Component {
     return (
       <Container ref={this.myRef}>
         <Block first={true}>
-          <Title first={true}>Le paiement à plusieurs repensé</Title>
-          <Button style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={this.discover}>
+          <Title first={true}>Payer au restaurant n'a jamais été aussi rapide</Title>
+          <Button
+            style={{borderRadius: '30px'}}
+            variant="contained"
+            color="primary"
+            onClick={ () => this.handleClick('/subscribe') }
+          >
             <BtnText>Découvrir</BtnText>
           </Button>
           <Animation ref={this.animRef}>
@@ -75,7 +85,7 @@ export default class Home extends React.Component {
             <Terminal left={this.state.scroll} src={process.env.PUBLIC_URL + 'terminal.png'}/>
           </Animation>
 
-          <BigText>Le service le plus rapide pour diviser les paiements en groupe</BigText>
+          <BigText>Le service le plus rapide pour diviser les paiements de groupe au restaurant</BigText>
           <Devise>
             <FontAwesomeIcon icon={faMobileAlt} size="3x" color="#e51d1d" />
             <DeviseTxt>Payez en 3 cliques</DeviseTxt>
@@ -98,31 +108,31 @@ export default class Home extends React.Component {
             <Sliders>
               <Carousel showThumbs={ false } showIndicators={ false } showStatus={ false } autoPlay={ true }>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'app/X - 6.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 6.PNG' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'app/X - 7.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 7.PNG' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'app/X - 8.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 8.PNG' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'app/X - 9.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 9.PNG' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'app/X - 10.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 10.PNG' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'app/X - 5.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 5.PNG' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'app/X - 11.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 11.PNG' } />
                 </div>
               </Carousel>
             </Sliders>
             <TwoText>
-              <Text style={ { marginBottom: '30px' } }>L’application Split permettra à un groupe de personnes de diviser une addition au restaurant. Un seul membre du groupe se chargera de régler l'addition, et chaque personne sera débitée d'une somme équitable ou modulable individuellement. Il n’y a aucun système de cagnotte, ni de remboursement : le paiement sera effectué instantanément.</Text>
-              <Text>Les principaux concernés par notre application seront les personnes qui iront consommer dans des lieux de restauration. Également à l’avenir le champ d’action de notre application pourrait s’élargir à d’autres secteurs comme le divertissement, les activités sportives, etc…</Text>
+              <Text style={ { marginBottom: '30px' } }>L’application Split permettra à un groupe de personnes de diviser une addition au restaurant. Un seul membre du groupe se chargera de régler l'addition, et chaque personne sera débitée d'une somme équitable ou modulable individuellement. Il n’y a aucun système de cagnotte, ni de remboursement : le paiement sera effectué instantanément</Text>
+              <Text>Les principaux concernés par notre application seront les personnes qui iront consommer dans des lieux de restauration. Également à l’avenir le champ d’action de notre application pourrait s’élargir à d’autres secteurs comme le divertissement, les activités sportives...</Text>
             </TwoText>
           </TwoElements>
         </Block>
@@ -137,9 +147,9 @@ export default class Home extends React.Component {
         <Block contact={true}>
           <Title>Contact</Title>
           <Title contact={true}>Retrouvez nous dans les locaux d'Epitech</Title>
-          <Text>24 Rue Pasteur, 94270 Le Kremlin-Bicêtre, France</Text>
+          <TextContact>24 Rue Pasteur, 94270 Le Kremlin-Bicêtre, France</TextContact>
           <Title contact={true}>Contactez nous directement</Title>
-          <Text>contact@split-pay.fr</Text>
+          <TextContact>contact@split-pay.fr</TextContact>
         </Block>
       </Container>
     )
