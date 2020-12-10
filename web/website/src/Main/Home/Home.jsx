@@ -108,25 +108,25 @@ export default class Home extends React.Component {
             <Sliders>
               <Carousel showThumbs={ false } showIndicators={ false } showStatus={ false } autoPlay={ true }>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 6.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 6.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 7.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 7.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 8.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 8.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 9.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 9.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 10.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 10.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 5.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 5.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 11.PNG' } />
+                  <img src={ process.env.PUBLIC_URL + 'X - 11.png' } />
                 </div>
               </Carousel>
             </Sliders>
