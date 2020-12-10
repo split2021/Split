@@ -169,7 +169,6 @@ export const DeviseTxt = styled.div`
 `;
 
 export const Covid = styled.div`
-  height: 60px;
   background-color: #fab1a0;
   text-align: center;
   display: flex;
@@ -179,13 +178,12 @@ export const Covid = styled.div`
 `;
 
 export const CovidTitle = styled.div`
-  height: 60px;
   font-size: 30px;
+  white-space: nowrap
   padding: 6px;
 `;
 
 export const CovidText = styled.div`
-  height: 60px;
   font-size: 20px;
   padding: 15px;
 `;
