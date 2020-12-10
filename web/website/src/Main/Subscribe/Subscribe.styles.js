@@ -25,14 +25,14 @@ export const Login = styled.div`
 export const Title = styled.div`
   width: 100%;
   text-align: center;
-  padding-top: 100px;
-  padding-bottom: 20px;
+  padding-top: 50px;
+  padding-bottom: 10px;
   font-size: 42px;
   font-weight: 800;
 `;
 
 export const LoginForm = styled.form`
-  margin: auto auto 100px auto;
+  margin: auto auto 90px auto;
   width: 80%;
   
   @media (max-width: 768px) {
@@ -96,7 +96,7 @@ export const AlreadySignUp = styled.div`
   margin-right: auto;
   width: 100%;
   text-align: center;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 `;
 
 export const SignUpLink = styled(Link)`

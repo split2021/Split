@@ -140,5 +140,6 @@ export default class SignIn extends React.Component {
     if (this.state.data.data && this.state.data.data.token) {
       this.setState(await Request('login', data, '', 'post'));
     }
+    this.setState({ isLoading: false });
   };
 }
