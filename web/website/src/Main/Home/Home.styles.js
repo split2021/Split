@@ -56,6 +56,17 @@ export const Title = styled.div`
   }
 `;
 
+export const SubTitle = styled.div`
+  font-size: 50px;
+  font-weight: 700;
+  margin-bottom: '10 0px';
+  
+  @media (max-width: 768px) {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+`;
+
 export const TwoElements = styled.div`
   margin-top: 100px;
   display: flex;
@@ -68,27 +79,43 @@ export const Sliders = styled.div`
   overflow: hidden;
   box-shadow: 0 10px 100px 0 rgba(0,0,0,0.1);
   margin: 0 auto;
+  margin-left: right(20px);
 `;
 
 export const TwoText = styled.div`
   max-width: 450px;
   height: 500px;
-  margin: auto auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  margin-left: min(20px);
+  
+  @media (max-width: 717px) {
+    max-width: 80%;
+    margin: 40px auto;
+  }
 `;
 
 export const Text = styled.div`
   font-size: 20px;
   font-weight: 500;
   text-align: left;
+  width: ${props => props.left ? '400px' : 'auto'};
   color: black;
   margin-left: auto;
   margin-right: auto;
   min-width: 200px;
   line-break: normal;
-  border-left: 3px solid #556DFF;
-  padding-left: 20px;
+  ${props => props.left ? 'border-right' : 'border-left' }: 3px solid #556DFF;
+  ${props => props.left ? 'padding-right: 20px;' : 'padding-left: 20px;' }
+  
+  
+  @media (max-width: 717px) {
+    border: none;
+    padding: 0px;
+  }
+  
+  ${props => props.left && '@media (max-width: 961px) { border: none; text-align: left; }'}
 `;
 
 export const TextContact = styled.div`
@@ -139,6 +166,41 @@ export const DeviseTxt = styled.div`
   font-weight: 700;
   opacity: 0.9;
   color: #5570dd;
+`;
+
+export const Covid = styled.div`
+  height: 60px;
+  background-color: #fab1a0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: black;
+`;
+
+export const CovidTitle = styled.div`
+  height: 60px;
+  font-size: 30px;
+  padding: 6px;
+`;
+
+export const CovidText = styled.div`
+  height: 60px;
+  font-size: 20px;
+  padding: 15px;
+`;
+
+export const Picture = styled.img`
+  margin: 0 auto;
+  margin-left: min(20px);
+  text-align: center;
+  border-radius: 13px;
+  box-shadow: 0 10px 100px 0 rgba(0,0,0,0.1);
+  
+  @media (max-width: 961px) {
+    margin-top: 40px;
+    margin-left: auto;
+  }
 `;
 
 export const Back = styled.div`
