@@ -6,6 +6,7 @@ import {
   Container,
   Block,
   Title,
+  SubTitle,
   Text,
   TextContact,
   Devise,
@@ -18,7 +19,11 @@ import {
   BtnText,
   Sliders,
   TwoElements,
-  TwoText
+  TwoText,
+  Picture,
+  Covid,
+  CovidTitle,
+  CovidText
 } from './Home.styles.js';
 import {
   faCheck,
@@ -103,7 +108,7 @@ export default class Home extends React.Component {
 
 
         <Block>
-          <Title>Un projet Epitech</Title>
+          <SubTitle>Un projet Epitech</SubTitle>
           <TwoElements>
             <Sliders>
               <Carousel showThumbs={ false } showIndicators={ false } showStatus={ false } autoPlay={ true }>
@@ -138,18 +143,33 @@ export default class Home extends React.Component {
         </Block>
 
         <div style={{backgroundColor: '#f6f6f8'}}>
-          <Block Trombi={true}>
-            <Title>Notre équipe</Title>
-            <Trombi/>
+          <Block>
+            <SubTitle>Une application pensée pour vous</SubTitle>
+            <TwoElements>
+              <Text left={ true }>En premier lieu chaque membre d’un groupe créera un compte sur notre application et ils ajouteront leurs informations de paiement. Ensuite un de ces membres rajoutera ces derniers dans un groupe sur l’application crée pour les paiements à venir. Lorsque le groupe doit payer une addition, seul un de ces membres se présentera pour payer avec notre application. Enfin celle-ci répartira équitablement les frais entre les individus qui valideront le paiement</Text>
+              <Picture src={ process.env.PUBLIC_URL + 'resto.jpg' } />
+            </TwoElements>
           </Block>
         </div>
+
+        <Covid>
+          <CovidTitle>Info covid : </CovidTitle>
+          <CovidText>Avec le COVID permettre à un groupe entier de payer uniquement avec 1 intermédiaire aide à réduire les risques de propagation</CovidText>
+        </Covid>
+
+        <Block Trombi={true}>
+          <SubTitle>Notre équipe</SubTitle>
+          <Trombi/>
+        </Block>
 
         <Block contact={true}>
           <Title>Contact</Title>
           <Title contact={true}>Retrouvez nous dans les locaux d'Epitech</Title>
-          <TextContact>24 Rue Pasteur, 94270 Le Kremlin-Bicêtre, France</TextContact>
+          <TextContact><a style={ { textDecoration: 'none', color: 'white' } } target="_blank" href="https://www.google.fr/maps/place/24+Rue+Pasteur,+94270+Le+Kremlin-Bicêtre/@48.8153291,2.360979,17z/data=!3m1!4b1!4m5!3m4!1s0x47e6717ff94e4521:0x24f4c7dfecbb39c3!8m2!3d48.8153291!4d2.3631677">
+            24 Rue Pasteur, 94270 Le Kremlin-Bicêtre, France</a></TextContact>
           <Title contact={true}>Contactez nous directement</Title>
-          <TextContact>contact@split-pay.fr</TextContact>
+          <TextContact><a style={ { textDecoration: 'none', color: 'white' } } target="_blank" href="mailto:split_2021@labeip.epitech.eu">
+            split_2021@labeip.epitech.eu</a></TextContact>
         </Block>
       </Container>
     )
