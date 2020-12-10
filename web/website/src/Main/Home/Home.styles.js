@@ -56,12 +56,46 @@ export const Title = styled.div`
   }
 `;
 
+export const TwoElements = styled.div`
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const Sliders = styled.div`
+  width: 250px;
+  height: 541px;
+  overflow: hidden;
+  box-shadow: 0 10px 100px 0 rgba(0,0,0,0.1);
+  margin: 0 auto;
+`;
+
+export const TwoText = styled.div`
+  max-width: 450px;
+  height: 500px;
+  margin: auto auto;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Image = styled.img`
+  height: 500px;
+  text-align: center;
+  box-shadow: 0 10px 100px 0 rgba(0,0,0,0.1);
+  margin: 100px auto;
+`;
+
 export const Text = styled.div`
   font-size: 20px;
-  font-weight: 700;
-  margin-top: 30px;
-  width: 60%;
-  margin-left: 20%;
+  font-weight: 500;
+  text-align: left;
+  color: black;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 200px;
+  line-break: normal;
+  border-left: 3px solid #556DFF;
+  padding-left: 20px;
 `;
 
 export const BtnText = styled.div`

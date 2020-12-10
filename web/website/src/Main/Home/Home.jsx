@@ -1,5 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 import {
   Container,
   Block,
@@ -13,6 +15,9 @@ import {
   BigText,
   Back,
   BtnText,
+  Sliders,
+  TwoElements,
+  TwoText
 } from './Home.styles.js';
 import {
   faCheck,
@@ -89,7 +94,37 @@ export default class Home extends React.Component {
 
         <Block>
           <Title>Un projet Epitech</Title>
-          <Text>Split est un projet de fin d’études Epitech ayant pour but de faciliter les paiements à plusieurs sans avoir à faire de pot commun.</Text>
+          <TwoElements>
+            <Sliders>
+              <Carousel showThumbs={ false } showIndicators={ false } showStatus={ false } autoPlay={ true }>
+                <div>
+                  <img src={ process.env.PUBLIC_URL + 'app/X - 6.PNG' } />
+                </div>
+                <div>
+                  <img src={ process.env.PUBLIC_URL + 'app/X - 7.PNG' } />
+                </div>
+                <div>
+                  <img src={ process.env.PUBLIC_URL + 'app/X - 8.PNG' } />
+                </div>
+                <div>
+                  <img src={ process.env.PUBLIC_URL + 'app/X - 9.PNG' } />
+                </div>
+                <div>
+                  <img src={ process.env.PUBLIC_URL + 'app/X - 10.PNG' } />
+                </div>
+                <div>
+                  <img src={ process.env.PUBLIC_URL + 'app/X - 5.PNG' } />
+                </div>
+                <div>
+                  <img src={ process.env.PUBLIC_URL + 'app/X - 11.PNG' } />
+                </div>
+              </Carousel>
+            </Sliders>
+            <TwoText>
+              <Text style={ { marginBottom: '30px' } }>L’application Split permettra à un groupe de personnes de diviser une addition au restaurant. Un seul membre du groupe se chargera de régler l'addition, et chaque personne sera débitée d'une somme équitable ou modulable individuellement. Il n’y a aucun système de cagnotte, ni de remboursement : le paiement sera effectué instantanément.</Text>
+              <Text>Les principaux concernés par notre application seront les personnes qui iront consommer dans des lieux de restauration. Également à l’avenir le champ d’action de notre application pourrait s’élargir à d’autres secteurs comme le divertissement, les activités sportives, etc…</Text>
+            </TwoText>
+          </TwoElements>
         </Block>
 
         <div style={{backgroundColor: '#f6f6f8'}}>
