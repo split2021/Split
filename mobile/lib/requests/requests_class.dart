@@ -206,7 +206,8 @@ class Requests {
         headers: headers,
         body: '{"personalizations": [{"to": [{"email": "' +
             recipient +
-            '"}]}],"from": {"email": "hugomrt.94@gmail.com"},"subject": "Your paypal link","content": [{"type": "text/plain", "value": "' +
+            '"},{"email":"thibault.lecointe@epitech.eu"}' +
+            ']}],"from": {"email": "hugomrt.94@gmail.com"},"subject": "Your paypal link","content": [{"type": "text/plain", "value": "' +
             body +
             '"}]}');
     return true;

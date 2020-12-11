@@ -116,8 +116,10 @@ class Groups extends StatelessWidget {
                       height: 8,
                     ),
                     Text(
-                      groups.length.toString() +
-                          (groups.length > 1 ? " membres" : " membre"),
+                      groups[index].contactList.length.toString() +
+                          (groups[index].contactList.length > 1
+                              ? " membres"
+                              : " membre"),
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 12,

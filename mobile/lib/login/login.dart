@@ -296,7 +296,7 @@ class _LogInState extends State<LogIn> {
         text: TextSpan(
           children: [
             TextSpan(
-              text: "Autres moyens de connexions",
+              text: "Autres moyens de connexion",
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontSize: 14.0,

@@ -52,9 +52,7 @@ class _CreateAccount extends State<CreateAccount> {
           decoration: logInBoxDecorationStyle,
           height: 48.0,
           child: TextField(
-            //focusNode: _focusNode,
             keyboardType: TextInputType.emailAddress,
-            autofocus: true,
             style: logInInputStyle,
             decoration: InputDecoration(
               border: InputBorder.none,
@@ -84,7 +82,6 @@ class _CreateAccount extends State<CreateAccount> {
           decoration: logInBoxDecorationStyle,
           height: 48.0,
           child: TextField(
-            //focusNode: _focusNode,
             keyboardType: TextInputType.text,
             style: logInInputStyle,
             obscureText: true,
@@ -116,7 +113,6 @@ class _CreateAccount extends State<CreateAccount> {
           decoration: logInBoxDecorationStyle,
           height: 48.0,
           child: TextField(
-            //focusNode: _focusNode,
             keyboardType: TextInputType.text,
             style: logInInputStyle,
             decoration: InputDecoration(
@@ -147,7 +143,6 @@ class _CreateAccount extends State<CreateAccount> {
           decoration: logInBoxDecorationStyle,
           height: 48.0,
           child: TextField(
-            //focusNode: _focusNode,
             keyboardType: TextInputType.name,
             style: logInInputStyle,
             decoration: InputDecoration(
@@ -178,7 +173,6 @@ class _CreateAccount extends State<CreateAccount> {
           decoration: logInBoxDecorationStyle,
           height: 48.0,
           child: TextField(
-            //focusNode: _focusNode,
             keyboardType: TextInputType.name,
             style: logInInputStyle,
             decoration: InputDecoration(
@@ -200,7 +194,7 @@ class _CreateAccount extends State<CreateAccount> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Numéros de téléphone",
+          "Numéro de téléphone",
           style: logInLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -209,13 +203,12 @@ class _CreateAccount extends State<CreateAccount> {
           decoration: logInBoxDecorationStyle,
           height: 48.0,
           child: TextField(
-            //focusNode: _focusNode,
             keyboardType: TextInputType.phone,
             style: logInInputStyle,
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.symmetric(horizontal: 15),
-              hintText: "Numéros de téléphone",
+              hintText: "Numéro de téléphone",
               hintStyle: logInHintTextStyle,
             ),
             controller: _phoneNumberInput,
@@ -245,8 +238,8 @@ class _CreateAccount extends State<CreateAccount> {
                       _phoneNumberInput.text) ==
                   true) {
             Navigator.pop(context);
-            buildShowDialog(context, "Bienvenue sur Split!",
-                "Votre compte a été crée"); //Navigator.pop(context);
+            buildShowDialog(
+                context, "Bienvenue sur Split!", "Votre compte a été crée");
           } else
             buildShowDialog(
                 context, "Une erreur s'est produite", Requests.reasonRequest);
