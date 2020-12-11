@@ -91,7 +91,7 @@ export default class Groupes extends React.Component {
                     {
                         this.state && this.state.groups ?
                           <FlexContainer>{ this.state.groups }</FlexContainer> :
-                          <div style={ { marginTop: '80px' } }><CircularProgress /></div>
+                          <div style={ { marginTop: '80px', overflow: 'hidden' } }><CircularProgress /></div>
                     }
                 </Tab>
 
