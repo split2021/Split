@@ -1,5 +1,8 @@
 # Split
 
+## Website
+http://pp.split2021.live/
+
 ## Status
 
 [![Codemagic build status](https://api.codemagic.io/apps/5dadd852813e33528455eb5e/5dadd852813e33528455eb5d/status_badge.svg)](https://codemagic.io/apps/5dadd852813e33528455eb5e/5dadd852813e33528455eb5d/latest_build)
