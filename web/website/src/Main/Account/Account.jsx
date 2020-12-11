@@ -16,7 +16,7 @@ export default class SettingsTab extends React.Component {
   constructor(props) {
     super(props);
     this.cookies = new Cookies();
-    if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
+    if (this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
       console.log('cookie présent');
       this.state = {
         connected: true,
@@ -34,30 +34,34 @@ export default class SettingsTab extends React.Component {
   }
 
   render() {
-    return (
-      <Container>
-        <Tab>
-          <Icon />
-          <Title>{this.state.data.user.first_name + ' ' + this.state.data.user.last_name}</Title>
-          <FlexContainer>
-            <Case
-              onClick={() => this.handleRedirect('/amis')}
-              Title={'Amis'}
-              Number={ this.state.data.user.friends_count }
+    if (this.state) {
+      return (
+        <Container>
+          <Tab>
+            <Icon/>
+            <Title>{this.state.data.user.first_name + ' ' + this.state.data.user.last_name}</Title>
+            <FlexContainer>
+              <Case
+                onClick={() => this.handleRedirect('/amis')}
+                Title={'Amis'}
+                Number={this.state.data.user.friends_count}
+              />
+              <Case
+                onClick={() => this.handleRedirect('/groupes')}
+                Title={'Groupes'}
+                Number={this.state.data.user.payment_groups.length}
+              />
+            </FlexContainer>
+            <TextCase
+              onClick={() => this.handleRedirect('/siderbar')}
+              Title={'Mes statistiques'}
             />
-            <Case
-              onClick={() => this.handleRedirect('/groupes')}
-              Title={'Groupes'}
-              Number={ this.state.data.user.payment_groups.length }
-            />
-          </FlexContainer>
-          <TextCase
-            onClick={ () => this.handleRedirect('/siderbar') }
-            Title={ 'Mes statistiques' }
-          />
-        </Tab>
-        <HistoryList />
-      </Container>
-    )
+          </Tab>
+          <HistoryList/>
+        </Container>
+      );
+    } else {
+      return '';
+    }
   }
 }
