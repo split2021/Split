@@ -10,7 +10,7 @@ export const GoBackText = styled.div`
 `;
 
 export const SiderbarContainer = styled.div`
-  display: flex;
+ // display: flex;
   grid-column: 1;
   grid-row: 1/5;
   height: 100vh;
@@ -59,12 +59,12 @@ export const Container = styled.div`
 `;
 
 export const GridOne = styled.div`
-  grid-column: 1;
-  grid-row: 1/5;
+  grid-column: 2/3;
+  grid-row: 1/4;
 `;
 
 export const GridTwo = styled.div`
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 1/4;
 `;
 
