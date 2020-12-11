@@ -30,7 +30,7 @@ export const SiderbarMenuItem = styled.li `
   padding-left: 30px;
   &:hover {
     background: rgba(255, 255, 255, 0.05);
-    box-shadow: inset 3px 0 0 0 black;
+    box-shadow: inset 0px 0 0 0 black;
     cursor: pointer;
   }
 `;

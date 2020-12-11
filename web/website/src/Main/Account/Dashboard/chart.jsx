@@ -47,9 +47,9 @@ export default class Charts extends React.Component {
         return (
             <Container>
                 <Tab>
-                        <Tableau container flex-direction={"row"} justify={"center"} alignItems={"center"}>
+                        <Tableau >
                             <Collumns>
-                                <Collumn>Date D'arriver</Collumn>
+                                <Collumn>Date D'arrivée</Collumn>
                             </Collumns>
                             {
                                 this.state && this.state.date_joined ? this.state.date_joined :
