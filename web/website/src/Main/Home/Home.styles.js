@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {Link} from "react-router-dom";
 
 export const Container = styled.div`
   color: #556DFF;
@@ -33,9 +34,11 @@ export const Phone = styled.img`
 `;
 
 export const Block = styled.div`
-  display: block;
+  display: ${props => props.avis ? 'flex' : 'block'};
+  justify-content: center;
+  flex-wrap: wrap;
   margin: 0px auto;
-  padding: ${props => props.first ? '100px 0px' : '100px 0px 100px'};
+  padding: ${props => props.first ? '100px 0px' : props.avis ? '30px' : '100px 0px 100px'};
   max-width: ${props => props.Trombi || props.contact ? '100%' : '1120px'};
   width: 100%;
   color: ${props => props.contact ? 'white' : '#556DFF'};
@@ -179,7 +182,7 @@ export const Covid = styled.div`
 
 export const CovidTitle = styled.div`
   font-size: 30px;
-  white-space: nowrap
+  white-space: nowrap;
   padding: 6px;
 `;
 
@@ -213,4 +216,36 @@ export const Back = styled.div`
     margin-top: -1000px;
     height: 1000px;w
   }
+`;
+
+export const Avis = styled.div`
+  padding: 20px;
+  box-shadow: 0 10px 100px 0 rgba(0,0,0,0.1);
+  border: 1px solid #E9E7EB;
+  border-radius: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  width: min-content;
+  margin: 15px;
+  color: black;
+  min-height: 60px;
+`;
+
+export const Comment = styled.div`
+  color: black;
+  min-width: 300px;
+  font-size: 16px;
+  text-align: left;
+  overflow-wrap: break-word;
+`;
+
+export const From = styled.div`
+  color: grey;
+  width: 100%;
+  white-space: nowrap;
+  text-align: right;
+  padding-top: 4px;
+  margin-top: 8px;
+  border-top: 2px solid #556DFF;
+  font-size: 12px;
 `;

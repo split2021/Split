@@ -23,7 +23,10 @@ import {
   Picture,
   Covid,
   CovidTitle,
-  CovidText
+  CovidText,
+  Avis,
+  Comment,
+  From,
 } from './Home.styles.js';
 import {
   faCheck,
@@ -157,10 +160,35 @@ export default class Home extends React.Component {
           <CovidText>Avec le COVID permettre à un groupe entier de payer uniquement avec 1 intermédiaire aide à réduire les risques de propagation</CovidText>
         </Covid>
 
-        <Block Trombi={true}>
-          <SubTitle>Notre équipe</SubTitle>
-          <Trombi/>
+        <Block avis={ true }>
+          <Avis>
+            <Comment>"Application très intéressante j'en ferais part à mon directeur"</Comment>
+            <From>Manageuse à Pardis du fruit</From>
+          </Avis>
+          <Avis>
+            <Comment>"Très bonne idée d'application, j'attends votre mail de prise de contact avec impatiente !"</Comment>
+            <From>Responsable restaurant à Fratellini Caffe</From>
+          </Avis>
+          <Avis>
+            <Comment>"Super application pour aider le temps de queue en caisse, il faut contacter la direction rapidement !"</Comment>
+            <From>Manageuse à Léon de Bruxelles</From>
+          </Avis>
+          <Avis>
+            <Comment>"Génial pour réduire le temps lors du paiement des groupes, cela libère le temps des serveurs"</Comment>
+            <From>Manageur à Old Wild West</From>
+          </Avis>
+          <Avis>
+            <Comment>"Une très bonne idée qui me liberera beaucoup de temps et fluidifiera le paiement !"</Comment>
+            <From>Serveuse à Indiana Café</From>
+          </Avis>
         </Block>
+
+        <div style={{backgroundColor: '#f6f6f8'}}>
+          <Block Trombi={true}>
+            <SubTitle>Notre équipe</SubTitle>
+            <Trombi/>
+          </Block>
+        </div>
 
         <Block contact={true}>
           <Title>Contact</Title>
