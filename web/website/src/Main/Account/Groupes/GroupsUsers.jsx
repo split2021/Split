@@ -61,7 +61,7 @@ export default class Amis extends React.Component {
       this.setState({ loadPercentage : (((i + 1.5) * 100) / (this.state.data.groupData[this.state.data.id].users).length) });
       if (friend.data.data) {
         result.push(
-          <Friend>
+          <Friend key={ this.state.data.groupData[this.state.data.id].users[i].id }>
             <CollumnFriend>
               { friend.data.data.first_name + ' ' + friend.data.data.last_name }
             </CollumnFriend>
