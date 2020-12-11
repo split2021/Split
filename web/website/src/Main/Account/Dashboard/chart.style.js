@@ -2,14 +2,11 @@ import styled from "styled-components";
 
 export const Tableau = styled.div`
   background-color: #FFFFFF;
-  //max-width: 120px;
-  //min-width: 100px;
   min-height: 10px;
-  //margin: 40px auto;
   margin-left: 10px;
   border-radius: 10px;
   border: 1px solid #dadce0;
-  text-align: left;
+  text-align: center;
 `;
 
 export const Collumn = styled.div`
@@ -29,7 +26,6 @@ export const Collumns = styled.div`
   box-sizing: border-box;
   cursor: default;
   display: table;
-  //height: 50px;
   overflow: hidden;
   table-layout: fixed;
   width: 100%;

@@ -2,7 +2,7 @@ import React from "react";
 import Cookies from "universal-cookie";
 import Request from "../../../components/Api/Request";
 import {CollumnFriend, Friend, Tableau} from "../Amis/Amis.styles";
-import {Collumn, Collumns, Container, Goback, Loader, Tab, Title} from "../Global.styles";
+import {Collumn, Collumns, Container, Loader, Tab} from "../Global.styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 export default class FriendLists extends React.Component {

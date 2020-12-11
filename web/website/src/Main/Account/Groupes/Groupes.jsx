@@ -61,6 +61,7 @@ export default class Groupes extends React.Component {
                 data.push(group.data.data);
                 result.push(
                   <Case
+                    key={ this.state.data.user.payment_groups[i].id }
                     onClick={
                         () => this.handleRedirect('/groupsUsers',
                       { groupData: this.state.groupData, id: i })
