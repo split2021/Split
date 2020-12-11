@@ -20,7 +20,12 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^1.1.0
-  titled_navigation_bar: ^4.1.0
+  flutter_phoenix: ^0.1.0
+  flutter_spinkit: "^4.1.2"
+  url_launcher: ^5.7.10
+
+
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -63,6 +68,14 @@ flutter:
     - assets/default_profile.jpg
     - assets/logos/google.jpg
     - assets/logos/facebook.jpg
+    - assets/f_logo_RGB-Blue_58 1.png
+    - assets/Google__G__Logo 1.png
+    - assets/add_icon.png
+    - assets/profil_p.png
+    - assets/edit_icon.png
+    - assets/add_icon.png
+
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

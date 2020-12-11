@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:titled_navigation_bar/titled_navigation_bar.dart';
+import 'package:split/decorations/home_decorations.dart';
 
 import '../contact/contact_page.dart';
 import '../group/group_manager.dart';
@@ -24,8 +24,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 
   Widget _buildBottomAppBar() {
-    return TitledBottomNavigationBar(
-        reverse: true,
+    return BottomNavigationBar(
         currentIndex:
             _currBtmNavIndex, // Use this to update the Bar giving a position
         onTap: (index) {
@@ -35,17 +34,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 duration: Duration(milliseconds: 500), curve: Curves.ease);
           });
         },
-        indicatorColor: Color.fromRGBO(21, 58, 81, 1),
-        activeColor: Color.fromRGBO(21, 58, 81, 1),
+        backgroundColor: Colors.white,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Color(0xffA2A2A2),
+        selectedFontSize: 12,
+        unselectedFontSize: 12,
+        selectedLabelStyle: labelTxtStyle,
         items: [
-          TitledNavigationBarItem(
-              title: Text('Groupes'),
-              icon: Icons.group,
-              backgroundColor: Colors.white),
-          TitledNavigationBarItem(
-              title: Text('Rechercher'), icon: Icons.search),
-          TitledNavigationBarItem(
-              title: Text('Profil'), icon: Icons.person_outline),
+          BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Groupes'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search), label: "Rechercher"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle), label: "Profile"),
         ]);
   }
 

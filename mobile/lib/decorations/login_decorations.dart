@@ -1,31 +1,72 @@
 import 'package:flutter/material.dart';
 
-final logInHintTextStyle = TextStyle(
-  color: Colors.white54,
-  fontFamily: 'OpenSans',
+final logInLabelStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.w600,
+  fontSize: 14,
 );
 
-final logInLabelStyle = TextStyle(
+final logInHintTextStyle = TextStyle(
+  color: Color(0xffA1A1A1),
+  fontWeight: FontWeight.w500,
+  fontSize: 14,
+);
+
+final logInInputStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.w500,
+  fontSize: 14,
+);
+
+final logInFrgtPsswrdStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.w600,
+  fontSize: 14,
+);
+
+final logInBtnTextStyle = TextStyle(
   color: Colors.white,
-  fontWeight: FontWeight.bold,
-  fontFamily: 'OpenSans',
+  fontWeight: FontWeight.w600,
+  fontSize: 16,
+);
+
+final dialogBtnTxtStyle = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.w500,
+  fontSize: 16,
+);
+
+final dialogBtnNoTxtStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.w500,
+  fontSize: 16,
+);
+
+final dialogTitleTxtStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.w600,
+  fontSize: 24,
+);
+
+final dialogTxtStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.w500,
+  fontSize: 14,
 );
 
 final accountCreatedLabelStyle = TextStyle(
-  color: Colors.white,
-  fontWeight: FontWeight.bold,
-  fontFamily: 'OpenSans',
-  fontSize: 25,
+  color: Colors.black,
+  fontWeight: FontWeight.w600,
+  fontSize: 16,
+);
+
+final priceTxtStyle = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.w500,
+  fontSize: 16,
 );
 
 final logInBoxDecorationStyle = BoxDecoration(
-  color: Color.fromRGBO(220, 220, 220, 0.2),
-  borderRadius: BorderRadius.circular(10.0),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.black12,
-      blurRadius: 6.0,
-      offset: Offset(0, 2),
-    ),
-  ],
+  color: Color(0xffE6E6E6),
+  borderRadius: BorderRadius.circular(8.0),
 );

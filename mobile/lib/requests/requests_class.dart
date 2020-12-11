@@ -8,14 +8,15 @@ import '../contact/contact_class.dart';
 import '../group/group_class.dart';
 
 // URL Prod : 52.178.136.18:443
-// URL Preprod : 40.112.78.121:80
+// OLD URL Preprod : 40.112.78.121:80
 // URL Local : 127.0.0.1:8080
+// URL Preprod : api.pp.split2021.live
 
 // Password Prod : X#9q@XCy7qy&
 // Password Preprod : @4g%G4HB&xE7z
 
 class Requests {
-  static String _urlRequest = "40.112.78.121:80";
+  static String _urlRequest = "api.pp.split2021.live";
   static String reasonRequest;
   static String statusCodeRequest;
 
@@ -33,7 +34,7 @@ class Requests {
       var parsedJson = jsonDecode(body);
       reasonRequest = parsedJson["reason"];
       statusCodeRequest = parsedJson["statuscode"].toString();
-      User.adminToken = parsedJson["data"]["token"];
+      User.adminToken = "Bearer " + parsedJson["data"]["token"];
       // Debug
       //print("Get admin token request: " + statusCode.toString());
       User.adminTokenTimer = DateTime.now();
@@ -87,21 +88,22 @@ class Requests {
 
   static Future<bool> createGroup(String groupName) async {
     String adminToken = await getAdminToken();
+    print("Admink Token: " + adminToken);
     List<int> usersIds = new List<int>();
     for (var user in User.contactList) {
       if (user.checked == true) usersIds.add(user.id);
     }
     usersIds.add(User.id);
     if (adminToken == null) return false;
-    String url = 'http://' + _urlRequest + '/api/payment_groups/';
+    String url = 'http://' + _urlRequest + '/api/paymentgroups/';
     Map<String, String> headers = {
       "Content-type": "application/json",
       "Authorization": adminToken
     };
     String usersIdsToString = usersIds.join(", ");
     String json =
-        '{"name": "' + groupName + '", "users": [' + usersIdsToString + ']}';
-    print(json);
+        '{"name": "' + groupName + '", "users": "' + usersIdsToString + '"}';
+    print("json: " + json);
     Response response = await post(url, headers: headers, body: json);
     String body = response.body;
     var parsedJson = jsonDecode(body);
@@ -109,8 +111,9 @@ class Requests {
     statusCodeRequest = parsedJson["statuscode"].toString();
     int statusCode = response.statusCode;
     // Debug
-    // print("Create group request: " + statusCode.toString());
-    if (statusCode == 200)
+    print("Create group request: " + statusCode.toString());
+    print(body);
+    if (statusCode == 201)
       return true;
     else
       return false;
@@ -147,16 +150,16 @@ class Requests {
     // Debug
     // print("Create user request: " + statusCode.toString());
 
-    if (statusCode == 200)
+    if (statusCode == 201)
       return true;
     else
       return false;
   }
 
-  static Future<bool> postPayment(List<String> userList, List<String> emailList,
-      double total, int groupId) async {
+  static Future<String> postPayment(double total, int groupId) async {
     String adminToken = await getAdminToken();
-    if (adminToken == null) return false;
+    String redirectLink;
+    if (adminToken == null) return null;
     String url = 'http://' + _urlRequest + '/api/payment';
     Map<String, String> headers = {
       "Content-type": "application/json",
@@ -164,10 +167,12 @@ class Requests {
     };
     String json = '{"group": ' +
         groupId.toString() +
-        ',	"users": {' +
-        userList.join(", ") +
+        ',	"users": {"' +
+        User.email +
+        '":' +
+        total.toString() +
         '},	"total": ' +
-        total.round().toString() +
+        total.toString() +
         ',	"target": "' +
         "sb-uzjfr871438@business.example.com" +
         '"}';
@@ -178,22 +183,16 @@ class Requests {
     reasonRequest = parsedJson["reason"];
     statusCodeRequest = parsedJson["statuscode"].toString();
     var data = parsedJson["data"];
-    for (var email in emailList) {
-      int i = 0;
-      for (var value in data[email]) {
-        i++;
-        int y = 0;
-        if (i == 2)
-          for (var link in value) {
-            y++;
-            if (y == 2) sendEmail(email, link);
-          }
+    for (var link in data[User.email]) {
+      if (link.toString().contains("REDIRECT")) {
+        sendEmail(User.email, link[1]);
+        redirectLink = link[1];
       }
     }
     if (statusCode == 200)
-      return true;
+      return redirectLink;
     else
-      return false;
+      return null;
   }
 
   static Future<bool> sendEmail(String recipient, String body) async {
@@ -203,14 +202,13 @@ class Requests {
     headers["Content-Type"] = "application/json";
 
     var url = 'https://api.sendgrid.com/v3/mail/send';
-    var response = await http.post(url,
+    await http.post(url,
         headers: headers,
         body: '{"personalizations": [{"to": [{"email": "' +
             recipient +
             '"}]}],"from": {"email": "hugomrt.94@gmail.com"},"subject": "Your paypal link","content": [{"type": "text/plain", "value": "' +
             body +
             '"}]}');
-    print('Response status: ${response.statusCode}');
     return true;
   }
 
@@ -235,7 +233,6 @@ class Requests {
     statusCodeRequest = parsedJson["statuscode"].toString();
     for (var contact in parsedJson["data"]) {
       listContact.add(Contact.fromJson(contact));
-      print(contact["email"]);
     }
     return listContact;
   }
@@ -244,7 +241,7 @@ class Requests {
     String adminToken = await getAdminToken();
     if (adminToken == null) return null;
     String url =
-        'http://' + _urlRequest + '/api/payment_groups/' + id.toString();
+        'http://' + _urlRequest + '/api/paymentgroups/' + id.toString();
     Map<String, String> headers = {
       "Content-type": "application/json",
       "Authorization": adminToken
@@ -289,7 +286,7 @@ class Requests {
     if (adminToken == null) return null;
     for (var id in groupsId) {
       String url =
-          'http://' + _urlRequest + '/api/payment_groups/' + id.toString();
+          'http://' + _urlRequest + '/api/paymentgroups/' + id.toString();
       Map<String, String> headers = {
         "Content-type": "application/json",
         "Authorization": adminToken
@@ -309,15 +306,25 @@ class Requests {
       statusCodeRequest = parsedJson["statuscode"].toString();
       List<Contact> userIds = new List<Contact>();
       for (var userId in parsedJson["data"]["users"]) {
-        Requests.getUserInfoById(userId["id"]).then((value) {
-          //print(value.firstName + value.lastName + value.email + value.id.toString() + value.phoneNumber);
-          userIds.add(new Contact(
-              firstName: value.firstName,
-              lastName: value.lastName,
-              email: value.email,
-              id: value.id,
-              phoneNumber: value.phoneNumber));
-        });
+        Contact fetchedContact;
+        String url =
+            'http://' + _urlRequest + '/api/users/' + userId["id"].toString();
+        Map<String, String> headers = {
+          "Content-type": "application/json",
+          "Authorization": adminToken
+        };
+        Response response = await get(url, headers: headers);
+        String body = response.body;
+        var parsedJson = jsonDecode(body);
+        reasonRequest = parsedJson["reason"];
+        statusCodeRequest = parsedJson["statuscode"].toString();
+        fetchedContact = Contact.fromJson(parsedJson["data"]);
+        userIds.add(new Contact(
+            firstName: fetchedContact.firstName,
+            lastName: fetchedContact.lastName,
+            email: fetchedContact.email,
+            id: fetchedContact.id,
+            phoneNumber: fetchedContact.phoneNumber));
       }
       fetchedGroups.add(new Group(parsedJson["data"]["name"], userIds, id));
     }
@@ -334,7 +341,6 @@ class Requests {
     };
     Response response = await get(url, headers: headers);
     String body = response.body;
-    print("GetUsername BODY" + body);
     var parsedBody = jsonDecode(body);
     return parsedBody["data"]["first_name"] +
         " " +
@@ -349,9 +355,9 @@ class Requests {
       "Content-type": "application/json",
       "Authorization": adminToken
     };
-    String json = '{"user1_id": "' +
+    String json = '{"user1": "' +
         id1.toString() +
-        '",	"user2_id": "' +
+        '",	"user2": "' +
         id2.toString() +
         '"}';
     Response response = await post(url, headers: headers, body: json);
@@ -362,14 +368,14 @@ class Requests {
     int statusCode = response.statusCode;
     // Debug
     // print("Add friend request: " + statusCode.toString());
-
     if (statusCode == 200)
       return true;
     else
       return false;
   }
 
-  static Future<bool> editUserProfile() async {
+  static Future<bool> editUserProfile(
+      String firstName, String lastName, String username, String phone) async {
     String adminToken = await getAdminToken();
     if (adminToken == null) return false;
     String url = 'http://' + _urlRequest + '/api/users/' + User.id.toString();
@@ -390,8 +396,6 @@ class Requests {
         '"}';
     Response response = await patch(url, headers: headers, body: json);
     int statusCode = response.statusCode;
-    String body = response.body;
-    print("Edit User Profile request " + body);
     if (statusCode == 200)
       return true;
     else

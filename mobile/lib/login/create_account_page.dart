@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:split/login/account_created.dart';
+import 'package:split/ui/decoration_box.dart';
 
-import '../requests/requests_class.dart';
-import '../ui/background_image.dart';
 import '../decorations/login_decorations.dart';
+import '../requests/requests_class.dart';
 import '../utils/show_dialog.dart';
 
 class CreateAccount extends StatefulWidget {
@@ -22,37 +21,204 @@ class _CreateAccount extends State<CreateAccount> {
   final _lastNameInput = TextEditingController();
   final _phoneNumberInput = TextEditingController();
 
-  Widget _buildCustomTextField(
-      String title, String hint, TextEditingController controller) {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailInput.dispose();
+    _phoneNumberInput.dispose();
+    _passwordInput.dispose();
+    _usernameInput.dispose();
+    _firstNameInput.dispose();
+    _lastNameInput.dispose();
+    super.dispose();
+  }
+
+  Widget _buildEmailTextField() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          title,
+          "Email",
           style: logInLabelStyle,
         ),
         SizedBox(height: 10.0),
         Container(
           alignment: Alignment.centerLeft,
           decoration: logInBoxDecorationStyle,
-          height: 60.0,
+          height: 48.0,
           child: TextField(
+            //focusNode: _focusNode,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
+            autofocus: true,
+            style: logInInputStyle,
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.contacts,
-                color: Colors.white,
-              ),
-              hintText: hint,
+              contentPadding: EdgeInsets.symmetric(horizontal: 15),
+              hintText: "Email",
               hintStyle: logInHintTextStyle,
             ),
-            controller: controller,
+            controller: _emailInput,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPasswordTextField() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Mot de passe",
+          style: logInLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: logInBoxDecorationStyle,
+          height: 48.0,
+          child: TextField(
+            //focusNode: _focusNode,
+            keyboardType: TextInputType.text,
+            style: logInInputStyle,
+            obscureText: true,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 15),
+              hintText: "Mot de passe",
+              hintStyle: logInHintTextStyle,
+            ),
+            controller: _passwordInput,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildUsernameTextField() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Nom d'utilisateur",
+          style: logInLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: logInBoxDecorationStyle,
+          height: 48.0,
+          child: TextField(
+            //focusNode: _focusNode,
+            keyboardType: TextInputType.text,
+            style: logInInputStyle,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 15),
+              hintText: "Nom d'utilisateur",
+              hintStyle: logInHintTextStyle,
+            ),
+            controller: _usernameInput,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFirstNameTextField() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Prénom",
+          style: logInLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: logInBoxDecorationStyle,
+          height: 48.0,
+          child: TextField(
+            //focusNode: _focusNode,
+            keyboardType: TextInputType.name,
+            style: logInInputStyle,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 15),
+              hintText: "Prénom",
+              hintStyle: logInHintTextStyle,
+            ),
+            controller: _firstNameInput,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLastNameTextField() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Nom",
+          style: logInLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: logInBoxDecorationStyle,
+          height: 48.0,
+          child: TextField(
+            //focusNode: _focusNode,
+            keyboardType: TextInputType.name,
+            style: logInInputStyle,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 15),
+              hintText: "Nom",
+              hintStyle: logInHintTextStyle,
+            ),
+            controller: _lastNameInput,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPhoneTextField() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Numéros de téléphone",
+          style: logInLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: logInBoxDecorationStyle,
+          height: 48.0,
+          child: TextField(
+            //focusNode: _focusNode,
+            keyboardType: TextInputType.phone,
+            style: logInInputStyle,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(horizontal: 15),
+              hintText: "Numéros de téléphone",
+              hintStyle: logInHintTextStyle,
+            ),
+            controller: _phoneNumberInput,
           ),
         ),
       ],
@@ -61,10 +227,9 @@ class _CreateAccount extends State<CreateAccount> {
 
   Widget _buildCreateButton() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
+      height: 42,
       child: RaisedButton(
-        elevation: 5.0,
         onPressed: () async {
           if (_emailInput != null &&
               _passwordInput != null &&
@@ -79,25 +244,109 @@ class _CreateAccount extends State<CreateAccount> {
                       _lastNameInput.text,
                       _phoneNumberInput.text) ==
                   true) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AccountCreated()));
+            Navigator.pop(context);
+            buildShowDialog(context, "Bienvenue sur Split!",
+                "Votre compte a été crée"); //Navigator.pop(context);
           } else
             buildShowDialog(
-                context, Requests.statusCodeRequest, Requests.reasonRequest);
+                context, "Une erreur s'est produite", Requests.reasonRequest);
         },
-        padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
-        color: Colors.white,
-        child: Text(
-          'Créer le compte',
-          style: TextStyle(
-            color: Color(0xFF527DAA),
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
+        color: Theme.of(context).primaryColor,
+        child: Text("S'inscrire", style: logInBtnTextStyle),
+      ),
+    );
+  }
+
+  Widget _buildLogInRedirect() {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Déjà un comtpe ? ',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            TextSpan(
+              text: "Se connecter",
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFormsContainer() {
+    return Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: 30.0),
+              _buildEmailTextField(),
+              SizedBox(height: 20.0),
+              _buildPasswordTextField(),
+              SizedBox(height: 20.0),
+              _buildUsernameTextField(),
+              SizedBox(height: 20.0),
+              _buildFirstNameTextField(),
+              SizedBox(height: 20.0),
+              _buildLastNameTextField(),
+              SizedBox(height: 20.0),
+              _buildPhoneTextField(),
+              SizedBox(height: 40.0),
+              _buildCreateButton(),
+              SizedBox(
+                height: 30,
+              ),
+              _buildLogInRedirect(),
+              SizedBox(
+                height: 30,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _backArrow() {
+    return Positioned(
+      top: MediaQuery.of(context).size.height / 20,
+      left: MediaQuery.of(context).size.width / 20,
+      child: Container(
+        child: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
           ),
         ),
       ),
@@ -107,79 +356,45 @@ class _CreateAccount extends State<CreateAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: true,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
-          onTap: () => {FocusScope.of(context).unfocus(), print("UNFOCUS")},
+          onTap: () => {
+            FocusScope.of(context).unfocus(),
+          },
           child: Stack(
             fit: StackFit.expand,
             children: <Widget>[
-              backgroundImage("assets/food_4k_1.jpg"),
               Container(
-                color: Color.fromRGBO(21, 58, 81, 0.9),
+                width: double.infinity,
+                color: Theme.of(context).primaryColor,
               ),
-              Container(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    vertical: 50.0,
+              buildDecorationBox(MediaQuery.of(context).size.width * 0.55,
+                  MediaQuery.of(context).size.height * 0.1),
+              buildDecorationBox(MediaQuery.of(context).size.width * 0.65,
+                  MediaQuery.of(context).size.height * 0.1),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).padding.top + 20,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Créer un compte',
-                        style: TextStyle(
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Text(
+                      "S'inscrire",
+                      style: TextStyle(
+                          fontSize: 30,
                           color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 30.0),
-                      _buildCustomTextField(
-                          "Entrez votre mail", "Email", _emailInput),
-                      SizedBox(height: 20.0),
-                      _buildCustomTextField("Entrez votre mot de passe",
-                          "Mot de passe", _passwordInput),
-                      SizedBox(height: 20.0),
-                      _buildCustomTextField("Entrez votre nom d'utilisateur",
-                          "Nom d'utilisateur", _usernameInput),
-                      SizedBox(height: 20.0),
-                      _buildCustomTextField(
-                          "Entrez votre prénom", "Prénom", _firstNameInput),
-                      SizedBox(height: 20.0),
-                      _buildCustomTextField(
-                          "Entrez votre nom", "Nom", _lastNameInput),
-                      SizedBox(height: 20.0),
-                      _buildCustomTextField("Entrez votre numéros de téléphone",
-                          "Numéro de téléphone", _phoneNumberInput),
-                      SizedBox(height: 10.0),
-                      _buildCreateButton(),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 10,
-                left: 10,
-                child: Container(
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: () {
-                      print("CLOSED");
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.close,
-                      color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                ),
+                  _buildFormsContainer(),
+                ],
               ),
+              _backArrow()
             ],
           ),
         ),

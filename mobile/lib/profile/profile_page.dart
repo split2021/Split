@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:split/login/login.dart';
-import './edit_profile.dart';
-import '../user/user_class.dart';
-import '../contact/contact_page.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:split/group/groupe_create.dart';
+import 'package:split/profile/edit_profile.dart';
+import 'package:split/ui/box_shadow.dart';
+
 import '../group/group_manager.dart';
+import '../user/user_class.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -13,249 +15,251 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-  void logOut(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
-    User.username = null;
-    User.email = null;
-    User.phoneNumber = null;
-    User.firstName = null;
-    User.lastName = null;
-    User.password = null;
-    User.token = null;
-    User.id = null;
-    User.profilePic = null;
-    User.friendsIds.clear();
-    User.groupsIds.clear();
-    User.contactList.clear();
-    User.groupsList.clear();
+  @override
+  void initState() {
+    super.initState();
   }
 
-  Widget buildBackground(Size screenSize) {
-    return Container(
-      height: screenSize.height / 2.6,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/profile_bg.jpg"),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
+  @override
+  void dispose() {
+    super.dispose();
   }
 
-  Widget buildProfilePicture() {
-    return Center(
+  @override
+  void setState(fn) {
+    if (this.mounted) {
+      super.setState(fn);
+    }
+  }
+
+  Future<Null> _onRefresh() async {
+    setState(() {});
+    return null;
+  }
+
+  _buildContainer(String label, String value) {
+    return Expanded(
       child: Container(
-        width: 140.0,
-        height: 140.0,
+        height: 70,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(User.profilePic),
-            fit: BoxFit.cover,
-          ),
-          borderRadius: BorderRadius.circular(80.0),
-          border: Border.all(
+            borderRadius: BorderRadius.circular(8.0),
             color: Colors.white,
-            width: 5.0,
-          ),
+            boxShadow: [
+              buildBoxShadow(),
+            ]),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              value,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            ),
+            Text(
+              label,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget buildUsername() {
-    TextStyle _nameTextStyle = TextStyle(
-      fontFamily: 'Roboto',
-      color: Colors.black,
-      fontSize: 28.0,
-      fontWeight: FontWeight.w700,
-    );
-
-    return Text(
-      User.firstName + " " + User.lastName,
-      style: _nameTextStyle,
+  Widget _buildImage() {
+    return Image.asset(
+      "assets/profil_p.png",
+      height: 150,
+      width: 150,
     );
   }
 
-  Widget buildStats() {
+  Widget _buildName() {
+    return Center(
+      child: Text(
+        User.firstName + " " + User.lastName,
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+
+  Widget _buildStatsRow() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _buildContainer(User.friendsIds.length > 1 ? "Amis" : "Ami",
+              User.friendsIds.length.toString()),
+          SizedBox(
+            width: 15,
+          ),
+          _buildContainer(User.friendsIds.length > 1 ? "Groupes" : "Groupe",
+              User.groupsIds.length.toString()),
+          SizedBox(
+            width: 15,
+          ),
+          _buildContainer("Points", "24"),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCreateGroupBtn() {
+    return ButtonTheme(
+      height: 50,
+      child: RaisedButton(
+        color: Colors.white,
+        elevation: 0,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(8),
+            topRight: Radius.circular(8),
+          ),
+        ),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CreateGroupePage(null)));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              "assets/add_icon.png",
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text("Créer un groupe",
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500))
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEditProfileBtn() {
+    return ButtonTheme(
+      height: 50,
+      child: RaisedButton(
+        color: Colors.white,
+        elevation: 0,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(8),
+            bottomRight: Radius.circular(8),
+          ),
+        ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => EditProfile()));
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              "assets/edit_icon.png",
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text("Editer le profil",
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500))
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLogOutBtn() {
     return Container(
-      height: 60.0,
-      margin: EdgeInsets.only(top: 8.0),
+      height: 50,
       decoration: BoxDecoration(
-        color: Color(0xFFEFF4F7),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          buildStat("Amis", User.contactList.length.toString()), //friends
-          buildStat("Groupes", User.groupsIds.length.toString()), //groups
-          buildStat("Points", "79"),
+        boxShadow: [
+          buildBoxShadow(),
         ],
       ),
-    );
-  }
-
-  Widget buildStat(String label, String count) {
-    TextStyle _statLabelTextStyle = TextStyle(
-      fontFamily: 'Roboto',
-      color: Colors.black,
-      fontSize: 16.0,
-      fontWeight: FontWeight.w300,
-    );
-
-    TextStyle _statCountTextStyle = TextStyle(
-      color: Colors.black,
-      fontSize: 24.0,
-      fontWeight: FontWeight.bold,
-    );
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          count,
-          style: _statCountTextStyle,
-        ),
-        Text(
-          label,
-          style: _statLabelTextStyle,
-        ),
-      ],
-    );
-  }
-
-  Widget buildSeparator(Size screenSize) {
-    return Container(
-      width: screenSize.width / 1.6,
-      height: 2.0,
-      color: Colors.black,
-      margin: EdgeInsets.only(top: 4.0),
-    );
-  }
-
-  Widget buildButtons(String labelOne, MaterialPageRoute routeOne,
-      String labelTwo, MaterialPageRoute routeTwo) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: InkWell(
-              onTap: () {
-                Navigator.push(context, routeOne);
-              },
-              child: Container(
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  color: Color.fromRGBO(21, 58, 81, 1),
-                ),
-                child: Center(
-                  child: Text(
-                    labelOne,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+      child: RaisedButton(
+        color: Colors.white,
+        elevation: 0,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8),
           ),
-          SizedBox(width: 10.0),
-          Expanded(
-            child: InkWell(
-              onTap: () {
-                Navigator.push(context, routeTwo);
-              },
-              child: Container(
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 2, color: Color.fromRGBO(21, 58, 81, 1)),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      labelTwo,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Color.fromRGBO(21, 58, 81, 1)
-                        ),
-                    ),
-                  ),
-                ),
-              ),
+        ),
+        onPressed: () {
+          Phoenix.rebirth(context);
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Icon(
+              Icons.logout,
+              color: Color(0xff7D7D7D),
             ),
-          ),
-        ],
+            SizedBox(
+              width: 10,
+            ),
+            Text("Se déconnecter",
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500))
+          ],
+        ),
       ),
     );
-  }
-
-  Widget buildLogOutButton(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-        child: Row(children: <Widget>[
-          Expanded(
-              child: InkWell(
-                  onTap: () {
-                    logOut(context);
-                  },
-                  child: Container(
-                      height: 40.0,
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        color: Color.fromRGBO(21, 58, 81, 1),
-                      ),
-                      child: Center(
-                          child: Text("Déconnexion",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ))))))
-        ]));
   }
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    if (User.id <= 0)
-      return new Container();
-    else
-      return Scaffold(
-        body: Stack(
-          children: <Widget>[
-            buildBackground(screenSize),
-            SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(height: screenSize.height / 5),
-                    buildProfilePicture(),
-                    buildUsername(),
-                    buildStats(),
-                    SizedBox(height: 15.0),
-                    buildSeparator(screenSize),
-                    SizedBox(height: 15.0),
-                    buildButtons(
-                        "Ajouter un ami",
-                        MaterialPageRoute(builder: (context) => ContactPage()),
-                        "Créer un groupe",
-                        MaterialPageRoute(builder: (context) => GroupManager())),
-                    buildButtons(
-                        "Editer le profil",
-                        MaterialPageRoute(builder: (context) => EditProfile()),
-                        "Editer le titre",
-                        MaterialPageRoute(builder: (context) => ContactPage())),
-                    SizedBox(height: 12.0),  
-                    buildLogOutButton(context),
-                  ],
+    return Scaffold(
+      body: RefreshIndicator(
+        child: Container(
+          color: Color(0xffF6F6F6),
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _buildImage(),
+                _buildName(),
+                SizedBox(
+                  height: 20,
                 ),
-              ),
+                _buildStatsRow(),
+                SizedBox(
+                  height: 25,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Container(
+                    decoration: BoxDecoration(boxShadow: [buildBoxShadow()]),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        _buildCreateGroupBtn(),
+                        SizedBox(
+                          height: 2,
+                        ),
+                        _buildEditProfileBtn(),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: _buildLogOutBtn(),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      );
+        onRefresh: _onRefresh,
+      ),
+    );
   }
 }

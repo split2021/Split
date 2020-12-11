@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:split/home/home.dart';
+import 'package:split/ui/decoration_box.dart';
 
-import '../ui/background_image.dart';
-import '../requests/requests_class.dart';
-import 'create_account_page.dart';
 import '../decorations/login_decorations.dart';
+import '../requests/requests_class.dart';
 import '../utils/show_dialog.dart';
+import 'create_account_page.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -18,12 +18,22 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   final _emailInput = TextEditingController();
   final _passwordInput = TextEditingController();
+  final animationDuration = 600;
 
-  bool _rememberMe = false;
+  bool isExpanded = false;
+  bool displayLogin = false;
+  bool displayBtn = true;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailInput.dispose();
+    _passwordInput.dispose();
+    super.dispose();
   }
 
   Widget _buildEmailTextField() {
@@ -38,21 +48,14 @@ class _LogInState extends State<LogIn> {
         Container(
           alignment: Alignment.centerLeft,
           decoration: logInBoxDecorationStyle,
-          height: 60.0,
+          height: 48.0,
           child: TextField(
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
+            style: logInInputStyle,
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.email,
-                color: Colors.white,
-              ),
-              hintText: 'Entrez votre email',
+              contentPadding: EdgeInsets.symmetric(horizontal: 15),
+              hintText: 'Email',
               hintStyle: logInHintTextStyle,
             ),
             controller: _emailInput,
@@ -74,21 +77,14 @@ class _LogInState extends State<LogIn> {
         Container(
           alignment: Alignment.centerLeft,
           decoration: logInBoxDecorationStyle,
-          height: 60.0,
+          height: 48.0,
           child: TextField(
             obscureText: true,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
+            style: logInInputStyle,
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.white,
-              ),
-              hintText: 'Entrez votre mot de passe',
+              contentPadding: EdgeInsets.symmetric(horizontal: 15),
+              hintText: 'Mot de passe',
               hintStyle: logInHintTextStyle,
             ),
             controller: _passwordInput,
@@ -106,43 +102,16 @@ class _LogInState extends State<LogIn> {
         padding: EdgeInsets.only(right: 0.0),
         child: Text(
           'Mot de passe oublié ?',
-          style: logInLabelStyle,
+          style: logInFrgtPsswrdStyle,
         ),
-      ),
-    );
-  }
-
-  Widget _buildRememberMeCheckbox() {
-    return Container(
-      height: 20.0,
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
-            child: Checkbox(
-              value: _rememberMe,
-              checkColor: Colors.green,
-              activeColor: Colors.white,
-              onChanged: (value) {
-                setState(() {
-                  _rememberMe = value;
-                });
-              },
-            ),
-          ),
-          Text(
-            'Rester connecté',
-            style: logInLabelStyle,
-          ),
-        ],
       ),
     );
   }
 
   Widget _buildLoginBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
+      height: 42,
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () async {
@@ -157,87 +126,11 @@ class _LogInState extends State<LogIn> {
             buildShowDialog(
                 context, Requests.statusCodeRequest, Requests.reasonRequest);
         },
-        padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
-        color: Colors.white,
-        child: Text(
-          'LOGIN',
-          style: TextStyle(
-            color: Color(0xFF527DAA),
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSignInWithText() {
-    return Column(
-      children: <Widget>[
-        Text(
-          '- OU -',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        SizedBox(height: 20.0),
-        Text(
-          'Se connecter avec',
-          style: logInLabelStyle,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSocialBtn(Function onTap, AssetImage logo) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 60.0,
-        width: 60.0,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0, 2),
-              blurRadius: 6.0,
-            ),
-          ],
-          image: DecorationImage(
-            image: logo,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSocialBtnRow() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 30.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildSocialBtn(
-            () => print('Login with Facebook'),
-            AssetImage(
-              'assets/logos/facebook.jpg',
-            ),
-          ),
-          _buildSocialBtn(
-            () => print('Login with Google'),
-            AssetImage(
-              'assets/logos/google.jpg',
-            ),
-          ),
-        ],
+        color: Theme.of(context).primaryColor,
+        child: Text('Se connecter', style: logInBtnTextStyle),
       ),
     );
   }
@@ -254,21 +147,227 @@ class _LogInState extends State<LogIn> {
             TextSpan(
               text: 'Pas de compte ? ',
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.w400,
+                color: Colors.black,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w600,
               ),
             ),
             TextSpan(
-              text: 'Créer un compte',
+              text: "S'inscrire",
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildTitle() {
+    return isExpanded
+        ? AnimatedDefaultTextStyle(
+            style: TextStyle(
+                fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
+            child: Text("Se connecter"),
+            duration: Duration(milliseconds: animationDuration),
+          )
+        : AnimatedDefaultTextStyle(
+            style: TextStyle(
+                fontSize: 55, color: Colors.white, fontWeight: FontWeight.bold),
+            child: Text("Split"),
+            duration: Duration(milliseconds: animationDuration),
+          );
+  }
+
+  Widget buildFacebookBtn() {
+    return Container(
+      height: 80,
+      child: RaisedButton(
+        color: Color(0xffF6F6F6),
+        onPressed: () {},
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset("assets/f_logo_RGB-Blue_58 1.png"),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              "Se connecter avec Facebook",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildGoogleBtn() {
+    return Container(
+        height: 80,
+        child: RaisedButton(
+          color: Color(0xffF6F6F6),
+          onPressed: () {},
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset("assets/Google__G__Logo 1.png"),
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                "Se connecter avec Google",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ));
+  }
+
+  Widget buildEmailBtn() {
+    return Container(
+        height: 80,
+        child: RaisedButton(
+          color: Color(0xffF6F6F6),
+          onPressed: () {
+            setState(() {
+              isExpanded = !isExpanded;
+              displayBtn = !displayBtn;
+            });
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.email,
+                color: Theme.of(context).primaryColor,
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                "Se connecter avec son email",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ));
+  }
+
+  Widget buildNotExpanded() {
+    return Padding(
+      padding: EdgeInsets.all(25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          buildFacebookBtn(),
+          buildGoogleBtn(),
+          buildEmailBtn(),
+        ],
+      ),
+    );
+  }
+
+  Widget buildOtherConnectionBtn() {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isExpanded = !isExpanded;
+          displayLogin = !displayLogin;
+        });
+      },
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: "Autres moyens de connexions",
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontSize: 14.0,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildExpanded() {
+    return Padding(
+      padding: EdgeInsets.all(25),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _buildEmailTextField(),
+          SizedBox(
+            height: 20,
+          ),
+          _buildPasswordTextField(),
+          _buildForgotPasswordBtn(),
+          SizedBox(
+            height: 40,
+          ),
+          _buildLoginBtn(),
+          SizedBox(
+            height: 40,
+          ),
+          _buildSignupBtn(),
+          SizedBox(
+            height: 30,
+          ),
+          buildOtherConnectionBtn(),
+        ],
+      ),
+    );
+  }
+
+  Widget buildAnimatedContainer() {
+    double _expanded = MediaQuery.of(context).size.height;
+    double _notExpanded = 320;
+    return Flexible(
+      child: AnimatedContainer(
+        width: double.infinity,
+        height: isExpanded ? _expanded : _notExpanded,
+        duration: Duration(milliseconds: animationDuration),
+        curve: Curves.fastOutSlowIn,
+        onEnd: () {
+          setState(() {
+            if (isExpanded)
+              displayLogin = !displayLogin;
+            else
+              displayBtn = !displayBtn;
+          });
+        },
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        child: displayLogin
+            ? buildExpanded()
+            : displayBtn
+                ? buildNotExpanded()
+                : Container(),
       ),
     );
   }
@@ -282,47 +381,28 @@ class _LogInState extends State<LogIn> {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              backgroundImage("assets/food_4k_1.jpg"),
+            children: [
               Container(
-                color: Color.fromRGBO(21, 58, 81, 0.9),
+                width: double.infinity,
+                color: Theme.of(context).primaryColor,
               ),
-              Container(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    vertical: 50.0,
+              buildDecorationBox(MediaQuery.of(context).size.width * 0.55,
+                  MediaQuery.of(context).size.height * 0.1),
+              buildDecorationBox(MediaQuery.of(context).size.width * 0.65,
+                  MediaQuery.of(context).size.height * 0.1),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).padding.top,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Se connecter',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 30.0),
-                      _buildEmailTextField(),
-                      SizedBox(
-                        height: 30.0,
-                      ),
-                      _buildPasswordTextField(),
-                      _buildForgotPasswordBtn(),
-                      _buildRememberMeCheckbox(),
-                      _buildLoginBtn(),
-                      _buildSignInWithText(),
-                      _buildSocialBtnRow(),
-                      _buildSignupBtn(),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.all(15),
+                    child: buildTitle(),
                   ),
-                ),
+                  buildAnimatedContainer(),
+                ],
               ),
             ],
           ),
