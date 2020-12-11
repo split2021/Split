@@ -113,25 +113,25 @@ export default class Home extends React.Component {
             <Sliders>
               <Carousel showThumbs={ false } showIndicators={ false } showStatus={ false } autoPlay={ true }>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 6.png' } />
+                  <img alt={''} src={ process.env.PUBLIC_URL + 'X - 6.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 7.png' } />
+                  <img alt={''} src={ process.env.PUBLIC_URL + 'X - 7.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 8.png' } />
+                  <img alt={''} src={ process.env.PUBLIC_URL + 'X - 8.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 9.png' } />
+                  <img alt={''} src={ process.env.PUBLIC_URL + 'X - 9.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 10.png' } />
+                  <img alt={''} src={ process.env.PUBLIC_URL + 'X - 10.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 5.png' } />
+                  <img alt={''} src={ process.env.PUBLIC_URL + 'X - 5.png' } />
                 </div>
                 <div>
-                  <img src={ process.env.PUBLIC_URL + 'X - 11.png' } />
+                  <img alt={''} src={ process.env.PUBLIC_URL + 'X - 11.png' } />
                 </div>
               </Carousel>
             </Sliders>
@@ -165,10 +165,10 @@ export default class Home extends React.Component {
         <Block contact={true}>
           <Title>Contact</Title>
           <Title contact={true}>Retrouvez nous dans les locaux d'Epitech</Title>
-          <TextContact><a style={ { textDecoration: 'none', color: 'white' } } target="_blank" href="https://www.google.fr/maps/place/24+Rue+Pasteur,+94270+Le+Kremlin-Bicêtre/@48.8153291,2.360979,17z/data=!3m1!4b1!4m5!3m4!1s0x47e6717ff94e4521:0x24f4c7dfecbb39c3!8m2!3d48.8153291!4d2.3631677">
+          <TextContact><a style={ { textDecoration: 'none', color: 'white' } } target="_blank" rel="noopener noreferrer" href="https://www.google.fr/maps/place/24+Rue+Pasteur,+94270+Le+Kremlin-Bicêtre/@48.8153291,2.360979,17z/data=!3m1!4b1!4m5!3m4!1s0x47e6717ff94e4521:0x24f4c7dfecbb39c3!8m2!3d48.8153291!4d2.3631677">
             24 Rue Pasteur, 94270 Le Kremlin-Bicêtre, France</a></TextContact>
           <Title contact={true}>Contactez nous directement</Title>
-          <TextContact><a style={ { textDecoration: 'none', color: 'white' } } target="_blank" href="mailto:split_2021@labeip.epitech.eu">
+          <TextContact><a style={ { textDecoration: 'none', color: 'white' } } target="_blank" rel="noopener noreferrer" href="mailto:split_2021@labeip.epitech.eu">
             split_2021@labeip.epitech.eu</a></TextContact>
         </Block>
       </Container>

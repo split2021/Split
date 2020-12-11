@@ -4,7 +4,6 @@ import {
     Tab,
     Title,
     Goback,
-    Loader,
 } from '../Global.styles.js';
 import Cookies from 'universal-cookie';
 import CircularProgress from '@material-ui/core/CircularProgress';

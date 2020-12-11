@@ -68,14 +68,14 @@ export default class Header extends React.Component {
           <Title onClick={() => {this.handleClick('/')}}>plit</Title>
           <MenuTab>
             {this.state.connected ?
-              [<Button style={{marginRight: '16px', borderRadius: '30px'}} color="primary" onClick={() => {this.disconnection()}}>
+              [<Button key={ 'disconnecion' } style={{marginRight: '16px', borderRadius: '30px'}} color="primary" onClick={() => {this.disconnection()}}>
                 <MenuTxt>Déconnexion</MenuTxt></Button>,
-                <Button style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={() => {this.handleClick('/account')}}>
+                <Button key={ 'account' } style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={() => {this.handleClick('/account')}}>
                   <MenuTxt>Mon compte</MenuTxt></Button>]
               :
-                [<Button style={{marginRight: '16px', borderRadius: '30px'}} color="primary" onClick={() => {this.handleClick('/login')}}>
+                [<Button key={ 'connection' } style={{marginRight: '16px', borderRadius: '30px'}} color="primary" onClick={() => {this.handleClick('/login')}}>
                   <MenuTxt>Se connecter</MenuTxt></Button>,
-                <Button style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={() => {this.handleClick('/subscribe')}}>
+                <Button key={ 'subscription' } style={{borderRadius: '30px'}} variant="contained" color="primary" onClick={() => {this.handleClick('/subscribe')}}>
                   <MenuTxt>S'inscrire</MenuTxt></Button>]
             }
           </MenuTab>
