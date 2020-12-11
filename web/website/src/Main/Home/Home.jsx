@@ -156,14 +156,14 @@ export default class Home extends React.Component {
         </div>
 
         <Covid>
-          <CovidTitle>Info covid : </CovidTitle>
-          <CovidText>Avec le COVID permettre à un groupe entier de payer uniquement avec 1 intermédiaire aide à réduire les risques de propagation</CovidText>
+          <CovidTitle>Info COVID : </CovidTitle>
+          <CovidText>En période de covid notre application permet à un groupe entier de payer uniquement avec 1 intermédiaire ce qui reduit les risques de propagation</CovidText>
         </Covid>
 
         <Block avis={ true }>
           <Avis>
             <Comment>"Application très intéressante j'en ferais part à mon directeur"</Comment>
-            <From>Manageuse à Pardis du fruit</From>
+            <From>Manageuse à Paradis du fruit</From>
           </Avis>
           <Avis>
             <Comment>"Très bonne idée d'application, j'attends votre mail de prise de contact avec impatiente !"</Comment>
