@@ -11,6 +11,8 @@ export const GoBackText = styled.div`
 
 export const SiderbarContainer = styled.div`
   display: flex;
+  grid-column: 1;
+  grid-row: 1/5;
   height: 100vh;
   width: 270px;
   background: #fff;
@@ -18,14 +20,7 @@ export const SiderbarContainer = styled.div`
   font-family: 'Open sans', sans-serif;
 `;
 
-export const SiderbarMenu = styled.ul `
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  list-style: none;
-  width: 100%;
-  padding: 0px 30px;
-`;
+
 
 export const SiderbarMenuItem = styled.li `
   display: flex;      
@@ -56,10 +51,20 @@ export const SiderbarMenuItemLabel = styled.p `
   
 `;
 export const Container = styled.div`
-  color: #5570dd;
-  width: 100%;
-  top: 0px;
-  color: black;
-  min-height: calc(100% - 280px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+
+`;
+
+export const GridOne = styled.div`
+  grid-column: 1;
+  grid-row: 1/5;
+`;
+
+export const GridTwo = styled.div`
+  grid-column: 1;
+  grid-row: 1/4;
 `;
 

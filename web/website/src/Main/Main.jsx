@@ -16,6 +16,9 @@ import theme from '../components/Theme/Theme';
 import Header from './Header/Header';
 import Siderbar from "./Account/Dashboard/siderbar";
 import GroupsUsers from './Account/Groupes/GroupsUsers';
+import Dashboard from "./Account/Dashboard/dashboard";
+import Charts from "./Account/Dashboard/chart";
+import FriendLists from "./Account/Dashboard/FriendLists";
 
 export default class App extends React.Component {
   render() {
@@ -33,6 +36,9 @@ export default class App extends React.Component {
             <Route path="/groupes" component={Groupes}/>
             <Route path="/groupsUsers" component={GroupsUsers}/>
             <Route path="/siderbar" component={Siderbar} />
+            <Route path="/dashboard" component={Dashboard}/>
+            <Route path="/charts" component={Charts} />
+            <Route path="/friendLists" component={FriendLists}/>
             <Footer/>
           </Router>
         </Container>
