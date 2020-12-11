@@ -22,7 +22,7 @@ export default class Siderbar extends React.Component {
         return (
             <Container>
                 <SiderbarContainer>
-                        <SiderbarMenuItem onClick={() => { this.handleRedirect('/dashboard') }}>
+                        <SiderbarMenuItem onClick={() => { this.handleRedirect('/siderbar') }}>
                             <Icon viewBox={"0 0 20 20"}>
                                 <DashboardIcon
                                 style={{color: 'black', fontSize: "large"}}
@@ -45,18 +45,14 @@ export default class Siderbar extends React.Component {
                         <SiderbarMenuItem>
                             <Icon></Icon>
                             <SiderbarMenuItemLabel>
-                                <GoBackText onClick={() => { this.handleRedirect('/friendLists') }}>
-                                    Customer Tickets
+                                <GoBackText onClick={() => { this.handleRedirect('/groupes') }}>
+                                    Groupes
                                 </GoBackText>
                             </SiderbarMenuItemLabel>
                         </SiderbarMenuItem>
                         <SiderbarMenuItem>
                             <Icon></Icon>
                             <SiderbarMenuItemLabel>Archive</SiderbarMenuItemLabel>
-                        </SiderbarMenuItem>
-                        <SiderbarMenuItem>
-                            <Icon></Icon>
-                            <SiderbarMenuItemLabel>Library</SiderbarMenuItemLabel>
                         </SiderbarMenuItem>
                         <SiderbarMenuItem>
                             <Icon></Icon>
