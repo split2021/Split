@@ -7,31 +7,20 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 export default class Charts extends React.Component {
     constructor(props) {
         super(props);
-        this.cookies = new Cookies();
-        if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
-            console.log('cookie présent');
-            this.state = {
-                connected: true,
-                elem: 0,
-                data: JSON.parse(localStorage.getItem('userData')) || '',
-                adminData: JSON.parse(localStorage.getItem('adminData')) || '',
-                loader: true,
-                loadPercentage: 0,
-                date_joined: '',
-            };
-        } else {
-            console.log('cookie non présent');
-            this.handleRedirect('/');
-        }
+        this.state = {
+            connected: true,
+            elem: 0,
+            data: JSON.parse(localStorage.getItem('userData')) || '',
+            adminData: JSON.parse(localStorage.getItem('adminData')) || '',
+            loader: true,
+            loadPercentage: 0,
+            date_joined: '',
+        };
     }
 
     componentDidMount() {
-        this.getDate();
-       console.log(this.state.data.user);
-    }
-
-    handleRedirect(direction) {
-        this.props.history.push(direction);
+        this.state.data && this.getDate();
+        console.log(this.state.data.user);
     }
 
 
