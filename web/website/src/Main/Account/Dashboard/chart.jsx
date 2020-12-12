@@ -18,7 +18,6 @@ export default class Charts extends React.Component {
                 loader: true,
                 loadPercentage: 0,
                 date_joined: '',
-                payments: '',
             };
         } else {
             console.log('cookie non présent');

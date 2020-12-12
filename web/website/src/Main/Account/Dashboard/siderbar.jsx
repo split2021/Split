@@ -11,8 +11,28 @@ import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import Charts from "./chart";
 import FriendLists from "./FriendLists";
+import Cookies from "universal-cookie";
 
 export default class Siderbar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.cookies = new Cookies();
+        if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
+            console.log('cookie présent');
+            this.state = {
+                connected: true,
+                elem: 0,
+                data: JSON.parse(localStorage.getItem('userData')) || '',
+                adminData: JSON.parse(localStorage.getItem('adminData')) || '',
+                loader: true,
+                loadPercentage: 0,
+                friends: '',
+            };
+        } else {
+            console.log('cookie non présent');
+            this.handleRedirect('/');
+        }
+    }
 
     handleRedirect(direction) {
         this.props.history.push(direction);

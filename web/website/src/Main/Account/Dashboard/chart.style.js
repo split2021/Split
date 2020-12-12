@@ -10,7 +10,7 @@ export const Tableau = styled.div`
 `;
 
 export const Collumn = styled.div`
-  display: block;
+  display: grid;
   padding: 12px;
   white-space: nowrap;
   font-weight: 600;
