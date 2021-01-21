@@ -19,9 +19,10 @@ export const Icon = styled.div`
 `;
 
 export const Title = styled.div`
-  margin-bottom: 20px;
+  margin-top: 70px;
+  margin-bottom: 0px;
   text-align: center;
-  font-size: 38px;
+  font-size: 28px;
   font-weight: 700;
 `;
 
@@ -47,4 +48,15 @@ export const HistoryList = styled.div`
   margin: 40px auto;
   border-radius: 6px;
   border: 1px solid #dadce0;
+`;
+
+export const Tableau = styled.div`
+  background-color: #FFFFFF;
+  max-width: 1200px;
+  min-width: 550px;
+  min-height: 10px;
+  margin: 40px auto;
+  border-radius: 6px;
+  border: 1px solid #dadce0;
+  text-align: left;
 `;

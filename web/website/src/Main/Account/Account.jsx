@@ -9,7 +9,14 @@ import {
   Icon,
   HistoryList,
   FlexContainer,
+  Tableau,
 } from './Account.styles.js';
+import History from "./History/History";
+import {
+  Collumn,
+  Collumns,
+  Goback
+} from "./Global.styles";
 
 export default class SettingsTab extends React.Component {
 
@@ -57,7 +64,16 @@ export default class SettingsTab extends React.Component {
               Title={'Mes statistiques'}
             />
           </Tab>
-          <HistoryList/>
+          <Title>Mes derniers paiements</Title>
+          <div style={ { overflow: 'auto' } }>
+            <Tableau>
+              <Collumns>
+                <Collumn>Montant payé par le groupe</Collumn>
+                <Collumn>Nb de personne (montant de chaque participant)</Collumn>
+              </Collumns>
+              <History />
+            </Tableau>
+          </div>
         </Container>
       );
     } else {
