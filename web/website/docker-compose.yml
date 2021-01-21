@@ -4,7 +4,8 @@ services:
   web:
     build: .
     command: sh -c "
-        yarn start"
+        yarn install  --network-timeout 1000000
+        && yarn start"
     ports:
       - "3000:3000"
     volumes:

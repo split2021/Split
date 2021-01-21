@@ -8,6 +8,6 @@ COPY package.json /web
 
 RUN npm install yarn
 
-RUN yarn install --network-timeout 1000000
+#RUN yarn install --network-timeout 1000000
 
 COPY . /web/
