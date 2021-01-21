@@ -84,9 +84,9 @@ export default class Home extends React.Component {
             style={{borderRadius: '30px'}}
             variant="contained"
             color="primary"
-            onClick={ () => this.handleClick('/subscribe') }
+            href={process.env.PUBLIC_URL + 'Split.apk'}
           >
-            <BtnText>Découvrir</BtnText>
+            <BtnText>Télécharger Split</BtnText>
           </Button>
           <Animation ref={this.animRef}>
             <Phone right={this.state.scroll} src={process.env.PUBLIC_URL + 'phone.png'}/>
