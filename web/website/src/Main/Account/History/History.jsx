@@ -69,7 +69,7 @@ export default class History extends React.Component {
           }
         }
         result.push(
-          <Paiment key={{paiment}}>
+          <Paiment key={paiment.id}>
             <CollumnPaiment>{paiment.total} €</CollumnPaiment>
             <CollumnPaiment>{Object.keys(paiment.payments).length + ' (' + eachUser + ' )'}</CollumnPaiment>
           </Paiment>
