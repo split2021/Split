@@ -58,7 +58,6 @@ export default class History extends React.Component {
     let result = [];
 
     if ((this.state.paiments).length) {
-      console.log(this.state.paiments);
       for (const paiment of this.state.paiments) {
         let eachUser = [];
         if (Object.keys(paiment.payments).length > 0) {
