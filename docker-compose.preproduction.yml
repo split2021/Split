@@ -22,7 +22,9 @@ services:
   
   web:
     build: ./web/website
-    command: yarn start
+    command: bash -c "
+      yarn install --network-timeout 1000000
+      && yarn start"
     depends_on:
       - api
     ports:
