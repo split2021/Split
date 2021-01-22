@@ -68,8 +68,8 @@ export default class SettingsTab extends React.Component {
           <div style={ { overflow: 'auto' } }>
             <Tableau>
               <Collumns>
-                <Collumn>Montant payé par le groupe</Collumn>
-                <Collumn>Nb de personne {/*(montant de chaque participant)*/}</Collumn>
+                <Collumn>Mes paiements</Collumn>
+                {/*<Collumn>Nb de personne (montant de chaque participant)</Collumn>*/}
               </Collumns>
               <History />
             </Tableau>

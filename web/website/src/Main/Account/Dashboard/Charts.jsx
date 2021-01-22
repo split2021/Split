@@ -11,7 +11,7 @@ const Charts = () => {
             labels: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'],
             datasets: [
                 {
-                    label: "Payment Group",
+                    label: "Groupes de paiement",
                     data: [32, 15, 25, 76, 69],
                     backgroundColor: ["rgba(75, 192, 192, 0.6"],
                     borderWidth: 2
@@ -29,7 +29,7 @@ const Charts = () => {
                 data={chartData}
                 options={{
                     responsive: true,
-                    title: { text: "Payment Group", display: true },
+                    title: { text: "Groupes de paiement", display: true },
                     scales: {
                         yAxes: [
                             {

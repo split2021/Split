@@ -89,7 +89,7 @@ export default class Amis extends React.Component {
       <Container>
         <Tab>
           <Goback onClick={() => {this.handleRedirect('/Groupes')}}>
-            &larr;  Retourner vers mon Compte
+            &larr;  Retourner vers mes groupes
           </Goback>
           <Title>
             Membres du groupe : { this.state && this.state.data ? this.state.data.groupData[this.state.data.id].name : ''}

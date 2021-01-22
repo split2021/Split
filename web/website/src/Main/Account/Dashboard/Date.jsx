@@ -40,7 +40,7 @@ export default class Dates extends React.Component {
                 <Tab>
                     <Tableau >
                         <Collumns>
-                            <Collumn>Date D'arrivée</Collumn>
+                            <Collumn>Date d'inscription</Collumn>
                         </Collumns>
                         {
                             this.state && this.state.date_joined ? this.state.date_joined :
