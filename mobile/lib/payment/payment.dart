@@ -7,8 +7,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../group/group_class.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
 class PaymentPage extends StatefulWidget {
   final Group group;
 

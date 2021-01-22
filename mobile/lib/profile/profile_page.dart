@@ -4,7 +4,6 @@ import 'package:split/group/groupe_create.dart';
 import 'package:split/profile/edit_profile.dart';
 import 'package:split/ui/box_shadow.dart';
 
-import '../group/group_manager.dart';
 import '../user/user_class.dart';
 
 class ProfilePage extends StatefulWidget {
