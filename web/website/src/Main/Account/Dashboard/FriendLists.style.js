@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export const Tableau = styled.div`
   background-color: #FFFFFF;
-  max-width: 1200px;
+  max-width: 200px;
   min-width: 550px;
   min-height: 10px;
   margin: 40px auto;
   border-radius: 6px;
   border: 1px solid #dadce0;
-  text-align: left;
+  text-align: center;
 `;
 
 export const Friend = styled.div`
@@ -27,7 +27,7 @@ export const Friend = styled.div`
 
 export const CollumnFriend = styled.div`
   display: table-cell;
-  padding: 12px;
+  //padding: 12px;
   white-space: nowrap;
   font-weight: 500;
   overflow: auto;
@@ -35,7 +35,7 @@ export const CollumnFriend = styled.div`
 
 export const Container = styled.div`
   color: black;
-  width: 100%;
+  width: 120%;
   top: 0px;
   min-height: calc(100% - 280px);
 `;
@@ -47,20 +47,9 @@ export const Title = styled.div`
   font-weight: 700;
 `;
 
-export const Goback = styled.div`
-  margin-top: 10px;
-  text-align: left;
-  font-size: 14px;
-  white-space: nowrap;
-  &:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
-
 export const Tab = styled.div`
-  margin-top: 100px;
-  max-width: 1200px;
+  margin-top: 150px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;

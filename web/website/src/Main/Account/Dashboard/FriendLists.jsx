@@ -1,28 +1,34 @@
 import React from "react";
 import Cookies from "universal-cookie";
 import Request from "../../../components/Api/Request";
-import {CollumnFriend, Friend, Tableau} from "../Amis/Amis.styles";
-import {Collumn, Collumns, Container, Loader, Tab} from "../Global.styles";
+import {CollumnFriend, Friend, Tableau, Collumn, Collumns, Container, Loader, Tab} from "./FriendLists.style";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 export default class FriendLists extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            connected: true,
-            elem: 0,
-            data: JSON.parse(localStorage.getItem('userData')) || '',
-            adminData: JSON.parse(localStorage.getItem('adminData')) || '',
-            loader: true,
-            loadPercentage: 0,
-            friends: '',
-        };
+        this.cookies = new Cookies();
+        if ( this.cookies !== undefined && (this.cookies.get('auth')) !== undefined) {
+            console.log('cookie présent');
+            this.state = {
+                connected: true,
+                elem: 0,
+                data: JSON.parse(localStorage.getItem('userData')) || '',
+                adminData: JSON.parse(localStorage.getItem('adminData')) || '',
+                loader: true,
+                loadPercentage: 0,
+                friends: '',
+            };
+        } else {
+            console.log('cookie non présent');
+        }
     }
 
     componentDidMount() {
-        this.state.data && this.getFriends();
+        this.getFriends();
     }
+
 
     async retrieveFriends() {
         let friend;
@@ -40,9 +46,6 @@ export default class FriendLists extends React.Component {
             if (friend.data.data) {
                 result.push(
                     <Friend>
-                        <CollumnFriend>
-                            { friend.data.data.first_name + ' ' + friend.data.data.last_name }
-                        </CollumnFriend>
                         <CollumnFriend>
                             { friend.data.data.email }
                         </CollumnFriend>
@@ -66,7 +69,6 @@ export default class FriendLists extends React.Component {
                     <div style={ { overflow: 'auto' } }>
                         <Tableau>
                             <Collumns>
-                                <Collumn>Nom</Collumn>
                                 <Collumn>E-mail</Collumn>
                             </Collumns>
                             {
@@ -81,7 +83,6 @@ export default class FriendLists extends React.Component {
                         </Tableau>
                     </div>
                 </Tab>
-
             </Container>
         )
     }

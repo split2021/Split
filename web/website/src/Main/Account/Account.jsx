@@ -7,7 +7,7 @@ import {
   Container,
   Title,
   Icon,
-  HistoryList,
+  //HistoryList,
   FlexContainer,
   Tableau,
 } from './Account.styles.js';
@@ -15,7 +15,7 @@ import History from "./History/History";
 import {
   Collumn,
   Collumns,
-  Goback
+  //Goback
 } from "./Global.styles";
 
 export default class SettingsTab extends React.Component {
