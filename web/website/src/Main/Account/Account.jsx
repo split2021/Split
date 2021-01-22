@@ -69,7 +69,7 @@ export default class SettingsTab extends React.Component {
             <Tableau>
               <Collumns>
                 <Collumn>Montant payé par le groupe</Collumn>
-                <Collumn>Nb de personne (montant de chaque participant)</Collumn>
+                <Collumn>Nb de personne {/*(montant de chaque participant)*/}</Collumn>
               </Collumns>
               <History />
             </Tableau>
