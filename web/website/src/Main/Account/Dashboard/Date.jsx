@@ -25,10 +25,13 @@ export default class Dates extends React.Component {
 
 
     async getDate() {
-        let date = this.state.data.user.date_joined;
-        const dates = moment(date).format('DD/MM/YYYY HH:mm')
-        this.setState({ loader : false });
-        this.setState({ date_joined : dates });
+        if (this.state.data.user !== undefined && this.state.data.user.date_joined !== undefined ) {
+            let date = this.state.data.user.date_joined;
+            const dates = moment(date).format('DD/MM/YYYY HH:mm')
+            this.setState({ loader : false });
+            this.setState({ date_joined : dates });
+
+        }
     }
 
     render() {
@@ -48,10 +51,8 @@ export default class Dates extends React.Component {
                                         value={ this.state ? this.state.loadPercentage : 0 } />
                                 </Loader>
                         }
-
                     </Tableau>
                 </Tab>
-
             </Container>
         )
     }
