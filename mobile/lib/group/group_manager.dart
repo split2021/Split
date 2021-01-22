@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'group_control.dart';
 import 'groups.dart';
 import 'group_class.dart';
+import '../user/user_class.dart';
+import '../requests/requests_class.dart';
 
 class GroupManager extends StatefulWidget {
-  final Group startingGroup = Group();
-
   @override
   State<StatefulWidget> createState() {
     return _GroupManagerState();
@@ -14,37 +13,57 @@ class GroupManager extends StatefulWidget {
 }
 
 class _GroupManagerState extends State<GroupManager> {
-  final List<Group> _groups = [];
+  List<Group> _groups = [];
+  TextEditingController editingController = new TextEditingController();
+  bool isLoading = false;
 
   @override
   void initState() {
-    _groups.add(widget.startingGroup);
     super.initState();
+    _updateList();
   }
 
-  void _addGroup() {
+  @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  Future<void> _updateList() async {
     setState(() {
-      _groups.add(new Group());
+      isLoading = true;
+    });
+    Requests.updateUser(User.username, User.password).then((value) {
+      Requests.getGroups(User.groupsIds).then((value) {
+        if (value != _groups)
+          setState(() {
+            _groups = value;
+            isLoading = false;
+          });
+      });
     });
   }
 
   void _delGroup(int removeIndex) {
-    setState(() {
-      _groups.removeAt(removeIndex);
+    Requests.deleteGroupById(_groups[removeIndex].id).then((value) {
+      _updateList();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: Groups(_groups, _delGroup),
-          )
-        ],
+      body: Container(
+        child: Center(
+          child: Column(
+            children: [
+              Expanded(
+                  child: Groups(_groups, _delGroup, _updateList, isLoading)),
+            ],
+          ),
+        ),
       ),
-      floatingActionButton: GroupControl(_addGroup),
     );
   }
 }

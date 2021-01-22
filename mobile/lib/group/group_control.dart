@@ -8,20 +8,13 @@ class GroupControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => {addGroup()},
+      onPressed: () => {addGroup(context)},
       tooltip: 'Ajouter un groupe',
       child: Stack(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: <Color>[
-                  Color.fromRGBO(85, 112, 221, 1.0),
-                  Color.fromRGBO(71, 50, 128, 1.0),
-                ],
-              ),
+              color: Color.fromRGBO(21, 58, 81, 1),
               shape: BoxShape.circle,
             ),
           ),

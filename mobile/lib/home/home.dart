@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:split/decorations/home_decorations.dart';
 
 import '../contact/contact_page.dart';
 import '../group/group_manager.dart';
@@ -12,81 +13,72 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  final PageController _pageController = PageController();
-  int _currPageIndex = 0;
+  final PageController _pageController =
+      PageController(initialPage: 0, keepPage: true);
+  int _currBtmNavIndex = 0;
 
-  _setIconColor(int curPageIndex) {
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
+
+  Widget _buildBottomAppBar() {
+    return BottomNavigationBar(
+        currentIndex:
+            _currBtmNavIndex, // Use this to update the Bar giving a position
+        onTap: (index) {
+          setState(() {
+            _currBtmNavIndex = index;
+            _pageController.animateToPage(index,
+                duration: Duration(milliseconds: 500), curve: Curves.ease);
+          });
+        },
+        backgroundColor: Colors.white,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Color(0xffA2A2A2),
+        selectedFontSize: 12,
+        unselectedFontSize: 12,
+        selectedLabelStyle: labelTxtStyle,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Groupes'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search), label: "Rechercher"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle), label: "Profile"),
+        ]);
+  }
+
+  void _pageChanged(int index) {
     setState(() {
-      _currPageIndex = curPageIndex;
+      _currBtmNavIndex = index;
     });
   }
 
-  Widget _appBar() {
-    return AppBar(
-      title: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              color: _currPageIndex == 0 ? Colors.white : Colors.grey,
-              icon: Icon(Icons.group),
-              onPressed: () {
-                _pageController.jumpToPage(0);
-              },
-            ),
-            IconButton(
-              color: _currPageIndex == 1 ? Colors.white : Colors.grey,
-              icon: Icon(Icons.contact_phone),
-              onPressed: () {
-                _pageController.jumpToPage(1);
-              },
-            ),
-            IconButton(
-              color: _currPageIndex == 2 ? Colors.white : Colors.grey,
-              icon: Icon(Icons.account_circle),
-              onPressed: () {
-                _pageController.jumpToPage(2);
-              },
-            ),
-          ],
-        ),
+  Widget _buildPageView() {
+    return Container(
+      margin: MediaQuery.of(context).padding,
+      child: PageView(
+        scrollDirection: Axis.horizontal,
+        controller: _pageController,
+        onPageChanged: (index) {
+          _pageChanged(index);
+        },
+        children: <Widget>[
+          GroupManager(),
+          ContactPage(),
+          ProfilePage(),
+        ],
       ),
-      flexibleSpace: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: <Color>[
-              Color.fromRGBO(85, 112, 221, 1.0),
-              Color.fromRGBO(71, 50, 128, 1.0),
-            ],
-          ),
-        ),
-      ),
-      automaticallyImplyLeading: false,
-    );
-  }
-
-  Widget _pageView() {
-    return PageView(
-      scrollDirection: Axis.horizontal,
-      controller: _pageController,
-      children: <Widget>[
-        GroupManager(),
-        ContactPage(),
-        ProfilePage(),
-      ],
-      onPageChanged: (i) {
-        _setIconColor(i);
-      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
-      body: _pageView(),
+      resizeToAvoidBottomPadding: false,
+      bottomNavigationBar: _buildBottomAppBar(),
+      body: _buildPageView(),
     );
   }
 }

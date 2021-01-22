@@ -28,6 +28,8 @@ mobile/.packages
 mobile/.pub-cache/
 mobile/.pub/
 mobile/build/
+mobile/.flutter-plugins-dependencies
+mobile/pubspec.lock
 
 # Android related
 **/android/**/gradle-wrapper.jar
