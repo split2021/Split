@@ -7,7 +7,7 @@ import Footer from './Footer/Footer';
 import Account from './Account/Account';
 import Amis from './Account/Amis/Amis';
 import Groupes from './Account/Groupes/Groupes';
-import { Router, Route, useParams } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import History from '../components/History/History';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
@@ -16,7 +16,7 @@ import theme from '../components/Theme/Theme';
 import Header from './Header/Header';
 import Siderbar from "./Account/Dashboard/siderbar";
 import GroupsUsers from './Account/Groupes/GroupsUsers';
-import Charts from "./Account/Dashboard/chart";
+import Dates from "./Account/Dashboard/Date";
 import FriendLists from "./Account/Dashboard/FriendLists";
 import MobilePage from '../components/MobilePages/Result';
 
@@ -37,7 +37,7 @@ export default class App extends React.Component {
             <Route path="/groupes" component={Groupes}/>
             <Route path="/groupsUsers" component={GroupsUsers}/>
             <Route path="/siderbar" component={Siderbar} />
-            <Route path="/charts" component={Charts} />
+            <Route path="/dates" component={Dates} />
             <Route path="/friendLists" component={FriendLists}/>
             <Route path="/result" component={MobilePage}/>
             <Footer/>

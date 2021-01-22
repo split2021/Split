@@ -5,13 +5,17 @@ import {
     SiderbarMenuItemLabel,
     Icon,
     GoBackText,
-    Container, GridOne, GridTwo
+    Container, GridOne, GridTwo, GridTree
 } from "./siderbar.style";
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import Charts from "./chart";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import GroupIcon from '@material-ui/icons/Group';
+//import ArchiveIcon from '@material-ui/icons/Archive';
 import FriendLists from "./FriendLists";
 import Cookies from "universal-cookie";
+import Dates from "./Date";
+import Chart from "./Charts";
 
 export default class Siderbar extends React.Component {
     constructor(props) {
@@ -63,7 +67,11 @@ export default class Siderbar extends React.Component {
                             </SiderbarMenuItemLabel>
                         </SiderbarMenuItem>
                         <SiderbarMenuItem>
-                            <Icon></Icon>
+                            <Icon viewBox={"0 0 20 20"}>
+                                <GroupIcon
+                                    style={{color: 'black'}}
+                                />
+                            </Icon>
                             <SiderbarMenuItemLabel>
                                 <GoBackText onClick={() => { this.handleRedirect('/groupes') }}>
                                     Groupes
@@ -71,11 +79,11 @@ export default class Siderbar extends React.Component {
                             </SiderbarMenuItemLabel>
                         </SiderbarMenuItem>
                         <SiderbarMenuItem>
-                            <Icon></Icon>
-                            <SiderbarMenuItemLabel>Archive</SiderbarMenuItemLabel>
-                        </SiderbarMenuItem>
-                        <SiderbarMenuItem>
-                            <Icon></Icon>
+                            <Icon viewBox={"0 0 20 20"}>
+                              <ExitToAppIcon
+                                  style={{color: 'black'}}
+                              />
+                            </Icon>
                             <SiderbarMenuItemLabel>
                                 <GoBackText onClick={() => { this.handleRedirect('/account') }}>
                                     Retourner vers mon Compte</GoBackText>
@@ -83,14 +91,19 @@ export default class Siderbar extends React.Component {
                         </SiderbarMenuItem>
                 </SiderbarContainer>
                 <GridOne>
-                    <Charts
+                    <Dates
+                        xs={12}
                     />
                 </GridOne>
                 <GridTwo>
-                    <FriendLists/>
+                    <FriendLists
+                        xs={12}
+                    />
                 </GridTwo>
+                <GridTree>
+                    <Chart/>
+                </GridTree>
             </Container>
-
         );
     }
 }
